@@ -304,12 +304,11 @@ main{padding-top:66px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* preloader */
-#pre{position:fixed;inset:0;z-index:1000;background:#141414;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transition:transform .8s cubic-bezier(.77,0,.18,1)}
-#pre.out{transform:translateY(-100%)}
-#pre img{width:180px;height:auto;opacity:0;transform:translateY(12px);animation:preIn .7s .1s cubic-bezier(.2,.7,.2,1) forwards}
-#pre .pc{font-family:"Sometype Mono",monospace;font-size:16px;letter-spacing:-.16px;color:#FFB3AD;opacity:.9}
-#pre .pl{width:180px;height:2px;background:rgba(242,231,220,.15);border-radius:2px;overflow:hidden}
-#pre .pl i{display:block;height:100%;width:0;background:#FFB3AD}
-@keyframes preIn{to{opacity:1;transform:none}}
+#pre{position:fixed;inset:0;z-index:1000;background:#141414}
+#pre canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#pre .pc{position:absolute;left:24px;bottom:24px;font-family:"Sometype Mono",monospace;font-size:40px;line-height:1;letter-spacing:-1px;color:#F2E7DC;background:#141414;border:1px solid rgba(255,179,173,.45);border-radius:14px;padding:12px 16px;transition:opacity .3s}
+#pre .pc b{font-weight:400;color:#FFB3AD}
+#pre.exit{background:transparent}
+#pre.exit .pc{opacity:0}
 html.pre-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){#pre{display:none}}
