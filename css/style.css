@@ -5,6 +5,7 @@ body{background:var(--bg) radial-gradient(circle,rgba(255,179,173,.1) 2px,transp
 }
 #dots{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
 main,footer,.header{position:relative;z-index:1}.header{position:fixed}
+@media (min-width:1200px){main,footer,.header{zoom:var(--dz,1)}}
 a{color:inherit;text-decoration:none}
 img{display:block}
 h1,h2,h3,h4{font-weight:400}
@@ -290,8 +291,10 @@ main{padding-top:66px}
   #form{grid-template-columns:1fr}
   .tree{width:260px;right:0}
   .footer{height:auto;min-height:560px;padding:24px 20px 120px;margin:0 12px 12px}
-  .f-cols{position:relative;flex-direction:column;gap:22px}
+  .f-cols{position:relative;top:auto;left:auto;flex-direction:column;gap:22px}
   .f-cols>div:first-child{width:auto}
   .clock{position:static;margin-top:26px;width:255px}
   .f-art{width:100%;height:110px}
 }
+
+@media (min-width:1470px){.hero,.footer{max-width:1430px;margin-left:auto;margin-right:auto}.header{left:max(22px,calc(50% - 713px));right:max(22px,calc(50% - 713px))}}

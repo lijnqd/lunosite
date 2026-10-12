@@ -1,4 +1,6 @@
 (function(){
+// desktop design is 1470 wide: on narrower desktops scale it down proportionally
+function dz(){var w=innerWidth;document.documentElement.style.setProperty("--dz",w>=1200&&w<1470?(w/1470).toFixed(4):1)}dz();addEventListener("resize",dz);
 // mouse glow over the dot grid (base dots are plain CSS, so they never lag on scroll)
 (function(){var c=document.getElementById('dots'),x=c.getContext('2d'),mx=-999,my=-999,dpr=window.devicePixelRatio||1,W,H,raf=0;
 function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;draw()}
