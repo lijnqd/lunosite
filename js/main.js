@@ -88,7 +88,7 @@ function tick(){var n=new Date(),h=n.getHours(),m=n.getMinutes(),s=n.getSeconds(
 tick();setInterval(tick,1000);
 
 // contact form (backend key will be added later)
-var FORM_ENDPOINT='';
+var FORM_ENDPOINT='https://luno-form.dsgn-ys.workers.dev';
 $('form').addEventListener('submit',function(e){
   e.preventDefault();var f=e.target,note=$('formNote');note.hidden=false;
   if(!FORM_ENDPOINT){note.textContent='form is being connected — please write to hey.lunostudio@gmail.com';return}
