@@ -143,7 +143,9 @@ function init() {
   const stepY = fontSize * 0.95;
 
   const offsetX = (width - maxCols * stepX) / 2;
-  const offsetY = (height - rows * stepY) / 2;
+  let bottomAlign = false;
+  try { bottomAlign = parent.innerWidth < 1200; } catch (err) {}
+  const offsetY = bottomAlign ? (height - rows * stepY) : (height - rows * stepY) / 2;
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < asciiArt[r].length; c++) {
