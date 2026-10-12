@@ -298,3 +298,5 @@ main{padding-top:66px}
 }
 
 @media (min-width:1470px){.hero,.footer{max-width:1430px;margin-left:auto;margin-right:auto}.header{left:max(22px,calc(50% - 713px));right:max(22px,calc(50% - 713px))}}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
