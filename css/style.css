@@ -89,7 +89,7 @@ main{padding-top:66px}
 .svc-head h2{width:864px}
 .svc-head .btn{margin-top:46px;width:240px}
 .svc-grid{display:flex;gap:10px;margin-top:12px}
-.scard{position:relative;flex:1;height:336px;border-radius:28px;padding:24px;background:var(--tex) center/100% 100% no-repeat,var(--glass);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.scard{position:relative;flex:1;height:336px;border-radius:28px;padding:24px;background:linear-gradient(rgba(20,20,20,.35),rgba(20,20,20,.35)),var(--tex) center/100% 100% no-repeat,var(--glass);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
 .scard>*{position:relative;z-index:1}
 .stitle{display:flex;align-items:baseline;gap:12px}
 .stitle h3{font-size:32px;line-height:40px;letter-spacing:-1px}
