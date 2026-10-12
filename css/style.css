@@ -141,7 +141,7 @@ main{padding-top:66px}
 .process h2{margin-top:13px}
 .steps{display:flex;margin-top:58px;position:relative;width:1430px}
 .steps::before{content:"";position:absolute;left:0;top:5px;width:1394px;height:1px;background:rgba(242,231,220,.2);transform-origin:left;transform:scaleX(var(--p,0))}
-.step{width:371px;flex:none;position:relative;opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.step.in{opacity:1;transform:none}
+.step{width:371px;flex:none;position:relative;opacity:0;transform:translateX(-48px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}.step.in{opacity:1;transform:none}
 .step:last-child{width:316px}
 .step .mk{display:block;height:11px;margin-bottom:12px;position:relative}
 .step .m1{width:11px;border-radius:3px;background:#F0A8A3}
