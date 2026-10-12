@@ -203,5 +203,6 @@ function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;draw()}
 function draw(){x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);if(mx<0)return;var sy=scrollY,y0=30-(sy%60);for(var y=y0;y<H+4;y+=60){for(var px=30;px<W+4;px+=60){var d=Math.hypot(px-mx,y-my);if(d>170)continue;var t=1-d/170,a=.75*t*t;x.fillStyle='rgba(255,179,173,'+(.4*a).toFixed(3)+')';x.beginPath();x.arc(px,y,2.2,0,6.283);x.fill()}}}
 addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addEventListener('scroll',draw,{passive:true});addEventListener('resize',size);size()})();
 </script>
+<script src="/js/cookies.js?v=1" defer></script>
 </body>
 </html>
