@@ -1,7 +1,7 @@
 :root{--bg:#141414;--beige:#F2E7DC;--pink:#FFB3AD;--glass:rgba(242,231,220,.04);--mono:"Sometype Mono","Office Code Pro D",ui-monospace,monospace}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{background:var(--bg) radial-gradient(circle,rgba(255,179,173,.1) 2px,transparent 2.6px) 30px 30px/60px 60px;color:var(--beige);font-family:Inter,Helvetica,Arial,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+body{background:var(--bg) radial-gradient(circle,rgba(255,179,173,.1) 2px,transparent 2.6px) 0 0/60px 60px;color:var(--beige);font-family:Inter,Helvetica,Arial,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 #dots{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
 main,footer,.header{position:relative;z-index:1}.header{position:fixed}
@@ -37,7 +37,7 @@ main{padding-top:66px}
 .hero{position:relative;margin:0 20px;height:774px;border-radius:32px;background:var(--pink);color:var(--bg);overflow:hidden}
 .hero h1{position:absolute;left:32px;top:40px;width:1100px;font-size:72px;line-height:72px;letter-spacing:-.72px;font-weight:400}
 .hero-art{position:absolute;left:750px;top:268px;width:755px;height:542px;border:0;background:transparent}
-.hero-bottom{position:absolute;left:52px;bottom:32px;width:434px}
+.hero-bottom{position:absolute;left:32px;bottom:32px;width:434px}
 .hero-bottom p{font-size:18px;line-height:21.6px;letter-spacing:-.18px;margin-bottom:22px}
 .hero-bottom .btn{width:180px}
 .stack{display:flex;flex-direction:column;align-items:center;gap:140px;padding:12px 20px 20px}
@@ -163,7 +163,7 @@ main{padding-top:66px}
 .luna{display:flex;gap:12px;align-items:flex-end;margin-bottom:24px}
 .luna img{width:70px;height:70px;border-radius:50%;object-fit:cover;flex:none;margin-bottom:0}
 .luna span{display:block;font-size:16px;line-height:19px;margin-bottom:8px}
-.luna p{background:rgba(242,231,220,.07);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:12px;padding:12px 14px;color:var(--pink);font-size:18px;line-height:20px;letter-spacing:-.18px;width:357px}
+.luna p{background:rgba(242,231,220,.07);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:12px 12px 12px 0;padding:12px 14px;color:var(--pink);font-size:18px;line-height:20px;letter-spacing:-.18px;width:357px}
 #form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 #form input{height:44px;border:0;border-radius:10px;background:rgba(242,231,220,.07);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:0 14px;font:400 15px Inter,Helvetica,Arial,sans-serif;color:var(--beige);outline:0}
 #form input::placeholder{color:#7a7a7a}
