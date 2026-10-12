@@ -12,6 +12,12 @@ addEventListener('scroll',draw,{passive:true});addEventListener('resize',size);s
 function u(){var r=st.getBoundingClientRect(),p=(innerHeight*.85-r.top)/(innerHeight*.45);p=Math.max(0,Math.min(1,p));st.style.setProperty('--p',p);ss.forEach(function(s,i){if(p>=i/ss.length+.02)s.classList.add('in')})}
 addEventListener('scroll',u,{passive:true});u()})();
 
+// cases scale on tablet
+(function(){var c=document.getElementById('cases');function f(){var w=innerWidth;if(w>=810&&w<1200){c.style.setProperty('--s',Math.min(1,c.clientWidth/1400))}else{c.style.removeProperty('--s')}}
+addEventListener('resize',f);f();var again=function(){f()};setTimeout(again,100)})();
+// vertical markers for process
+document.querySelectorAll('.step').forEach(function(s,i){var m=document.createElement('div');m.className='mkv';for(var k=0;k<=i;k++)m.appendChild(document.createElement('i'));s.insertBefore(m,s.firstChild)});
+
 // reveal on scroll
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
