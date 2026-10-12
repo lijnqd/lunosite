@@ -74,6 +74,8 @@ html,body{overflow-x:clip}
 .cs-body li{padding-left:18px}.cs-body li::before{left:0;top:6px}
 .cs-steps li{padding-left:30px}.cs-steps li::before{left:0;top:3px}
 .cs-text .label{font-size:24px;line-height:28px;letter-spacing:-.24px;margin:0 0 16px}
+.cs-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}.cs-top .cs-tags{margin:0;padding-top:22px;justify-content:flex-end;flex:none}.cs-lead{margin-top:16px}
+@media (max-width:1199px){.cs-top .cs-tags{padding-top:14px}}@media (max-width:809px){.cs-top{flex-direction:column;gap:16px}.cs-top .cs-tags{padding-top:0;justify-content:flex-start}}
 </style>
 </head>
 <body>
@@ -88,8 +90,10 @@ html,body{overflow-x:clip}
 
 <main class="cs">
   <a class="cs-back" href="/#cases">back to cases</a>
+  <div class="cs-top">
   <h1>SET</h1>
   <div class="cs-tags"><span>#e-commerce</span><span>#branding</span><span>#ux/ui</span></div>
+  </div>
   <p class="cs-lead">Online store and brand identity for handmade bags</p>
   <figure class="cs-hero"><img src="/assets/img/case-set-cover.webp" alt="Designer working on the SET online store product page on a laptop" width="2000" height="1333"></figure>
 
