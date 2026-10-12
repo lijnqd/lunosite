@@ -159,7 +159,7 @@ main{padding-top:66px}
 /* contacts */
 .contacts{position:relative;height:677px;margin-top:30px}
 .wordmark{position:absolute;left:155px;top:0;width:1120px;height:128px}
-.c-card{z-index:1;position:absolute;left:0;right:0;top:89px;bottom:0;border-radius:40px;background:rgba(242,231,220,.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);overflow:hidden}
+.c-card{z-index:1;position:absolute;left:0;right:0;top:89px;bottom:0;border-radius:40px;background:rgba(242,231,220,.04);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:hidden}
 .tree{position:absolute;right:-20px;bottom:0;width:420px;opacity:.5;z-index:0}
 .c-inner{position:absolute;left:368px;top:130px;width:695px}
 .luna{display:flex;gap:12px;align-items:flex-end;margin-bottom:24px}
@@ -251,6 +251,7 @@ main{padding-top:66px}
   .about{height:auto;padding:70px 20px}
   .about-text{font-size:28px;line-height:32px;letter-spacing:-.28px}
   .h40{font-size:24px;line-height:28px;letter-spacing:-.24px}
+  .adv-head h2{font-size:24px;line-height:28px;letter-spacing:-.24px}
   .adv-head .btn{width:100%}
   .adv-row{flex-direction:column}
   .adv-row .acard{height:250px;flex:none}
