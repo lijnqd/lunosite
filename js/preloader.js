@@ -1,4 +1,5 @@
 (function(){var p=document.getElementById('pre');if(!p)return;
+try{if(sessionStorage.getItem('luno_pre')){p.remove();return}sessionStorage.setItem('luno_pre','1')}catch(e){}
 if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches){p.remove();return}
 var h=document.documentElement,cv=p.querySelector('canvas'),x=cv.getContext('2d'),pc=p.querySelector('.pc'),W,H,dpr=Math.min(2,window.devicePixelRatio||1),S,G=3,C,cols,rows,jit=[];
 var BG='#141414',PINK=[255,179,173],BEIGE=[242,231,220];
