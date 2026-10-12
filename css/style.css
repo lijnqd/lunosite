@@ -192,9 +192,10 @@ main{padding-top:66px}
 
 /* ---------- TABLET 810–1199 ---------- */
 @media (max-width:1199px){
-  .hero h1{font-size:56px;line-height:56px;letter-spacing:-.56px;width:calc(100% - 64px)}
+  .hero{display:flex;flex-direction:column;padding:40px 32px}
+  .hero h1{position:static;font-size:56px;line-height:56px;letter-spacing:-.56px;width:100%}
   .hero-art{left:auto;right:-75px;top:auto;bottom:-36px}
-  .hero-bottom{top:310px;bottom:auto;left:32px}
+  .hero-bottom{position:relative;z-index:2;top:auto;bottom:auto;left:auto;margin-top:26px}
   .about{padding:100px 60px}
   .about-text{width:100%;max-width:800px;font-size:40px;line-height:44px;letter-spacing:-.4px}
   .adv-head{flex-direction:column;align-items:flex-start;gap:16px}
@@ -212,7 +213,7 @@ main{padding-top:66px}
   .steps::before{left:5px;top:0;width:1px;height:100%;transform:scaleY(var(--p,0));transform-origin:top}
   .step,.step:last-child{width:100%;display:grid;grid-template-columns:11px 1fr;column-gap:16px;row-gap:6px;align-items:start}
   .step>.mk,.step>img.mk{display:none}
-  .mkv{display:flex;flex-direction:column;gap:6px;grid-row:1/3;padding-top:7px;position:relative;background:var(--bg)}
+  .mkv{display:flex;flex-direction:column;gap:6px;grid-row:1/3;padding-top:7px;position:relative}
   .mkv i{width:11px;height:11px;border-radius:3px;background:#F0A8A3;display:block}
   .step h3{margin:0;font-size:24px}
   .step p{width:auto;max-width:640px}
@@ -223,7 +224,7 @@ main{padding-top:66px}
   .q-close{right:20px;top:auto;bottom:40px;width:86px;height:46px}
   .wordmark{left:50%;transform:translateX(-50%);width:min(760px,calc(100% - 40px));height:auto}
   .contacts{height:640px}
-  .c-card{top:60px}
+  .c-card{top:70px}
   .c-inner{left:50%;transform:translateX(-50%);width:min(695px,calc(100% - 80px));top:120px}
   .footer{height:520px}
   .f-cols{left:30px}
@@ -239,9 +240,10 @@ main{padding-top:66px}
   .btn-pink{width:170px}
   main{padding-top:66px}
   .hero{margin:0 12px;height:780px;border-radius:28px}
-  .hero h1{left:20px;top:28px;width:calc(100% - 40px);font-size:32px;line-height:34px;letter-spacing:-.32px}
+  .hero{padding:28px 20px}
+  .hero h1{font-size:32px;line-height:34px;letter-spacing:-.32px}
   .hero-art{width:560px;height:410px;right:-120px;bottom:-40px}
-  .hero-bottom{left:20px;right:20px;width:auto;top:232px;bottom:auto}
+  .hero-bottom{width:auto;margin-top:20px}
   .hero-bottom p{font-size:16px;line-height:19px;max-width:260px}
   .hero-bottom .btn{width:100%}
   .stack{padding:12px 12px 20px;gap:80px}
@@ -250,22 +252,24 @@ main{padding-top:66px}
   .h40{font-size:28px;line-height:32px}
   .adv-head .btn{width:100%}
   .adv-row{flex-direction:column}
-  .acard{height:240px;flex:none}
+  .adv-row .acard{height:250px;flex:none}
   .acard h3{font-size:26px}
   .cases{height:auto;padding:20px 20px 24px;border-radius:28px}
   .cases-in{position:static;width:auto;height:auto;zoom:1;display:flex;flex-direction:column;align-items:center;gap:14px}
   .cases-title{position:static;align-self:flex-start;margin-bottom:6px}
-  .folder{position:relative;left:auto!important;top:auto!important;width:100%;max-width:340px;height:auto;aspect-ratio:332/233}
-  .folder b,.folder em{font-size:inherit}
+  .folder{position:relative;left:auto!important;top:auto!important;width:332px;height:233px;flex:none;zoom:var(--fs,1)}
   .services .label,.svc-head{}
   .scard{height:300px;padding:20px}
   .stitle h3{font-size:26px}
-  .chat{margin:20px 0 0;height:520px;border-radius:28px}
-  .threads{width:140px;padding:8px 6px}
-  .th{padding:0 6px;gap:8px}
+  .chat{margin:20px 0 0;border-radius:28px}
+  .chat{flex-direction:column;height:auto}
+  .threads{width:100%;display:flex;gap:4px;overflow-x:auto;padding:10px;border-right:0;border-bottom:1px solid rgba(242,231,220,.14)}
+  .threads-head{display:none}
+  .th{width:auto;flex:1 0 auto;height:auto;flex-direction:column;gap:6px;padding:8px 10px;margin:0;min-width:70px}
   .th .tx .top span,.th .pv{display:none}
-  .th .av{width:40px;height:40px}
-  .threads-head{padding:0 6px}
+  .th .tx{flex:none}
+  .th .av{width:44px;height:44px}
+  .msgs{min-height:300px}
   .pane-head{padding:0 12px}
   .pane-head img{width:30px;height:30px}
   .verified{display:none}
@@ -278,7 +282,7 @@ main{padding-top:66px}
   .q-open{left:16px;top:24px;width:50px;height:33px}
   .q-close{right:16px;bottom:24px;width:50px;height:27px}
   .contacts{height:auto;padding-bottom:0;margin-top:0}
-  .wordmark{position:relative;transform:none;left:auto;width:100%;margin:0 auto -30px;z-index:0}
+  .wordmark{position:relative;transform:none;left:auto;width:100%;margin:0 auto -8px;z-index:0}
   .c-card{position:relative;top:auto;left:auto;right:auto;bottom:auto;padding:70px 16px 30px;border-radius:28px}
   .c-inner{position:relative;left:auto;top:auto;transform:none;width:100%}
   .luna img{width:48px;height:48px}

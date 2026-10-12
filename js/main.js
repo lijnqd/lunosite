@@ -9,11 +9,12 @@ addEventListener('scroll',draw,{passive:true});addEventListener('resize',size);s
 
 // process: line draws on scroll, steps appear
 (function(){var st=document.querySelector('.steps'),ss=st.querySelectorAll('.step');
-function u(){var r=st.getBoundingClientRect(),p=(innerHeight*.85-r.top)/(innerHeight*.45);p=Math.max(0,Math.min(1,p));st.style.setProperty('--p',p);ss.forEach(function(s,i){if(p>=i/ss.length+.02)s.classList.add('in')})}
+function u(){var r=st.getBoundingClientRect(),p=innerWidth<1200?(innerHeight*.8-r.top)/(r.height+20):(innerHeight*.85-r.top)/(innerHeight*.45);p=Math.max(0,Math.min(1,p));st.style.setProperty('--p',p);ss.forEach(function(s,i){if(p>=i/ss.length+.02)s.classList.add('in')})}
 addEventListener('scroll',u,{passive:true});u()})();
 
 // cases scale on tablet
-(function(){var c=document.getElementById('cases');function f(){var w=innerWidth;if(w>=810&&w<1200){c.style.setProperty('--s',Math.min(1,c.clientWidth/1400))}else{c.style.removeProperty('--s')}}
+(function(){var c=document.getElementById('cases');function f(){var w=innerWidth;if(w>=810&&w<1200){c.style.setProperty('--s',Math.min(1,c.clientWidth/1400))}else{c.style.removeProperty('--s')}
+  if(w<810){c.style.setProperty('--fs',Math.min(1,(c.clientWidth-40)/332))}else{c.style.removeProperty('--fs')}}
 addEventListener('resize',f);f();var again=function(){f()};setTimeout(again,100)})();
 // vertical markers for process
 document.querySelectorAll('.step').forEach(function(s,i){var m=document.createElement('div');m.className='mkv';for(var k=0;k<=i;k++)m.appendChild(document.createElement('i'));s.insertBefore(m,s.firstChild)});
