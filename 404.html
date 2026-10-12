@@ -48,7 +48,7 @@ var cv=document.getElementById('nf404'),ctx=cv.getContext('2d'),CW=760,CH=470,P=
 function build(){
   var o=document.createElement('canvas');o.width=CW;o.height=CH;var g=o.getContext('2d');
   g.fillStyle='#000';g.textBaseline='alphabetic';g.textAlign='left';
-  var fs=385;g.font='900 '+fs+'px Inter, Helvetica, Arial, sans-serif';
+  var fs=385;g.font='900 '+fs+'px Inter, sans-serif';
   var w4=g.measureText('4').width,wO=g.measureText('O').width,tot=w4*2+wO,x0=(CW-tot)/2,base=CH-8;
   g.fillText('4',x0,base);g.fillText('O',x0+w4,base);g.fillText('4',x0+w4+wO,base);
   var cx=x0+w4+wO/2,dy=base-fs*.72-48;[-1,1].forEach(function(s){g.beginPath();g.arc(cx+s*wO*.27,dy,27,0,6.283);g.fill()});

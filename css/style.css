@@ -1,7 +1,7 @@
 :root{--bg:#141414;--beige:#F2E7DC;--pink:#FFB3AD;--glass:rgba(242,231,220,.04);--mono:"Sometype Mono","Office Code Pro D",ui-monospace,monospace}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{background:var(--bg) radial-gradient(circle,rgba(255,179,173,.1) 2px,transparent 2.6px) 0 0/60px 60px;color:var(--beige);font-family:Inter,Helvetica,Arial,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+body{background:var(--bg) radial-gradient(circle,rgba(255,179,173,.1) 2px,transparent 2.6px) 0 0/60px 60px;color:var(--beige);font-family:Inter,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 #dots{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
 main,footer,.header{position:relative;z-index:1}.header{position:fixed}
@@ -17,7 +17,7 @@ h1,h2,h3,h4{font-weight:400}
 .reveal.in{opacity:1;transform:none}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;height:40px;border-radius:20px;font-family:Helvetica,Arial,sans-serif;font-size:16px;letter-spacing:-.16px;border:0;cursor:pointer;transition:transform .2s,opacity .2s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;height:40px;border-radius:20px;font-family:Inter,sans-serif;font-size:16px;letter-spacing:-.16px;border:0;cursor:pointer;transition:transform .2s,opacity .2s}
 .btn i{width:9px;height:9px;border-radius:50%;background:currentColor;display:block}
 .btn:hover{transform:scale(1.03)}
 .btn-pink{background:var(--pink);color:var(--bg);width:240px}
@@ -29,7 +29,7 @@ h1,h2,h3,h4{font-weight:400}
 .header>*{pointer-events:auto}
 .logo img{width:147px;height:32px;margin-top:-4px}
 .nav{position:absolute;left:50%;transform:translateX(calc(-50% - 46px));height:42px;padding:0 20px;display:flex;gap:20px;align-items:center;border-radius:20px;background:rgba(242,231,220,.06);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(10px)}
-.nav a{font-family:Helvetica,Arial,sans-serif;font-size:16px;letter-spacing:-.16px;padding:0 0}
+.nav a{font-family:Inter,sans-serif;font-size:16px;letter-spacing:-.16px;padding:0 0}
 .nav a:hover{color:var(--pink)}
 .header .btn-pink{margin-right:-2px}
 
@@ -132,7 +132,7 @@ main{padding-top:66px}
 .bubble .caret{display:inline-block;width:2px;height:15px;background:var(--pink);vertical-align:-2px;margin-left:1px;animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:0}}
 .pane-foot{height:64px;border-top:1px solid rgba(242,231,220,.14);display:flex;align-items:center;padding:0 20px;gap:10px}
-.replay{display:flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:20px;border:1px solid rgba(242,231,220,.25);background:transparent;color:var(--beige);font:500 12.5px Inter,Helvetica,Arial,sans-serif;cursor:pointer}
+.replay{display:flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:20px;border:1px solid rgba(242,231,220,.25);background:transparent;color:var(--beige);font:500 12.5px Inter,sans-serif;cursor:pointer}
 .count{margin-left:auto;font-size:12.5px;color:#c7c7c7;margin-right:6px}
 .round{width:38px;height:38px;border-radius:50%;border:1px solid rgba(242,231,220,.25);background:transparent;color:var(--beige);display:grid;place-items:center;cursor:pointer}
 .replay:hover,.round:hover{background:rgba(242,231,220,.1)}
@@ -146,8 +146,8 @@ main{padding-top:66px}
 .step:last-child{width:316px}
 .step .mk{display:block;height:11px;margin-bottom:12px;position:relative}
 .step .m1{width:11px;border-radius:3px;background:#F0A8A3}
-.step h3{font-family:Helvetica,Arial,sans-serif;font-size:24px;line-height:28px;letter-spacing:-.24px;margin-bottom:12px;margin-top:8px}
-.step p{font-family:Helvetica,Arial,sans-serif;font-size:18px;line-height:21.6px;letter-spacing:-.18px;opacity:.9;width:316px}
+.step h3{font-family:Inter,sans-serif;font-size:24px;line-height:28px;letter-spacing:-.24px;margin-bottom:12px;margin-top:8px}
+.step p{font-family:Inter,sans-serif;font-size:18px;line-height:21.6px;letter-spacing:-.18px;opacity:.9;width:316px}
 
 /* quote */
 .quote{position:relative;height:511px;display:flex;flex-direction:column;align-items:center}
@@ -167,7 +167,7 @@ main{padding-top:66px}
 .luna span{display:block;font-size:16px;line-height:19px;margin-bottom:8px}
 .luna p{background:rgba(242,231,220,.07);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border-radius:12px 12px 12px 0;padding:12px 14px;color:var(--pink);font-size:18px;line-height:20px;letter-spacing:-.18px;width:357px}
 #form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-#form input{height:44px;border:0;border-radius:10px;background:rgba(242,231,220,.07);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:0 14px;font:400 15px Inter,Helvetica,Arial,sans-serif;color:var(--beige);outline:0}
+#form input{height:44px;border:0;border-radius:10px;background:rgba(242,231,220,.07);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:0 14px;font:400 15px Inter,sans-serif;color:var(--beige);outline:0}
 #form input::placeholder{color:#7a7a7a}
 #form input:focus{box-shadow:0 0 0 1px var(--pink)}
 .btn.wide{grid-column:1/-1;width:100%;margin-top:14px;font-size:16px}
