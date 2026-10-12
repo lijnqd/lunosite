@@ -77,8 +77,8 @@ main{padding-top:66px}
 .fold{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 332 233'%3E%3Cpath d='M111.451 0C115.648 0 119.677 1.649 122.67 4.592L144 25.568 129.668 28H312C323.046 28 332 36.954 332 48V213C332 224.046 323.046 233 312 233H20C8.954 233 0 224.046 0 213V16C0 7.163 7.163 0 16 0Z' fill='%23FFB3AD'/%3E%3C/svg%3E") no-repeat;background-size:100% 100%}
 .folder img{position:absolute;left:53px;top:18px;width:226px;height:152px;border-radius:8px;object-fit:cover;transition:transform .35s}
 .glass{position:absolute;left:0;top:28px;width:332px;height:205px;border-radius:20px;background:rgba(242,231,220,.5);backdrop-filter:blur(2.5px);-webkit-backdrop-filter:blur(2.5px);}
-.folder b{position:absolute;left:20px;top:184px;font-size:24px;font-weight:400;line-height:30px;letter-spacing:-1px}
-.folder em{position:absolute;right:20px;top:190px;font-family:var(--mono);font-style:normal;font-size:16px;line-height:20px;letter-spacing:-.16px}
+.folder b{position:absolute;left:20px;bottom:16px;font-size:24px;font-weight:400;line-height:30px;letter-spacing:-1px}
+.folder em{position:absolute;right:20px;bottom:20px;font-family:var(--mono);font-style:normal;font-size:16px;line-height:20px;letter-spacing:-.16px}
 .folder:hover img{transform:translateY(-10px)}
 .f1{left:706px;top:79px}.f2{left:1049px;top:79px}
 .f3{left:20px;top:341px}.f4{left:363px;top:341px}.f5{left:1049px;top:341px}
