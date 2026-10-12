@@ -30,10 +30,9 @@
 .cs-tags{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 0}
 .cs-tags span{font-family:var(--mono);font-size:14px;color:var(--pink);border:1px solid rgba(255,179,173,.4);border-radius:14px;padding:5px 12px}
 .cs h1{font-size:72px;line-height:72px;letter-spacing:-.72px;font-weight:400;max-width:1100px}
-.cs-hero{margin:48px 0 0;border-radius:12px;overflow:hidden;background:var(--glass);aspect-ratio:1430/700;display:flex;align-items:center;justify-content:center}
+.cs-hero{margin:48px 0 0;margin-left:calc((100% - 100vw/var(--dz,1))/2);width:calc(100vw/var(--dz,1));border-radius:0;overflow:hidden;background:var(--glass);height:clamp(280px,48vw,700px)}
 .cs-hero img{width:100%;height:100%;object-fit:cover}
 .cs-lead{font-size:18px;line-height:22px;letter-spacing:-.18px;max-width:900px;margin:16px 0 0}
-.cs-sec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;margin-top:100px;align-items:start}
 .cs-sec h2{margin:0}
 .cs-body{font-size:16px;line-height:18px;letter-spacing:-.16px}
 .cs-body p+p,.cs-body ul+p,.cs-body p+ul{margin-top:10px}
@@ -46,21 +45,21 @@
 .cs-steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);background:none;width:auto;height:auto;top:0;font-family:var(--mono);font-size:12px;color:var(--pink);border-radius:0}
 .cs-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
 .cs-tools span{font-family:var(--mono);font-size:14px;border:1px solid rgba(242,231,220,.25);border-radius:14px;padding:5px 12px}
-.cs-text{max-width:440px}.cs-text .label{margin:0 0 20px}.cs-media{display:flex;flex-direction:column;gap:20px}.cs-media figure{border-radius:12px;overflow:hidden;background:var(--glass)}.cs-media img{display:block;width:100%;height:auto}
+.cs-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;margin-top:100px;align-items:start}.cs-texts{display:flex;flex-direction:column;gap:40px}.cs-medias{display:flex;flex-direction:column;gap:20px}.cs-text{max-width:440px}.cs-text .label{margin:0 0 20px}.cs-media{display:flex;flex-direction:column;gap:20px}.cs-media figure{border-radius:12px;overflow:hidden;background:var(--glass)}.cs-media img{display:block;width:100%;height:auto}
 @media (max-width:1199px){.cs h1{font-size:56px;line-height:56px}
-.cs-sec{gap:24px;margin-top:100px}}
+.cs-cols{gap:24px;margin-top:100px}}
 @media (max-width:809px){
  .cs-media{gap:12px}
  .header{left:12px;right:12px}
  .cs{padding:96px 12px 12px}
  .cs h1{font-size:32px;line-height:34px;letter-spacing:-.32px}
- .cs-hero{border-radius:12px;aspect-ratio:4/3;margin-top:32px}
+ .cs-hero{margin-top:32px}
  .cs-lead{font-size:18px;line-height:22px;margin-top:16px}
- .cs-sec{grid-template-columns:1fr;gap:24px;margin-top:80px}
+ .cs-cols{grid-template-columns:1fr;gap:40px;margin-top:80px}.cs-medias{gap:12px}
 }
 .cs-media.sq{flex-direction:row}.cs-media.sq figure{flex:1;min-width:0;aspect-ratio:1}.cs-media.sq img{height:100%;object-fit:cover}
 .cs-hero img{object-position:center 40%}main.stack{margin-top:100px;padding-top:0!important}main.stack .contacts{margin-top:0}
-.cs-hero{max-height:700px}
+html,body{overflow-x:clip}
 </style>
 </head>
 <body>
@@ -80,61 +79,31 @@
   <p class="cs-lead">Multi-page website for a digital marketing agency</p>
   <figure class="cs-hero"><img src="/assets/img/case-midas-cover.webp" alt="Midas website on a laptop screen — lunö studio case" width="1600" height="874"></figure>
 
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#task</h2>
-    <div class="cs-body"><p>Create a multi-page website for the agency from scratch.</p><p>The client asked for a very bold design without heavy images, animation or video, and with many colors that still don’t feel childish.</p></div>
+  <div class="cs-cols">
+    <div class="cs-texts">
+    <div class="cs-text"><h2 class="label">#task</h2>
+    <div class="cs-body"><p>Create a multi-page website for the agency from scratch.</p><p>The client asked for a very bold design without heavy images, animation or video, and with many colors that still don’t feel childish.</p></div></div>
+    <div class="cs-text"><h2 class="label">#client requirements</h2>
+    <div class="cs-body"><ul><li>Maximally bold design with no heavy images, animation or video</li><li>Many colors, without drifting into a childish look</li><li>No heavy pages or slow-loading elements</li><li>Each page answers one specific question and lets the user take the needed action without extra clicks, scrolls or waiting</li><li>The first screen takes at most 70–75% of the viewport; the rest shows the next screen, so it’s clear there is more to scroll</li></ul></div></div>
+    <div class="cs-text"><h2 class="label">#what was hard</h2>
+    <div class="cs-body"><ul><li>Lots of text and almost no images. The task was to present that much text in an interesting way.</li><li>The client had almost no ready copy, so we worked from placeholder text and wrote most of it ourselves.</li></ul></div></div>
+    <div class="cs-text"><h2 class="label">#solution</h2>
+    <div class="cs-body"><ul><li><b>3D instead of photos.</b> No images, animation or video. Interesting 3D objects break up the text.</li><li><b>One accent color.</b> It’s used in headings and key elements. Secondary colors appear in some cards, 3D objects and small details.</li><li><b>No long blocks.</b> Nothing takes more than one screen, so pages stay easy to scan.</li></ul></div></div>
+    <div class="cs-text"><h2 class="label">#process</h2>
+    <div class="cs-body"><ol class="cs-steps"><li>Studying the target audience</li><li>Competitor analysis</li><li>Functional prototype</li><li>Searching for references</li><li>Developing the visual concept</li><li>Responsive design for tablet and mobile</li><li>UI kit</li></ol><div class="cs-tools"><span>Figma</span><span>Photoshop</span></div></div></div>
+    <div class="cs-text"><h2 class="label">#what we delivered</h2>
+    <div class="cs-body"><ul><li>Multi-page website design</li><li>Responsive layouts for desktop, tablet and mobile</li><li>UI kit</li><li>Copy for the pages</li></ul></div></div>
+    <div class="cs-text"><h2 class="label">#result</h2>
+    <div class="cs-body"><p>After the redesign, the website’s conversion rate grew by 5%. Every page now answers one question and leads to one action, so visitors get to what they need without extra clicks or waiting.</p><p>The large volume of text reads easily thanks to 3D accents and a clear color system, and the pages stay light and fast to load.</p><p><a class="pink" href="https://www.behance.net/gallery/214922059/Midas-website-design" target="_blank" rel="noopener">See the full project on Behance</a></p></div></div>
     </div>
+    <div class="cs-medias">
     <div class="cs-media"><figure><img src="/assets/img/midas-home.webp" alt="Midas home page: dark first screen, 3D objects and colorful blocks" width="1200" height="7018" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#client requirements</h2>
-    <div class="cs-body"><ul><li>Maximally bold design with no heavy images, animation or video</li><li>Many colors, without drifting into a childish look</li><li>No heavy pages or slow-loading elements</li><li>Each page answers one specific question and lets the user take the needed action without extra clicks, scrolls or waiting</li><li>The first screen takes at most 70–75% of the viewport; the rest shows the next screen, so it’s clear there is more to scroll</li></ul></div>
-    </div>
-    <div class="cs-media"></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#what was hard</h2>
-    <div class="cs-body"><ul><li>Lots of text and almost no images. The task was to present that much text in an interesting way.</li><li>The client had almost no ready copy, so we worked from placeholder text and wrote most of it ourselves.</li></ul></div>
-    </div>
     <div class="cs-media"><figure><img src="/assets/img/midas-cases.webp" alt="Midas cases page with colored case cards" width="1200" height="2245" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#solution</h2>
-    <div class="cs-body"><ul><li><b>3D instead of photos.</b> No images, animation or video. Interesting 3D objects break up the text.</li><li><b>One accent color.</b> It’s used in headings and key elements. Secondary colors appear in some cards, 3D objects and small details.</li><li><b>No long blocks.</b> Nothing takes more than one screen, so pages stay easy to scan.</li></ul></div>
-    </div>
     <div class="cs-media"><figure><img src="/assets/img/midas-tools.webp" alt="Midas tools page with a grid of colorful service cards" width="1200" height="2129" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#process</h2>
-    <div class="cs-body"><ol class="cs-steps"><li>Studying the target audience</li><li>Competitor analysis</li><li>Functional prototype</li><li>Searching for references</li><li>Developing the visual concept</li><li>Responsive design for tablet and mobile</li><li>UI kit</li></ol><div class="cs-tools"><span>Figma</span><span>Photoshop</span></div></div>
-    </div>
-    <div class="cs-media"></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#what we delivered</h2>
-    <div class="cs-body"><ul><li>Multi-page website design</li><li>Responsive layouts for desktop, tablet and mobile</li><li>UI kit</li><li>Copy for the pages</li></ul></div>
-    </div>
     <div class="cs-media"><figure><img src="/assets/img/midas-seo2.webp" alt="Midas SEO by subscription service page" width="1200" height="3170" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#result</h2>
-    <div class="cs-body"><p>After the redesign, the website’s conversion rate grew by 5%. Every page now answers one question and leads to one action, so visitors get to what they need without extra clicks or waiting.</p><p>The large volume of text reads easily thanks to 3D accents and a clear color system, and the pages stay light and fast to load.</p><p><a class="pink" href="https://www.behance.net/gallery/214922059/Midas-website-design" target="_blank" rel="noopener">See the full project on Behance</a></p></div>
     </div>
-    <div class="cs-media"></div>
-  </section>
+  </div>
+
 </main>
 
 <main class="stack" style="padding-top:0">

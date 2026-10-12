@@ -30,10 +30,9 @@
 .cs-tags{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 0}
 .cs-tags span{font-family:var(--mono);font-size:14px;color:var(--pink);border:1px solid rgba(255,179,173,.4);border-radius:14px;padding:5px 12px}
 .cs h1{font-size:72px;line-height:72px;letter-spacing:-.72px;font-weight:400;max-width:1100px}
-.cs-hero{margin:48px 0 0;border-radius:12px;overflow:hidden;background:var(--glass);aspect-ratio:1430/700;display:flex;align-items:center;justify-content:center}
+.cs-hero{margin:48px 0 0;margin-left:calc((100% - 100vw/var(--dz,1))/2);width:calc(100vw/var(--dz,1));border-radius:0;overflow:hidden;background:var(--glass);height:clamp(280px,48vw,700px)}
 .cs-hero img{width:100%;height:100%;object-fit:cover}
 .cs-lead{font-size:18px;line-height:22px;letter-spacing:-.18px;max-width:900px;margin:16px 0 0}
-.cs-sec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;margin-top:100px;align-items:start}
 .cs-sec h2{margin:0}
 .cs-body{font-size:16px;line-height:18px;letter-spacing:-.16px}
 .cs-body p+p,.cs-body ul+p,.cs-body p+ul{margin-top:10px}
@@ -46,22 +45,21 @@
 .cs-steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);background:none;width:auto;height:auto;top:0;font-family:var(--mono);font-size:12px;color:var(--pink);border-radius:0}
 .cs-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
 .cs-tools span{font-family:var(--mono);font-size:14px;border:1px solid rgba(242,231,220,.25);border-radius:14px;padding:5px 12px}
-.cs-text{max-width:440px}.cs-text .label{margin:0 0 20px}.cs-media{display:flex;flex-direction:column;gap:20px}.cs-media figure{border-radius:12px;overflow:hidden;background:var(--glass)}.cs-media img{display:block;width:100%;height:auto}
+.cs-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;margin-top:100px;align-items:start}.cs-texts{display:flex;flex-direction:column;gap:40px}.cs-medias{display:flex;flex-direction:column;gap:20px}.cs-text{max-width:440px}.cs-text .label{margin:0 0 20px}.cs-media{display:flex;flex-direction:column;gap:20px}.cs-media figure{border-radius:12px;overflow:hidden;background:var(--glass)}.cs-media img{display:block;width:100%;height:auto}
 @media (max-width:1199px){.cs h1{font-size:56px;line-height:56px}
-.cs-sec{gap:24px;margin-top:100px}}
+.cs-cols{gap:24px;margin-top:100px}}
 @media (max-width:809px){
  .cs-media{gap:12px}
  .header{left:12px;right:12px}
  .cs{padding:96px 12px 12px}
  .cs h1{font-size:32px;line-height:34px;letter-spacing:-.32px}
- .cs-hero{border-radius:12px;margin-top:32px}
+ .cs-hero{margin-top:32px}
  .cs-lead{font-size:18px;line-height:22px;margin-top:16px}
- .cs-sec{grid-template-columns:1fr;gap:24px;margin-top:80px}
+ .cs-cols{grid-template-columns:1fr;gap:40px;margin-top:80px}.cs-medias{gap:12px}
 }
 .cs-media.sq{flex-direction:row}.cs-media.sq figure{flex:1;min-width:0;aspect-ratio:1}.cs-media.sq img{height:100%;object-fit:cover}
 .cs-hero img{object-position:center 40%}main.stack{margin-top:100px;padding-top:0!important}main.stack .contacts{margin-top:0}
-.cs-hero{aspect-ratio:2000/1564}
-.cs-hero{max-height:700px}
+html,body{overflow-x:clip}
 </style>
 </head>
 <body>
@@ -81,53 +79,30 @@
   <p class="cs-lead">AI-powered marketing for energy and industrial technology</p>
   <figure class="cs-hero"><img src="/assets/img/case-p54-cover.webp" alt="Project 54 logo over a night gas station — lunö studio case" width="2000" height="1564"></figure>
 
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#about</h2>
-    <div class="cs-body"><p>Project 54 is an AI-powered marketing company for the energy and industrial technology sectors. It helps businesses replace outdated marketing strategies with smarter growth systems designed to generate leads, support expansion, and strengthen their position in oil, gas, and renewable energy.</p></div>
+  <div class="cs-cols">
+    <div class="cs-texts">
+    <div class="cs-text"><h2 class="label">#about</h2>
+    <div class="cs-body"><p>Project 54 is an AI-powered marketing company for the energy and industrial technology sectors. It helps businesses replace outdated marketing strategies with smarter growth systems designed to generate leads, support expansion, and strengthen their position in oil, gas, and renewable energy.</p></div></div>
+    <div class="cs-text"><h2 class="label">#task</h2>
+    <div class="cs-body"><p>Design a clear, functional, and visually engaging website that communicates Project 54’s value. The site also needed to introduce the company’s AI-powered system without revealing confidential details about how it works.</p></div></div>
+    <div class="cs-text"><h2 class="label">#solution</h2>
+    <div class="cs-body"><ul><li>Built the content structure around what visitors need to understand first: what Project 54 does, who it works with, and how to get in touch.</li><li>Presented the company’s role in energy and industrial technology through a confident, contemporary visual direction.</li><li>Introduced the AI-powered system at a high level, keeping confidential product details private.</li><li>Included an Insights section to give the company space to share expertise and industry perspectives.</li></ul></div></div>
+    <div class="cs-text"><h2 class="label">#pages</h2>
+    <div class="cs-body"><ul><li>Main</li><li>About</li><li>Insights</li><li>Contact</li></ul></div></div>
+    <div class="cs-text"><h2 class="label">#deliverables</h2>
+    <div class="cs-body"><ul><li>Website design for four pages</li><li>Content structure and visual direction</li></ul></div></div>
+    <div class="cs-text"><h2 class="label">#result</h2>
+    <div class="cs-body"><p>The final design gives Project 54 a clear digital presence tailored to the energy and industrial technology sectors. Its four-page structure brings the company’s offer, background, insights, and contact information together, while introducing its AI-powered approach without exposing confidential details.</p><p><a class="pink" href="https://www.behance.net/gallery/230028195/Project-54-Corporate-website-design" target="_blank" rel="noopener">See the full project on Behance</a></p></div></div>
     </div>
+    <div class="cs-medias">
     <div class="cs-media"><figure><img src="/assets/img/p54-main.webp" alt="Project 54 home page with a dark first screen and energy-sector imagery" width="1200" height="5637" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#task</h2>
-    <div class="cs-body"><p>Design a clear, functional, and visually engaging website that communicates Project 54’s value. The site also needed to introduce the company’s AI-powered system without revealing confidential details about how it works.</p></div>
-    </div>
     <div class="cs-media"><figure><img src="/assets/img/p54-about.webp" alt="Project 54 About page with team photos and company method" width="1200" height="4167" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#solution</h2>
-    <div class="cs-body"><ul><li>Built the content structure around what visitors need to understand first: what Project 54 does, who it works with, and how to get in touch.</li><li>Presented the company’s role in energy and industrial technology through a confident, contemporary visual direction.</li><li>Introduced the AI-powered system at a high level, keeping confidential product details private.</li><li>Included an Insights section to give the company space to share expertise and industry perspectives.</li></ul></div>
-    </div>
     <div class="cs-media"><figure><img src="/assets/img/p54-insights.webp" alt="Project 54 Insights page with a grid of article cards and topic filters" width="1200" height="2766" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#pages</h2>
-    <div class="cs-body"><ul><li>Main</li><li>About</li><li>Insights</li><li>Contact</li></ul></div>
-    </div>
     <div class="cs-media"><figure><img src="/assets/img/p54-article.webp" alt="Project 54 article page with a large hero photo and pull quote" width="1200" height="2207" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#deliverables</h2>
-    <div class="cs-body"><ul><li>Website design for four pages</li><li>Content structure and visual direction</li></ul></div>
-    </div>
     <div class="cs-media"><figure><img src="/assets/img/p54-form.webp" alt="Project 54 feedback form with contact details and a message form" width="1200" height="653" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#result</h2>
-    <div class="cs-body"><p>The final design gives Project 54 a clear digital presence tailored to the energy and industrial technology sectors. Its four-page structure brings the company’s offer, background, insights, and contact information together, while introducing its AI-powered approach without exposing confidential details.</p><p><a class="pink" href="https://www.behance.net/gallery/230028195/Project-54-Corporate-website-design" target="_blank" rel="noopener">See the full project on Behance</a></p></div>
     </div>
-    <div class="cs-media"></div>
-  </section>
+  </div>
+
 </main>
 
 <main class="stack" style="padding-top:0">

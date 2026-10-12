@@ -30,10 +30,9 @@
 .cs-tags{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 0}
 .cs-tags span{font-family:var(--mono);font-size:14px;color:var(--pink);border:1px solid rgba(255,179,173,.4);border-radius:14px;padding:5px 12px}
 .cs h1{font-size:72px;line-height:72px;letter-spacing:-.72px;font-weight:400;max-width:1100px}
-.cs-hero{margin:48px 0 0;border-radius:12px;overflow:hidden;background:var(--glass);aspect-ratio:1430/700;display:flex;align-items:center;justify-content:center}
+.cs-hero{margin:48px 0 0;margin-left:calc((100% - 100vw/var(--dz,1))/2);width:calc(100vw/var(--dz,1));border-radius:0;overflow:hidden;background:var(--glass);height:clamp(280px,48vw,700px)}
 .cs-hero img{width:100%;height:100%;object-fit:cover}
 .cs-lead{font-size:18px;line-height:22px;letter-spacing:-.18px;max-width:900px;margin:16px 0 0}
-.cs-sec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;margin-top:100px;align-items:start}
 .cs-sec h2{margin:0}
 .cs-body{font-size:16px;line-height:18px;letter-spacing:-.16px}
 .cs-body p+p,.cs-body ul+p,.cs-body p+ul{margin-top:10px}
@@ -46,22 +45,22 @@
 .cs-steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);background:none;width:auto;height:auto;top:0;font-family:var(--mono);font-size:12px;color:var(--pink);border-radius:0}
 .cs-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
 .cs-tools span{font-family:var(--mono);font-size:14px;border:1px solid rgba(242,231,220,.25);border-radius:14px;padding:5px 12px}
-.cs-text{max-width:440px}.cs-text .label{margin:0 0 20px}.cs-media{display:flex;flex-direction:column;gap:20px}.cs-media figure{border-radius:12px;overflow:hidden;background:var(--glass)}.cs-media img{display:block;width:100%;height:auto}
+.cs-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;margin-top:100px;align-items:start}.cs-texts{display:flex;flex-direction:column;gap:40px}.cs-medias{display:flex;flex-direction:column;gap:20px}.cs-text{max-width:440px}.cs-text .label{margin:0 0 20px}.cs-media{display:flex;flex-direction:column;gap:20px}.cs-media figure{border-radius:12px;overflow:hidden;background:var(--glass)}.cs-media img{display:block;width:100%;height:auto}
 @media (max-width:1199px){.cs h1{font-size:56px;line-height:56px}
-.cs-sec{gap:24px;margin-top:100px}}
+.cs-cols{gap:24px;margin-top:100px}}
 @media (max-width:809px){
  .cs-media{gap:12px}
  .header{left:12px;right:12px}
  .cs{padding:96px 12px 12px}
  .cs h1{font-size:32px;line-height:34px;letter-spacing:-.32px}
- .cs-hero{border-radius:12px;aspect-ratio:4/3;margin-top:32px}
+ .cs-hero{margin-top:32px}
  .cs-lead{font-size:18px;line-height:22px;margin-top:16px}
- .cs-sec{grid-template-columns:1fr;gap:24px;margin-top:80px}
+ .cs-cols{grid-template-columns:1fr;gap:40px;margin-top:80px}.cs-medias{gap:12px}
 }
 .cs-media.sq{flex-direction:row}.cs-media.sq figure{flex:1;min-width:0;aspect-ratio:1}.cs-media.sq img{height:100%;object-fit:cover}
 .cs-hero img{object-position:center 40%}main.stack{margin-top:100px;padding-top:0!important}main.stack .contacts{margin-top:0}
 .cs-body .cs-intro{font-size:18px;line-height:22px;letter-spacing:-.18px}
-.cs-hero{max-height:700px}
+html,body{overflow-x:clip}
 </style>
 </head>
 <body>
@@ -81,20 +80,14 @@
   <p class="cs-lead">Online store and brand identity for handmade bags</p>
   <figure class="cs-hero"><img src="/assets/img/case-set-cover.webp" alt="Designer working on the SET online store product page on a laptop" width="2000" height="1333"></figure>
 
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#task</h2>
+  <div class="cs-cols">
+    <div class="cs-texts">
+    <div class="cs-text"><h2 class="label">#task</h2>
     <div class="cs-body"><p class="cs-intro">SET is a handmade bag brand. We redesigned its online store from scratch and created a complete brand identity, so the website, posters and business cards finally speak with one voice: natural, calm and crafted with care.</p>
       <p>Redesign the store’s website and build it, so a visitor understands the brand at once and finds the right bag quickly.</p>
       <p>The brand’s products are soft, natural and made by hand. The digital presence had to feel the same way.</p>
-    </div>
-    </div>
-    <div class="cs-media"><figure><img src="/assets/img/set-404.webp" alt="SET 404 error page" width="1600" height="1227" loading="lazy" decoding="async"></figure><figure><img src="/assets/img/set-thanks.webp" alt="SET thank-you page after order" width="1600" height="933" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#what was wrong before</h2>
+    </div></div>
+    <div class="cs-text"><h2 class="label">#what was wrong before</h2>
     <div class="cs-body">
       <ul>
         <li>The site was made by the client themselves, so the composition was weak and the functionality inconvenient.</li>
@@ -102,14 +95,8 @@
         <li>The whole site was built from standard Tilda blocks, which didn’t convey the brand’s aesthetic or positioning.</li>
         <li>In practice, buying a bag meant writing to the founder in direct messages.</li>
       </ul>
-    </div>
-    </div>
-    <div class="cs-media"><figure><img src="/assets/img/set-product.webp" alt="SET product page: bag photos, description and recommendations" width="1600" height="2104" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#solution</h2>
+    </div></div>
+    <div class="cs-text"><h2 class="label">#solution</h2>
     <div class="cs-body">
       <ul>
         <li><b>A real home page.</b> The first screen explains the brand right away. Unnecessary pages were removed and the key information moved to the home page.</li>
@@ -117,14 +104,8 @@
         <li><b>Research-based design.</b> A distinctive, convenient interface built on competitor analysis.</li>
         <li><b>Every technical page.</b> 404, privacy policy and other service pages were designed too, so nothing breaks the experience.</li>
       </ul>
-    </div>
-    </div>
-    <div class="cs-media"><figure><img src="/assets/img/set-shop.webp" alt="SET shop catalog page with product grid" width="1000" height="2442" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#branding</h2>
+    </div></div>
+    <div class="cs-text"><h2 class="label">#branding</h2>
     <div class="cs-body">
       <p>Alongside the website, we developed the visual identity of SET:</p>
       <ul>
@@ -133,14 +114,8 @@
         <li><b>Business cards.</b> A compact, tactile piece that continues the same visual language.</li>
       </ul>
       <p>The identity and the website share one palette and one logic, so a customer meets the same brand at every step, from a poster to the checkout.</p>
-    </div>
-    </div>
-    <div class="cs-media sq"><figure><img src="/assets/img/set-brand-card.webp" alt="SET brand postcards with logo and dot pattern" width="1400" height="2100" loading="lazy" decoding="async"></figure><figure><img src="/assets/img/set-brand-label.webp" alt="SET woven clothing label: set apart from others" width="1000" height="1250" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#process</h2>
+    </div></div>
+    <div class="cs-text"><h2 class="label">#process</h2>
     <div class="cs-body">
       <ol class="cs-steps">
         <li>Studying the target audience</li>
@@ -153,14 +128,8 @@
         <li>Website development on Tilda: home page and product page</li>
       </ol>
       <div class="cs-tools"><span>Figma</span><span>Photoshop</span><span>Tilda</span></div>
-    </div>
-    </div>
-    <div class="cs-media"><figure><img src="/assets/img/set-checkout.webp" alt="SET checkout page" width="1600" height="1566" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#what we delivered</h2>
+    </div></div>
+    <div class="cs-text"><h2 class="label">#what we delivered</h2>
     <div class="cs-body">
       <ul>
         <li>Redesigned website: home page, product page and technical pages</li>
@@ -168,22 +137,25 @@
         <li>UI kit</li>
         <li>Brand style, posters and business cards</li>
       </ul>
-    </div>
-    </div>
-    <div class="cs-media"><figure><img src="/assets/img/set-cart.webp" alt="SET cart drawer over the product page" width="1600" height="980" loading="lazy" decoding="async"></figure></div>
-  </section>
-
-  <section class="cs-sec">
-    <div class="cs-text">
-    <h2 class="label">#result</h2>
+    </div></div>
+    <div class="cs-text"><h2 class="label">#result</h2>
     <div class="cs-body">
       <p>Before the redesign, buying a SET bag meant writing to the founder in direct messages. Now customers can browse the catalog and order on their own, anytime, without a single message.</p>
       <p>The website explains the brand from the first screen, the product pages make the choice easy, and the new identity ties the store, posters and business cards into one recognizable brand. The project was warmly received by the design community on Behance.</p>
       <p><a class="pink" href="https://www.behance.net/gallery/220909775/set-e-commerce-website" target="_blank" rel="noopener">See the full project on Behance</a></p>
+    </div></div>
     </div>
-    </div>
+    <div class="cs-medias">
+    <div class="cs-media"><figure><img src="/assets/img/set-404.webp" alt="SET 404 error page" width="1600" height="1227" loading="lazy" decoding="async"></figure><figure><img src="/assets/img/set-thanks.webp" alt="SET thank-you page after order" width="1600" height="933" loading="lazy" decoding="async"></figure></div>
+    <div class="cs-media"><figure><img src="/assets/img/set-product.webp" alt="SET product page: bag photos, description and recommendations" width="1600" height="2104" loading="lazy" decoding="async"></figure></div>
+    <div class="cs-media"><figure><img src="/assets/img/set-shop.webp" alt="SET shop catalog page with product grid" width="1000" height="2442" loading="lazy" decoding="async"></figure></div>
+    <div class="cs-media sq"><figure><img src="/assets/img/set-brand-card.webp" alt="SET brand postcards with logo and dot pattern" width="1400" height="2100" loading="lazy" decoding="async"></figure><figure><img src="/assets/img/set-brand-label.webp" alt="SET woven clothing label: set apart from others" width="1000" height="1250" loading="lazy" decoding="async"></figure></div>
+    <div class="cs-media"><figure><img src="/assets/img/set-checkout.webp" alt="SET checkout page" width="1600" height="1566" loading="lazy" decoding="async"></figure></div>
+    <div class="cs-media"><figure><img src="/assets/img/set-cart.webp" alt="SET cart drawer over the product page" width="1600" height="980" loading="lazy" decoding="async"></figure></div>
     <div class="cs-media"><figure><img src="/assets/img/set-info.webp" alt="SET info page: delivery, refund and care recommendations" width="1600" height="1437" loading="lazy" decoding="async"></figure></div>
-  </section>
+    </div>
+  </div>
+
 
 </main>
 
