@@ -1,10 +1,11 @@
 (function(){
-// mouse-reactive dot grid
-(function(){var c=document.getElementById('dots'),x=c.getContext('2d'),mx=-999,my=-999,dpr=window.devicePixelRatio||1,W,H;
+// mouse glow over the dot grid (base dots are plain CSS, so they never lag on scroll)
+(function(){var c=document.getElementById('dots'),x=c.getContext('2d'),mx=-999,my=-999,dpr=window.devicePixelRatio||1,W,H,raf=0;
 function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;draw()}
-function draw(){x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);var sy=scrollY,y0=30-(sy%60);for(var y=y0;y<H+4;y+=60){for(var px=30;px<W+4;px+=60){var d=Math.hypot(px-mx,y-my),t=Math.max(0,1-d/160),a=.25+.75*t*t;x.fillStyle='rgba(255,179,173,'+(.4*a).toFixed(3)+')';x.beginPath();x.arc(px,y,2+t*1.2,0,7);x.fill()}}}
-addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;requestAnimationFrame(draw)});
-addEventListener('scroll',function(){requestAnimationFrame(draw)},{passive:true});addEventListener('resize',size);size()})();
+function draw(){raf=0;x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);if(mx<0)return;var sy=scrollY,y0=30-(sy%60);for(var y=y0;y<H+4;y+=60){for(var px=30;px<W+4;px+=60){var d=Math.hypot(px-mx,y-my);if(d>170)continue;var t=1-d/170,a=.75*t*t;x.fillStyle='rgba(255,179,173,'+(.4*a).toFixed(3)+')';x.beginPath();x.arc(px,y,2+t*1.2,0,7);x.fill()}}}
+function req(){if(!raf)raf=requestAnimationFrame(draw)}
+addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;req()});
+addEventListener('scroll',draw,{passive:true});addEventListener('resize',size);size()})();
 
 // process: line draws on scroll, steps appear
 (function(){var st=document.querySelector('.steps'),ss=st.querySelectorAll('.step');
