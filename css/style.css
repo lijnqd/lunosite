@@ -159,8 +159,8 @@ main{padding-top:66px}
 /* contacts */
 .contacts{position:relative;height:677px;margin-top:30px}
 .wordmark{position:absolute;left:155px;top:0;width:1120px;height:128px}
-.c-card{position:absolute;left:0;right:0;top:89px;bottom:0;border-radius:40px;background:rgba(242,231,220,.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);overflow:hidden}
-.tree{position:absolute;right:-20px;bottom:0;width:420px;opacity:.35;filter:blur(1px)}
+.c-card{z-index:1;position:absolute;left:0;right:0;top:89px;bottom:0;border-radius:40px;background:rgba(242,231,220,.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);overflow:hidden}
+.tree{position:absolute;right:-20px;bottom:0;width:420px;opacity:.5;z-index:0}
 .c-inner{position:absolute;left:368px;top:130px;width:695px}
 .luna{display:flex;gap:12px;align-items:flex-end;margin-bottom:24px}
 .luna img{width:70px;height:70px;border-radius:50%;object-fit:cover;flex:none;margin-bottom:0}
@@ -213,8 +213,9 @@ main{padding-top:66px}
   .steps::before{left:5px;top:0;width:1px;height:100%;transform:scaleY(var(--p,0));transform-origin:top}
   .step,.step:last-child{width:100%;display:grid;grid-template-columns:11px 1fr;column-gap:16px;row-gap:6px;align-items:start}
   .step>.mk,.step>img.mk{display:none}
-  .mkv{display:flex;flex-direction:column;gap:6px;grid-row:1/3;padding-top:7px;position:relative}
-  .mkv i{width:11px;height:11px;border-radius:3px;background:#F0A8A3;display:block}
+  .mkv{display:block;position:relative;width:11px;grid-row:1/3;margin-top:5px}
+  .mkv i{display:block;width:11px;height:11px;border-radius:3px;background:#FFB3AE}
+  .mkv img{position:absolute;left:0;top:0;height:11px;transform-origin:0 0;transform:translateX(11px) rotate(90deg)}
   .step h3{margin:0;font-size:24px}
   .step p{width:auto;max-width:640px}
   .quote{height:auto;min-height:440px;padding:110px 40px 90px}
@@ -249,18 +250,18 @@ main{padding-top:66px}
   .stack{padding:12px 12px 20px;gap:80px}
   .about{height:auto;padding:70px 20px}
   .about-text{font-size:28px;line-height:32px;letter-spacing:-.28px}
-  .h40{font-size:28px;line-height:32px}
+  .h40{font-size:24px;line-height:28px;letter-spacing:-.24px}
   .adv-head .btn{width:100%}
   .adv-row{flex-direction:column}
   .adv-row .acard{height:250px;flex:none}
-  .acard h3{font-size:26px}
+  .acard h3{font-size:24px}
   .cases{height:auto;padding:20px 20px 24px;border-radius:28px}
   .cases-in{position:static;width:auto;height:auto;zoom:1;display:flex;flex-direction:column;align-items:center;gap:14px}
   .cases-title{position:static;align-self:flex-start;margin-bottom:6px}
   .folder{position:relative;left:auto!important;top:auto!important;width:332px;height:233px;flex:none;zoom:var(--fs,1)}
   .services .label,.svc-head{}
   .scard{height:300px;padding:20px}
-  .stitle h3{font-size:26px}
+  .stitle h3{font-size:24px}
   .chat{margin:20px 0 0;border-radius:28px}
   .chat{flex-direction:column;height:auto}
   .threads{width:100%;display:flex;gap:4px;overflow-x:auto;padding:10px;border-right:0;border-bottom:1px solid rgba(242,231,220,.14)}
@@ -288,10 +289,10 @@ main{padding-top:66px}
   .luna img{width:48px;height:48px}
   .luna p{width:auto;font-size:15px;line-height:18px}
   #form{grid-template-columns:1fr}
-  .tree{width:260px}
-  .footer{height:auto;min-height:620px;padding:24px 20px 170px;margin:0 12px 12px}
+  .tree{width:260px;right:0}
+  .footer{height:auto;min-height:560px;padding:24px 20px 120px;margin:0 12px 12px}
   .f-cols{position:static;flex-direction:column;gap:22px}
   .f-cols>div:first-child{width:auto}
   .clock{position:static;margin-top:26px;width:255px}
-  .f-art{width:300%;right:auto;height:233.5px}
+  .f-art{width:100%;height:110px}
 }
