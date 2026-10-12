@@ -1,5 +1,5 @@
 (function(){
-var GTM_ID='';/* paste GTM-XXXXXXX here to enable Google Tag Manager */
+var GTM_ID='GTM-TGT5WDHG';/* paste GTM-XXXXXXX here to enable Google Tag Manager */
 var KEY='luno_consent',cats=[['necessary','Necessary','Keeps the site working. Always on.',1],['preferences','Preferences','Remembers your settings.',0],['analytics','Analytics','Helps us understand how the site is used.',0],['marketing','Marketing','Used for ads and remarketing.',0]];
 var w=window;w.dataLayer=w.dataLayer||[];function gtag(){w.dataLayer.push(arguments)}
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',wait_for_update:500});
