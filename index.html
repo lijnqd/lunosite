@@ -1,21 +1,163 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>lunö — design studio</title>
-<style>
-  :root{--bg:#141414;--fg:#f2e7dc;--accent:#ffb1ae}
-  html,body{height:100%;margin:0}
-  body{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;display:grid;place-items:center;text-align:center}
-  h1{font-size:clamp(48px,12vw,160px);margin:0;letter-spacing:-.04em;color:var(--accent)}
-  p{opacity:.7}
-</style>
+<title>lunö studio — Product Design, UX/UI & Web Development Studio</title>
+<meta name="description" content="lunö is an independent design studio creating brand identities, websites, and digital products for growing businesses.">
+<link rel="icon" href="assets/img/mascot-circle.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sometype+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<main>
-  <h1>lunö</h1>
-  <p>site is being built</p>
+
+<header class="header">
+  <a class="logo" href="#top" aria-label="lunö"><img src="assets/svg/logo.svg" alt="lunö"></a>
+  <nav class="nav">
+    <a href="#about">#about</a><a href="#services">#services</a><a href="#cases">#cases</a><a href="#contacts">#contact</a>
+  </nav>
+  <a class="btn btn-pink" href="#contacts"><i></i>book a call</a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <h1>brand identity and websites for ambitious startups and growing businesses</h1>
+    <iframe class="hero-art" src="embeds/hero-mascot.html" title="" loading="lazy"></iframe>
+    <div class="hero-bottom">
+      <p>we help businesses build clear brand identities, websites, and digital products through thoughtful strategy, design, and development</p>
+      <a class="btn btn-dark" href="#contacts"><i></i>book a call</a>
+    </div>
+  </section>
+
+  <div class="stack">
+    <section id="about" class="about card reveal">
+      <p class="label">#about us</p>
+      <p class="about-text" id="aboutText">lunö is an independent design studio creating brand identities, websites, and digital products for growing <img class="eye" src="assets/svg/eye-67.svg" alt=""> businesses. we bring strategy, visual design, UX/UI, and development together to make brands easier <span class="pill">to recognize, understand, and trust</span></p>
+    </section>
+
+    <section class="adv">
+      <div class="adv-head">
+        <div>
+          <p class="label">#our advantages</p>
+          <h2 class="h40 reveal"><span class="pink">thoughtful design</span>, built around real people and real <img class="star" src="assets/svg/star.svg" alt=""> business goals</h2>
+        </div>
+        <a class="btn btn-pink" href="#contacts"><i></i>book a call</a>
+      </div>
+      <div class="adv-grid">
+        <div class="adv-row r1">
+          <article class="acard reveal"><img src="assets/svg/icon-empathy.svg" alt=""><div><h3>empathy</h3><p>we put ourselves in the shoes of your users. every interaction we design starts with understanding real people</p></div></article>
+          <article class="acard reveal"><img src="assets/svg/icon-honesty.svg" alt=""><div><h3>honesty</h3><p>clear, transparent, and truthful. we don’t promise what design can’t deliver</p></div></article>
+        </div>
+        <div class="adv-row r2">
+          <article class="acard reveal"><img src="assets/svg/icon-purposeful.svg" alt=""><div><h3>purposeful design</h3><p>no decoration without reason. every choice serves a goal: usefulness, clarity, and impact</p></div></article>
+          <article class="acard reveal"><img src="assets/svg/icon-detail.svg" alt=""><div><h3>attention to detail</h3><p>We refine every detail so the experience feels clear and cohesive</p></div></article>
+          <article class="acard reveal"><img src="assets/svg/icon-collab.svg" alt=""><div><h3>collaboration</h3><p>we work openly with your team to make better decisions together</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases" class="cases">
+      <img class="cases-bg" src="assets/img/texture-4.png" alt="">
+      <h2 class="h40 cases-title">our <span class="pink">case</span> studies</h2>
+      <a class="folder f1" href="https://www.behance.net/gallery/220909775/set-e-commerce-website" target="_blank" rel="noopener"><span class="fold"></span><img src="assets/img/case-set.png" alt=""><span class="glass"></span><b>SET</b><em>#e-commerce</em></a>
+      <a class="folder f2" href="https://www.behance.net/gallery/231905489/BEEYAWN-Corporate-website-design" target="_blank" rel="noopener"><span class="fold"></span><img src="assets/img/case-beeyown.png" alt=""><span class="glass"></span><b>Beeyawn</b><em>#corporate</em></a>
+      <a class="folder f3" href="https://www.behance.net/gallery/230028195/Project-54-Corporate-website-design" target="_blank" rel="noopener"><span class="fold"></span><img src="assets/img/case-project54.png" alt=""><span class="glass"></span><b>Project 54</b><em>#corporate</em></a>
+      <a class="folder f4" href="https://www.behance.net/gallery/214922059/Midas-website-design" target="_blank" rel="noopener"><span class="fold"></span><img src="assets/img/case-midas.png" alt=""><span class="glass"></span><b>Midas</b><em>#corporate</em></a>
+      <a class="folder f5" href="https://www.behance.net/gallery/228406425/Orta-community-corporate-website-design" target="_blank" rel="noopener"><span class="fold"></span><img src="assets/img/case-orta.png" alt=""><span class="glass"></span><b>ORTA</b><em>#corporate</em></a>
+      <a class="folder f6" href="https://www.behance.net/gallery/214005931/ANT-SYSTEM-website-design" target="_blank" rel="noopener"><span class="fold"></span><img src="assets/img/case-ant-system.png" alt=""><span class="glass"></span><b>ANT system</b><em>#corporate</em></a>
+      <a class="folder f7" href="https://www.behance.net/gallery/214922059/Midas-website-design" target="_blank" rel="noopener"><span class="fold"></span><img src="assets/img/case-media-brothers.png" alt=""><span class="glass"></span><b>Media brothers</b><em>#corporate</em></a>
+      <a class="folder f8" href="https://www.behance.net/gallery/220655963/uxui-designer-portfolio" target="_blank" rel="noopener"><span class="fold"></span><img src="assets/img/case-portfolio.png" alt=""><span class="glass"></span><b>Portfolio</b><em>#portfolio</em></a>
+    </section>
+
+    <section id="services" class="services">
+      <p class="label">#services</p>
+      <div class="svc-head">
+        <h2 class="h40 reveal">Branding, websites, and digital products designed to <span class="pink">move your <img class="star" src="assets/svg/star.svg" alt=""> business</span> forward</h2>
+        <a class="btn btn-pink" href="#contacts"><i></i>book a call</a>
+      </div>
+      <div class="svc-grid">
+        <article class="scard reveal" style="--tex:url(../assets/img/texture-1.png)"><div class="stitle"><h3>Brand identity</h3><span>from $600</span></div><p>a clear visual identity that helps people recognize and remember your brand. the project can include logo design, typography, color, brand guidelines, and launch materials</p></article>
+        <article class="scard reveal" style="--tex:url(../assets/img/texture-2.png)"><div class="stitle"><h3>UX/UI design</h3><span>from $900</span></div><p>we design clear, intuitive interfaces for websites and digital products. from early concepts to detailed UI, we help teams make their products easier to use and understand</p></article>
+        <article class="scard reveal" style="--tex:url(../assets/img/texture-3.png)"><div class="stitle"><h3>Development</h3><span>from $600</span></div><p>we build responsive websites and digital experiences from approved designs, with careful attention to usability, performance, and detail</p></article>
+      </div>
+    </section>
+
+    <section id="reviews" class="reviews">
+      <p class="label">#reviews</p>
+      <div class="rev-head">
+        <h2 class="h40 reveal">proof that good design changes things</h2>
+        <div class="avatars"><img src="assets/img/review-sveta.jpg" alt=""><img src="assets/img/review-danil.jpg" alt=""><img src="assets/img/review-altynai.png" alt=""><img src="assets/img/review-alexandra.jpg" alt=""></div>
+      </div>
+      <div class="chat" id="chat">
+        <aside class="threads" id="threads"><div class="threads-head"><b>reviews</b><i></i></div></aside>
+        <div class="pane">
+          <div class="pane-head"><img id="pAva" alt=""><div><b id="pName"></b><span id="pRole"></span></div><span class="verified"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified customer</span></div>
+          <div class="msgs"><div class="day" id="pDay"></div><div class="bubble-row"><img id="pAva2" alt=""><div class="bubble" id="pMsg"></div></div></div>
+          <div class="pane-foot">
+            <button class="replay" id="replay"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 8a5.5 5.5 0 1 0 1.8-4.1M2.5 2.5v3h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Replay</button>
+            <span class="count" id="count">01 / 04</span>
+            <button class="round" id="prev" aria-label="previous"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="round" id="next" aria-label="next"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="process">
+      <p class="label">#process</p>
+      <h2 class="h40 reveal">how we work</h2>
+      <div class="steps">
+        <div class="step"><span class="mk m1"></span><h3>share your brief</h3><p>tell us about your business, audience, and goals</p></div>
+        <div class="step"><img class="mk" src="assets/svg/marker-2.svg" alt=""><h3>align on direction</h3><p>we discuss the scope, timeline, and next steps</p></div>
+        <div class="step"><img class="mk" src="assets/svg/marker-3.svg" alt=""><h3>design and build</h3><p>we create the agreed identity, website, or product experience</p></div>
+        <div class="step"><img class="mk" src="assets/svg/marker-4.svg" alt=""><h3>review and launch</h3><p>We refine the work, prepare the final files, and support the launch</p></div>
+      </div>
+    </section>
+
+    <section class="quote card">
+      <iframe class="q-open" src="embeds/quote-open.html" title="" loading="lazy"></iframe>
+      <iframe class="q-close" src="embeds/quote-close.html" title="" loading="lazy"></iframe>
+      <blockquote class="reveal">for me, design is about <span class="pink">listening, asking questions, and making sense of complexity.</span> It’s not about decoration or trends; it’s about clarity, structure, and decisions that help brands feel understandable and trustworthy.</blockquote>
+      <p class="author">— Yana S.<br>founder of lunö studio</p>
+    </section>
+
+    <section id="contacts" class="contacts">
+      <img class="wordmark" src="assets/img/contacts-wordmark.png" alt="contacts">
+      <div class="c-card">
+        <img class="tree" src="assets/img/vector-large.svg" alt="">
+        <div class="c-inner">
+          <div class="luna">
+            <img src="assets/img/cat-luna.jpg" alt="Luna">
+            <div><span>Luna, founder's cat</span><p>tell me a little about your project, your goals, and your timeline. we’ll get back to you within two business days</p></div>
+          </div>
+          <form id="form" action="#" method="post">
+            <input type="text" name="name" placeholder="name">
+            <input type="tel" name="phone" placeholder="phone*" required>
+            <input type="email" name="email" placeholder="email*" required>
+            <input type="text" name="message" placeholder="message">
+            <button class="btn btn-pink wide" type="submit"><i></i>Submit</button>
+            <p class="form-note" id="formNote" hidden></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
 </main>
+
+<footer class="footer">
+  <div class="f-cols">
+    <div><h4>main</h4><a href="#about">about</a><a href="#cases">cases</a><a href="#services">services</a><a href="#contacts">contacts</a></div>
+    <div><h4>contacts</h4><a href="mailto:hey.lunostudio@gmail.com">hey.lunostudio@gmail.com</a><a href="https://www.instagram.com/dsgn.luno/" target="_blank" rel="noopener">instagram</a><a href="https://t.me/lijnqd" target="_blank" rel="noopener">telegram</a><a href="https://www.behance.net/dsgn_luno" target="_blank" rel="noopener">behance</a></div>
+  </div>
+  <div class="clock">
+    <svg class="analog" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#F2E7DC"/><g id="ticks" stroke="#141414" stroke-width="1.6" stroke-linecap="round"></g><line id="hh" x1="50" y1="50" x2="50" y2="26" stroke="#141414" stroke-width="3" stroke-linecap="round"/><line id="mm" x1="50" y1="50" x2="50" y2="14" stroke="#141414" stroke-width="2" stroke-linecap="round"/><line id="ss" x1="50" y1="56" x2="50" y2="12" stroke="#FFB3AD" stroke-width="1.2" stroke-linecap="round"/><circle cx="50" cy="50" r="2.5" fill="#FFB3AD"/></svg>
+    <div class="digital"><div class="time" id="time">00:00</div><div class="date" id="date"></div></div>
+  </div>
+  <iframe class="f-art" src="embeds/footer-art.html" title="" loading="lazy"></iframe>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>

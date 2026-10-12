@@ -1,0 +1,258 @@
+
+<html>
+    <head>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            :root {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            * {
+                box-sizing: border-box;
+                -webkit-font-smoothing: inherit;
+            }
+
+            h1, h2, h3, h4, h5, h6, p, figure {
+                margin: 0;
+            }
+
+            body, input, textarea, select, button {
+                font-size: 12px;
+                font-family: sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <link href="https://fonts.googleapis.com/css2?family=Sometype+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  body, html { 
+    margin: 0; 
+    padding: 0; 
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden; 
+    background: transparent; 
+  }
+  canvas { 
+    display: block; 
+    width: 100%; 
+    height: 100%; 
+    cursor: pointer;
+  }
+</style>
+<canvas id="canvas"></canvas>
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+let width, height, dpr;
+const chars = [];
+
+const randomSymbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-/<>=?";
+function getRandomChar() {
+  return randomSymbols[Math.floor(Math.random() * randomSymbols.length)];
+}
+
+const asciiArt = [
+  "                                                                                                                                       @@@@@        @@@@                                                                                                                                                                                                                                                         ",
+  "                                                                                                                                      @@@@@       @@@@@                                                                                                                                                                                                                                                         ",
+  "                                                                                                                                                                                                                                                                                                                                                                                                                ",
+  "                                                                                                                                                                                                                                                                                                                                                                                                                ",
+  "                                           @@@@@@@@@@                @@@@@@@@@@@     @@@@@@@@@@@@                                         @@@@@@@@@@                                         @@@@@@@@                                                                                                                                                                                  @@@@@@@@@@@@@            ",
+  "        @@@@@@@@@@@@@@                  @@@@@@@@@@@@@@@            @@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@            @@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@                           @@@@@@@@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   @@@@@@@@@@@@@@             @@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                @@@@@@@@@@@@@         @@@@@@@@@@@@@@@@@@@@@@@       ",
+  "       @@@@@@@@@@@@@@@                  @@@@@@@@@@@@@@            @@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@         @@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@            @@@@@@@@@@@@@@@   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@         @@@@@@@@@@@@@@     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    ",
+  "      @@@@@@@@@@@@@@@                  @@@@@@@@@@@@@@             @@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@@@@@   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@            @@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  ",
+  "     @@@@@@@@@@@@@@@                  @@@@@@@@@@@@@@@            @@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@@ @@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@              @@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@            @@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@     @@@@@@@@@@@@@@   @@@@@@@@@@@@@@       @@@@@@@@@@@@@@@ ",
+  "     @@@@@@@@@@@@@@                   @@@@@@@@@@@@@@            @@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@     @@@@@@@@@@@@@@@@@             @@@@@@@@@@@@@@@@@@      @@@@@@                  @@@@@@@@@@@@@@@@              @@@@@@@@@@@@@@@@            @@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@          @@@@@@@@@@@@@@@@@   @@@@@@@@@@@@@@@  @@@@@@@@@@@@            @@@@@@@@@@@@@@",
+  "    @@@@@@@@@@@@@@@                  @@@@@@@@@@@@@@            @@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@          @@@@@@@@@@@@@@             @@@@@@@@@@@@@@@@@@@@@@@@@@@@@                   @@@@@@@@@@@@@@@               @@@@@@@@@@@@@@@            @@@@@@@@@@@@@@@   @@@@@@@@@@@@@@@@             @@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@  @@@@@@@@@@@@              @@@@@@@@@@@@@",
+  "    @@@@@@@@@@@@@@                  @@@@@@@@@@@@@@@            @@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          @@@@@@@@@@@@@@@               @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                @@@@@@@@@@@@@@@              @@@@@@@@@@@@@@@             @@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@              @@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@ @@@@@@@@@@@@@              @@@@@@@@@@@@@",
+  "   @@@@@@@@@@@@@@                  @@@@@@@@@@@@@@@            @@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@          @@@@@@@@@@@@@@@@                  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@             @@@@@@@@@@@@@@@              @@@@@@@@@@@@@@@             @@@@@@@@@@@@@@@   @@@@@@@@@@@@@@@              @@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@  @@@@@@@@@@@@               @@@@@@@@@@@@@",
+  "  @@@@@@@@@@@@@@@                  @@@@@@@@@@@@@@@           @@@@@@@@@@@@@@@  @@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@@@                              @@@@@@@@@@@@@@@@@@@           @@@@@@@@@@@@@@@               @@@@@@@@@@@@@@@            @@@@@@@@@@@@@@@   @@@@@@@@@@@@@@@@             @@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@   @@@@@@@@@@@@@             @@@@@@@@@@@@@@",
+  " @@@@@@@@@@@@@@@@@                 @@@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@      @@@@@@@@@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@            @@@@@@@@@@@@@         @@@@@@@@@@@@@@@@@          @@@@@@@@@@@@@@@               @@@@@@@@@@@@@@@@         @@@@@@@@@@@@@@@@   @@@@@@@@@@@@@@@@@          @@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@    @@@@@@@@@@@@@@         @@@@@@@@@@@@@@@@ ",
+  " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@        @@@@@@@@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@           @@@@@@@@@@@@@@@@@@ @  @@@@@@@@@@@@@@@@@@@         @@@@@@@@@@@@@@@                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   ",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@     @@@@@@@@@@@@@@         @@@@@@@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@              @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          @@@@@@@@@@@@@@@                  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    ",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@@@@            @@@@@@@@@@@@@@@@           @@@@@@@@@@@@@@@@@@@@@@@@@@                   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@            @@@@@@@@@@@@@@                     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@@@@@@           @@@@@@@@@@@@@@@@@@@@@@@@@@@@       ",
+  " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                @@@@@@@@@@@@                                           @@@@@@@@@@@@@                   @@@@@@@@@@@@@@                            @@@@@@@@@@@@@@@@@@@@@@@@@                 @@@@@@@@@@@@@                          @@@@@@@@@@@@@@@@@@@@@@@             @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@              @@@@@@@@@@@@@@               @@@@@@@@@@@@@@@@@@@@@@          "
+];
+
+function init() {
+  dpr = window.devicePixelRatio || 1;
+  width = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
+  height = canvas.parentElement ? canvas.parentElement.clientHeight : window.innerHeight;
+
+  canvas.width = Math.round(width * dpr);
+  canvas.height = Math.round(height * dpr);
+  canvas.style.width = width + 'px';
+  canvas.style.height = height + 'px';
+
+  ctx.scale(dpr, dpr);
+  ctx.textBaseline = 'alphabetic';
+  ctx.imageSmoothingEnabled = false;
+
+  chars.length = 0;
+
+  const rows = asciiArt.length;
+  let maxCols = 0;
+  for (let r = 0; r < rows; r++) {
+    if (asciiArt[r].length > maxCols) maxCols = asciiArt[r].length;
+  }
+
+  const fontSize = Math.max(6, Math.min((width - 40) / maxCols * 1.5, (height - 40) / rows * 1.3));
+  const stepX = fontSize * 0.58;
+  const stepY = fontSize * 0.95;
+
+  const offsetX = (width - maxCols * stepX) / 2;
+  const offsetY = (height - rows * stepY) / 2;
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < asciiArt[r].length; c++) {
+      const char = asciiArt[r][c];
+      if (char !== ' ') {
+        const x = offsetX + c * stepX;
+        const y = offsetY + r * stepY;
+
+        chars.push({
+          char: getRandomChar(),
+          x: x,
+          y: y,
+          originX: x,
+          originY: y,
+          vx: 0,
+          vy: 0,
+          fontSize: fontSize
+        });
+      }
+    }
+  }
+}
+
+let mouse = { x: -9999, y: -9999, radius: 75 };
+
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = e.clientX - rect.left;
+  mouse.y = e.clientY - rect.top;
+});
+
+canvas.addEventListener('mouseleave', () => {
+  mouse.x = -9999;
+  mouse.y = -9999;
+});
+
+canvas.addEventListener('mousedown', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const clickY = e.clientY - rect.top;
+  const clickRadius = 90;
+
+  for (let i = 0; i < chars.length; i++) {
+    const item = chars[i];
+    const dx = clickX - item.x;
+    const dy = clickY - item.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    if (dist < clickRadius) {
+      const angle = Math.atan2(dy, dx);
+      const force = (clickRadius - dist) / clickRadius;
+      item.vx -= Math.cos(angle) * force * 4;
+      item.vy -= Math.sin(angle) * force * 4;
+    }
+  }
+});
+
+window.addEventListener('resize', init);
+
+function animate() {
+  ctx.clearRect(0, 0, width, height);
+
+  for (let i = 0; i < chars.length; i++) {
+    const item = chars[i];
+
+    // Редкое и плавное мерцание символов
+    if (Math.random() < 0.005) {
+      item.char = getRandomChar();
+    }
+
+    const dx = mouse.x - item.x;
+    const dy = mouse.y - item.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    if (dist < mouse.radius) {
+      const angle = Math.atan2(dy, dx);
+      const force = (mouse.radius - dist) / mouse.radius;
+      item.vx -= Math.cos(angle) * force * 2.5;
+      item.vy -= Math.sin(angle) * force * 2.5;
+    }
+
+    item.vx += (item.originX - item.x) * 0.08;
+    item.vy += (item.originY - item.y) * 0.08;
+    item.vx *= 0.85;
+    item.vy *= 0.85;
+
+    item.x += item.vx;
+    item.y += item.vy;
+
+    ctx.font = `500 ${item.fontSize}px 'Sometype Mono', monospace`;
+    ctx.fillStyle = '#000000';
+    ctx.fillText(item.char, item.x, item.y);
+  }
+
+  requestAnimationFrame(animate);
+}
+
+// Ожидание завершения прелоудера / появления размеров контейнера
+function checkContainer() {
+  const w = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
+  const h = canvas.parentElement ? canvas.parentElement.clientHeight : window.innerHeight;
+  
+  if (w > 0 && h > 0) {
+    init();
+    animate();
+  } else {
+    setTimeout(checkContainer, 50);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', checkContainer);
+window.addEventListener('load', checkContainer);
+</script>
+
+        <script type="module">
+            let height = 0
+
+            function sendEmbedHeight() {
+                window.parent.postMessage({
+                    embedHeight: height
+                }, "*")
+            }
+
+            const observer = new ResizeObserver((entries) => {
+                if (entries.length !== 1) return
+                const entry = entries[0]
+                if (entry.target !== document.body) return
+
+                height = entry.contentRect.height
+                sendEmbedHeight()
+            })
+
+            observer.observe(document.body)
+
+            window.addEventListener("message", (event) => {
+                if (event.source !== window.parent) return
+                if (event.data !== "getEmbedHeight") return
+                sendEmbedHeight()
+            })
+        </script>
+    <body>
+</html>
