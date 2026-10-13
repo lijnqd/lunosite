@@ -10,7 +10,7 @@ var R=[
 var cur=0,timer=null,th=document.getElementById('threads');
 R.forEach(function(x,i){
   var b=document.createElement('button');b.className='th';
-  b.innerHTML='<span class="av"><img src="'+x.a+'" alt=""><u></u></span><span class="tx"><span class="top"><b>'+x.n+'</b><span>'+x.d+'</span></span><div class="pv"></div></span>';
+  b.innerHTML='<span class="av"><img src="'+x.a+'" alt="'+x.n.toLowerCase()+', '+x.r.replace(/"/g,'').toLowerCase()+'"><u></u></span><span class="tx"><span class="top"><b>'+x.n+'</b><span>'+x.d+'</span></span><div class="pv"></div></span>';
   b.querySelector('.pv').textContent=x.t;
   b.addEventListener('click',function(){show(i)});th.appendChild(b);
 });
@@ -18,7 +18,7 @@ function $(id){return document.getElementById(id)}
 function show(i){
   cur=(i+R.length)%R.length;var x=R[cur];
   document.querySelectorAll('.th').forEach(function(b,k){b.classList.toggle('on',k===cur);b.setAttribute('aria-pressed',k===cur?'true':'false');if(k===cur)b.classList.add('read')});
-  $('pAva').src=x.a;$('pAva2').src=x.a;$('pAva').alt=$('pAva2').alt=x.n+', '+x.r;$('pName').textContent=x.n;$('pRole').textContent=x.r;$('pDay').textContent=x.d;
+  $('pAva').src=x.a;$('pAva2').src=x.a;$('pAva').alt=$('pAva2').alt=x.n.toLowerCase()+', '+x.r.replace(/"/g,'').toLowerCase();$('pName').textContent=x.n;$('pRole').textContent=x.r;$('pDay').textContent=x.d;
   $('count').textContent='0'+(cur+1)+' / 0'+R.length;
   type(x.t);
 }

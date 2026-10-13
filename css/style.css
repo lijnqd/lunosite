@@ -341,7 +341,7 @@ input,textarea{text-transform:none}
 .fq .pl:before,.fq .pl:after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1.5px;background:var(--bg);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .35s}
 .fq .pl:before{transform:translate(-50%,-50%)}
 .fq .pl:after{transform:translate(-50%,-50%) rotate(90deg)}
-.fq .a{position:absolute;left:18px;right:70px;bottom:18px;font-size:16px;line-height:19px;letter-spacing:-.16px;opacity:0;transform:translateY(16px);transition:opacity .25s,transform .4s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.fq .a{position:absolute;left:18px;right:70px;max-width:500px;bottom:18px;font-size:16px;line-height:19px;letter-spacing:-.16px;opacity:0;transform:translateY(16px);transition:opacity .25s,transform .4s cubic-bezier(.2,.7,.2,1);pointer-events:none}
 .fq.open{flex-grow:2.2;background:var(--pink);color:var(--bg)}
 .fq.open .a{opacity:1;transform:none;transition-delay:.1s}
 .fq.open .pl{background:var(--bg)}
