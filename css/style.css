@@ -184,7 +184,7 @@ main{padding-top:66px}
 .analog{width:77px;height:77px;flex:none;margin-left:6px}
 .digital{margin-left:auto;margin-right:12px;text-align:center}
 .time{display:block;margin:0 auto}
-.date{font-family:var(--mono);font-size:11px;color:#e3e3e3;letter-spacing:.3px;margin-top:8px;text-transform:uppercase;white-space:nowrap}
+.date{font-family:var(--mono);font-size:11px;color:#e3e3e3;letter-spacing:.3px;margin-top:8px;white-space:nowrap}
 .f-art{position:absolute;left:0;right:0;bottom:0;width:100%;height:233.5px;border:0;background:transparent}
 
 /* vertical process markers (tablet/phone) */
@@ -312,3 +312,8 @@ main{padding-top:66px}
 #pre.exit .pc{opacity:0}
 html.pre-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){#pre{display:none}}
+
+/* all site text lowercase (markup keeps proper case for SEO) */
+body{text-transform:lowercase}
+button{text-transform:inherit}
+input,textarea{text-transform:none}
