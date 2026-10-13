@@ -322,17 +322,8 @@ body{text-transform:lowercase}
 button{text-transform:inherit}
 input,textarea{text-transform:none}
 
-/* soft secondary buttons + legal footer column */
-.btn-ghost{background:transparent;color:var(--bg);border:1px solid rgba(20,20,20,.38);width:auto;padding:0 20px;white-space:nowrap}
-.btn-ghost:hover{background:rgba(20,20,20,.06)}
-.btn-ghost-l{color:var(--beige);border-color:rgba(242,231,220,.3)}
-.btn-ghost-l:hover{background:rgba(242,231,220,.07)}
-.hero-cta{display:flex;gap:10px}
-.hero-bottom .hero-cta .btn-dark{width:180px}
-.svc-cta{display:flex;gap:10px;margin-top:46px;flex:none}.svc-cta .btn{margin-top:0!important}
+/* legal footer column */
 .f-cols>div:nth-child(2){width:300px}
 .f-cols .f-legal{margin-left:20px}
 .f-cols .f-legal h4{font-size:32px;line-height:34px;letter-spacing:-.32px;margin-bottom:10px}
-@media (max-width:1199px){.svc-cta .btn-ghost{display:none}.svc-cta{margin-top:0}}
-@media (max-width:809px){.hero-cta{flex-direction:column}.hero-bottom .hero-cta .btn-dark{width:100%}.hero-cta .btn-ghost{width:100%}.f-cols>div:nth-child(2){width:auto}.f-cols .f-legal{margin-left:0}}
-.svc-head .svc-cta .btn-ghost{width:auto;margin-top:0}.svc-head .svc-cta .btn-pink{margin-top:0}
+@media (max-width:809px){.f-cols>div:nth-child(2){width:auto}.f-cols .f-legal{margin-left:0}}
