@@ -36,6 +36,12 @@
 .ab-hero h1 em{font-style:italic;color:var(--pink)}
 .ab-hero .ab-txt p{font-size:18px;line-height:21.6px;letter-spacing:-.18px}
 .ab-hero .btn{position:absolute;right:40px;bottom:40px;width:167px}
+.ab-wave{position:relative;height:150px;overflow:hidden;margin-bottom:-60px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ab-wave .tr{position:absolute;left:0;top:0;height:100%;display:flex;align-items:center;white-space:nowrap;will-change:transform}
+.ab-wave .it{display:flex;align-items:center;flex:none}
+.ab-wave .ch{display:inline-block;font-size:64px;line-height:1;letter-spacing:-.64px;white-space:pre;will-change:transform}
+.ab-wave .sep{display:inline-block;font-size:64px;width:.3em;height:.3em;margin:0 .7em;flex:none;background:var(--pink);border-radius:30% 70% 70% 30%/30% 30% 70% 70%;transform:rotate(45deg)}
+@media (max-width:809px){.ab-wave{height:100px;margin-bottom:-30px}.ab-wave .ch{font-size:40px;letter-spacing:-.4px}.ab-wave .sep{font-size:40px}}
 .ab .stack{padding-top:58px;gap:140px}
 .ab-about{display:flex;gap:28px}
 .ab-about>div:first-child{width:705px;flex:none}
@@ -100,6 +106,7 @@
   <a class="btn btn-pink" href="/#cases"><i></i>view cases</a>
 </section>
 <div class="stack">
+  <section class="ab-wave" aria-label="founded in 2025 · 4 years of design experience · clients from 6 countries"><div class="tr" id="abWave" aria-hidden="true"></div></section>
   <section class="ab-about">
     <div><p class="label">#about us</p><p class="ab-lead reveal">lunö is an <span class="pink">independent design studio.</span> we make logos, brand identities, websites, and digital products for startups and growing businesses</p></div>
     <div class="ab-side reveal"><p>most of our clients come to us with the same problem: they’re great at what they do, but their brand or website doesn’t show it. people don’t get what they offer, or don’t trust it enough to reach out. that’s the part we fix</p><p>we don’t start with pretty pictures. we start by asking questions: who your customers are, what they need, what makes you different. then we turn all of that into a brand and a website that feel clear and honest, and that look like you</p></div>
@@ -265,6 +272,38 @@ addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addE
 if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
 var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
 els.forEach(function(e){io.observe(e)})})();
+</script>
+<script>
+(function(){
+var tr=document.getElementById('abWave');if(!tr)return;
+var T=['founded in 2025','4 years of design experience','clients from 6 countries'],items=[];
+function build(){
+ var it=document.createElement('div');it.className='it';
+ T.forEach(function(t){
+  t.split('').forEach(function(c){var s=document.createElement('span');s.className='ch';s.textContent=c;it.appendChild(s)});
+  var d=document.createElement('span');d.className='sep';it.appendChild(d)});
+ return it}
+var base=build();tr.appendChild(base);
+var chars,w=0,x=0,last=0,t0=0,reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+function fill(){
+ while(tr.children.length>1)tr.removeChild(tr.lastChild);
+ w=base.getBoundingClientRect().width;if(!w)return;
+ var n=Math.ceil(innerWidth/w)+1;
+ for(var i=0;i<n;i++)tr.appendChild(build());
+ chars=[].slice.call(tr.querySelectorAll('.ch'))}
+function frame(now){
+ if(!last)last=now;var dt=Math.min(64,now-last);last=now;
+ x=(x+dt*.06)%w;tr.style.transform='translate3d('+(-x)+'px,0,0)';
+ var amp=innerWidth<810?14:26,k=now/700;
+ for(var i=0;i<chars.length;i++){var c=chars[i],px=c.offsetLeft;
+  c.style.transform='translateY('+(Math.sin((px-x)/150+k)*amp).toFixed(1)+'px)'}
+ raf=requestAnimationFrame(frame)}
+var raf=0;
+function start(){fill();if(!chars)return;cancelAnimationFrame(raf);if(reduce){chars.forEach(function(c,i){c.style.transform='translateY('+(Math.sin(c.offsetLeft/150)*14).toFixed(1)+'px)'});return}raf=requestAnimationFrame(frame)}
+(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(start);
+addEventListener('resize',start);
+document.addEventListener('visibilitychange',function(){last=0});
+})();
 </script>
 </body>
 </html>
