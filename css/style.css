@@ -327,3 +327,24 @@ input,textarea{text-transform:none}
 .f-cols .f-legal{margin-left:20px}
 .f-cols .f-legal h4{font-size:32px;line-height:34px;letter-spacing:-.32px;margin-bottom:10px}
 @media (max-width:809px){.f-cols>div:nth-child(2){width:auto}.f-cols .f-legal{margin-left:0}}
+
+/* FAQ reveal cards */
+.faq{position:relative}
+.faq h2{margin-top:13px}
+.fq-grid{margin-top:32px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;background:#000;border-radius:20px;padding:4px}
+.fq{position:relative;height:218px;border-radius:16px;background:#E3E3E3;color:#000;overflow:hidden;transition:background .35s,height .4s cubic-bezier(.2,.7,.2,1)}
+.fq button{position:absolute;left:0;top:0;width:100%;height:100%;display:flex;align-items:flex-start;justify-content:flex-start;border:0;background:none;color:inherit;font:inherit;text-align:left;padding:20px 18px;cursor:pointer;text-transform:inherit}
+.fq .q{display:block;font-size:18px;line-height:22px;letter-spacing:-.18px;font-weight:500}
+.fq .pl{position:absolute;right:18px;bottom:18px;width:36px;height:36px;border-radius:9px;background:#000;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.fq .pl:before,.fq .pl:after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1.5px;background:#fff;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.fq .pl:before{transform:translate(-50%,-50%)}
+.fq .pl:after{transform:translate(-50%,-50%) rotate(90deg)}
+.fq.open .pl:before{transform:translate(-50%,-50%) rotate(45deg)}
+.fq.open .pl:after{transform:translate(-50%,-50%) rotate(-45deg)}
+.fq .a{position:absolute;left:18px;right:70px;bottom:18px;font-size:16px;line-height:19px;letter-spacing:-.16px;opacity:0;transform:translateY(16px);transition:opacity .25s,transform .4s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.fq.open{background:var(--pink)}
+.fq.open .a{opacity:1;transform:none;transition-delay:.08s}
+.fq button:focus-visible{outline:2px solid #000;outline-offset:-4px;border-radius:16px}
+@media (hover:hover){.fq:not(.open):hover .pl{transform:scale(1.08)}}
+@media (max-width:1199px){.fq-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fq{height:230px}}
+@media (max-width:809px){.fq-grid{grid-template-columns:1fr;gap:10px;padding:3px}.fq{height:130px}.fq.open{height:240px}.fq button{padding:16px 14px}.fq .q{max-width:calc(100% - 4px)}.fq .a{left:14px;right:62px;bottom:14px}.fq .pl{right:14px;bottom:14px}}
