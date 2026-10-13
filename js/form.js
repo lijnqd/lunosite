@@ -5,7 +5,7 @@ var css='#form .ff{display:flex;flex-direction:column;min-width:0}#form .ff inpu
 var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
 form.setAttribute('novalidate','');
 var rules={
- phone:function(v){v=v.trim();if(!v)return'enter a phone number we can reach you on';if((v.match(/\d/g)||[]).length<6||!/^[+\d\s().\-]+$/.test(v))return'that doesn’t look like a phone number';return''},
+ phone:function(v){v=v.trim();if(!v)return'';if((v.match(/\d/g)||[]).length<6||!/^[+\d\s().\-]+$/.test(v))return'that doesn’t look like a phone number';return''},
  email:function(v){v=v.trim();if(!v)return'enter your email';if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return'check the email address';return''}
 };
 var fields=[];
@@ -21,7 +21,7 @@ Array.prototype.forEach.call(form.querySelectorAll('input'),function(inp){
 });
 var btn0=form.querySelector('button[type=submit]');
 var cw=document.createElement('div');cw.className='ff ck';
-cw.innerHTML='<label><input type="checkbox" name="consent" value="yes" checked><span>i agree to the processing of my personal data in line with the <a href="/privacy/" target="_blank" rel="noopener">privacy policy</a></span></label><p class="err" id="err-consent" role="alert"></p>';
+cw.innerHTML='<label><input type="checkbox" name="consent" value="yes"><span>i agree to the processing of my personal data in line with the <a href="/privacy/" target="_blank" rel="noopener">privacy policy</a></span></label><p class="err" id="err-consent" role="alert"></p>';
 form.insertBefore(cw,btn0);
 var ci=cw.querySelector('input');
 fields.push({inp:ci,w:cw,p:cw.querySelector('.err'),rule:function(){return ci.checked?'':'please confirm your consent to send the form'}});
@@ -51,4 +51,4 @@ if(window.dataLayer)window.dataLayer.push({event:'cta_click',label:'free review'
 
 // "book a review" in services: pre-fill the message once contacts are reached
 (function(){var a=document.querySelector('.review-cta'),f=document.getElementById('form');if(!a||!f)return;
-a.addEventListener('click',function(){var m=f.querySelector('[name=message]');if(m)m.value='free 20-minute review — my site / brand link: '})})();
+a.addEventListener('click',function(){var m=f.querySelector('[name=message]');if(m)m.value='free 15-minute video review — my site / brand link: '})})();
