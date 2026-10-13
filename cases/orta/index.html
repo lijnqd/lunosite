@@ -24,7 +24,7 @@
 <link rel="icon" type="image/png" href="/assets/img/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1791884479">
+<link rel="stylesheet" href="/css/style.css?v=1791884846">
 <style>
 .cs{position:relative;z-index:1;max-width:1430px;margin:0 auto;padding:110px 20px 0}
 .cs-back{display:inline-flex;gap:10px;align-items:center;font-size:16px;opacity:.7;margin-bottom:28px}
@@ -82,6 +82,7 @@ html,body{overflow-x:clip}
 </style>
 </head>
 <body>
+<a class="skip" href="#content">skip to content</a>
 <div id="pre" aria-hidden="true"><canvas></canvas><div class="pc">00<b>%</b></div></div>
 <script src="/js/preloader.js?v=3"></script>
 <noscript><style>#pre{display:none}html.pre-lock{overflow:auto}</style></noscript>
@@ -89,12 +90,12 @@ html,body{overflow-x:clip}
 <header class="header">
   <a class="logo" href="/" aria-label="lunö"><img src="/assets/svg/logo.svg" alt="lunö"></a>
   <nav class="nav">
-    <a href="/#about">#about</a><a href="/#services">#services</a><a href="/#cases">#cases</a><a href="/#contacts">#contact</a>
+    <a href="/#about">#about</a><a href="/#services">#services</a><a href="/#cases">#cases</a><a href="/#faq">#faq</a><a href="/#contacts">#contact</a>
   </nav>
   <a class="btn btn-pink" href="/#contacts"><i></i>discuss a project</a>
 </header>
 
-<main class="cs">
+<main id="content" class="cs">
   <a class="cs-back" href="/#cases">back to cases</a>
   <div class="cs-top">
   <h1>Orta Community</h1>
@@ -155,7 +156,7 @@ html,body{overflow-x:clip}
 
 <footer class="footer">
   <div class="f-cols">
-    <div><h4>main</h4><a href="/#about">about</a><a href="/#cases">cases</a><a href="/#services">services</a><a href="/#contacts">contacts</a></div>
+    <div><h4>main</h4><a href="/#about">about</a><a href="/#cases">cases</a><a href="/#services">services</a><a href="/#faq">faq</a><a href="/#contacts">contacts</a></div>
     <div><h4>contacts</h4><a href="mailto:hey.lunostudio@gmail.com">hey.lunostudio@gmail.com</a><a href="https://www.instagram.com/dsgn.luno/" target="_blank" rel="noopener">instagram</a><a href="https://t.me/lijnqd" target="_blank" rel="noopener">telegram</a><a href="https://www.behance.net/dsgn_luno" target="_blank" rel="noopener">behance</a></div>
     <div class="f-legal"><h4>legal</h4><a href="/privacy/">privacy policy</a><a href="/cookies/">cookie policy</a><a href="#" onclick="window.openCookieSettings&amp;&amp;window.openCookieSettings();return false">cookie settings</a></div>
   </div>
@@ -163,7 +164,7 @@ html,body{overflow-x:clip}
     <svg class="analog" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#E3E3E3"/><g id="ticks" fill="#8a8a8a"><circle cx="50" cy="6" r="2"/><circle cx="94" cy="50" r="2"/><circle cx="50" cy="94" r="2"/><circle cx="6" cy="50" r="2"/></g><line id="hh" x1="50" y1="50" x2="50" y2="26" stroke="#222" stroke-width="3.2" stroke-linecap="round"/><line id="mm" x1="50" y1="50" x2="50" y2="12" stroke="#222" stroke-width="2.4" stroke-linecap="round"/><line id="ss" x1="50" y1="50" x2="50" y2="14" stroke="#FFB3AD" stroke-width="2" stroke-linecap="round"/><circle cx="50" cy="50" r="3.2" fill="#222"/></svg>
     <div class="digital"><canvas class="time" id="time" width="200" height="56" style="width:100px;height:28px"></canvas><div class="date" id="date"></div></div>
   </div>
-  <iframe class="f-art" id="fArt" title=""></iframe>
+  <iframe class="f-art" id="fArt" title="" aria-hidden="true" tabindex="-1"></iframe>
 </footer>
 
 <script>
@@ -202,6 +203,7 @@ addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addE
 </script>
 <script src="/js/cookies.js?v=3" defer></script>
 <script src="/js/dotmorph.js?v=7" defer></script>
+<script src="/js/track.js?v=1" defer></script>
 <script src="/js/form.js?v=6" defer></script>
 </body>
 </html>

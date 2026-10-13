@@ -354,4 +354,13 @@ input,textarea{text-transform:none}
 /* service timelines + faq cta */
 .shead{display:flex;flex-direction:column;gap:4px}
 .stime{font-style:normal;font-size:16px;line-height:19px;letter-spacing:-.16px}
-.faq-cta{margin-top:24px}
+.faq-head{display:flex;justify-content:space-between;align-items:flex-start}.faq-head h2{width:1040px;margin-top:13px}.faq-head .btn{margin-top:46px;width:240px}
+@media (max-width:1199px){.faq-head .btn{display:none}.faq-head h2{width:100%}}
+
+/* accessibility */
+.skip{position:fixed;left:12px;top:-60px;z-index:2000;background:var(--pink);color:var(--bg);padding:10px 16px;border-radius:20px;font-size:16px;transition:top .2s}
+.skip:focus{top:12px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--beige);outline-offset:3px;border-radius:inherit}
+.hero a:focus-visible,.footer a:focus-visible,.footer button:focus-visible{outline-color:var(--bg)}
+.folder:focus-visible{outline:2px solid var(--pink);outline-offset:4px;border-radius:20px}
+.th:focus-visible{outline-offset:-3px}

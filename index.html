@@ -26,9 +26,10 @@
 <link rel="icon" type="image/png" href="assets/img/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=1791884479">
+<link rel="stylesheet" href="css/style.css?v=1791884846">
 </head>
 <body>
+<a class="skip" href="#content">skip to content</a>
 <div id="pre" aria-hidden="true"><canvas></canvas><div class="pc">00<b>%</b></div></div>
 <script src="/js/preloader.js?v=3"></script>
 <noscript><style>#pre{display:none}html.pre-lock{overflow:auto}</style></noscript>
@@ -37,15 +38,15 @@
 <header class="header">
   <a class="logo" href="#top" aria-label="lunö"><img src="assets/svg/logo.svg" alt="lunö"></a>
   <nav class="nav">
-    <a href="#about">#about</a><a href="#services">#services</a><a href="#cases">#cases</a><a href="#contacts">#contact</a>
+    <a href="#about">#about</a><a href="#services">#services</a><a href="#cases">#cases</a><a href="#faq">#faq</a><a href="#contacts">#contact</a>
   </nav>
   <a class="btn btn-pink" href="#contacts"><i></i>discuss a project</a>
 </header>
 
 <main id="top">
-  <section class="hero">
+  <section class="hero" id="content">
     <h1>brand identity and websites for ambitious startups and growing businesses</h1>
-    <iframe class="hero-art" src="embeds/hero-mascot.html" title="" scrolling="no" allowtransparency="true"></iframe>
+    <iframe class="hero-art" src="embeds/hero-mascot.html" title="" aria-hidden="true" tabindex="-1" scrolling="no" allowtransparency="true"></iframe>
     <div class="hero-bottom">
       <p>we help businesses build clear brand identities, websites, and digital products through thoughtful strategy, design, and development</p>
       <a class="btn btn-dark" href="#cases"><i></i>see cases</a>
@@ -138,15 +139,15 @@
     </section>
 
     <section class="quote card">
-      <iframe class="q-open" src="embeds/quote-open.html" title="" loading="lazy"></iframe>
-      <iframe class="q-close" src="embeds/quote-close.html" title="" loading="lazy"></iframe>
+      <iframe class="q-open" src="embeds/quote-open.html" title="" aria-hidden="true" tabindex="-1" loading="lazy"></iframe>
+      <iframe class="q-close" src="embeds/quote-close.html" title="" aria-hidden="true" tabindex="-1" loading="lazy"></iframe>
       <blockquote class="reveal">for me, design is about <span class="pink">listening, asking questions, and making sense of complexity.</span> It’s not about decoration or trends; it’s about clarity, structure, and decisions that help brands feel understandable and trustworthy.</blockquote>
       <p class="author"><span class="pink">— Yana S.</span>founder of lunö studio</p>
     </section>
 
     <section id="faq" class="faq">
       <p class="label">#faq</p>
-      <h2 class="h40 reveal">here are a few things you might be wondering about</h2>
+      <div class="faq-head"><h2 class="h40 reveal">here are a few things you might be wondering about</h2><a class="btn btn-pink" href="#contacts"><i></i>discuss a project</a></div>
       <div class="fq-grid reveal">
         <div class="fq-row">
           <div class="fq open"><button type="button" aria-expanded="true" aria-controls="fa1"><span class="q">01. what services does lunö offer?</span><span class="pl" aria-hidden="true"></span></button><p class="a" id="fa1" role="region">we offer brand identity design, ux/ui design, and responsive website development.</p></div>
@@ -159,7 +160,6 @@
           <div class="fq"><button type="button" aria-expanded="false" aria-controls="fa6"><span class="q">06. what do you need to get started?</span><span class="pl" aria-hidden="true"></span></button><p class="a" id="fa6" role="region">tell us about your business, audience, goals, and timeline using the contact form. a finished brief isn’t necessary—we’ll help clarify the details together.</p></div>
         </div>
       </div>
-      <div class="faq-cta"><a class="btn btn-pink" href="#contacts"><i></i>discuss a project</a></div>
     </section>
 
     <section id="contacts" class="contacts">
@@ -188,7 +188,7 @@
 
 <footer class="footer">
   <div class="f-cols">
-    <div><h4>main</h4><a href="#about">about</a><a href="#cases">cases</a><a href="#services">services</a><a href="#contacts">contacts</a></div>
+    <div><h4>main</h4><a href="#about">about</a><a href="#cases">cases</a><a href="#services">services</a><a href="#faq">faq</a><a href="#contacts">contacts</a></div>
     <div><h4>contacts</h4><a href="mailto:hey.lunostudio@gmail.com">hey.lunostudio@gmail.com</a><a href="https://www.instagram.com/dsgn.luno/" target="_blank" rel="noopener">instagram</a><a href="https://t.me/lijnqd" target="_blank" rel="noopener">telegram</a><a href="https://www.behance.net/dsgn_luno" target="_blank" rel="noopener">behance</a></div>
     <div class="f-legal"><h4>legal</h4><a href="/privacy/">privacy policy</a><a href="/cookies/">cookie policy</a><a href="#" onclick="window.openCookieSettings&amp;&amp;window.openCookieSettings();return false">cookie settings</a></div>
   </div>
@@ -196,12 +196,13 @@
     <svg class="analog" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#E3E3E3"/><g id="ticks" fill="#8a8a8a"><circle cx="50" cy="6" r="2"/><circle cx="94" cy="50" r="2"/><circle cx="50" cy="94" r="2"/><circle cx="6" cy="50" r="2"/></g><line id="hh" x1="50" y1="50" x2="50" y2="26" stroke="#222" stroke-width="3.2" stroke-linecap="round"/><line id="mm" x1="50" y1="50" x2="50" y2="12" stroke="#222" stroke-width="2.4" stroke-linecap="round"/><line id="ss" x1="50" y1="50" x2="50" y2="14" stroke="#FFB3AD" stroke-width="2" stroke-linecap="round"/><circle cx="50" cy="50" r="3.2" fill="#222"/></svg>
     <div class="digital"><canvas class="time" id="time" width="200" height="56" style="width:100px;height:28px"></canvas><div class="date" id="date"></div></div>
   </div>
-  <iframe class="f-art" id="fArt" title=""></iframe>
+  <iframe class="f-art" id="fArt" title="" aria-hidden="true" tabindex="-1"></iframe>
 </footer>
 
-<script src="js/main.js?v=1791814349"></script>
+<script src="js/main.js?v=1791884786"></script>
 <script src="/js/cookies.js?v=3" defer></script>
 <script src="/js/dotmorph.js?v=7" defer></script>
+<script src="/js/track.js?v=1" defer></script>
 <script src="/js/form.js?v=6" defer></script>
 <script src="/js/faq.js?v=4" defer></script>
 </body>
