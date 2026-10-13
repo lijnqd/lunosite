@@ -36,14 +36,7 @@
 .ab-hero h1 em{font-style:italic;color:var(--pink)}
 .ab-hero .ab-txt p{font-size:18px;line-height:21.6px;letter-spacing:-.18px}
 .ab-hero .btn{position:absolute;right:40px;bottom:40px;width:167px}
-.ab-run{position:relative;overflow:hidden;margin:-70px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.ab-run .tr{display:flex;width:max-content;animation:abrun 50s linear infinite}
-.ab-run .it{display:flex;align-items:center;flex:none;font-size:32px;line-height:40px;letter-spacing:-.32px;opacity:.6;white-space:nowrap}
-.ab-run .dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:currentColor;margin:0 28px;flex:none}
-@keyframes abrun{to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.ab-run .tr{animation:none}}
-@media (max-width:809px){.ab-run{margin:-40px 0}.ab-run .it{font-size:24px;line-height:30px}.ab-run .dot{width:9px;height:9px;margin:0 20px}}
-.ab .stack{padding-top:58px;gap:140px}
+.ab .stack{padding-top:80px;gap:140px}
 .ab-about{display:flex;gap:28px}
 .ab-about>div:first-child{width:705px;flex:none}
 .ab-about .label{margin-bottom:16px}
@@ -137,7 +130,6 @@
         </div>
       </div>
     </section>
-  <section class="ab-run" aria-label="founded in 2025 · 4 years of design experience · clients from 6 countries"><div class="tr" id="abRun" aria-hidden="true"></div></section>
   <section class="ab-h"><p class="label">#our skills</p><h2 class="reveal">we can take a project all the way from <span class="pink">“here’s a rough idea”</span> to a finished, working website</h2>
     <div class="ab-skills" style="max-width:1430px">
 <article class="ab-sk reveal"><h3>ux/ui &amp; product design</h3><div class="cols"><ul><li>user research</li><li>competitor analysis</li><li>information architecture</li><li>component libraries</li></ul><ul><li>responsive design</li><li>interactive prototypes</li><li>usability testing</li><li>accessibility</li></ul><ul><li>user flows &amp; journey maps</li><li>wireframing</li><li>ux audits &amp; reviews</li><li>design systems</li></ul></div></article>
@@ -273,18 +265,6 @@ addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addE
 if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
 var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
 els.forEach(function(e){io.observe(e)})})();
-</script>
-<script>
-(function(){var tr=document.getElementById('abRun');if(!tr)return;
-var T=['founded in 2025','4 years of design experience','clients from 6 countries'];
-function unit(){var h='';T.forEach(function(t){h+='<span>'+t+'</span><i class="dot"></i>'});return h}
-function build(){tr.innerHTML='';var half=document.createElement('div');half.className='it';half.innerHTML=unit();tr.appendChild(half);
- var w=half.getBoundingClientRect().width||1,n=Math.max(1,Math.ceil(innerWidth/w));half.innerHTML=new Array(n+1).join(unit());
- var c=half.cloneNode(true);tr.appendChild(c);
- var w2=half.getBoundingClientRect().width;tr.style.animationDuration=Math.round(w2/60)+'s'}
-(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(build);
-var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(build,200)});
-})();
 </script>
 </body>
 </html>
