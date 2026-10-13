@@ -22,16 +22,19 @@
 <link rel="icon" type="image/png" href="/assets/img/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1791904577">
+<link rel="stylesheet" href="/css/style.css?v=1791904919">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About lunö studio","url":"https://designluno.com/about/","description":"lunö is an independent design studio. we make logos, brand identities, websites and digital products for startups and growing businesses — one team, from strategy to launch."}</script>
 <style>
 .ab{padding-top:72px}
-.ab-hero{position:relative;height:646px;margin:0 20px;border-radius:28px;overflow:hidden;background:rgba(242,231,220,.05);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.ab-hero{position:relative;height:646px;margin:0 20px;border-radius:28px;overflow:hidden}
+.ab-hero:before{content:"";position:absolute;inset:0;z-index:1;background:rgba(242,231,220,.05);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.ab-hero>*:not(.ab-cover){z-index:2}
 .ab-cover{position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;pointer-events:none}
-.ab-hero .tags{position:absolute;left:40px;top:40px;font-size:16px;line-height:16px;letter-spacing:-.48px;color:var(--pink)}
-.ab-hero h1{position:absolute;left:40px;bottom:248px;width:385px;font-size:72px;line-height:72px;letter-spacing:-.72px;font-weight:400}
+.ab-hero .tags{position:absolute;z-index:2;left:40px;top:40px;font-size:16px;line-height:16px;letter-spacing:-.48px;color:var(--pink)}
+.ab-txt{position:absolute;left:40px;bottom:40px;width:385px;display:flex;flex-direction:column;gap:20px}
+.ab-hero h1{font-size:72px;line-height:72px;letter-spacing:-.72px;font-weight:400}
 .ab-hero h1 em{font-style:italic;color:var(--pink)}
-.ab-hero p{position:absolute;left:40px;bottom:40px;width:385px;font-size:18px;line-height:21.6px;letter-spacing:-.18px}
+.ab-hero .ab-txt p{font-size:18px;line-height:21.6px;letter-spacing:-.18px}
 .ab-hero .btn{position:absolute;right:40px;bottom:40px;width:167px}
 .ab .stack{padding-top:58px;gap:140px}
 .ab-about{display:flex;gap:28px}
@@ -61,7 +64,7 @@
 .ab-adv-ico{display:inline-block;width:29px;height:29px;vertical-align:-3px;margin:0 6px}
 .ab-quote-wrap .quote{width:100%}
 @media (max-width:1199px){
- .ab-hero{height:560px}.ab-hero h1{font-size:56px;line-height:56px;bottom:220px}
+ .ab-hero{height:560px}.ab-hero h1{font-size:56px;line-height:56px}
  .ab-about{flex-direction:column;gap:32px}.ab-about>div:first-child,.ab-lead,.ab-side{width:100%;max-width:760px}.ab-side{padding-top:0}
  .ab-feel{flex-wrap:wrap;gap:32px 10px}.ab-feel>div{flex:1 1 calc(50% - 10px);min-height:220px}.ab-feel>div:nth-child(2){border-right:0}
  .ab-skills{grid-template-columns:1fr}
@@ -69,8 +72,7 @@
 @media (max-width:809px){
  .ab{padding-top:64px}.ab-hero{margin:0 12px;height:auto;min-height:620px;padding:24px}
  .ab-hero .tags{position:static;display:block;margin-bottom:12px}
- .ab-hero h1{position:absolute;left:24px;bottom:210px;font-size:44px;line-height:44px;width:300px}
- .ab-hero p{left:24px;bottom:90px;width:calc(100% - 48px)}.ab-hero .btn{left:24px;right:24px;width:auto;bottom:24px}
+ .ab-txt{left:24px;bottom:88px;width:calc(100% - 48px)}.ab-hero h1{font-size:44px;line-height:44px}.ab-hero .btn{left:24px;right:24px;width:auto;bottom:24px}
 .ab-lead{font-size:32px;line-height:35px;letter-spacing:-.32px}
  .ab-h h2{font-size:32px;line-height:35px}
  .ab-feel{margin-top:32px;gap:24px}.ab-feel>div{flex:1 1 100%;border-right:0;min-height:0;gap:24px}
@@ -84,7 +86,7 @@
 <header class="header">
   <a class="logo" href="/" aria-label="lunö"><img src="/assets/svg/logo.svg" alt="lunö"></a>
   <nav class="nav">
-    <a href="/#about">#about</a><a href="/#services">#services</a><a href="/#cases">#cases</a><a href="/#faq">#faq</a><a href="/#contacts">#contact</a>
+    <a href="/about/">#about</a><a href="/#services">#services</a><a href="/#cases">#cases</a><a href="/#faq">#faq</a><a href="/#contacts">#contact</a>
   </nav>
   <a class="btn btn-pink" href="/#contacts"><i></i>discuss a project</a>
 </header>
@@ -93,8 +95,8 @@
 <section class="ab-hero">
   <img class="ab-cover" src="/assets/img/about-cover.webp" alt="" width="2000" height="872">
   <p class="tags">product · ux/ui · branding · development</p>
-  <h1>hi, we’re <em>lunö studio</em></h1>
-  <p>we design brands, websites, and products around real people and real goals</p>
+  <div class="ab-txt"><h1>hi, we’re <em>lunö studio</em></h1>
+  <p>we design brands, websites, and products around real people and real goals</p></div>
   <a class="btn btn-pink" href="/#cases"><i></i>view cases</a>
 </section>
 <div class="stack">
@@ -142,6 +144,22 @@
       <iframe class="q-close" src="/embeds/quote-close.html" title="" aria-hidden="true" tabindex="-1" loading="lazy"></iframe>
       <blockquote class="reveal">for me, design is about <span class="pink">listening, asking questions, and making sense of complexity</span> It’s not about decoration or trends; it’s about clarity, structure, and decisions that help brands feel understandable and trustworthy</blockquote>
       <p class="author"><span class="pink">— Yana S.</span>founder of lunö studio</p>
+    </section>
+  <section id="faq" class="faq">
+      <p class="label">#faq</p>
+      <div class="faq-head"><h2 class="h40 reveal">here are a few things you might be wondering about</h2><a class="btn btn-pink" href="#contacts"><i></i>discuss a project</a></div>
+      <div class="fq-grid reveal">
+        <div class="fq-row">
+          <div class="fq open"><button type="button" aria-expanded="true" aria-controls="fa1"><span class="q">01<br>what services does lunö offer?</span><span class="pl" aria-hidden="true"></span></button><p class="a" id="fa1" role="region">landing pages, brand identity, websites, ux/ui for digital products, development and ai-powered systems — separately or as one end-to-end project</p></div>
+          <div class="fq"><button type="button" aria-expanded="false" aria-controls="fa2"><span class="q">02<br>who do you work with?</span><span class="pl" aria-hidden="true"></span></button><p class="a" id="fa2" role="region">from founders launching their first landing page to teams building complex platforms and ai tools</p></div>
+          <div class="fq"><button type="button" aria-expanded="false" aria-controls="fa3"><span class="q">03<br>how much does a project cost?</span><span class="pl" aria-hidden="true"></span></button><p class="a" id="fa3" role="region">projects start at $600 for brand identity, $900 for ux/ui design, and $600 for development<br>the final price depends on the scope, complexity, and deliverables</p></div>
+        </div>
+        <div class="fq-row">
+          <div class="fq"><button type="button" aria-expanded="false" aria-controls="fa4"><span class="q">04<br>how does the process work?</span><span class="pl" aria-hidden="true"></span></button><p class="a" id="fa4" role="region">we start with your brief and goals, then agree on the scope and timeline<br>next, we design and build the agreed solution, review it with you, and prepare the final deliverables for launch</p></div>
+          <div class="fq"><button type="button" aria-expanded="false" aria-controls="fa5"><span class="q">05<br>how long will my project take?</span><span class="pl" aria-hidden="true"></span></button><p class="a" id="fa5" role="region">timelines depend on the scope and complexity<br>typical starting points: brand identity from 2 weeks, ux/ui design from 3 weeks, development from 2 weeks<br>we’ll share an estimated schedule before we begin</p></div>
+          <div class="fq"><button type="button" aria-expanded="false" aria-controls="fa6"><span class="q">06<br>what do you need to get started?</span><span class="pl" aria-hidden="true"></span></button><p class="a" id="fa6" role="region">tell us about your business, audience, goals, and timeline using the contact form<br>a finished brief isn’t necessary—we’ll help clarify the details together</p></div>
+        </div>
+            </div>
     </section>
 </div>
 </main>
@@ -222,6 +240,7 @@ addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addE
 <script src="/js/dotmorph.js?v=9" defer></script>
 <script src="/js/track.js?v=1" defer></script>
 <script src="/js/form.js?v=10" defer></script>
+<script src="/js/faq.js?v=4" defer></script>
 <script>
 (function(){var els=[].slice.call(document.querySelectorAll('.reveal'));
 if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
