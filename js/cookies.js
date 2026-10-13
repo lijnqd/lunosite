@@ -1,6 +1,6 @@
 (function(){
 var GTM_ID='GTM-TGT5WDHG';/* paste GTM-XXXXXXX here to enable Google Tag Manager */
-var KEY='luno_consent',cats=[['necessary','Necessary','Keeps the site working. Always on.',1],['preferences','Preferences','Remembers your settings.',0],['analytics','Analytics','Helps us understand how the site is used.',0],['marketing','Marketing','Used for ads and remarketing.',0]];
+var KEY='luno_consent',cats=[['necessary','Necessary','Keeps the site working, always on',1],['preferences','Preferences','Remembers your settings',0],['analytics','Analytics','Helps us understand how the site is used',0],['marketing','Marketing','Used for ads and remarketing',0]];
 var w=window;w.dataLayer=w.dataLayer||[];function gtag(){w.dataLayer.push(arguments)}
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',wait_for_update:500});
 function get(){try{return JSON.parse(localStorage.getItem(KEY))}catch(e){return null}}
@@ -11,7 +11,7 @@ var st=document.createElement('style');st.textContent='#ck{position:fixed;left:2
 document.head.appendChild(st);
 var saved=get();if(saved){apply(saved)}
 function build(){var b=document.createElement('div');b.id='ck';b.setAttribute('role','dialog');b.setAttribute('aria-label','Cookie preferences');
- b.innerHTML='<h3>we use cookies</h3><p class="lead">we use cookies to make the site work and, with your consent, to understand how it is used. you can change your choice anytime. <a href="/cookies/" style="text-decoration:underline;text-underline-offset:2px">cookie policy</a>.</p><div class="pr">'+cats.map(function(c){return'<label><span>'+c[1]+'<small>'+c[2]+'</small></span><input type="checkbox" data-c="'+c[0]+'"'+(c[3]?' checked disabled':'')+'></label>'}).join('')+'</div><div class="row"><button class="ok" data-a="all">accept all</button><button data-a="none">reject</button><button class="cz" data-a="cu">customize</button><button class="sv" data-a="save">save choice</button></div>';
+ b.innerHTML='<h3>we use cookies</h3><p class="lead">we use cookies to make the site work and, with your consent, to understand how it is used, you can change your choice anytime <a href="/cookies/" style="text-decoration:underline;text-underline-offset:2px">cookie policy</a></p><div class="pr">'+cats.map(function(c){return'<label><span>'+c[1]+'<small>'+c[2]+'</small></span><input type="checkbox" data-c="'+c[0]+'"'+(c[3]?' checked disabled':'')+'></label>'}).join('')+'</div><div class="row"><button class="ok" data-a="all">accept all</button><button data-a="none">reject</button><button class="cz" data-a="cu">customize</button><button class="sv" data-a="save">save choice</button></div>';
  document.body.appendChild(b);
  b.addEventListener('click',function(e){var a=e.target.getAttribute&&e.target.getAttribute('data-a');if(!a)return;
   if(a==='cu'){b.classList.add('cu');return}

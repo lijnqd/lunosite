@@ -46,7 +46,7 @@ if(note&&btn&&window.MutationObserver){new MutationObserver(function(){
 
 // free video review offer: pre-fills the message field
 (function(){var b=document.querySelector('.c-offer'),f=document.getElementById('form');if(!b||!f)return;
-b.addEventListener('click',function(){var m=f.querySelector('[name=message]');if(m){m.value='free 20-minute review — my site / brand link: ';m.focus();var n=m.value.length;try{m.setSelectionRange(n,n)}catch(e){}}
+b.addEventListener('click',function(){var m=f.querySelector('[name=message]');if(m){m.value='free 15-minute video review — my site / brand link: ';m.focus();var n=m.value.length;try{m.setSelectionRange(n,n)}catch(e){}}
 if(window.dataLayer)window.dataLayer.push({event:'cta_click',label:'free review',link_url:'#form',location:'contacts'})})})();
 
 // "book a review" in services: pre-fill the message once contacts are reached
