@@ -12,9 +12,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&family=Sometype+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=1791872687">
+<link rel="stylesheet" href="/css/style.css?v=1791880000">
 <style>
-.nf{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:110px 20px 60px;text-align:center;position:relative;z-index:1}
+.nf{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:110px 20px 120px;text-align:center;position:relative;z-index:1}
 .nf canvas{display:block;width:min(760px,100%);height:auto;touch-action:none}
 .nf p{font-size:18px;line-height:21.6px;letter-spacing:-.18px;max-width:340px}
 @media (max-width:809px){.nf{gap:22px}.nf p{font-size:16px;line-height:19px}.header{left:12px;right:12px}}
@@ -43,26 +43,32 @@ function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;draw()}
 function draw(){x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);if(mx<0)return;var sy=scrollY,y0=30-(sy%60);for(var y=y0;y<H+4;y+=60){for(var px=30;px<W+4;px+=60){var d=Math.hypot(px-mx,y-my);if(d>170)continue;var t=1-d/170,a=.75*t*t;x.fillStyle='rgba(255,179,173,'+(.4*a).toFixed(3)+')';x.beginPath();x.arc(px,y,2.2,0,6.283);x.fill()}}}
 addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addEventListener('resize',size);size();
 
-// dot-matrix 404
-var cv=document.getElementById('nf404'),ctx=cv.getContext('2d'),CW=760,CH=470,P=6,R=2.85,pts=[],px=-999,py=-999,raf=0;
+// ascii 404 (same style as the home cover)
+var cv=document.getElementById('nf404'),ctx=cv.getContext('2d'),CW=760,CH=470,D=Math.min(devicePixelRatio||1,2),SYM='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-/<>=?',items=[],mouse={x:-9999,y:-9999,r:75},started=0;
+cv.width=CW*D;cv.height=CH*D;
+function rc(){return SYM[Math.floor(Math.random()*SYM.length)]}
 function build(){
   var o=document.createElement('canvas');o.width=CW;o.height=CH;var g=o.getContext('2d');
-  g.fillStyle='#000';g.textBaseline='alphabetic';g.textAlign='left';
-  var fs=385;g.font='900 '+fs+'px Inter, sans-serif';
-  var w4=g.measureText('4').width,wO=g.measureText('O').width,tot=w4*2+wO,x0=(CW-tot)/2,base=CH-8;
-  g.fillText('4',x0,base);g.fillText('O',x0+w4,base);g.fillText('4',x0+w4+wO,base);
-  var cx=x0+w4+wO/2,dy=base-fs*.72-48;[-1,1].forEach(function(s){g.beginPath();g.arc(cx+s*wO*.27,dy,27,0,6.283);g.fill()});
-  var d=g.getImageData(0,0,CW,CH).data;pts=[];
-  for(var y=P/2;y<CH;y+=P)for(var xx=P/2;xx<CW;xx+=P){if(d[((y|0)*CW+(xx|0))*4+3]>128)pts.push([xx,y])}
+  g.fillStyle='#000';g.textBaseline='alphabetic';g.textAlign='center';
+  g.font='900 440px Inter, sans-serif';g.fillText('404',CW/2,CH-30);
+  var d=g.getImageData(0,0,CW,CH).data,fs=11,sx=fs*.58,sy=fs*.95;items=[];
+  for(var y=sy;y<CH;y+=sy)for(var xx=0;xx<CW;xx+=sx){
+    if(d[((Math.round(y-sy/2))*CW+Math.round(xx+sx/2))*4+3]>128)items.push({c:rc(),x:xx,y:y,ox:xx,oy:y,vx:0,vy:0})}
 }
-function paint(){raf=0;ctx.clearRect(0,0,CW,CH);ctx.fillStyle='#FFB3AD';
-  for(var i=0;i<pts.length;i++){var p=pts[i],dx=p[0]-px,dy=p[1]-py,dd=Math.sqrt(dx*dx+dy*dy),s=1;if(dd<110){s=.3+.7*(dd/110)}
-    ctx.beginPath();ctx.arc(p[0],p[1],R*s,0,6.283);ctx.fill()}}
-function go(){if(!raf)raf=requestAnimationFrame(paint)}
-function move(e){var r=cv.getBoundingClientRect(),t=e.touches?e.touches[0]:e;px=(t.clientX-r.left)*CW/r.width;py=(t.clientY-r.top)*CH/r.height;go()}
-cv.addEventListener('mousemove',move);cv.addEventListener('touchmove',move,{passive:true});
-cv.addEventListener('mouseleave',function(){px=py=-999;go()});
-(document.fonts&&document.fonts.load?document.fonts.load('900 100px Inter').catch(function(){}):Promise.resolve()).then(function(){build();paint()});
+function frame(){
+  ctx.setTransform(D,0,0,D,0,0);ctx.clearRect(0,0,CW,CH);ctx.font="500 11px 'Sometype Mono', monospace";ctx.fillStyle='#FFB3AD';
+  for(var i=0;i<items.length;i++){var t=items[i];
+    if(Math.random()<.005)t.c=rc();
+    var dx=mouse.x-t.x,dy=mouse.y-t.y,dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<mouse.r){var a=Math.atan2(dy,dx),f=(mouse.r-dist)/mouse.r;t.vx-=Math.cos(a)*f*2.5;t.vy-=Math.sin(a)*f*2.5}
+    t.vx+=(t.ox-t.x)*.08;t.vy+=(t.oy-t.y)*.08;t.vx*=.85;t.vy*=.85;t.x+=t.vx;t.y+=t.vy;
+    ctx.fillText(t.c,t.x,t.y)}
+  requestAnimationFrame(frame)}
+function move(e){var r=cv.getBoundingClientRect(),t=e.touches?e.touches[0]:e;mouse.x=(t.clientX-r.left)*CW/r.width;mouse.y=(t.clientY-r.top)*CH/r.height}
+function leave(){mouse.x=mouse.y=-9999}
+cv.addEventListener('mousemove',move);cv.addEventListener('touchmove',move,{passive:true});cv.addEventListener('mouseleave',leave);cv.addEventListener('touchend',leave);
+function start(){if(started)return;started=1;build();frame()}
+Promise.all([document.fonts.load('900 100px Inter'),document.fonts.load("500 14px 'Sometype Mono'")]).then(start,start);setTimeout(start,1500);
 })();
 </script>
 </body>
