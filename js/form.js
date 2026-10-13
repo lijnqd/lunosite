@@ -21,7 +21,7 @@ Array.prototype.forEach.call(form.querySelectorAll('input'),function(inp){
 });
 var btn0=form.querySelector('button[type=submit]');
 var cw=document.createElement('div');cw.className='ff ck';
-cw.innerHTML='<label><input type="checkbox" name="consent" value="yes"><span>i agree to the processing of my personal data</span></label><p class="err" id="err-consent" role="alert"></p>';
+cw.innerHTML='<label><input type="checkbox" name="consent" value="yes" checked><span>i agree to the processing of my personal data</span></label><p class="err" id="err-consent" role="alert"></p>';
 form.insertBefore(cw,btn0);
 var ci=cw.querySelector('input');
 fields.push({inp:ci,w:cw,p:cw.querySelector('.err'),rule:function(){return ci.checked?'':'please confirm your consent to send the form'}});
