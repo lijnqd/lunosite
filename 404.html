@@ -12,10 +12,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&family=Sometype+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=1791880000">
+<link rel="stylesheet" href="/css/style.css?v=1791883000">
 <style>
 .nf{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:110px 20px 120px;text-align:center;position:relative;z-index:1}
-.nf canvas{display:block;width:min(760px,100%);height:auto;touch-action:none}
+.nf canvas{display:block;width:min(900px,100%);height:auto;touch-action:none}
 .nf p{font-size:18px;line-height:21.6px;letter-spacing:-.18px;max-width:340px}
 @media (max-width:809px){.nf{gap:22px}.nf p{font-size:16px;line-height:19px}.header{left:12px;right:12px}}
 </style>
@@ -31,10 +31,13 @@
 </header>
 <main class="nf">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">404 — page not found</h1>
-  <canvas id="nf404" width="760" height="470" role="img" aria-label="404"></canvas>
+  <canvas id="nf404" width="900" height="560" role="img" aria-label="404"></canvas>
   <p>Looks like this page hasn’t been designed yet, or it vanished into thin air.</p>
   <a class="btn btn-pink" href="/"><i></i>back to home</a>
 </main>
+<script src="/js/cookies.js?v=2" defer></script>
+<script src="/js/dotmorph.js?v=7" defer></script>
+<script src="/js/form.js?v=4" defer></script>
 <script>
 (function(){
 // background dot glow (same as the main page)
@@ -44,13 +47,13 @@ function draw(){x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);if(mx<0)ret
 addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addEventListener('resize',size);size();
 
 // ascii 404 (same style as the home cover)
-var cv=document.getElementById('nf404'),ctx=cv.getContext('2d'),CW=760,CH=470,D=Math.min(devicePixelRatio||1,2),SYM='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-/<>=?',items=[],mouse={x:-9999,y:-9999,r:75},started=0;
+var cv=document.getElementById('nf404'),ctx=cv.getContext('2d'),CW=900,CH=560,D=Math.min(devicePixelRatio||1,2),SYM='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-/<>=?',items=[],mouse={x:-9999,y:-9999,r:75},started=0;
 cv.width=CW*D;cv.height=CH*D;
 function rc(){return SYM[Math.floor(Math.random()*SYM.length)]}
 function build(){
   var o=document.createElement('canvas');o.width=CW;o.height=CH;var g=o.getContext('2d');
   g.fillStyle='#000';g.textBaseline='alphabetic';g.textAlign='center';
-  g.font='900 440px Inter, sans-serif';g.fillText('404',CW/2,CH-30);
+  var fs0=420;g.font='900 '+fs0+'px Inter, sans-serif';var tw=g.measureText('4Ö4').width;fs0=Math.floor(fs0*Math.min(1,(CW-60)/tw));g.font='900 '+fs0+'px Inter, sans-serif';g.fillText('4Ö4',CW/2,CH-50);
   var d=g.getImageData(0,0,CW,CH).data,fs=11,sx=fs*.58,sy=fs*.95;items=[];
   for(var y=sy;y<CH;y+=sy)for(var xx=0;xx<CW;xx+=sx){
     if(d[((Math.round(y-sy/2))*CW+Math.round(xx+sx/2))*4+3]>128)items.push({c:rc(),x:xx,y:y,ox:xx,oy:y,vx:0,vy:0})}
