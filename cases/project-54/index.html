@@ -24,7 +24,7 @@
 <link rel="icon" type="image/png" href="/assets/img/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1791881609">
+<link rel="stylesheet" href="/css/style.css?v=1791882348">
 <style>
 .cs{position:relative;z-index:1;max-width:1430px;margin:0 auto;padding:110px 20px 0}
 .cs-back{display:inline-flex;gap:10px;align-items:center;font-size:16px;opacity:.7;margin-bottom:28px}
@@ -158,6 +158,7 @@ html,body{overflow-x:clip}
   <div class="f-cols">
     <div><h4>main</h4><a href="/#about">about</a><a href="/#cases">cases</a><a href="/#services">services</a><a href="/#contacts">contacts</a></div>
     <div><h4>contacts</h4><a href="mailto:hey.lunostudio@gmail.com">hey.lunostudio@gmail.com</a><a href="https://www.instagram.com/dsgn.luno/" target="_blank" rel="noopener">instagram</a><a href="https://t.me/lijnqd" target="_blank" rel="noopener">telegram</a><a href="https://www.behance.net/dsgn_luno" target="_blank" rel="noopener">behance</a></div>
+    <div class="f-legal"><h4>legal</h4><a href="/privacy/">privacy policy</a><a href="/cookies/">cookie policy</a><a href="#" onclick="window.openCookieSettings&amp;&amp;window.openCookieSettings();return false">cookie settings</a></div>
   </div>
   <div class="clock">
     <svg class="analog" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#E3E3E3"/><g id="ticks" fill="#8a8a8a"><circle cx="50" cy="6" r="2"/><circle cx="94" cy="50" r="2"/><circle cx="50" cy="94" r="2"/><circle cx="6" cy="50" r="2"/></g><line id="hh" x1="50" y1="50" x2="50" y2="26" stroke="#222" stroke-width="3.2" stroke-linecap="round"/><line id="mm" x1="50" y1="50" x2="50" y2="12" stroke="#222" stroke-width="2.4" stroke-linecap="round"/><line id="ss" x1="50" y1="50" x2="50" y2="14" stroke="#FFB3AD" stroke-width="2" stroke-linecap="round"/><circle cx="50" cy="50" r="3.2" fill="#222"/></svg>
@@ -200,8 +201,8 @@ function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;draw()}
 function draw(){x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);if(mx<0)return;var sy=scrollY,y0=30-(sy%60);for(var y=y0;y<H+4;y+=60){for(var px=30;px<W+4;px+=60){var d=Math.hypot(px-mx,y-my);if(d>170)continue;var t=1-d/170,a=.75*t*t;x.fillStyle='rgba(255,179,173,'+(.4*a).toFixed(3)+')';x.beginPath();x.arc(px,y,2.2,0,6.283);x.fill()}}}
 addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addEventListener('scroll',draw,{passive:true});addEventListener('resize',size);size()})();
 </script>
-<script src="/js/cookies.js?v=2" defer></script>
+<script src="/js/cookies.js?v=3" defer></script>
 <script src="/js/dotmorph.js?v=7" defer></script>
-<script src="/js/form.js?v=4" defer></script>
+<script src="/js/form.js?v=5" defer></script>
 </body>
 </html>
