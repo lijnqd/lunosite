@@ -354,7 +354,7 @@ input,textarea{text-transform:none}
 /* service timelines + faq cta */
 .shead{display:flex;flex-direction:column;gap:4px}
 .stime{font-style:normal;font-size:16px;line-height:19px;letter-spacing:-.16px}
-.faq-head{display:flex;justify-content:space-between;align-items:flex-start}.faq-head h2{width:1040px;margin-top:13px}.faq-head .btn{margin-top:46px;width:240px}
+.faq-head{display:flex;justify-content:space-between;align-items:flex-end}.faq-head h2{width:1040px;margin-top:13px}.faq-head .btn{margin-top:0;width:240px}
 @media (max-width:1199px){.faq-head .btn{display:none}.faq-head h2{width:100%}}
 
 /* accessibility */
