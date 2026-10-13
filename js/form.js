@@ -43,3 +43,8 @@ if(note&&btn&&window.MutationObserver){new MutationObserver(function(){
  if(ok){clearTimeout(tm);tm=setTimeout(function(){DotMorph.set(btn,'idle')},3000)}
 }).observe(note,{childList:true,characterData:true,subtree:true})}
 })();
+
+// free video review offer: pre-fills the message field
+(function(){var b=document.querySelector('.c-offer'),f=document.getElementById('form');if(!b||!f)return;
+b.addEventListener('click',function(){var m=f.querySelector('[name=message]');if(m){m.value='free 15-minute video review — my site / brand link: ';m.focus();var n=m.value.length;try{m.setSelectionRange(n,n)}catch(e){}}
+if(window.dataLayer)window.dataLayer.push({event:'cta_click',label:'free video review',link_url:'#form',location:'contacts'})})})();

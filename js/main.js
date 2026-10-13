@@ -92,6 +92,6 @@ var FORM_ENDPOINT='https://luno-form.dsgn-ys.workers.dev';
 $('form').addEventListener('submit',function(e){
   e.preventDefault();var f=e.target,note=$('formNote');note.hidden=false;
   if(!FORM_ENDPOINT){note.textContent='form is being connected — please write to hey.lunostudio@gmail.com';return}
-  fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){if(!r.ok)throw 0;note.textContent='thank you! we’ll get back to you within two business days';f.reset()}).catch(function(){note.textContent='something went wrong — please write to hey.lunostudio@gmail.com'});
+  fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){if(!r.ok)throw 0;note.textContent='thank you! we’ll get back to you within 24 hours';f.reset()}).catch(function(){note.textContent='something went wrong — please write to hey.lunostudio@gmail.com'});
 });
 })();

@@ -24,7 +24,7 @@
 <link rel="icon" type="image/png" href="/assets/img/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1791886411">
+<link rel="stylesheet" href="/css/style.css?v=1791891176">
 <style>
 .cs{position:relative;z-index:1;max-width:1430px;margin:0 auto;padding:110px 20px 0}
 .cs-back{display:inline-flex;gap:10px;align-items:center;font-size:16px;opacity:.7;margin-bottom:28px}
@@ -79,12 +79,13 @@ html,body{overflow-x:clip}
 @media (max-width:1199px){.cs-top .cs-tags{padding-top:14px}}@media (max-width:809px){.cs-top{flex-direction:column;gap:16px}.cs-top .cs-tags{padding-top:0;justify-content:flex-start}}
 
 .cs-more{margin:100px 0 0}.cs-more .label{margin:0 0 20px}.cs-more .row{display:flex;justify-content:space-between;gap:20px}.cs-more .folder{position:relative;flex:none}@media(max-width:1199px){.cs-more .row{flex-wrap:wrap;justify-content:center}}@media(max-width:809px){.cs-more{margin-top:80px}.cs-more .row{flex-direction:column;align-items:center}}
+.cs-quote{margin:100px 0 0;max-width:820px;background:rgba(242,231,220,.06);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);border-radius:16px;padding:24px;display:grid;grid-template-columns:56px 1fr;gap:4px 16px;align-items:center}.cs-quote img{grid-row:1/3;width:56px;height:56px;border-radius:50%;object-fit:cover;align-self:start}.cs-quote blockquote{grid-column:2;font-size:20px;line-height:24px;letter-spacing:-.2px;color:var(--pink)}.cs-quote figcaption{grid-column:2;display:flex;gap:10px;flex-wrap:wrap;font-size:14px;line-height:18px;margin-top:8px}.cs-quote figcaption b{font-weight:500}.cs-quote figcaption span{opacity:.6}.cs-cta{margin:100px 0 0;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}.cs-cta .btn{width:240px;flex:none}.cs-quote+.cs-cta{margin-top:60px}@media (max-width:809px){.cs-quote{margin-top:60px;padding:16px;grid-template-columns:44px 1fr}.cs-quote img{width:44px;height:44px}.cs-quote blockquote{font-size:16px;line-height:20px}.cs-cta{flex-direction:column;align-items:stretch;margin-top:60px}.cs-cta .btn{width:100%}}
 </style>
 </head>
 <body>
 <a class="skip" href="#content">skip to content</a>
 <div id="pre" aria-hidden="true"><canvas></canvas><div class="pc">00<b>%</b></div></div>
-<script src="/js/preloader.js?v=3"></script>
+<script src="/js/preloader.js?v=4"></script>
 <noscript><style>#pre{display:none}html.pre-lock{overflow:auto}</style></noscript>
 <canvas id="dots"></canvas>
 <header class="header">
@@ -128,6 +129,8 @@ html,body{overflow-x:clip}
     </div>
   </div>
 
+<section class="cs-cta"><h2 class="h40">want the same for your brand?</h2><a class="btn btn-pink" href="/#contacts"><i></i>discuss a project</a></section>
+
 <section class="cs-more"><p class="label">#other cases</p><div class="row"><a class="folder" href="/cases/set/"><span class="fold"></span><img src="/assets/img/case-set.png" alt="SET — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>SET</b><em>#e-commerce</em></a><a class="folder" href="/cases/beeyawn/"><span class="fold"></span><img src="/assets/img/case-beeyown.png" alt="Beeyawn — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>Beeyawn</b><em>#corporate</em></a><a class="folder" href="/cases/midas/"><span class="fold"></span><img src="/assets/img/case-midas.png" alt="Midas — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>Midas</b><em>#corporate</em></a><a class="folder" href="/cases/orta/"><span class="fold"></span><img src="/assets/img/case-orta.png" alt="ORTA — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>ORTA</b><em>#corporate</em></a></div></section>
 </main>
 
@@ -139,8 +142,9 @@ html,body{overflow-x:clip}
         <div class="c-inner">
           <div class="luna">
             <img src="/assets/img/cat-luna.webp" alt="Luna, the studio founder’s cat" loading="lazy" decoding="async">
-            <div><span>Luna, founder's cat</span><p>tell me a little about your project, your goals, and your timeline. we’ll get back to you within two business days</p></div>
+            <div><span>Luna, founder's cat</span><p>tell me a little about your project, your goals, and your timeline. we’ll get back to you within 24 hours</p></div>
           </div>
+          <button type="button" class="c-offer">not sure where to start? get a free 15-minute video review of your site or brand →</button>
           <form id="form" action="#" method="post">
             <input type="text" name="name" placeholder="name">
             <input type="tel" name="phone" placeholder="phone*" required>
@@ -192,7 +196,7 @@ var FORM_ENDPOINT='https://luno-form.dsgn-ys.workers.dev';
 $('form').addEventListener('submit',function(e){
   e.preventDefault();var f=e.target,note=$('formNote');note.hidden=false;
   if(!FORM_ENDPOINT){note.textContent='form is being connected — please write to hey.lunostudio@gmail.com';return}
-  fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){if(!r.ok)throw 0;note.textContent='thank you! we’ll get back to you within two business days';f.reset()}).catch(function(){note.textContent='something went wrong — please write to hey.lunostudio@gmail.com'});
+  fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){if(!r.ok)throw 0;note.textContent='thank you! we’ll get back to you within 24 hours';f.reset()}).catch(function(){note.textContent='something went wrong — please write to hey.lunostudio@gmail.com'});
 });
 })();
 </script>
@@ -205,6 +209,6 @@ addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addE
 <script src="/js/cookies.js?v=3" defer></script>
 <script src="/js/dotmorph.js?v=7" defer></script>
 <script src="/js/track.js?v=1" defer></script>
-<script src="/js/form.js?v=6" defer></script>
+<script src="/js/form.js?v=7" defer></script>
 </body>
 </html>
