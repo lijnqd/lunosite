@@ -350,3 +350,8 @@ input,textarea{text-transform:none}
 .fq button:focus-visible{outline:2px solid var(--pink);outline-offset:-4px;border-radius:16px}
 @media (max-width:1199px){.fq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.fq-row{display:contents}.fq{flex:none;height:230px}.fq.open{flex-grow:0}}
 @media (max-width:809px){.fq-grid{grid-template-columns:1fr;gap:10px}.fq{height:130px;transition:height .4s cubic-bezier(.2,.7,.2,1),background .35s,color .35s}.fq.open{height:240px}.fq button{padding:16px 14px}.fq .a{left:14px;right:62px;bottom:14px}.fq .pl{right:14px;bottom:14px}}
+
+/* service timelines + faq cta */
+.shead{display:flex;flex-direction:column;gap:4px}
+.stime{font-style:normal;font-size:16px;line-height:19px;letter-spacing:-.16px}
+.faq-cta{margin-top:24px}
