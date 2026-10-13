@@ -6,6 +6,7 @@ function set(c,o){c.classList.toggle('open',o);c.querySelector('button').setAttr
 cards.forEach(function(c){
   c.querySelector('button').addEventListener('click',function(){var o=!c.classList.contains('open');cards.forEach(function(x){set(x,false)});set(c,o)});
   c.addEventListener('mouseenter',function(){if(!hov.matches)return;cards.forEach(function(x){set(x,x===c)})});
-  c.addEventListener('mouseleave',function(){if(hov.matches)set(c,false)});
+  
 });
+g.addEventListener('mouseleave',function(){if(hov.matches)cards.forEach(function(x){set(x,false)})});
 })();
