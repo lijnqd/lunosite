@@ -67,7 +67,7 @@ function type(t){
   var rows=document.querySelector('.bubble-row');rows.style.visibility='visible';
   timer=setInterval(function(){i+=2;if(i>=t.length){i=t.length;clearInterval(timer);m.textContent=t;return}m.textContent=t.slice(0,i);m.appendChild(Object.assign(document.createElement('span'),{className:'caret'}))},22);
 }
-$('replay').addEventListener('click',function(){type(R[cur].t)});
+var rp=$('replay');if(rp)rp.addEventListener('click',function(){type(R[cur].t)});
 $('prev').addEventListener('click',function(){show(cur-1)});
 $('next').addEventListener('click',function(){show(cur+1)});
 show(0);
