@@ -36,7 +36,7 @@ document.addEventListener('submit',function(e){
  if(e.target!==form)return;
  var first=null;fields.forEach(function(f){if(!check(f)&&!first)first=f});
  if(first){e.preventDefault();e.stopPropagation();first.inp.focus();if(note)note.hidden=true;return}
- if(window.DotMorph&&btn){clearTimeout(tm);DotMorph.set(btn,'loading')}
+ if(window.DotMorph&&btn){clearTimeout(tm);DotMorph.set(btn,'loading');tm=setTimeout(function(){DotMorph.set(btn,'idle')},15000)}
 },true);
 if(note&&btn&&window.MutationObserver){new MutationObserver(function(){
  if(!window.DotMorph)return;var ok=/^thank/i.test(note.textContent);DotMorph.set(btn,ok?'success':'idle');
