@@ -71,7 +71,7 @@
 }
 @media (max-width:809px){
  .ab{padding-top:64px}.ab-hero{margin:0 12px;height:auto;min-height:620px;padding:24px}
- .ab-hero .tags{position:static;display:block;margin-bottom:12px}
+ .ab-hero .tags{position:relative;z-index:2;left:auto;top:auto;display:block;margin-bottom:12px}.ab-contacts{padding-top:60px!important}
  .ab-txt{left:24px;bottom:88px;width:calc(100% - 48px)}.ab-hero h1{font-size:44px;line-height:44px}.ab-hero .btn{left:24px;right:24px;width:auto;bottom:24px}
 .ab-lead{font-size:32px;line-height:35px;letter-spacing:-.32px}
  .ab-h h2{font-size:32px;line-height:35px}
@@ -112,9 +112,27 @@
       <div class="reveal"><div><img src="/assets/img/ab-spark.webp" alt=""><h3>you don’t need a perfect brief</h3></div><p>just tell us what you’re working on, and we’ll figure out the rest together</p></div>
     </div>
   </section>
+  <section id="reviews" class="reviews">
+      <p class="label">#reviews</p>
+      <div class="rev-head">
+        <h2 class="h40 reveal">proof that good design changes things</h2>
+      </div>
+      <div class="chat" id="chat">
+        <aside class="threads" id="threads"><div class="threads-head"><b>reviews</b><i>4</i></div></aside>
+        <div class="pane">
+          <div class="pane-head"><img id="pAva" alt=""><div><b id="pName"></b><span id="pRole"></span></div><span class="verified"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified customer</span></div>
+          <div class="msgs"><div class="day" id="pDay"></div><div class="bubble-row"><img id="pAva2" alt=""><div class="bubble" id="pMsg"></div></div></div>
+          <div class="pane-foot">
+            <span class="count" id="count">01 / 04</span>
+            <button class="round" id="prev" aria-label="previous">[&lt;]</button>
+            <button class="round" id="next" aria-label="next">[&gt;]</button>
+          </div>
+        </div>
+      </div>
+    </section>
   <section class="ab-h"><p class="label">#our skills</p><h2 class="reveal">we can take a project all the way from <span class="pink">“here’s a rough idea”</span> to a finished, working website</h2>
     <div class="ab-skills" style="max-width:1430px">
-<article class="ab-sk reveal"><h3>ux/ui &amp; product design</h3><div class="cols"><ul><li>user research</li><li>competitor analysis</li><li>information architecture</li><li>component libraries</li></ul><ul><li>responsive design</li><li>interactive prototypes</li><li>usability testing</li><li>accessibility</li></ul><ul><li>user flows &amp; jm</li><li>wireframing</li><li>ux audits &amp; reviews</li><li>design systems</li></ul></div></article>
+<article class="ab-sk reveal"><h3>ux/ui &amp; product design</h3><div class="cols"><ul><li>user research</li><li>competitor analysis</li><li>information architecture</li><li>component libraries</li></ul><ul><li>responsive design</li><li>interactive prototypes</li><li>usability testing</li><li>accessibility</li></ul><ul><li>user flows &amp; journey maps</li><li>wireframing</li><li>ux audits &amp; reviews</li><li>design systems</li></ul></div></article>
 <article class="ab-sk reveal"><h3>brand identity</h3><div class="cols"><ul><li>brand strategy</li><li>naming support</li><li>logo design</li></ul><ul><li>visual identity</li><li>typography &amp; color</li><li>social media templates</li></ul><ul><li>brand guidelines</li><li>presentation design</li><li>launch materials</li></ul></div></article>
 <article class="ab-sk reveal"><h3>web design &amp; development</h3><div class="cols"><ul><li>landing pages</li><li>corporate websites</li><li>e-commerce</li><li>portfolio websites</li></ul><ul><li>animations &amp; interactions</li><li>cms setup</li><li>seo basics</li><li>performance optimization</li></ul><ul><li>responsive layouts</li><li>domain &amp; hosting setup</li><li>analytics setup</li><li>support &amp; updates</li></ul></div></article>
 <article class="ab-sk reveal"><h3>tools we love</h3><div class="cols"><ul><li>figma</li><li>framer</li><li>webflow</li><li>tilda</li></ul><ul><li>wordpress</li><li>html, css &amp; javascript</li><li>adobe illustrator</li><li>adobe photoshop</li></ul><ul><li>after effects</li><li>notion</li><li>google analytics</li></ul></div></article>
@@ -164,7 +182,7 @@
 </div>
 </main>
 
-<main class="stack" style="padding-top:0">
+<main class="stack ab-contacts" style="padding-top:120px">
     <section id="contacts" class="contacts">
       <h2 class="sr">Contact lunö studio</h2>
       <img class="wordmark" src="/assets/img/contacts-wordmark.png" alt="" loading="lazy" decoding="async">
@@ -241,6 +259,7 @@ addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addE
 <script src="/js/track.js?v=1" defer></script>
 <script src="/js/form.js?v=10" defer></script>
 <script src="/js/faq.js?v=4" defer></script>
+<script src="/js/reviews.js?v=1" defer></script>
 <script>
 (function(){var els=[].slice.call(document.querySelectorAll('.reveal'));
 if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
