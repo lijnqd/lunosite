@@ -5,7 +5,7 @@ var css='#form .ff{display:flex;flex-direction:column;min-width:0}#form .ff inpu
 var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
 form.setAttribute('novalidate','');
 var rules={
- phone:function(v){v=v.trim();if(!v)return'';if((v.match(/\d/g)||[]).length<6||!/^[+\d\s().\-]+$/.test(v))return'that doesn’t look like a phone number';return''},
+ phone:function(v){v=v.trim();if(!v)return'enter a phone number we can reach you on';if((v.match(/\d/g)||[]).length<6||!/^[+\d\s().\-]+$/.test(v))return'that doesn’t look like a phone number';return''},
  email:function(v){v=v.trim();if(!v)return'enter your email';if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return'check the email address';return''}
 };
 var fields=[];
