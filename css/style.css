@@ -162,7 +162,7 @@ main{padding-top:66px}
 .author{position:absolute;left:0;right:0;text-align:center;top:385px;font-size:16px;line-height:19.2px;letter-spacing:-.16px}.author .pink{display:block}
 
 /* contacts */
-.contacts{position:relative;height:740px;margin-top:30px}
+.contacts{position:relative;height:677px;margin-top:30px}
 .wordmark{position:absolute;left:155px;top:0;width:1120px;height:128px}
 .c-card{z-index:1;position:absolute;left:0;right:0;top:89px;bottom:0;border-radius:40px;background:rgba(242,231,220,.04);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);overflow:hidden}
 .c-inner{position:absolute;left:368px;top:130px;width:695px}
@@ -229,7 +229,7 @@ main{padding-top:66px}
   .q-open{left:20px;top:60px;width:86px;height:54px}
   .q-close{right:20px;top:auto;bottom:40px;width:86px;height:46px}
   .wordmark{left:50%;transform:translateX(-50%);width:min(760px,calc(100% - 40px));height:auto}
-  .contacts{height:700px}
+  .contacts{height:640px}
   .c-card{top:70px}
   .c-inner{left:50%;transform:translateX(-50%);width:min(695px,calc(100% - 80px));top:120px}
   .footer{height:520px}
