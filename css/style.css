@@ -370,3 +370,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .c-title{font-family:Inter,sans-serif;font-weight:400;font-size:24px;line-height:28px;letter-spacing:-.24px;margin:0 0 20px}.c-direct{margin-top:14px;text-align:center;font-size:14px;opacity:.8}.c-direct a{text-decoration:underline;text-underline-offset:3px}
 @media (min-width:810px){.c-card{display:flex;align-items:center;justify-content:center;padding-top:50px}.c-inner{position:relative;left:auto;top:auto;transform:none;width:min(695px,calc(100% - 80px))}}
 b,strong,h1,h2,h3,h4,h5,h6,th,label,button,em,i{font-weight:400}
+
+/* faq: open card grows to fit question + answer on tablet/phone (no overlap) */
+@media (max-width:1199px){.fq.open{min-height:var(--need,0px)}}
+@media (max-width:809px){.fq.open{height:var(--need,240px);min-height:0}}
