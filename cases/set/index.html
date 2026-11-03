@@ -24,7 +24,7 @@
 <link rel="icon" type="image/png" href="/assets/img/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1793626914">
+<link rel="stylesheet" href="/css/style.css?v=1793705374">
 <style>
 .cs{position:relative;z-index:1;max-width:1430px;margin:0 auto;padding:110px 20px 0}
 .cs-back{display:inline-flex;gap:10px;align-items:center;font-size:16px;opacity:.7;margin-bottom:28px}
@@ -69,6 +69,16 @@ html,body{overflow-x:clip}
 .cs-body li{padding-left:36px}.cs-body li::before{left:16px;top:18px}
 .cs-steps li{padding-left:48px}.cs-steps li::before{left:16px;top:15px}
 .cs-tools{margin-top:8px}
+.cs-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 14px}
+.cs-stat{background:rgba(242,231,220,.06);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.cs-stat span{font-family:var(--mono);font-size:12px;line-height:16px;letter-spacing:.2px;opacity:.7}
+.cs-stat b{font-weight:400;font-size:32px;line-height:34px;letter-spacing:-1px}
+.cs-stat em{font-style:normal;font-family:var(--mono);font-size:13px;line-height:16px;color:var(--pink)}
+.cs-stat em:before{content:"▲ "}
+.cs-stat dl{display:flex;flex-direction:column;gap:2px;margin:0;font-size:16px;line-height:20px}
+.cs-stat dl div{display:flex;justify-content:space-between;gap:8px}
+.cs-stat dl dd{margin:0}
+
 .cs-text{background:rgba(242,231,220,.06);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);border-radius:16px;padding:20px 24px 24px}
 .cs-text .label{margin:0 0 16px}
 .cs-body>p,.cs-body li,.cs-steps li{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:0;padding:0}
@@ -168,7 +178,12 @@ html,body{overflow-x:clip}
       </ul>
     </div></div>
     <div class="cs-text"><h2 class="label">#result</h2>
-    <div class="cs-body">
+    <div class="cs-body"><div class="cs-stats">
+        <div class="cs-stat"><span>sessions</span><b>24,346</b><em>1178.01%</em></div>
+        <div class="cs-stat"><span>leads</span><b>673</b><em>2220.69%</em></div>
+        <div class="cs-stat"><span>conversion</span><b>2.76%</b><em>1.24%</em></div>
+        <div class="cs-stat"><span>device type</span><dl><div><dt>mobile</dt><dd>90.92% <em>27.72%</em></dd></div><div><dt>desktop</dt><dd>9.08%</dd></div></dl></div>
+      </div>
       <p>Before the redesign, buying a SET bag meant writing to the founder in direct messages<br>Now customers can browse the catalog and order on their own, anytime, without a single message</p>
       <p>The website explains the brand from the first screen, the product pages make the choice easy, and the new identity ties the store, posters and business cards into one recognizable brand<br>The project was warmly received by the design community on Behance</p>
       </div></div>
