@@ -88,8 +88,10 @@ html,body{overflow-x:clip}
 .bc-bot{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
 .bc p{font-size:16px;line-height:22px;letter-spacing:-.16px;max-width:301px;opacity:.85}
 .bc .pl{position:relative;flex:none;width:41px;height:41px;border-radius:10px;background:var(--pink);transition:background .35s}
-.bc .pl:before,.bc .pl:after{content:"";position:absolute;left:50%;top:50%;width:18px;height:1.5px;background:var(--bg);transform:translate(-50%,-50%);transition:background .35s}
+.bc .pl:before,.bc .pl:after{content:"";position:absolute;left:50%;top:50%;width:18px;height:1.5px;background:var(--bg);transform:translate(-50%,-50%);transition:transform .35s,background .35s}
 .bc .pl:after{transform:translate(-50%,-50%) rotate(90deg)}
+.bc:focus-visible .pl:before,.bc.on .pl:before{transform:translate(-50%,-50%) rotate(45deg)}.bc:focus-visible .pl:after,.bc.on .pl:after{transform:translate(-50%,-50%) rotate(135deg)}
+@media (hover:hover){.bc:hover .pl:before{transform:translate(-50%,-50%) rotate(45deg)}.bc:hover .pl:after{transform:translate(-50%,-50%) rotate(135deg)}}
 .bc:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
 .bc:focus-visible,.bc.on{background:var(--pink);color:var(--bg)}
 .bc:focus-visible time,.bc.on time{color:var(--bg)}
