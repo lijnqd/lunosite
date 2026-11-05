@@ -99,15 +99,17 @@ html,body{overflow-x:clip}
 @media (max-width:1199px){.blog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:809px){.blog{padding-top:110px}.blog h1{font-size:48px;line-height:52px}.blog-grid{grid-template-columns:1fr}.bc{min-height:250px;padding:20px}.bc h2{font-size:28px;line-height:30px}}
 
-.post{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:142px 20px 0}
+.back{display:inline-flex;gap:10px;align-items:center;font-size:16px;opacity:.7;margin-bottom:28px;transition:opacity .2s}.back:hover{opacity:1}
+.post{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:100px 20px 0}
 .p-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
 .p-top h1{font-size:84px;line-height:84px;letter-spacing:-.84px;font-weight:400;max-width:999px}
 .p-top time{font-size:16px;line-height:16px;color:var(--pink);letter-spacing:-.48px;white-space:nowrap}
 .p-quote{position:relative;margin-top:48px;min-height:530px;border-radius:32px;background:rgba(242,231,220,.04);backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px);padding:120px 60px 0;text-align:center}
 .p-quote blockquote{max-width:813px;margin:0 auto;font-size:32px;line-height:32px;letter-spacing:-.32px}
 .p-quote blockquote p+p{margin-top:0}
-.p-quote .qm{position:absolute;left:60px;top:70px;font-size:260px;line-height:1;color:var(--pink);opacity:.55;font-family:var(--mono)}
-.p-quote .qm.e{left:auto;right:60px;top:auto;bottom:10px}
+.p-quote iframe{position:absolute;border:0;background:transparent}
+.p-quote .qo{left:58px;top:120px;width:129px;height:81px}
+.p-quote .qc{right:55px;top:300px;width:129px;height:68px}
 .p-quote .by{margin-top:20px;font-size:16px;line-height:19px;letter-spacing:-.16px}
 .p-quote .by span{color:var(--pink);opacity:.9}
 .pr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:80px;align-items:start}
@@ -115,9 +117,9 @@ html,body{overflow-x:clip}
 .pr h2{font-size:48px;line-height:1.1;letter-spacing:-.48px;font-weight:400;max-width:640px;padding-right:20px}
 .pc{max-width:568px;font-size:18px;line-height:1.2;letter-spacing:-.18px}
 .pc>p+p,.pc .it p+p{margin-top:22px}
-.pc .items{display:flex;flex-direction:column;gap:32px}
+.pc.items{display:flex;flex-direction:column;gap:32px}
 .it h3{font-size:24px;line-height:1.1;letter-spacing:-.24px;font-weight:400;color:var(--pink);margin-bottom:20px}
-.pc ul{list-style:none;display:flex;flex-direction:column;gap:32px;margin-top:20px}
+.pc ul{list-style:none;display:flex;flex-direction:column;gap:32px;margin-top:32px}
 .pc ul.sq li{position:relative;padding-left:20px}
 .pc ul.sq li:before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:2px;background:var(--pink)}
 .pc ul.sq h3{font-size:24px;line-height:1.1;letter-spacing:-.24px;font-weight:400;color:var(--pink);margin-bottom:12px}
@@ -127,12 +129,12 @@ html,body{overflow-x:clip}
 .pc ul.dash{gap:0;margin:22px 0;padding-left:27px;list-style:disc}.pc ul.dash li{display:list-item}
 @media (max-width:1199px){.p-top h1{font-size:64px;line-height:64px}.pr h2{font-size:40px}}
 @media (max-width:809px){
-.post{padding-top:110px}
+.post{padding-top:92px}
 .p-top{flex-direction:column-reverse;gap:16px}.p-top h1{font-size:40px;line-height:42px;letter-spacing:-.4px}
 .p-quote{margin-top:32px;min-height:0;padding:72px 20px 32px;border-radius:24px}
 .p-quote blockquote{font-size:20px;line-height:24px}.p-quote blockquote p+p{margin-top:12px}
-.p-quote .qm{font-size:110px;left:16px;top:12px}.p-quote .qm.e{display:none}
-.pr{grid-template-columns:1fr;gap:24px;margin-top:64px}.pr.first{margin-top:56px}
+.p-quote .qo{left:16px;top:24px;width:50px;height:33px}.p-quote .qc{right:16px;top:auto;bottom:24px;width:50px;height:27px}
+.pr{grid-template-columns:1fr;gap:32px;margin-top:64px}.pr.first{margin-top:56px}
 .pr h2{font-size:32px;padding:0}.pc{font-size:17px}
 }
 </style>
@@ -152,11 +154,12 @@ html,body{overflow-x:clip}
 </header>
 
 <main id="content" class="post">
+  <a class="back" href="/blog/">back to all articles</a>
   <div class="p-top"><h1>How to explain to a designer what you want</h1><time datetime="2026-11-05">nov 5, 2026</time></div>
   <section class="p-quote">
-    <span class="qm" aria-hidden="true">“</span>
+    <iframe class="qo" src="/embeds/quote-open.html" title="" aria-hidden="true" tabindex="-1" loading="lazy"></iframe>
     <blockquote><p>You don't need to speak "design" to get a great design. Start with how you want people to feel, show what you like and what you don't, explain who it's for and what it should achieve. A good designer will turn that into a visual direction — and check it with you before designing anything.</p><p>Below are 7 simple ways to do it, plus a short checklist you can send to any designer.</p></blockquote>
-    <span class="qm e" aria-hidden="true">”</span>
+    <iframe class="qc" src="/embeds/quote-close.html" title="" aria-hidden="true" tabindex="-1" loading="lazy"></iframe>
     <p class="by"><span>— Yana S.</span><br>founder of lunö studio</p>
   </section>
   <article class="p-body">
