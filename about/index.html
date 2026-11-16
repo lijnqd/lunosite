@@ -289,17 +289,16 @@ addEventListener("pointermove",function(e){wake(e.clientX,e.clientY)},{passive:t
 addEventListener("pointerdown",function(e){wake(e.clientX,e.clientY)},{passive:true});
 addEventListener("touchmove",function(e){var t=e.touches[0];if(t)wake(t.clientX,t.clientY)},{passive:true});
 function frame(now){raf=0;if(!vis)return;
-var r=w.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height*.6,idle=now-last>2600;
-if(idle)setSay(true);
+var r=w.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height*.6;
 var tx=0,ty=0,lx=0,ly=0;
 if(has&&!asleep){var dx=mx-cx,dy=my-cy,d=Math.sqrt(dx*dx+dy*dy)||1;
-var k=Math.min(1,d/(r.width*1.1));lx=dx/d*k;ly=dy/d*k;
+var k=Math.min(1,d/(r.width*.45));lx=dx/d*k;ly=dy/d*k;
 var R=r.width*.16,f=Math.min(1,d/(r.width*1.6));tx=dx/d*f*R;ty=dy/d*f*R*.6}
 if(rm){tx=0;ty=0}
 vx+=(tx-px)*.045;vy+=(ty-py)*.045;vx*=.86;vy*=.86;px+=vx;py+=vy;
 var br=rm?0:Math.sin((now-t0)/(asleep?1500:900)),rot=Math.max(-9,Math.min(9,px/r.width*38+vx*.9));
 pet.style.transform="translate("+px.toFixed(2)+"px,"+(py+br*(asleep?2.5:1.5)).toFixed(2)+"px) rotate("+rot.toFixed(2)+"deg) scale("+(1+br*.008).toFixed(4)+","+(1-br*.008).toFixed(4)+")";
-ex+=(lx*14-ex)*.2;ey+=(ly*5-ey)*.2;
+ex+=(lx*26-ex)*.22;ey+=(ly*10-ey)*.22;
 for(var i=0;i<ir.length;i++)ir[i].setAttribute("transform","translate("+ex.toFixed(2)+" "+ey.toFixed(2)+")");
 if(asleep)lidT=1;else{if(now>blinkAt){blinkEnd=now+130;blinkAt=now+2600+Math.random()*3200}lidT=now<blinkEnd?1:0}
 lid+=(lidT-lid)*(asleep?.12:.45);
