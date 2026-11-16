@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self' https://luno-form.dsgn-ys.workers.dev; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>page not found — lunö studio</title>
 <meta name="description" content="This page doesn’t exist or has moved. Head back to the lunö studio homepage.">
@@ -11,7 +13,7 @@
 <link rel="icon" type="image/png" href="/assets/img/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1794828765">
+<link rel="stylesheet" href="/css/style.css?v=1794848024">
 <style>
 .nf{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:110px 20px 120px;text-align:center;position:relative;z-index:1}
 .nf canvas{display:block;width:min(900px,100%);height:auto;touch-action:none}
@@ -20,25 +22,25 @@
 </style>
 </head>
 <body>
-<a class="skip" href="#content">skip to content</a>
+<a class="skip" href="#content">skip to content</a>
 <canvas id="dots"></canvas>
 <header class="header">
   <a class="logo" href="/" aria-label="lunö"><img src="/assets/svg/logo.svg" alt="lunö"></a>
   <nav class="nav">
     <a href="/about/">#about</a><a href="/#services">#services</a><a href="/#cases">#cases</a><a href="/#faq">#faq</a><a href="/blog/">#blog</a><a href="/#contacts">#contact</a>
   </nav>
-  <a class="btn btn-pink" href="/#contacts"><i></i>discuss a project</a>
+  <a class="btn btn-pink" href="/#contacts"><i></i>discuss a project</a>
 </header>
 <main id="content" class="nf">
-  <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">404 — page not found</h1>
+  <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">404 — page not found</h1>
   <canvas id="nf404" width="900" height="560" role="img" aria-label="404"></canvas>
-  <p>Looks like this page hasn’t been designed yet, or it vanished into thin air</p>
-  <a class="btn btn-pink" href="/"><i></i>back to home</a>
+  <p>Looks like this page hasn’t been designed yet, or it vanished into thin air</p>
+  <a class="btn btn-pink" href="/"><i></i>back to home</a>
 </main>
-<script src="/js/cookies.js?v=5" defer></script>
+<script src="/js/cookies.js?v=6" defer></script>
 <script src="/js/dotmorph.js?v=9" defer></script>
 <script src="/js/track.js?v=1" defer></script>
-<script src="/js/form.js?v=11" defer></script>
+<script src="/js/form.js?v=12" defer></script>
 <script>
 (function(){
 // background dot glow (same as the main page)

@@ -21,7 +21,7 @@ addEventListener('resize',f);f();var again=function(){f()};setTimeout(again,100)
 // vertical markers for process (tablet/phone)
 document.querySelectorAll('.step').forEach(function(s,i){var m=document.createElement('div');m.className='mkv';if(i===0){m.appendChild(document.createElement('i'))}else{var im=document.createElement('img');im.src='assets/img/marker-'+(i+1)+'.png';im.alt='';im.style.width=[0,28,45,62][i]+'px';m.style.height=[11,28,45,62][i]+'px';m.appendChild(im)}s.insertBefore(m,s.firstChild)});
 // footer art: word-only variant on phones
-document.getElementById('fArt').src='embeds/footer-art.html'+(innerWidth<810?'?w=1':'');
+(function(){var f=document.getElementById('fArt');if(!f)return;function go(){if(!f.src)f.src='embeds/footer-art.html?v=2'+(innerWidth<810?'&w=1':'')}if('IntersectionObserver'in window){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){o.disconnect();go()}},{rootMargin:'500px'});o.observe(f)}else go()})();
 
 // reveal on scroll
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
@@ -42,15 +42,15 @@ var at=document.getElementById('aboutText');
 
 // reviews
 var R=[
- {n:'Sveta',d:'Sun',r:'CEO of "SET"',a:'assets/img/review-sveta.webp',t:"it's easy and pleasant to work with yana! the result exceeded expectations, all wishes were taken into account, and all the details were worked out"},
- {n:'Danil',d:'Mon',r:'founder of "Midas & Media brothers"',a:'assets/img/review-danil.webp',t:"Yana, thank you so much for your work!🌟 The sites turned out to be stylish, thoughtful and fully meet our expectations. It is pleasant and easy to cooperate with you — your professionalism and attention to detail are felt at every stage of the work. 🙌😊"},
- {n:'Altynai',d:'Fri',r:'SMM of "Orta"',a:'assets/img/review-altynai.webp',t:"Hi! I wanted to say thank you so much for your work — the design turned out to be very creative and stylish, just what we need! We may have clarifying questions about the layouts during the layout process, so it would be great if you could stay in touch. Thank you again for your contribution!"},
- {n:'Alexandra',d:'Thu',r:'lawyer of "Ruskapital"',a:'assets/img/review-alexandra.webp',t:"I would like to express my sincere gratitude to the designer, Yana, for her exceptional work in creating a website for our consulting company. From the very beginning of our cooperation, Yana demonstrated a high level of professionalism and creativity. She listened carefully to our wishes and ideas while suggesting many insightful solutions that significantly enhanced the final result."}
+ {n:'Sveta',d:'Sun',r:'CEO of "SET"',a:'assets/img/review-sveta-192.webp',t:"it's easy and pleasant to work with yana! the result exceeded expectations, all wishes were taken into account, and all the details were worked out"},
+ {n:'Danil',d:'Mon',r:'founder of "Midas & Media brothers"',a:'assets/img/review-danil-192.webp',t:"Yana, thank you so much for your work!🌟 The sites turned out to be stylish, thoughtful and fully meet our expectations. It is pleasant and easy to cooperate with you — your professionalism and attention to detail are felt at every stage of the work. 🙌😊"},
+ {n:'Altynai',d:'Fri',r:'SMM of "Orta"',a:'assets/img/review-altynai-192.webp',t:"Hi! I wanted to say thank you so much for your work — the design turned out to be very creative and stylish, just what we need! We may have clarifying questions about the layouts during the layout process, so it would be great if you could stay in touch. Thank you again for your contribution!"},
+ {n:'Alexandra',d:'Thu',r:'lawyer of "Ruskapital"',a:'assets/img/review-alexandra-192.webp',t:"I would like to express my sincere gratitude to the designer, Yana, for her exceptional work in creating a website for our consulting company. From the very beginning of our cooperation, Yana demonstrated a high level of professionalism and creativity. She listened carefully to our wishes and ideas while suggesting many insightful solutions that significantly enhanced the final result."}
 ];
 var cur=0,timer=null,th=document.getElementById('threads');
 R.forEach(function(x,i){
   var b=document.createElement('button');b.className='th';
-  b.innerHTML='<span class="av"><img src="'+x.a+'" alt="'+x.n.toLowerCase()+', '+x.r.replace(/"/g,'').toLowerCase()+'"><u></u></span><span class="tx"><span class="top"><b>'+x.n+'</b><span>'+x.d+'</span></span><div class="pv"></div></span>';
+  b.innerHTML='<span class="av"><img src="'+x.a+'" width="96" height="96" loading="lazy" decoding="async" alt="'+x.n.toLowerCase()+', '+x.r.replace(/"/g,'').toLowerCase()+'"><u></u></span><span class="tx"><span class="top"><b>'+x.n+'</b><span>'+x.d+'</span></span><div class="pv"></div></span>';
   b.querySelector('.pv').textContent=x.t;
   b.addEventListener('click',function(){show(i)});th.appendChild(b);
 });

@@ -183,6 +183,7 @@ canvas.addEventListener('mouseleave', () => {
 });
 
 canvas.addEventListener('mousedown', (e) => {
+  __busy = 2;
   const rect = canvas.getBoundingClientRect();
   const clickX = e.clientX - rect.left;
   const clickY = e.clientY - rect.top;
@@ -205,14 +206,25 @@ canvas.addEventListener('mousedown', (e) => {
 
 window.addEventListener('resize', init);
 
+let __vis = true, __fr = 0, __busy = 2;
+try { new IntersectionObserver((e) => { __vis = e[0].isIntersecting; }).observe(canvas); } catch (err) {}
 function animate() {
+  requestAnimationFrame(animate);
+  if (!__vis || document.hidden) return;
+  // idle (no pointer, everything settled): redraw at ~10fps, full speed while interacting
+  __fr++;
+  if (mouse.x < -9000 && __busy <= 0 && __fr % 6) return;
+  let __moving = false;
+  const __p = (mouse.x < -9000 && __busy <= 0) ? 0.03 : 0.005;
   ctx.clearRect(0, 0, width, height);
+  ctx.fillStyle = '#000000';
+  let __font = 0;
 
   for (let i = 0; i < chars.length; i++) {
     const item = chars[i];
 
     // Шанс смены символа снижен в три раза (теперь мерцает гораздо реже и спокойнее)
-    if (Math.random() < 0.005) {
+    if (Math.random() < __p) {
       item.char = getRandomChar();
     }
 
@@ -236,12 +248,11 @@ function animate() {
     item.x += item.vx;
     item.y += item.vy;
 
-    ctx.font = `500 ${item.fontSize}px 'Sometype Mono', monospace`;
-    ctx.fillStyle = '#000000';
+    if (item.vx > 0.02 || item.vx < -0.02 || item.vy > 0.02 || item.vy < -0.02) __moving = true;
+    if (__font !== item.fontSize) { __font = item.fontSize; ctx.font = `500 ${item.fontSize}px 'Sometype Mono', monospace`; }
     ctx.fillText(item.char, item.x, item.y);
   }
-
-  requestAnimationFrame(animate);
+  __busy = __moving ? 2 : __busy - 1;
 }
 
 init();

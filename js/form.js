@@ -36,6 +36,8 @@ document.addEventListener('submit',function(e){
  if(e.target!==form)return;
  var first=null;fields.forEach(function(f){if(!check(f)&&!first)first=f});
  if(first){e.preventDefault();e.stopPropagation();first.inp.focus();if(note)note.hidden=true;return}
+ /* honeypot: bots fill the hidden field -> pretend success, send nothing */
+ var hp=form.querySelector('[name=website]');if(hp&&hp.value){e.preventDefault();e.stopPropagation();form.reset();if(note){note.hidden=false;note.textContent='thank you! we’ll get back to you within 24 hours'}return}
  if(window.DotMorph&&btn){clearTimeout(tm);DotMorph.set(btn,'loading');tm=setTimeout(function(){DotMorph.set(btn,'idle')},15000)}
 },true);
 if(note&&btn&&window.MutationObserver){new MutationObserver(function(){
