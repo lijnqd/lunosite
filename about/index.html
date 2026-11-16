@@ -78,6 +78,10 @@
  .ab-feel{margin-top:32px;gap:24px}.ab-feel>div{flex:1 1 100%;border-right:0;min-height:0;gap:24px}
  .ab-skills{margin-top:32px}.ab-sk{height:auto;padding:20px 18px}.ab-sk .cols{position:static;flex-direction:column;gap:16px;margin-top:28px}.ab-sk ul{width:100%}
 }
+.ab-face{position:absolute;left:50%;top:50%;height:66%;width:auto;aspect-ratio:1110/1125;transform:translate(-50%,-50%);pointer-events:none;overflow:visible}
+.ab-face .iris{will-change:transform}
+@media (max-width:1199px){.ab-face{left:62%;top:44%;height:62%}}
+@media (max-width:809px){.ab-face{left:50%;top:64px;height:auto;width:min(64%,270px);transform:translateX(-50%)}}
 </style>
 </head>
 <body>
@@ -95,6 +99,7 @@
 <section class="ab-hero">
   <img class="ab-cover" src="/assets/img/about-cover.webp" alt="ascii art illustration made of pink characters" width="2000" height="872">
   <p class="tags">product · ux/ui · branding · development</p>
+  <svg class="ab-face" viewBox="0 0 1110 1125" role="img" aria-label="hand-drawn character whose eyes follow your cursor"><image href="/assets/img/face/back-l.webp" x="214" y="670" width="243" height="114"/><image href="/assets/img/face/back-r.webp" x="600" y="617" width="261" height="130"/><image class="iris" href="/assets/img/face/iris-l.webp" x="263" y="661" width="170" height="105"/><image class="iris" href="/assets/img/face/iris-r.webp" x="643" y="608" width="184" height="119"/><image href="/assets/img/face/front.webp" x="0" y="0" width="1110" height="1125"/></svg>
   <div class="ab-txt"><h1>hi, we’re <em>lunö studio</em></h1>
   <p>we turn ideas into visuals with meaning: digital ascii, brands, interfaces and code</p></div>
   <a class="btn btn-pink" href="/#cases"><i></i>view cases</a>
@@ -268,5 +273,12 @@ if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add(
 var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
 els.forEach(function(e){io.observe(e)})})();
 </script>
+<script>(function(){var f=document.querySelector(".ab-face");if(!f)return;var ir=f.querySelectorAll(".iris"),tx=0,ty=0,x=0,y=0,raf=0,MX=14,MY=5;
+function aim(cx,cy){var r=f.getBoundingClientRect();if(!r.width)return;var dx=cx-(r.left+r.width*.485),dy=cy-(r.top+r.height*.62),d=Math.sqrt(dx*dx+dy*dy)||1,k=Math.min(1,d/(r.width*.9));tx=dx/d*k*MX;ty=dy/d*k*MY;if(!raf)raf=requestAnimationFrame(step)}
+function step(){x+=(tx-x)*.18;y+=(ty-y)*.18;for(var i=0;i<ir.length;i++)ir[i].setAttribute("transform","translate("+x.toFixed(2)+" "+y.toFixed(2)+")");raf=(Math.abs(tx-x)>.05||Math.abs(ty-y)>.05)?requestAnimationFrame(step):0}
+addEventListener("pointermove",function(e){aim(e.clientX,e.clientY)},{passive:true});
+addEventListener("pointerdown",function(e){aim(e.clientX,e.clientY)},{passive:true});
+addEventListener("touchmove",function(e){var t=e.touches[0];if(t)aim(t.clientX,t.clientY)},{passive:true});
+document.addEventListener("mouseleave",function(){tx=0;ty=0;if(!raf)raf=requestAnimationFrame(step)})})();</script>
 </body>
 </html>
