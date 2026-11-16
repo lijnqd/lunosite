@@ -78,10 +78,13 @@
  .ab-feel{margin-top:32px;gap:24px}.ab-feel>div{flex:1 1 100%;border-right:0;min-height:0;gap:24px}
  .ab-skills{margin-top:32px}.ab-sk{height:auto;padding:20px 18px}.ab-sk .cols{position:static;flex-direction:column;gap:16px;margin-top:28px}.ab-sk ul{width:100%}
 }
-.ab-face{position:absolute;left:50%;top:50%;height:66%;width:auto;aspect-ratio:1110/1125;transform:translate(-50%,-50%);pointer-events:none;overflow:visible}
-.ab-face .iris{will-change:transform}
+.ab-face{position:absolute;left:50%;top:50%;height:66%;width:auto;aspect-ratio:1110/1125;transform:translate(-50%,-50%);pointer-events:none}
+.pet{position:absolute;inset:0;will-change:transform;transform-origin:50% 85%}
+.pet-svg{display:block;width:100%;height:100%;overflow:visible}
+.pet-say{position:absolute;left:79%;bottom:76%;padding:10px 16px;border-radius:18px 18px 18px 4px;background:var(--pink);color:var(--bg);font-size:16px;line-height:19px;letter-spacing:-.16px;white-space:nowrap;text-transform:none;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s}
+.pet-say.pop{transform:scale(.9)}
 @media (max-width:1199px){.ab-face{left:62%;top:44%;height:62%}}
-@media (max-width:809px){.ab-face{left:50%;top:64px;height:auto;width:min(64%,270px);transform:translateX(-50%)}}
+@media (max-width:809px){.ab-face{left:44%;top:84px;height:auto;width:min(60%,250px);transform:translateX(-50%)}.pet-say{left:74%;bottom:80%;font-size:14px;padding:8px 13px}}
 </style>
 </head>
 <body>
@@ -99,7 +102,10 @@
 <section class="ab-hero">
   <img class="ab-cover" src="/assets/img/about-cover.webp" alt="ascii art illustration made of pink characters" width="2000" height="872">
   <p class="tags">product · ux/ui · branding · development</p>
-  <svg class="ab-face" viewBox="0 0 1110 1125" role="img" aria-label="hand-drawn character whose eyes follow your cursor"><image href="/assets/img/face/back-l.webp" x="214" y="670" width="243" height="114"/><image href="/assets/img/face/back-r.webp" x="600" y="617" width="261" height="130"/><image class="iris" href="/assets/img/face/iris-l.webp" x="263" y="661" width="170" height="105"/><image class="iris" href="/assets/img/face/iris-r.webp" x="643" y="608" width="184" height="119"/><image href="/assets/img/face/front.webp" x="0" y="0" width="1110" height="1125"/></svg>
+  <div class="ab-face"><div class="pet"><svg class="pet-svg" viewBox="0 0 1110 1125" role="img" aria-label="hand-drawn character whose eyes follow your cursor"><image href="/assets/img/face/back-l.webp" x="214" y="670" width="243" height="114"/><image href="/assets/img/face/back-r.webp" x="600" y="617" width="261" height="130"/><image class="iris" href="/assets/img/face/iris-l.webp" x="263" y="661" width="170" height="105"/><image class="iris" href="/assets/img/face/iris-r.webp" x="643" y="608" width="184" height="119"/><defs><clipPath id="ecl"><polygon points="220,693 250,687 290,680 335,676 380,678 420,684 450,693 448,715 430,740 400,765 360,777 320,775 280,760 250,735 230,713"/></clipPath><clipPath id="ecr"><polygon points="608,667 630,659 660,649 730,633 800,625 830,623 852,623 854,645 845,675 820,705 780,727 730,740 680,733 645,715 620,693 606,675"/></clipPath></defs>
+<g clip-path="url(#ecl)"><g class="lid" data-h="112"><rect x="200" y="480" width="270" height="215" fill="#4a4a4a"/><polygon points="220,693 250,687 290,680 335,676 380,678 420,684 450,693 448,715 430,740 400,765 360,777 320,775 280,760 250,735 230,713" fill="#4a4a4a"/><polyline points="450,693 448,715 430,740 400,765 360,777 320,775 280,760 250,735 230,713 220,693" fill="none" stroke="#0c0c0c" stroke-width="10" stroke-linejoin="round"/></g></g>
+<g clip-path="url(#ecr)"><g class="lid" data-h="130"><rect x="590" y="420" width="280" height="250" fill="#4a4a4a"/><polygon points="608,667 630,659 660,649 730,633 800,625 830,623 852,623 854,645 845,675 820,705 780,727 730,740 680,733 645,715 620,693 606,675" fill="#4a4a4a"/><polyline points="852,623 854,645 845,675 820,705 780,727 730,740 680,733 645,715 620,693 606,675 608,667" fill="none" stroke="#0c0c0c" stroke-width="10" stroke-linejoin="round"/></g></g>
+<image href="/assets/img/face/front.webp" x="0" y="0" width="1110" height="1125"/></svg><div class="pet-say" aria-hidden="true"><span>Yana, founder</span></div></div></div>
   <div class="ab-txt"><h1>hi, we’re <em>lunö studio</em></h1>
   <p>we turn ideas into visuals with meaning: digital ascii, brands, interfaces and code</p></div>
   <a class="btn btn-pink" href="/#cases"><i></i>view cases</a>
@@ -273,12 +279,36 @@ if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add(
 var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
 els.forEach(function(e){io.observe(e)})})();
 </script>
-<script>(function(){var f=document.querySelector(".ab-face");if(!f)return;var ir=f.querySelectorAll(".iris"),tx=0,ty=0,x=0,y=0,raf=0,MX=14,MY=5;
-function aim(cx,cy){var r=f.getBoundingClientRect();if(!r.width)return;var dx=cx-(r.left+r.width*.485),dy=cy-(r.top+r.height*.62),d=Math.sqrt(dx*dx+dy*dy)||1,k=Math.min(1,d/(r.width*.9));tx=dx/d*k*MX;ty=dy/d*k*MY;if(!raf)raf=requestAnimationFrame(step)}
-function step(){x+=(tx-x)*.18;y+=(ty-y)*.18;for(var i=0;i<ir.length;i++)ir[i].setAttribute("transform","translate("+x.toFixed(2)+" "+y.toFixed(2)+")");raf=(Math.abs(tx-x)>.05||Math.abs(ty-y)>.05)?requestAnimationFrame(step):0}
-addEventListener("pointermove",function(e){aim(e.clientX,e.clientY)},{passive:true});
-addEventListener("pointerdown",function(e){aim(e.clientX,e.clientY)},{passive:true});
-addEventListener("touchmove",function(e){var t=e.touches[0];if(t)aim(t.clientX,t.clientY)},{passive:true});
-document.addEventListener("mouseleave",function(){tx=0;ty=0;if(!raf)raf=requestAnimationFrame(step)})})();</script>
+<script>(function(){var w=document.querySelector(".ab-face");if(!w)return;
+var pet=w.querySelector(".pet"),ir=w.querySelectorAll(".iris"),lids=w.querySelectorAll(".lid"),say=w.querySelector(".pet-say"),txt=say.firstChild;
+var rm=matchMedia("(prefers-reduced-motion:reduce)").matches,ACTIVE="Yana, founder",IDLE="zzz\u2026";
+var mx=0,my=0,has=false,px=0,py=0,vx=0,vy=0,ex=0,ey=0,lid=0,lidT=0,blinkAt=performance.now()+2500,blinkEnd=0,last=performance.now()+4000,asleep=false,vis=true,raf=0,t0=performance.now();
+function setSay(a){if(asleep===a)return;asleep=a;say.classList.add("pop");setTimeout(function(){txt.textContent=a?IDLE:ACTIVE;say.classList.remove("pop")},120)}
+function wake(x,y){mx=x;my=y;has=true;last=performance.now();setSay(false)}
+addEventListener("pointermove",function(e){wake(e.clientX,e.clientY)},{passive:true});
+addEventListener("pointerdown",function(e){wake(e.clientX,e.clientY)},{passive:true});
+addEventListener("touchmove",function(e){var t=e.touches[0];if(t)wake(t.clientX,t.clientY)},{passive:true});
+function frame(now){raf=0;if(!vis)return;
+var r=w.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height*.6,idle=now-last>2600;
+if(idle)setSay(true);
+var tx=0,ty=0,lx=0,ly=0;
+if(has&&!asleep){var dx=mx-cx,dy=my-cy,d=Math.sqrt(dx*dx+dy*dy)||1;
+var k=Math.min(1,d/(r.width*1.1));lx=dx/d*k;ly=dy/d*k;
+var R=r.width*.16,f=Math.min(1,d/(r.width*1.6));tx=dx/d*f*R;ty=dy/d*f*R*.6}
+if(rm){tx=0;ty=0}
+vx+=(tx-px)*.045;vy+=(ty-py)*.045;vx*=.86;vy*=.86;px+=vx;py+=vy;
+var br=rm?0:Math.sin((now-t0)/(asleep?1500:900)),rot=Math.max(-9,Math.min(9,px/r.width*38+vx*.9));
+pet.style.transform="translate("+px.toFixed(2)+"px,"+(py+br*(asleep?2.5:1.5)).toFixed(2)+"px) rotate("+rot.toFixed(2)+"deg) scale("+(1+br*.008).toFixed(4)+","+(1-br*.008).toFixed(4)+")";
+ex+=(lx*14-ex)*.2;ey+=(ly*5-ey)*.2;
+for(var i=0;i<ir.length;i++)ir[i].setAttribute("transform","translate("+ex.toFixed(2)+" "+ey.toFixed(2)+")");
+if(asleep)lidT=1;else{if(now>blinkAt){blinkEnd=now+130;blinkAt=now+2600+Math.random()*3200}lidT=now<blinkEnd?1:0}
+lid+=(lidT-lid)*(asleep?.12:.45);
+for(i=0;i<lids.length;i++){var h=+lids[i].getAttribute("data-h");lids[i].setAttribute("transform","translate(0 "+(-(1-lid)*h).toFixed(1)+")")}
+raf=requestAnimationFrame(frame)}
+function go(){if(!raf&&vis)raf=requestAnimationFrame(frame)}
+if("IntersectionObserver"in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting;go()}).observe(w);
+document.addEventListener("visibilitychange",function(){if(!document.hidden)go()});
+go()})();</script>
+
 </body>
 </html>
