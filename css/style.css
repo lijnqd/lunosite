@@ -324,10 +324,10 @@ button{text-transform:inherit}
 input,textarea{text-transform:none}
 
 /* legal footer column */
-.f-cols>div:nth-child(2){width:300px}
+.f-cols>div:nth-child(3){width:300px}.f-cols .f-pages{width:128px}
 .f-cols .f-legal{margin-left:20px}
 .f-cols .f-legal h4{font-size:32px;line-height:34px;letter-spacing:-.32px;margin-bottom:10px}
-@media (max-width:809px){.f-cols>div:nth-child(2){width:auto}.f-cols .f-legal{margin-left:0}}
+@media (max-width:809px){.f-cols>div:nth-child(3),.f-cols .f-pages{width:auto}.f-cols .f-legal{margin-left:0}}
 
 /* FAQ reveal cards */
 .faq{position:relative}
