@@ -22,7 +22,7 @@
 <link rel="icon" type="image/png" href="/assets/img/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1794848024">
+<link rel="stylesheet" href="/css/style.css?v=1794848860">
 <style>
 .cs{position:relative;z-index:1;max-width:1430px;margin:0 auto;padding:110px 20px 0}
 .cs-back{display:inline-flex;gap:10px;align-items:center;font-size:16px;opacity:.7;margin-bottom:28px}
@@ -103,6 +103,12 @@ html,body{overflow-x:clip}
 @media (hover:hover){.bc:hover{background:var(--pink);color:var(--bg)}.bc:hover time{color:var(--bg)}.bc:hover .pl{background:var(--bg)}.bc:hover .pl:before,.bc:hover .pl:after{background:var(--pink)}}
 @media (max-width:1199px){.blog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:809px){.blog{padding-top:110px}.blog h1{font-size:48px;line-height:52px}.blog-grid{grid-template-columns:1fr}.bc{min-height:250px;padding:20px}.bc h2{font-size:28px;line-height:30px}}
+.blog-filter{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.blog-filter button{font:inherit;font-size:16px;line-height:19px;letter-spacing:-.16px;text-transform:lowercase;color:var(--beige);background:var(--glass);border:0;border-radius:100px;padding:10px 18px;cursor:pointer;transition:background .25s,color .25s}
+.blog-filter button.on{background:var(--pink);color:var(--bg)}
+.blog-filter button:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+@media (hover:hover){.blog-filter button:not(.on):hover{background:rgba(242,231,220,.12)}}
+.blog-filter+.blog-grid{margin-top:16px}.bc[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -121,17 +127,18 @@ html,body{overflow-x:clip}
 
 <main id="content" class="blog">
   <h1>our blog</h1>
+  <div class="blog-filter" role="group" aria-label="filter articles by topic"><button type="button" class="on" aria-pressed="true" data-f="">all</button><button type="button" aria-pressed="false" data-f="branding">branding</button><button type="button" aria-pressed="false" data-f="web design">web design</button><button type="button" aria-pressed="false" data-f="working with a designer">working with a designer</button></div>
   <div class="blog-grid">
-    <a class="bc" href="/blog/how-to-explain-to-a-designer-what-you-want/"><div class="bc-top"><time>nov 5, 2026</time><h2>How to explain to a designer what you want</h2></div><div class="bc-bot"><p>Don’t know how to describe your brand to a designer? 7 simple ways to explain what you want — no design jargon needed.</p><span class="pl" aria-hidden="true"></span></div></a>
-    <a class="bc" href="/blog/what-is-a-brand-guideline/"><div class="bc-top"><time>nov 5, 2026</time><h2>What Is a Brand Guideline and Do You Need One?</h2></div><div class="bc-bot"><p>A brand guideline keeps your logo, colors and fonts consistent everywhere. Here’s what’s inside one and when your business actually needs it.</p><span class="pl" aria-hidden="true"></span></div></a>
-    <a class="bc" href="/blog/logo-vs-brand-identity/"><div class="bc-top"><time>nov 5, 2026</time><h2>Logo vs Brand Identity: What’s the Difference?</h2></div><div class="bc-bot"><p>A logo is one symbol. A brand identity is the whole visual system around it. Here’s the difference — and which one your business really needs.</p><span class="pl" aria-hidden="true"></span></div></a>
-    <a class="bc" href="/blog/brand-identity-package/"><div class="bc-top"><time>nov 5, 2026</time><h2>What’s Included in a Brand Identity Package?</h2></div><div class="bc-bot"><p>Logo, colors, fonts, guideline — what should a brand identity package include? A clear checklist of the essentials, the extras and what to ask before you hire a designer.</p><span class="pl" aria-hidden="true"></span></div></a>
-    <a class="bc" href="/blog/freelancer-vs-design-studio-vs-agency/"><div class="bc-top"><time>nov 5, 2026</time><h2>Freelancer vs Design Studio vs Agency: Who Should Design Your Brand?</h2></div><div class="bc-bot"><p>Freelancer, design studio or agency? An honest comparison of cost, speed, quality and risk — and how to choose the right fit for your brand.</p><span class="pl" aria-hidden="true"></span></div></a>
-    <a class="bc" href="/blog/how-long-does-it-take-to-design-a-website/"><div class="bc-top"><time>nov 5, 2026</time><h2>How Long Does It Take to Design a Website?</h2></div><div class="bc-bot"><p>A landing page takes 2–3 weeks, a full website 1–2 months. Here’s what affects the timeline, what slows projects down and how to launch faster.</p><span class="pl" aria-hidden="true"></span></div></a>
-    <a class="bc" href="/blog/signs-your-website-is-losing-customers/"><div class="bc-top"><time>nov 5, 2026</time><h2>5 Signs Your Website Is Losing You Customers</h2></div><div class="bc-bot"><p>Visitors come, look and leave? Here are 5 signs your website is quietly losing you customers — and simple ways to fix each one.</p><span class="pl" aria-hidden="true"></span></div></a>
-    <a class="bc" href="/blog/can-ai-design-your-logo/"><div class="bc-top"><time>nov 5, 2026</time><h2>Can AI Design Your Logo? What You Get and What You Miss</h2></div><div class="bc-bot"><p>AI logo generators are fast and cheap. But what do you actually get — and what’s missing? An honest look at AI logos vs working with a designer.</p><span class="pl" aria-hidden="true"></span></div></a>
-    <a class="bc" href="/blog/how-to-write-a-design-brief/"><div class="bc-top"><time>nov 5, 2026</time><h2>How to Write a Design Brief (Free Template)</h2></div><div class="bc-bot"><p>A clear design brief saves weeks of back-and-forth. Here’s what to include, common mistakes to avoid and a free copy-paste template.</p><span class="pl" aria-hidden="true"></span></div></a>
-    <a class="bc" href="/blog/why-your-brand-looks-cheap/"><div class="bc-top"><time>nov 5, 2026</time><h2>Why Your Brand Looks Cheaper Than Your Product</h2></div><div class="bc-bot"><p>Great product, but your brand looks cheap? Here are 7 common reasons — from too many fonts to stock photos — and how to make your brand look as good as what you sell.</p><span class="pl" aria-hidden="true"></span></div></a>
+    <a class="bc" data-cat="working with a designer" href="/blog/how-to-explain-to-a-designer-what-you-want/"><div class="bc-top"><time>nov 5, 2026</time><h2>How to explain to a designer what you want</h2></div><div class="bc-bot"><p>Don’t know how to describe your brand to a designer? 7 simple ways to explain what you want — no design jargon needed.</p><span class="pl" aria-hidden="true"></span></div></a>
+    <a class="bc" data-cat="branding" href="/blog/what-is-a-brand-guideline/"><div class="bc-top"><time>nov 5, 2026</time><h2>What Is a Brand Guideline and Do You Need One?</h2></div><div class="bc-bot"><p>A brand guideline keeps your logo, colors and fonts consistent everywhere. Here’s what’s inside one and when your business actually needs it.</p><span class="pl" aria-hidden="true"></span></div></a>
+    <a class="bc" data-cat="branding" href="/blog/logo-vs-brand-identity/"><div class="bc-top"><time>nov 5, 2026</time><h2>Logo vs Brand Identity: What’s the Difference?</h2></div><div class="bc-bot"><p>A logo is one symbol. A brand identity is the whole visual system around it. Here’s the difference — and which one your business really needs.</p><span class="pl" aria-hidden="true"></span></div></a>
+    <a class="bc" data-cat="branding" href="/blog/brand-identity-package/"><div class="bc-top"><time>nov 5, 2026</time><h2>What’s Included in a Brand Identity Package?</h2></div><div class="bc-bot"><p>Logo, colors, fonts, guideline — what should a brand identity package include? A clear checklist of the essentials, the extras and what to ask before you hire a designer.</p><span class="pl" aria-hidden="true"></span></div></a>
+    <a class="bc" data-cat="working with a designer" href="/blog/freelancer-vs-design-studio-vs-agency/"><div class="bc-top"><time>nov 5, 2026</time><h2>Freelancer vs Design Studio vs Agency: Who Should Design Your Brand?</h2></div><div class="bc-bot"><p>Freelancer, design studio or agency? An honest comparison of cost, speed, quality and risk — and how to choose the right fit for your brand.</p><span class="pl" aria-hidden="true"></span></div></a>
+    <a class="bc" data-cat="web design" href="/blog/how-long-does-it-take-to-design-a-website/"><div class="bc-top"><time>nov 5, 2026</time><h2>How Long Does It Take to Design a Website?</h2></div><div class="bc-bot"><p>A landing page takes 2–3 weeks, a full website 1–2 months. Here’s what affects the timeline, what slows projects down and how to launch faster.</p><span class="pl" aria-hidden="true"></span></div></a>
+    <a class="bc" data-cat="web design" href="/blog/signs-your-website-is-losing-customers/"><div class="bc-top"><time>nov 5, 2026</time><h2>5 Signs Your Website Is Losing You Customers</h2></div><div class="bc-bot"><p>Visitors come, look and leave? Here are 5 signs your website is quietly losing you customers — and simple ways to fix each one.</p><span class="pl" aria-hidden="true"></span></div></a>
+    <a class="bc" data-cat="branding" href="/blog/can-ai-design-your-logo/"><div class="bc-top"><time>nov 5, 2026</time><h2>Can AI Design Your Logo? What You Get and What You Miss</h2></div><div class="bc-bot"><p>AI logo generators are fast and cheap. But what do you actually get — and what’s missing? An honest look at AI logos vs working with a designer.</p><span class="pl" aria-hidden="true"></span></div></a>
+    <a class="bc" data-cat="working with a designer" href="/blog/how-to-write-a-design-brief/"><div class="bc-top"><time>nov 5, 2026</time><h2>How to Write a Design Brief (Free Template)</h2></div><div class="bc-bot"><p>A clear design brief saves weeks of back-and-forth. Here’s what to include, common mistakes to avoid and a free copy-paste template.</p><span class="pl" aria-hidden="true"></span></div></a>
+    <a class="bc" data-cat="branding" href="/blog/why-your-brand-looks-cheap/"><div class="bc-top"><time>nov 5, 2026</time><h2>Why Your Brand Looks Cheaper Than Your Product</h2></div><div class="bc-bot"><p>Great product, but your brand looks cheap? Here are 7 common reasons — from too many fonts to stock photos — and how to make your brand look as good as what you sell.</p><span class="pl" aria-hidden="true"></span></div></a>
   </div>
 </main>
 
@@ -212,5 +219,6 @@ addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addE
 <script src="/js/dotmorph.js?v=9" defer></script>
 <script src="/js/track.js?v=1" defer></script>
 <script src="/js/form.js?v=12" defer></script>
+<script>(function(){var bs=document.querySelectorAll(".blog-filter button"),cs=document.querySelectorAll(".blog-grid .bc");[].forEach.call(bs,function(b){b.addEventListener("click",function(){var f=b.getAttribute("data-f");[].forEach.call(bs,function(o){var on=o===b;o.classList.toggle("on",on);o.setAttribute("aria-pressed",on?"true":"false")});[].forEach.call(cs,function(c){c.hidden=!!f&&c.getAttribute("data-cat")!==f})})})})();</script>
 </body>
 </html>

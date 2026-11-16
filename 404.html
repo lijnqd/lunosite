@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self' https://luno-form.dsgn-ys.workers.dev; upgrade-insecure-requests">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="lunö studio">
+<meta property="og:title" content="page not found — lunö studio">
+<meta property="og:description" content="This page doesn’t exist or has moved. Head back to the lunö studio homepage.">
+<meta property="og:image" content="https://designluno.com/assets/img/og-image-v2.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>page not found — lunö studio</title>
 <meta name="description" content="This page doesn’t exist or has moved. Head back to the lunö studio homepage.">
@@ -13,7 +19,7 @@
 <link rel="icon" type="image/png" href="/assets/img/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1794848024">
+<link rel="stylesheet" href="/css/style.css?v=1794848860">
 <style>
 .nf{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:110px 20px 120px;text-align:center;position:relative;z-index:1}
 .nf canvas{display:block;width:min(900px,100%);height:auto;touch-action:none}
@@ -37,10 +43,42 @@
   <p>Looks like this page hasn’t been designed yet, or it vanished into thin air</p>
   <a class="btn btn-pink" href="/"><i></i>back to home</a>
 </main>
+<footer class="footer">
+  <div class="f-cols">
+    <div><p class="f-h">main</p><a href="/#cases">cases</a><a href="/#services">services</a><a href="/#faq">faq</a><a href="/#contacts">contacts</a></div>
+    <div class="f-pages"><p class="f-h">pages</p><a href="/about/">about</a><a href="/blog/">blog</a></div>
+    <div><p class="f-h">contacts</p><a href="mailto:hey.lunostudio@gmail.com">hey.lunostudio@gmail.com</a><a href="https://www.instagram.com/dsgn.luno/" target="_blank" rel="noopener">instagram</a><a href="https://t.me/lijnqd" target="_blank" rel="noopener">telegram</a><a href="https://wa.me/dsgn.luno" target="_blank" rel="noopener">whatsapp</a><a href="https://www.behance.net/dsgn_luno" target="_blank" rel="noopener">behance</a></div>
+    <div class="f-legal"><p class="f-h">legal</p><a href="/privacy/">privacy policy</a><a href="/cookies/">cookie policy</a><a href="#" onclick="window.openCookieSettings&amp;&amp;window.openCookieSettings();return false">cookie settings</a></div>
+  </div>
+  <div class="clock">
+    <svg class="analog" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#E3E3E3"/><g id="ticks" fill="#8a8a8a"><circle cx="50" cy="6" r="2"/><circle cx="94" cy="50" r="2"/><circle cx="50" cy="94" r="2"/><circle cx="6" cy="50" r="2"/></g><line id="hh" x1="50" y1="50" x2="50" y2="26" stroke="#222" stroke-width="3.2" stroke-linecap="round"/><line id="mm" x1="50" y1="50" x2="50" y2="12" stroke="#222" stroke-width="2.4" stroke-linecap="round"/><line id="ss" x1="50" y1="50" x2="50" y2="14" stroke="#FFB3AD" stroke-width="2" stroke-linecap="round"/><circle cx="50" cy="50" r="3.2" fill="#222"/></svg>
+    <div class="digital"><canvas class="time" id="time" width="200" height="56" style="width:100px;height:28px"></canvas><div class="date" id="date"></div></div>
+  </div>
+  <iframe class="f-art" id="fArt" title="" aria-hidden="true" tabindex="-1"></iframe>
+</footer>
 <script src="/js/cookies.js?v=6" defer></script>
 <script src="/js/dotmorph.js?v=9" defer></script>
 <script src="/js/track.js?v=1" defer></script>
 <script src="/js/form.js?v=12" defer></script>
+<script>
+(function(){function $(i){return document.getElementById(i)}
+(function(){var f=document.getElementById('fArt');if(!f)return;function go(){if(!f.src)f.src='/embeds/footer-art.html?v=2'+(innerWidth<810?'&w=1':'')}if('IntersectionObserver'in window){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){o.disconnect();go()}},{rootMargin:'500px'});o.observe(f)}else go()})();
+// clock
+var D=['SUN','MON','TUE','WED','THU','FRI','SAT'],M=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+var G={'0':'01110 10001 10011 10101 11001 10001 01110','1':'00100 01100 00100 00100 00100 00100 01110','2':'01110 10001 00001 00010 00100 01000 11111','3':'11110 00001 00001 01110 00001 00001 11110','4':'00010 00110 01010 10010 11111 00010 00010','5':'11111 10000 11110 00001 00001 10001 01110','6':'00110 01000 10000 11110 10001 10001 01110','7':'11111 00001 00010 00100 01000 01000 01000','8':'01110 10001 10001 01110 10001 10001 01110','9':'01110 10001 10001 01111 00001 00010 01100'};
+function drawTime(hh,mm){var c=$('time'),x=c.getContext('2d');x.clearRect(0,0,200,56);var pitch=8,r=2.8,ox=3,oy=3;
+  function dg(ch,col,cx){G[ch].split(' ').forEach(function(row,ry){for(var k=0;k<5;k++){if(row[k]==='1'){x.fillStyle=col;x.beginPath();x.arc(cx+k*pitch+r,oy+ry*pitch+r,r,0,7);x.fill()}}})}
+  var pk='#FFB3AD',wh='#ffffff';
+  dg(hh[0],pk,ox);dg(hh[1],pk,ox+44);
+  x.fillStyle=pk;[2,4].forEach(function(ry){x.beginPath();x.arc(ox+93,oy+ry*pitch+r,r,0,7);x.fill()});
+  dg(mm[0],wh,ox+104);dg(mm[1],wh,ox+148)}
+function tick(){var n=new Date(),h=n.getHours(),m=n.getMinutes(),s=n.getSeconds();
+  function p(v){return(v<10?'0':'')+v}
+  drawTime(p(h),p(m));$('date').textContent=n.getDate()+' '+M[n.getMonth()]+' '+n.getFullYear()+' | '+D[n.getDay()];
+  $('hh').setAttribute('transform','rotate('+((h%12)*30+m/2)+' 50 50)');$('mm').setAttribute('transform','rotate('+(m*6+s/10)+' 50 50)');$('ss').setAttribute('transform','rotate('+(s*6)+' 50 50)')}
+tick();setInterval(tick,1000);
+})();
+</script>
 <script>
 (function(){
 // background dot glow (same as the main page)
