@@ -19,7 +19,7 @@
 <link rel="icon" type="image/png" href="/assets/img/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1794828407">
+<link rel="stylesheet" href="/css/style.css?v=1794828765">
 <style>
 .cs{position:relative;z-index:1;max-width:1430px;margin:0 auto;padding:110px 20px 0}
 .cs-back{display:inline-flex;gap:10px;align-items:center;font-size:16px;opacity:.7;margin-bottom:28px}
@@ -156,6 +156,13 @@ html,body{overflow-x:clip}
 .pc .copy{display:inline-block;margin-bottom:16px;border:1px solid rgba(255,179,173,.5);color:var(--pink);background:none;border-radius:100px;padding:7px 16px;font:inherit;font-size:14px;cursor:pointer}
 .pc .copy:hover{background:var(--pink);color:var(--bg)}
 .pc ul+ul,.pc p.lbl+ul{margin-top:16px}
+.pc ul.chk li{padding-left:0}.pc ul.chk li:before{display:none}
+.pc ul.chk label{position:relative;display:block;padding-left:34px;cursor:pointer}
+.pc ul.chk input{position:absolute;left:0;top:1px;width:18px;height:18px;margin:0;appearance:none;-webkit-appearance:none;border:1.5px solid var(--pink);border-radius:5px;background:none;cursor:pointer;transition:background .2s}
+.pc ul.chk input:checked{background:var(--pink)}
+.pc ul.chk input:checked:after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--bg);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.pc ul.chk input:focus-visible{outline:2px solid var(--beige);outline-offset:2px}
+.pc ul.chk input:checked+span{opacity:.6}
 </style>
 </head>
 <body>
@@ -182,7 +189,7 @@ html,body{overflow-x:clip}
     <section class="pr"><h2>3. There's no clear next step</h2><div class="pc"><p>Some websites have five different buttons on one screen. Others have none until the very bottom. In both cases, visitors don't know what to do — so they do nothing.</p><p><b>How to check:</b> what is the one action you want visitors to take? Can you find that button within a second on every page?</p><p><b>How to fix it:</b> choose one main action — book a call, get a quote, buy now — and make it the most visible button on the page. Repeat it after key sections, not just at the end.</p></div></section>
     <section class="pr"><h2>4. It's frustrating on a phone</h2><div class="pc"><p>For most businesses, more than half of visitors come from mobile. If text is tiny, buttons are hard to tap, images load slowly or the menu doesn't work — they won't wait.</p><p><b>How to check:</b> open your site on your phone, in a weak signal area. Try to find a price and contact you. Was it easy?</p><p><b>How to fix it:</b> design for mobile first, not as an afterthought. Large readable text, big buttons, compressed images and a simple menu.</p></div></section>
     <section class="pr"><h2>5. Your website looks cheaper than your product</h2><div class="pc"><p>This is the one most owners don't notice. Your product is premium, but the site uses a template, stock photos and random fonts. Visitors judge quality in seconds — and they assume your product is as average as your website.</p><p><b>How to check:</b> put your homepage next to your top three competitors. Would a stranger know which one is the best?</p><p><b>How to fix it:</b> a consistent visual identity — your own colors, typography, real photos and a design that reflects the quality of what you sell. It's often the difference between "just looking" and "I'll take it".</p></div></section>
-    <section class="pr"><h2>Quick self-check</h2><div class="pc"><p>Go through this list with your website open:</p><ul class="chk"><li>A stranger understands what we do within 5 seconds</li><li>There are reviews, cases or other proof before the contact form</li><li>There's one clear main button on every page</li><li>The site is easy to use on a phone</li><li>Our site looks as good as our product — and different from competitors</li></ul><p>If you didn't tick two or more, your website is probably costing you customers right now.</p></div></section>
+    <section class="pr"><h2>Quick self-check</h2><div class="pc"><p>Go through this list with your website open:</p><ul class="chk"><li><label><input type="checkbox"><span>A stranger understands what we do within 5 seconds</span></label></li><li><label><input type="checkbox"><span>There are reviews, cases or other proof before the contact form</span></label></li><li><label><input type="checkbox"><span>There's one clear main button on every page</span></label></li><li><label><input type="checkbox"><span>The site is easy to use on a phone</span></label></li><li><label><input type="checkbox"><span>Our site looks as good as our product — and different from competitors</span></label></li></ul><p>If you didn't tick two or more, your website is probably costing you customers right now.</p></div></section>
     <section class="pr last"><h2>Want a second pair of eyes?</h2><div class="pc"><p>It's hard to see your own website the way a new visitor does. That's why we offer a <b>free 15-minute video review</b>.</p><p>We'll go through your site on video and show you:</p><ul class="bl"><li>what a new visitor sees in the first few seconds</li><li>the 3 biggest things holding your site back</li><li>1 quick fix you can make yourself this week</li></ul><p>No pressure, no sales pitch — just honest feedback from a design studio that builds websites for growing brands.</p><p class="cta"><b><a href="/#contacts">Get your free website review</a></b></p></div></section>
   </article>
 </main>
