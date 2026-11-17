@@ -51,6 +51,7 @@ function draw(t){
    for(var k=0;k<R.cells.length;k++){var c=R.cells[k],px=c.x+ox,py=c.y+oy;if(px<-CW*4||px>W+CW*4)continue;
     var dx=px-lx,dy=py-ly,d2=dx*dx+dy*dy,near=d2<RAD*RAD,ctx=x;
     /* the hovered word and the symbols right around the cursor run apart and come into focus */
+    if(TOUCH)continue; /* touch: no ascii, the tapped word is drawn as clean type */
     if(near||(act>=0&&c.w===act)){ctx=x2;if(near){var d=Math.sqrt(d2)||1,f=1-d/RAD;f*=f;px+=dx/d*f*RAD*.32;py+=dy/d*f*RAD*.32}}
     if(Math.random()<.004)c.c=Math.random()*SYM.length|0;
     if(ctx===x)continue;
@@ -61,7 +62,7 @@ function soft(act,lx,ly,RAD){
  for(var ri=0;ri<rows.length;ri++){var R=rows[ri],by=ri*LH+LH*.74,sw=FS*.42,gap=FS*.42;
   for(var rep=0;rep<2;rep++){var ox=R.pos+rep*R.w;if(ox>W||ox+R.w<0)continue;
    for(var q=0;q<R.parts.length;q++){var P=R.parts[q],X=ox+P.x0;
-    if(X<W&&X+(P.x1-P.x0)>0){if(P.i!==act)x.fillText(D[P.i][0],X,by);else if(TOUCH){x2.save();x2.setTransform(dpr,0,0,dpr,0,0);x2.globalCompositeOperation='destination-over';x2.font=font();x2.textBaseline='alphabetic';x2.fillStyle='rgba(255,179,173,.28)';x2.fillText(D[P.i][0],X,by);x2.restore()}}
+    if(X<W&&X+(P.x1-P.x0)>0){if(P.i!==act)x.fillText(D[P.i][0],X,by);else if(TOUCH){x2.save();x2.setTransform(dpr,0,0,dpr,0,0);x2.globalCompositeOperation='destination-over';x2.font=font();x2.textBaseline='alphabetic';x2.fillStyle='#FFB3AD';x2.fillText(D[P.i][0],X,by);x2.restore()}}
     var sx=ox+P.x1+gap;if(sx<W&&sx+sw>0&&star.naturalWidth)x.drawImage(star,sx,by-sw*1.08,sw,sw)}}}
  if(lx>-999){x.globalCompositeOperation='destination-out';var g=x.createRadialGradient(lx,ly,0,lx,ly,RAD);g.addColorStop(0,'rgba(0,0,0,1)');g.addColorStop(.7,'rgba(0,0,0,.9)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(lx-RAD,ly-RAD,RAD*2,RAD*2);x.globalCompositeOperation='source-over'}}
 function tick(t){if(!vis||!ready){last=0;return}var dt=last?Math.min(.05,(t-last)/1000):0;last=t;
@@ -75,7 +76,7 @@ if(hover){
 }else{
  S.classList.add('touch');
  show(0);
- var tt;cv.addEventListener('click',function(e){var h=hit(e.clientX,e.clientY);if(h<0)return;show(h);mx=e.clientX;my=e.clientY;inside=true;clearTimeout(tt);tt=setTimeout(function(){inside=false;mx=my=-9999},700)});
+ var tt;cv.addEventListener('click',function(e){var h=hit(e.clientX,e.clientY);if(h<0)return;show(h)});
 }
 /* keyboard: hidden buttons, one per direction */
 [].forEach.call(S.querySelectorAll('.exp-keys button'),function(b){b.addEventListener('focus',function(){if(!hover)return;var r=stage.getBoundingClientRect();mx=r.left+r.width/2-200;my=r.top+40;cx=mx-r.left;cy=my-r.top+H/2;show(+b.getAttribute('data-i'));follow()});b.addEventListener('blur',function(){if(hover)hide()})});
