@@ -379,3 +379,33 @@ b,strong,h1,h2,h3,h4,h5,h6,th,label,button,em,i{font-weight:400}
 @media (max-width:809px){.fq.open{height:var(--need,240px);min-height:0}}
 
 .f-cols .f-h{font-weight:400;margin-top:0}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+
+/* expertise: blurred marquee of skills, hover a word -> sharp + pink card */
+.exp{position:relative;z-index:2}
+.exp .label{margin-bottom:24px}
+.exp-stage{position:relative}
+.exp-rows{display:flex;flex-direction:column;width:calc(100vw / var(--dz,1));margin-left:calc(50% - 50vw / var(--dz,1))}
+.exp-row{white-space:nowrap}
+.exp-rows{overflow-x:clip;overflow-y:visible}
+.exp-track{display:inline-flex;animation:expL 60s linear infinite;will-change:transform}
+.exp-row:nth-child(2) .exp-track{animation-name:expR;animation-duration:70s}
+.exp-row:nth-child(3) .exp-track{animation-duration:55s}
+.exp-set{display:inline-flex;align-items:center;flex:none}
+.exp-w,.exp-sep{font:italic 500 clamp(44px,6.9vw,104px)/1.15 Inter,sans-serif;letter-spacing:-.025em;color:var(--pink);text-transform:lowercase}
+.exp-w{background:none;border:0;padding:0 .14em;cursor:default;filter:blur(7px);opacity:.62;transition:filter .35s,opacity .35s,color .35s}
+.exp-sep{padding:0 .1em;filter:blur(7px);opacity:.5}
+.exp-w.on{filter:none;opacity:1;color:var(--beige)}
+.exp-w:focus-visible{outline:2px solid var(--pink);outline-offset:4px;filter:none;opacity:1}
+.exp.active .exp-track,.exp.off .exp-track{animation-play-state:paused}
+.exp-card{position:absolute;left:0;top:0;z-index:3;width:440px;max-width:calc(100vw - 40px);padding:22px 24px 24px;border-radius:12px;background:var(--pink);color:var(--bg);font-family:var(--mono);font-size:15px;line-height:1.35;letter-spacing:-.2px;text-transform:uppercase;pointer-events:none;opacity:0;transition:opacity .2s;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.exp-card.show{opacity:1}
+.exp-t{font-weight:500;padding-bottom:14px;border-bottom:1px dotted rgba(20,20,20,.55);margin-bottom:22px;min-height:1.35em}
+.exp-l{list-style:none;display:flex;flex-direction:column;gap:18px}
+.exp-l li{display:grid;grid-template-columns:38px 1fr;min-height:2.7em}
+.exp-l b{font-weight:500}
+.exp.touch .exp-w{cursor:pointer}
+.exp.touch .exp-card{position:relative;transform:none!important;opacity:1;margin-top:28px;width:auto;max-width:520px}
+@keyframes expL{to{transform:translateX(-50%)}}
+@keyframes expR{from{transform:translateX(-50%)}to{transform:none}}
+@media (max-width:809px){.exp-w,.exp-sep{filter:blur(5px)}.exp-card{font-size:13px;padding:18px}.exp-l li{grid-template-columns:32px 1fr}}
+@media (prefers-reduced-motion:reduce){.exp-track{animation:none}}
