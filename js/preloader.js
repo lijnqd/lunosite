@@ -8,7 +8,7 @@
 var d=document,h=d.documentElement,w=window,ss;try{ss=w.sessionStorage}catch(e){}
 var RM=w.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
 var SYM='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-=/\\|<>?!@[]{}();:.,~^',BG=[20,20,20];
-var TONES=['rgba(242,231,220,.92)','rgba(242,231,220,.5)','rgba(255,179,173,.9)'];
+var TONES=['rgb(255,179,173)','rgba(255,179,173,.62)','rgba(255,179,173,.8)'],B=.2,JT;
 var FONT=function(){return '500 '+FS+'px "Sometype Mono", ui-monospace, monospace'};
 var el=d.getElementById('pre'),cv,x,W,H,dpr,CW,CH,FS,cols,rows,N,nz,ch,tone,LA,MK,mk,MD,ED,raf=0;
 
@@ -29,8 +29,8 @@ function setup(){
  cv=canvas(Math.round(W*dpr),Math.round(H*dpr));el.appendChild(cv);x=cv.getContext('2d');
  FS=W<810?11:13;x.font=FONT();CW=x.measureText('M').width||FS*.6;CH=Math.round(FS*1.2);
  cols=Math.ceil(W/CW);rows=Math.ceil(H/CH);N=cols*rows;
- var a=noiseField(W<810?9:15),b=noiseField(5),i;nz=new Float32Array(N);ch=new Uint8Array(N);tone=new Uint8Array(N);
- for(i=0;i<N;i++){nz[i]=a[i]*.88+b[i]*.12;ch[i]=Math.random()*SYM.length|0;var q=Math.random();tone[i]=q<.04?2:q<.3?1:0}
+ var a=noiseField(W<810?9:15),b=noiseField(5),i;nz=new Float32Array(N);ch=new Uint8Array(N);tone=new Uint8Array(N);JT=new Float32Array(N);
+ for(i=0;i<N;i++){nz[i]=a[i]*.88+b[i]*.12;ch[i]=Math.random()*SYM.length|0;var q=Math.random();tone[i]=q<.15?1:q<.35?2:0;JT[i]=Math.random()*.45}
  /* glyph layer: dark cells with glyphs in a few tones, painted once */
  LA=canvas(cv.width,cv.height);
  var la=LA.getContext('2d'),r,t,c;la.fillStyle='rgb('+BG+')';la.fillRect(0,0,LA.width,LA.height);
@@ -48,7 +48,8 @@ function maskTo(ctx,img){mk.putImageData(img,0,0);ctx.imageSmoothingEnabled=fals
 function draw(k,v,band){
  flicker(Math.max(6,N*.003|0));
  var m=MD.data,e=ED.data,any=0;
- for(var i=0,o=3;i<N;i++,o+=4){var g=v-k[i];m[o]=g>0?255:0;var ed=g>0&&g<band;e[o]=0}
+ /* soft front: cells fade in/out over a band, with a per-cell dither so the edge thins out into single glyphs */
+ for(var i=0,o=3;i<N;i++,o+=4){var a=(v-k[i])/B*1.45-JT[i];m[o]=a<=0?0:a>=1?255:a*255|0;e[o]=0}
  x.globalCompositeOperation='copy';x.drawImage(LA,0,0);x.globalCompositeOperation='destination-in';maskTo(x,MD);
  if(any){x.globalCompositeOperation='source-atop';maskTo(x,ED)}x.globalCompositeOperation='source-over'}
 function keys(ox,oy,dirW){
@@ -64,7 +65,7 @@ function ease(p){return -(Math.cos(Math.PI*p)-1)/2}
 function finish(){h.classList.remove('pre-lock');if(el)el.remove();el=null}
 function reveal(ox,oy){
  var k=keys(ox,oy,.32);
- run(900,function(p){draw(k,1.001-ease(p)*1.002,0)},finish)}
+ run(1000,function(p){draw(k,(1+B)*(1-ease(p)),0)},finish)}
 
 /* ---------- on arrival ---------- */
 var tr=null,first=false;
@@ -96,7 +97,7 @@ d.addEventListener('click',function(e){
  try{ss&&ss.setItem('luno_tr',(ox/innerWidth).toFixed(3)+','+(oy/innerHeight).toFixed(3))}catch(err){}
  setup();var k=keys(ox,oy,.62);
  var gone=false,nav=function(){if(gone)return;gone=true;location.href=u.href};
- run(700,function(p){draw(k,ease(p)*1.001,0)},nav);setTimeout(nav,1400)},false);
+ run(800,function(p){draw(k,(1+B)*ease(p),0)},nav);setTimeout(nav,1400)},false);
 /* back/forward cache: never come back to a covered screen */
 w.addEventListener('pageshow',function(e){if(e.persisted){busy=false;cancelAnimationFrame(raf);h.classList.remove('pre-lock');var p=d.getElementById('pre');if(p)p.remove();el=null}});
 })();
