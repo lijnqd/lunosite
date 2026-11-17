@@ -25,11 +25,11 @@
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="/assets/img/about-cover.webp" imagesrcset="/assets/img/about-cover-640.webp 640w, /assets/img/about-cover-1000.webp 1000w, /assets/img/about-cover.webp 2000w" imagesizes="(max-width:809px) 50vw, 100vw" fetchpriority="high">
-<link rel="stylesheet" href="/css/style.css?v=1794922411">
+<link rel="stylesheet" href="/css/style.css?v=1794922535">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About lunö studio","url":"https://designluno.com/about/","description":"design studio that gives visuals a meaning: brand identities, websites and digital products for startups and growing businesses, from idea to interface."}</script>
 <style>
 .ab{padding-top:72px}
-.ab-hero{position:relative;height:646px;margin:0 20px;border-radius:28px;overflow:hidden}
+.ab-hero{position:relative;height:646px;margin:0 20px;border-radius:var(--r);overflow:hidden}
 .ab-hero:before{content:"";position:absolute;inset:0;z-index:1;background:rgba(242,231,220,.05);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .ab-hero>*:not(.ab-cover){z-index:2}
 .ab-cover{position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;pointer-events:none}
@@ -58,7 +58,7 @@
 .ab-feel h3{font-size:24px;line-height:24px;letter-spacing:-.24px;font-weight:400;max-width:254px}
 .ab-feel p{font-size:18px;line-height:21.6px;letter-spacing:-.18px;max-width:323px;padding-right:12px}
 .ab-skills{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:32px}
-.ab-sk{position:relative;height:330px;border-radius:20px;background:rgba(242,231,220,.05);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);padding:20px 18px}
+.ab-sk{position:relative;height:330px;border-radius:var(--r);background:rgba(242,231,220,.05);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);padding:20px 18px}
 .ab-sk h3{font-size:32px;line-height:25.6px;letter-spacing:-.32px;font-weight:400;padding-left:2px}
 .ab-sk .cols{position:absolute;left:18px;right:18px;bottom:20px;display:flex;gap:16px;align-items:flex-end}
 .ab-sk ul{list-style:none;width:209px;display:flex;flex-direction:column;gap:16px}
@@ -84,7 +84,7 @@
 .ab-face{position:absolute;left:50%;top:50%;height:66%;width:auto;aspect-ratio:1110/1125;transform:translate(-50%,-50%);pointer-events:none}
 .pet{position:absolute;inset:0;will-change:transform;transform-origin:50% 85%}
 .pet-svg{display:block;width:100%;height:100%;overflow:visible}
-.pet-say{position:absolute;left:79%;bottom:76%;padding:10px 16px;border-radius:18px 18px 18px 4px;background:var(--pink);color:var(--bg);font-size:16px;line-height:19px;letter-spacing:-.16px;white-space:nowrap;text-transform:none;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s}
+.pet-say{position:absolute;left:79%;bottom:76%;padding:10px 16px;border-radius:var(--r) var(--r) var(--r) 4px;background:var(--pink);color:var(--bg);font-size:16px;line-height:19px;letter-spacing:-.16px;white-space:nowrap;text-transform:none;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s}
 .pet-say.pop{transform:scale(.9)}
 @media (max-width:1199px){.ab-face{left:62%;top:44%;height:62%}}
 @media (max-width:809px){.ab-face{left:44%;top:84px;height:auto;width:min(60%,250px);transform:translateX(-50%)}.pet-say{left:74%;bottom:80%;font-size:14px;padding:8px 13px}}
@@ -281,7 +281,7 @@ function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;draw()}
 function draw(){x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);if(mx<0)return;var sy=scrollY,y0=30-(sy%60);for(var y=y0;y<H+4;y+=60){for(var px=30;px<W+4;px+=60){var d=Math.hypot(px-mx,y-my);if(d>170)continue;var t=1-d/170,a=.75*t*t;x.fillStyle='rgba(255,179,173,'+(.4*a).toFixed(3)+')';x.beginPath();x.arc(px,y,2.2,0,6.283);x.fill()}}}
 addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addEventListener('scroll',draw,{passive:true});addEventListener('resize',size);size()})();
 </script>
-<script src="/js/cookies.js?v=6" defer></script>
+<script src="/js/cookies.js?v=6r" defer></script>
 <script src="/js/dotmorph.js?v=9" defer></script>
 <script src="/js/track.js?v=1" defer></script>
 <script src="/js/form.js?v=13" defer></script>
