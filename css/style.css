@@ -409,13 +409,12 @@ b,strong,h1,h2,h3,h4,h5,h6,th,label,button,em,i{font-weight:400}
 @media (max-width:809px){.exp-w,.exp-sep{filter:blur(4px)}.exp-card{font-size:13px;padding:18px}.exp-l li{grid-template-columns:32px 1fr}}
 
 /* expertise on touch screens: horizontal tab list + card under it */
-.exp.touch .exp-rows{display:none}
 .exp.touch .exp-keys{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;width:100vw;margin-left:calc(50% - 50vw);padding:0 var(--g,16px) 4px;scroll-padding:0 var(--g,16px);scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .exp.touch .exp-keys::-webkit-scrollbar{display:none}
 .exp-keys button{flex:none;scroll-snap-align:start;display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:150px;padding:14px 16px;border-radius:var(--r);border:1px solid rgba(242,231,220,.12);background:var(--glass);color:var(--beige);font:400 17px/1.15 Inter,sans-serif;letter-spacing:-.17px;text-transform:lowercase;text-align:left;transition:background .25s,color .25s,border-color .25s}
 .exp-keys button i{font:500 12px/1 var(--mono);font-style:normal;color:var(--pink);letter-spacing:0}
 .exp-keys button.on{background:var(--pink);border-color:var(--pink);color:var(--bg)}
 .exp-keys button.on i{color:var(--bg)}
-.exp.touch .exp-card{margin-top:12px;max-width:none}
+.exp.touch .exp-card{margin-top:4px;max-width:none}
 
 @media (max-width:809px){:root{--r:12px}}

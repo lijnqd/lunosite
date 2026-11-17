@@ -3,7 +3,7 @@ window.LUNO_EXP=[["brand identity", ["building a brand people recognize before t
 var S=document.querySelector('.exp');if(!S)return;
 var D=window.LUNO_EXP,stage=S.querySelector('.exp-stage'),cv=S.querySelector('.exp-cv'),x=cv.getContext('2d'),cv2=S.querySelector('.exp-cv2'),x2=cv2.getContext('2d'),card=S.querySelector('.exp-card'),T=card.querySelector('.exp-t'),L=card.querySelectorAll('.exp-l span');
 var hover=matchMedia('(hover:hover) and (pointer:fine)').matches,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
-var ROWS=[[0,1,2],[3,4,5],[6,7,8]],SYM='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+=<>/?',PINK='255,179,173';
+var TOUCH=!matchMedia('(hover:hover) and (pointer:fine)').matches,ROWS=TOUCH?[[0,1,2,3,4,5,6,7,8]]:[[0,1,2],[3,4,5],[6,7,8]],SYM='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+=<>/?',PINK='255,179,173';
 var W,H,dpr,FS,LH,CW,CHh,rows=[],star=new Image(),ready=false,cur=-1,timers=[],mx=-9999,my=-9999,inside=false,cx=0,cy=0,raf=0;
 star.src='/assets/svg/star.svg';
 /* glyph atlas: every symbol in 2 pink tones */
@@ -14,7 +14,7 @@ function atlas(){var g=Math.ceil(CW*dpr),h=Math.ceil(CHh*dpr);AT=document.create
 function font(){return 'italic 700 '+FS+'px Inter, sans-serif'}
 /* lay out one set per row on an offscreen canvas, sample it into ascii cells */
 function build(){
- W=cv.parentNode.clientWidth;dpr=Math.min(2,devicePixelRatio||1);FS=W<810?Math.max(60,W*.17):Math.max(72,Math.min(120,W*.072));LH=Math.round(FS*1.4);H=LH*3;
+ W=cv.parentNode.clientWidth;dpr=Math.min(2,devicePixelRatio||1);FS=W<810?Math.max(38,W*.11):Math.max(72,Math.min(120,W*.072));LH=Math.round(FS*1.4);H=LH*ROWS.length;
  CW=W<810?2.9:3.9;CHh=W<810?4.2:5.6;
  cv.width=cv2.width=W*dpr;cv.height=cv2.height=H*dpr;cv.style.height=cv2.style.height=H+'px';atlas();
  var o=document.createElement('canvas'),ox=o.getContext('2d');rows=[];
@@ -26,7 +26,7 @@ function build(){
   var dat=ox.getImageData(0,0,o.width,o.height).data,cells=[];
   for(var yy=CHh/2;yy<LH;yy+=CHh)for(var xx=CW/2;xx<o.width;xx+=CW){var a=dat[((yy|0)*o.width+(xx|0))*4+3];if(a>120)cells.push({x:xx-CW/2,y:yy-CHh/2,c:Math.random()*SYM.length|0,t:Math.random()<.12?1:0,w:wordAt(parts,xx)})}
   rows.push({w:w,parts:parts,cells:cells,pos:0})});
- rows[1].pos=-rows[1].w;ready=true}
+ if(rows[1])rows[1].pos=-rows[1].w;ready=true}
 function wordAt(parts,px){for(var k=0;k<parts.length;k++)if(px>=parts[k].x0-4&&px<=parts[k].x1+4)return parts[k].i;return -1}
 /* card */
 var G='abcdefghijklmnopqrstuvwxyz0123456789';
@@ -45,12 +45,13 @@ var dir=[-1,1,-1],base=[34,28,40],boost=0,lastY=scrollY,vis=true,last=0;
 addEventListener('scroll',function(){var dy=Math.abs(scrollY-lastY);lastY=scrollY;boost=Math.min(boost+dy*3.5,700)},{passive:true});
 function draw(t){
  x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,cv.width,cv.height);x2.setTransform(1,0,0,1,0,0);x2.clearRect(0,0,cv2.width,cv2.height);
-  var r=cv.getBoundingClientRect(),lx=mx-r.left,ly=my-r.top,RAD=W<810?60:95,act=inside?cur:-1,gw=AG.w,gh=AG.h;
+  var r=cv.getBoundingClientRect(),lx=mx-r.left,ly=my-r.top,RAD=W<810?60:95,act=(inside||TOUCH)?cur:-1,gw=AG.w,gh=AG.h;
  for(var ri=0;ri<rows.length;ri++){var R=rows[ri],oy=ri*LH;
   for(var rep=0;rep<2;rep++){var ox=R.pos+rep*R.w;if(ox>W||ox+R.w<0)continue;
    for(var k=0;k<R.cells.length;k++){var c=R.cells[k],px=c.x+ox,py=c.y+oy;if(px<-CW*4||px>W+CW*4)continue;
     var dx=px-lx,dy=py-ly,d2=dx*dx+dy*dy,near=d2<RAD*RAD,ctx=x;
     /* the hovered word and the symbols right around the cursor run apart and come into focus */
+    if(TOUCH&&c.w===act)continue;
     if(near||(act>=0&&c.w===act)){ctx=x2;if(near){var d=Math.sqrt(d2)||1,f=1-d/RAD;f*=f;px+=dx/d*f*RAD*.32;py+=dy/d*f*RAD*.32}}
     if(Math.random()<.004)c.c=Math.random()*SYM.length|0;
     if(ctx===x)continue;
@@ -61,7 +62,7 @@ function soft(act,lx,ly,RAD){
  for(var ri=0;ri<rows.length;ri++){var R=rows[ri],by=ri*LH+LH*.74,sw=FS*.42,gap=FS*.42;
   for(var rep=0;rep<2;rep++){var ox=R.pos+rep*R.w;if(ox>W||ox+R.w<0)continue;
    for(var q=0;q<R.parts.length;q++){var P=R.parts[q],X=ox+P.x0;
-    if(P.i!==act&&X<W&&X+(P.x1-P.x0)>0)x.fillText(D[P.i][0],X,by);
+    if(X<W&&X+(P.x1-P.x0)>0){if(P.i!==act)x.fillText(D[P.i][0],X,by);else if(TOUCH){x2.setTransform(dpr,0,0,dpr,0,0);x2.font=font();x2.textBaseline='alphabetic';x2.fillStyle='#FFB3AD';x2.fillText(D[P.i][0],X,by)}}
     var sx=ox+P.x1+gap;if(sx<W&&sx+sw>0&&star.naturalWidth)x.drawImage(star,sx,by-sw*1.08,sw,sw)}}}
  if(lx>-999){x.globalCompositeOperation='destination-out';var g=x.createRadialGradient(lx,ly,0,lx,ly,RAD);g.addColorStop(0,'rgba(0,0,0,1)');g.addColorStop(.7,'rgba(0,0,0,.9)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(lx-RAD,ly-RAD,RAD*2,RAD*2);x.globalCompositeOperation='source-over'}}
 function tick(t){if(!vis||!ready){last=0;return}var dt=last?Math.min(.05,(t-last)/1000):0;last=t;
@@ -74,11 +75,7 @@ if(hover){
  stage.addEventListener('pointerleave',function(){inside=false;mx=my=-9999;hide()});
 }else{
  S.classList.add('touch');
- var keys=S.querySelector('.exp-keys'),kb=keys.querySelectorAll('button');keys.classList.remove('sr');
- function gut(){keys.style.setProperty('--g',Math.max(8,Math.round(stage.getBoundingClientRect().left))+'px')}gut();addEventListener('resize',gut);
- function pick(i){show(i);[].forEach.call(kb,function(b){var on=+b.getAttribute('data-i')===i;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);if(on)b.scrollIntoView({inline:'start',block:'nearest',behavior:'smooth'})})}
- [].forEach.call(kb,function(b){b.addEventListener('click',function(){pick(+b.getAttribute('data-i'))})});
- pick(0);
+ show(0);
  cv.addEventListener('click',function(e){var h=hit(e.clientX,e.clientY);if(h>=0)show(h)});
 }
 /* keyboard: hidden buttons, one per direction */
