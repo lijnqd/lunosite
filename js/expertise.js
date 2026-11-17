@@ -14,8 +14,8 @@ function atlas(){var g=Math.ceil(CW*dpr),h=Math.ceil(CHh*dpr);AT=document.create
 function font(){return 'italic 700 '+FS+'px Inter, sans-serif'}
 /* lay out one set per row on an offscreen canvas, sample it into ascii cells */
 function build(){
- W=cv.parentNode.clientWidth;dpr=Math.min(2,devicePixelRatio||1);FS=W<810?Math.max(28,W*.08):Math.max(72,Math.min(120,W*.072));LH=Math.round(FS*1.4);H=LH*ROWS.length;
- CW=W<810?2.4:3.9;CHh=W<810?3.6:5.6;
+ W=cv.parentNode.clientWidth;dpr=Math.min(2,devicePixelRatio||1);FS=W<810?Math.max(30,W*.09):Math.max(72,Math.min(120,W*.072));LH=Math.round(FS*1.4);H=LH*ROWS.length;
+ CW=W<810?2.6:3.9;CHh=W<810?3.9:5.6;
  cv.width=cv2.width=W*dpr;cv.height=cv2.height=H*dpr;cv.style.height=cv2.style.height=H+'px';atlas();
  var o=document.createElement('canvas'),ox=o.getContext('2d');rows=[];
  ROWS.forEach(function(ids){
@@ -45,7 +45,7 @@ var dir=[-1,1,-1],base=[34,28,40],boost=0,lastY=scrollY,vis=true,last=0;
 addEventListener('scroll',function(){var dy=Math.abs(scrollY-lastY);lastY=scrollY;boost=Math.min(boost+dy*3.5,700)},{passive:true});
 function draw(t){
  x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,cv.width,cv.height);x2.setTransform(1,0,0,1,0,0);x2.clearRect(0,0,cv2.width,cv2.height);
-  var r=cv.getBoundingClientRect(),lx=mx-r.left,ly=my-r.top,RAD=W<810?60:95,act=(inside||TOUCH)?cur:-1,gw=AG.w,gh=AG.h;
+  var r=cv.getBoundingClientRect(),lx=mx-r.left,ly=my-r.top,RAD=W<810?40:95,act=(inside||TOUCH)?cur:-1,gw=AG.w,gh=AG.h;
  for(var ri=0;ri<rows.length;ri++){var R=rows[ri],oy=ri*LH;
   for(var rep=0;rep<2;rep++){var ox=R.pos+rep*R.w;if(ox>W||ox+R.w<0)continue;
    for(var k=0;k<R.cells.length;k++){var c=R.cells[k],px=c.x+ox,py=c.y+oy;if(px<-CW*4||px>W+CW*4)continue;
@@ -61,7 +61,7 @@ function soft(act,lx,ly,RAD){
  for(var ri=0;ri<rows.length;ri++){var R=rows[ri],by=ri*LH+LH*.74,sw=FS*.42,gap=FS*.42;
   for(var rep=0;rep<2;rep++){var ox=R.pos+rep*R.w;if(ox>W||ox+R.w<0)continue;
    for(var q=0;q<R.parts.length;q++){var P=R.parts[q],X=ox+P.x0;
-    if(X<W&&X+(P.x1-P.x0)>0){if(P.i!==act)x.fillText(D[P.i][0],X,by);}
+    if(X<W&&X+(P.x1-P.x0)>0){if(P.i!==act)x.fillText(D[P.i][0],X,by);else if(TOUCH){x2.save();x2.setTransform(dpr,0,0,dpr,0,0);x2.globalCompositeOperation='destination-over';x2.font=font();x2.textBaseline='alphabetic';x2.fillStyle='rgba(255,179,173,.28)';x2.fillText(D[P.i][0],X,by);x2.restore()}}
     var sx=ox+P.x1+gap;if(sx<W&&sx+sw>0&&star.naturalWidth)x.drawImage(star,sx,by-sw*1.08,sw,sw)}}}
  if(lx>-999){x.globalCompositeOperation='destination-out';var g=x.createRadialGradient(lx,ly,0,lx,ly,RAD);g.addColorStop(0,'rgba(0,0,0,1)');g.addColorStop(.7,'rgba(0,0,0,.9)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(lx-RAD,ly-RAD,RAD*2,RAD*2);x.globalCompositeOperation='source-over'}}
 function tick(t){if(!vis||!ready){last=0;return}var dt=last?Math.min(.05,(t-last)/1000):0;last=t;
@@ -75,7 +75,7 @@ if(hover){
 }else{
  S.classList.add('touch');
  show(0);
- var tt;cv.addEventListener('click',function(e){var h=hit(e.clientX,e.clientY);if(h<0)return;show(h);mx=e.clientX;my=e.clientY;inside=true;clearTimeout(tt);tt=setTimeout(function(){inside=false;mx=my=-9999},1400)});
+ var tt;cv.addEventListener('click',function(e){var h=hit(e.clientX,e.clientY);if(h<0)return;show(h);mx=e.clientX;my=e.clientY;inside=true;clearTimeout(tt);tt=setTimeout(function(){inside=false;mx=my=-9999},700)});
 }
 /* keyboard: hidden buttons, one per direction */
 [].forEach.call(S.querySelectorAll('.exp-keys button'),function(b){b.addEventListener('focus',function(){if(!hover)return;var r=stage.getBoundingClientRect();mx=r.left+r.width/2-200;my=r.top+40;cx=mx-r.left;cy=my-r.top+H/2;show(+b.getAttribute('data-i'));follow()});b.addEventListener('blur',function(){if(hover)hide()})});

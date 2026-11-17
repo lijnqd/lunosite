@@ -415,6 +415,6 @@ b,strong,h1,h2,h3,h4,h5,h6,th,label,button,em,i{font-weight:400}
 .exp-keys button i{font:500 12px/1 var(--mono);font-style:normal;color:var(--pink);letter-spacing:0}
 .exp-keys button.on{background:var(--pink);border-color:var(--pink);color:var(--bg)}
 .exp-keys button.on i{color:var(--bg)}
-.exp.touch .exp-card{margin-top:4px;max-width:none}
+.exp.touch .exp-card{margin-top:28px;max-width:none}
 
 @media (max-width:809px){:root{--r:12px}}
