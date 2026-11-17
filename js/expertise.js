@@ -26,6 +26,19 @@ if(hover){
  S.classList.add('touch');show(0);
  S.addEventListener('click',function(e){var w=e.target.closest('.exp-w');if(w)show(+w.getAttribute('data-i'))});
 }
-/* pause the marquee while it is off screen */
-if('IntersectionObserver'in window)new IntersectionObserver(function(e){S.classList.toggle('off',!e[0].isIntersecting)}).observe(S);
+/* marquee: steady drift, speeds up with scroll velocity, keeps moving on hover */
+var rows=S.querySelectorAll('.exp-track'),pos=[0,0,0],dir=[-1,1,-1],base=[34,28,40],boost=0,lastY=scrollY,vis=true,last=0,inside=false;
+if('IntersectionObserver'in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis)requestAnimationFrame(tick)}).observe(S);
+addEventListener('scroll',function(){var dy=Math.abs(scrollY-lastY);lastY=scrollY;boost=Math.min(boost+dy*14,2600)},{passive:true});
+if(hover){stage.addEventListener('pointerenter',function(){inside=true});stage.addEventListener('pointerleave',function(){inside=false})}
+function tick(t){if(!vis){last=0;return}var dt=last?Math.min(.05,(t-last)/1000):0;last=t;
+ if(!RM){var sp=boost;boost*=Math.pow(.04,dt);
+  for(var i=0;i<rows.length;i++){var wd=rows[i].firstElementChild.offsetWidth;if(!wd)continue;
+   pos[i]+=dir[i]*(base[i]+sp)*dt;if(pos[i]<=-wd)pos[i]+=wd;if(pos[i]>0)pos[i]-=wd;
+   rows[i].style.transform='translate3d('+pos[i].toFixed(1)+'px,0,0)'}}
+ /* words slide under a still cursor: keep the active word in sync */
+ if(hover&&inside){var el=document.elementFromPoint(mx,my),w=el&&el.closest&&el.closest('.exp-w');if(w)show(+w.getAttribute('data-i'))}
+ requestAnimationFrame(tick)}
+for(var i=0;i<rows.length;i++)if(dir[i]>0)pos[i]=-(rows[i].firstElementChild.offsetWidth||0);
+requestAnimationFrame(tick);
 })();
