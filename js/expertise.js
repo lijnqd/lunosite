@@ -9,7 +9,7 @@ function scramble(el,txt,delay){var n=txt.length,st=0,id;el.textContent='';
  id=setTimeout(function step(){st+=Math.max(2,n/14|0);var o='';for(var i=0;i<n;i++)o+=i<st?txt[i]:(txt[i]===' '?' ':(i<st+6?G[Math.random()*G.length|0]:''));el.textContent=o;if(st<n)timers.push(setTimeout(step,28))},delay);timers.push(id)}
 function show(i){if(i===cur)return;cur=i;timers.forEach(clearTimeout);timers=[];
  [].forEach.call(words,function(w){w.classList.toggle('on',+w.getAttribute('data-i')===i)});
- scramble(T,'::'+D[i][0]+'::',0);for(var k=0;k<3;k++)scramble(L[k],D[i][1][k],60+k*90);
+ scramble(T,D[i][0],0);for(var k=0;k<3;k++)scramble(L[k],D[i][1][k],60+k*90);
  card.classList.add('show');S.classList.add('active')}
 function hide(){cur=-1;card.classList.remove('show');S.classList.remove('active');[].forEach.call(words,function(w){w.classList.remove('on')})}
 function follow(){var r=stage.getBoundingClientRect(),w=card.offsetWidth,h=card.offsetHeight,tx=mx-r.left+24,ty=my-r.top+24;
@@ -29,7 +29,7 @@ if(hover){
 /* marquee: steady drift, speeds up with scroll velocity, keeps moving on hover */
 var rows=S.querySelectorAll('.exp-track'),pos=[0,0,0],dir=[-1,1,-1],base=[34,28,40],boost=0,lastY=scrollY,vis=true,last=0,inside=false;
 if('IntersectionObserver'in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis)requestAnimationFrame(tick)}).observe(S);
-addEventListener('scroll',function(){var dy=Math.abs(scrollY-lastY);lastY=scrollY;boost=Math.min(boost+dy*14,2600)},{passive:true});
+addEventListener('scroll',function(){var dy=Math.abs(scrollY-lastY);lastY=scrollY;boost=Math.min(boost+dy*3.5,700)},{passive:true});
 if(hover){stage.addEventListener('pointerenter',function(){inside=true});stage.addEventListener('pointerleave',function(){inside=false})}
 function tick(t){if(!vis){last=0;return}var dt=last?Math.min(.05,(t-last)/1000):0;last=t;
  if(!RM){var sp=boost;boost*=Math.pow(.04,dt);
