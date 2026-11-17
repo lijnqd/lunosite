@@ -309,9 +309,15 @@ main{padding-top:66px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* preloader */
-#pre{position:fixed;inset:0;z-index:1000;background:#141414;pointer-events:none}
+#pre{position:fixed;inset:0;z-index:1000;background:#141414;transition:opacity .6s ease}
 #pre canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-#pre.on{background:transparent}
+#pre.done{opacity:0;pointer-events:none}
+#pre .pc{position:absolute;left:20px;top:20px;display:flex;align-items:center;gap:12px;padding:10px 16px 10px 14px;border-radius:12px;background:#141414;border:1px solid rgba(255,179,173,.25);font-family:"Sometype Mono",ui-monospace,monospace;font-size:28px;line-height:1;letter-spacing:-.5px;color:#F2E7DC;font-variant-numeric:tabular-nums}
+#pre .pi{display:grid;grid-template-columns:repeat(4,5px);align-items:end;gap:2px;height:20px}
+#pre .pi b{display:block;width:5px;background:#FFB3AD;height:5px;transition:height .18s}
+#pre .pc[data-n="0"] .pi b:nth-child(1),#pre .pc[data-n="1"] .pi b:nth-child(2),#pre .pc[data-n="2"] .pi b:nth-child(3),#pre .pc[data-n="3"] .pi b:nth-child(4){height:20px}
+#pre .pc[data-n="0"] .pi b:nth-child(2),#pre .pc[data-n="1"] .pi b:nth-child(3),#pre .pc[data-n="2"] .pi b:nth-child(4),#pre .pc[data-n="3"] .pi b:nth-child(1){height:12px}
+@media (max-width:809px){#pre .pc{left:16px;top:16px;font-size:22px;padding:8px 12px}}
 html.pre-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){#pre{display:none}}
 
