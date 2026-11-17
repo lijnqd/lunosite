@@ -384,7 +384,9 @@ b,strong,h1,h2,h3,h4,h5,h6,th,label,button,em,i{font-weight:400}
 .exp{position:relative;z-index:2}
 .exp .label{margin-bottom:24px}
 .exp-stage{position:relative}
-.exp-rows{display:flex;flex-direction:column;width:calc(100vw / var(--dz,1));margin-left:calc(50% - 50vw / var(--dz,1))}
+.exp-rows{width:calc(100vw / var(--dz,1));margin-left:calc(50% - 50vw / var(--dz,1))}
+.exp-cv{display:block;width:100%}
+.exp.touch .exp-cv{cursor:pointer}
 .exp-row{white-space:nowrap}
 .exp-rows{overflow-x:clip;overflow-y:visible}
 .exp-track{display:inline-flex;will-change:transform}

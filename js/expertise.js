@@ -1,44 +1,77 @@
 window.LUNO_EXP=[["brand identity", ["building a brand people recognize before they read the name", "turning your story into logo, color and type that work together", "giving you clear rules, so the brand stays consistent everywhere"]], ["visual meaning", ["finding the idea behind the brand before choosing how it looks", "making every color, shape and symbol mean something", "designing visuals that explain your product, not just decorate it"]], ["digital ascii", ["building brand graphics out of letters, glyphs and code", "creating interactive ascii art that reacts to people", "making your brand look like nothing else in the feed"]], ["websites", ["designing sites that tell visitors what you do in five seconds", "building clear structure from the first screen to the contact form", "turning visitors into clients, not just impressing them"]], ["ux/ui", ["researching how people really use your product", "simplifying complex flows into clear, calm interfaces", "testing ideas early, before they cost you money"]], ["design systems", ["collecting every button, color and style into one library", "helping your team design faster and stay consistent", "building a system that grows with the product"]], ["development", ["building fast, responsive sites pixel-perfect from the design", "adding micro-interactions that make the site feel alive", "taking care of seo, analytics and launch"]], ["art direction", ["setting one visual direction for photo, type and layout", "keeping campaigns and launches recognizable", "guiding photographers, illustrators and developers"]], ["brand strategy", ["defining who you are for and why they should care", "shaping positioning, tone of voice and key messages", "connecting business goals to design decisions"]]];
 (function(){
 var S=document.querySelector('.exp');if(!S)return;
-var D=window.LUNO_EXP,card=S.querySelector('.exp-card'),stage=S.querySelector('.exp-stage'),T=card.querySelector('.exp-t'),L=card.querySelectorAll('.exp-l span');
-var words=S.querySelectorAll('.exp-w'),hover=matchMedia('(hover:hover) and (pointer:fine)').matches,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
-var G='abcdefghijklmnopqrstuvwxyz0123456789#$%&*+=<>/',cur=-1,raf=0,mx=0,my=0,cx=0,cy=0,run=0,timers=[];
-function scramble(el,txt,delay){var n=txt.length,st=0,id;el.textContent='';
- if(RM){el.textContent=txt;return}
- id=setTimeout(function step(){st+=Math.max(2,n/14|0);var o='';for(var i=0;i<n;i++)o+=i<st?txt[i]:(txt[i]===' '?' ':(i<st+6?G[Math.random()*G.length|0]:''));el.textContent=o;if(st<n)timers.push(setTimeout(step,28))},delay);timers.push(id)}
+var D=window.LUNO_EXP,stage=S.querySelector('.exp-stage'),cv=S.querySelector('.exp-cv'),x=cv.getContext('2d'),card=S.querySelector('.exp-card'),T=card.querySelector('.exp-t'),L=card.querySelectorAll('.exp-l span');
+var hover=matchMedia('(hover:hover) and (pointer:fine)').matches,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var ROWS=[[0,1,2],[3,4,5],[6,7,8]],SYM='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+=<>/?',PINK='255,179,173';
+var W,H,dpr,FS,LH,CW,CHh,rows=[],star=new Image(),ready=false,cur=-1,timers=[],mx=-9999,my=-9999,inside=false,cx=0,cy=0,raf=0;
+star.src='/assets/svg/star.svg';
+/* glyph atlas: every symbol in 2 pink tones */
+var AT,AG;
+function atlas(){var g=Math.ceil(CW*dpr),h=Math.ceil(CHh*dpr);AT=document.createElement('canvas');AT.width=g*SYM.length;AT.height=h*2;AG={w:g,h:h};
+ var a=AT.getContext('2d');a.scale(dpr,dpr);a.font='500 '+(CHh*1.02)+'px "Sometype Mono", monospace';a.textBaseline='top';
+ ['rgba('+PINK+',1)','rgba('+PINK+',.55)'].forEach(function(c,t){a.fillStyle=c;for(var j=0;j<SYM.length;j++)a.fillText(SYM[j],j*CW,t*CHh)})}
+function font(){return 'italic 900 '+FS+'px Inter, sans-serif'}
+/* lay out one set per row on an offscreen canvas, sample it into ascii cells */
+function build(){
+ W=cv.parentNode.clientWidth;dpr=Math.min(2,devicePixelRatio||1);FS=W<810?Math.max(92,W*.26):Math.max(110,Math.min(170,W*.11));LH=Math.round(FS*1.08);H=LH*3;
+ CW=W<810?3.4:5;CHh=W<810?5:7.2;
+ cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+'px';atlas();
+ var o=document.createElement('canvas'),ox=o.getContext('2d');rows=[];
+ ROWS.forEach(function(ids){
+  ox.font=font();var gap=FS*.42,sw=FS*.42,parts=[],w=0;
+  ids.forEach(function(i){var tw=ox.measureText(D[i][0]).width;parts.push({i:i,x0:w,x1:w+tw});w+=tw+gap+sw+gap});
+  o.width=Math.ceil(w)+4;o.height=LH;ox.font=font();ox.textBaseline='alphabetic';ox.fillStyle='#000';
+  parts.forEach(function(p){ox.fillText(D[p.i][0],p.x0,LH*.8);if(star.complete&&star.naturalWidth)ox.drawImage(star,p.x1+gap,LH*.8-sw*1.08,sw,sw)});
+  var dat=ox.getImageData(0,0,o.width,o.height).data,cells=[];
+  for(var yy=CHh/2;yy<LH;yy+=CHh)for(var xx=CW/2;xx<o.width;xx+=CW){var a=dat[((yy|0)*o.width+(xx|0))*4+3];if(a>120)cells.push({x:xx-CW/2,y:yy-CHh/2,c:Math.random()*SYM.length|0,t:Math.random()<.12?1:0,w:wordAt(parts,xx)})}
+  rows.push({w:w,parts:parts,cells:cells,pos:0})});
+ rows[1].pos=-rows[1].w;ready=true}
+function wordAt(parts,px){for(var k=0;k<parts.length;k++)if(px>=parts[k].x0-4&&px<=parts[k].x1+4)return parts[k].i;return -1}
+/* card */
+var G='abcdefghijklmnopqrstuvwxyz0123456789';
+function scramble(el,txt,delay){var n=txt.length,st=0;el.textContent='';if(RM){el.textContent=txt;return}
+ timers.push(setTimeout(function step(){st+=Math.max(2,n/14|0);var o='';for(var i=0;i<n;i++)o+=i<st?txt[i]:(txt[i]===' '?' ':(i<st+6?G[Math.random()*G.length|0]:''));el.textContent=o;if(st<n)timers.push(setTimeout(step,28))},delay))}
 function show(i){if(i===cur)return;cur=i;timers.forEach(clearTimeout);timers=[];
- [].forEach.call(words,function(w){w.classList.toggle('on',+w.getAttribute('data-i')===i)});
- scramble(T,D[i][0],0);for(var k=0;k<3;k++)scramble(L[k],D[i][1][k],60+k*90);
- card.classList.add('show');S.classList.add('active')}
-function hide(){cur=-1;card.classList.remove('show');S.classList.remove('active');[].forEach.call(words,function(w){w.classList.remove('on')})}
+ scramble(T,D[i][0],0);for(var k=0;k<3;k++)scramble(L[k],D[i][1][k],60+k*90);card.classList.add('show')}
+function hide(){cur=-1;card.classList.remove('show')}
+function hit(px,py){var r=cv.getBoundingClientRect(),lx=px-r.left,ly=py-r.top;if(ly<0||ly>H||lx<0||lx>W)return -1;
+ var ri=Math.floor(ly/LH),R=rows[ri];if(!R)return -1;var p=((lx-R.pos)%R.w+R.w)%R.w;return wordAt(R.parts,p)}
 function follow(){var r=stage.getBoundingClientRect(),w=card.offsetWidth,h=card.offsetHeight,tx=mx-r.left+24,ty=my-r.top+24;
  if(tx+w>r.width)tx=mx-r.left-w-24;if(my+24+h>innerHeight-16)ty=my-r.top-h-24;
- cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;card.style.transform='translate3d('+cx.toFixed(1)+'px,'+cy.toFixed(1)+'px,0)';
- raf=(Math.abs(tx-cx)>.3||Math.abs(ty-cy)>.3)?requestAnimationFrame(follow):0}
+ cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;card.style.transform='translate3d('+cx.toFixed(1)+'px,'+cy.toFixed(1)+'px,0)'}
+/* motion */
+var dir=[-1,1,-1],base=[34,28,40],boost=0,lastY=scrollY,vis=true,last=0;
+addEventListener('scroll',function(){var dy=Math.abs(scrollY-lastY);lastY=scrollY;boost=Math.min(boost+dy*3.5,700)},{passive:true});
+function draw(t){
+ x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,cv.width,cv.height);
+ var r=cv.getBoundingClientRect(),lx=mx-r.left,ly=my-r.top,RAD=W<810?60:110,act=inside?cur:-1,gw=AG.w,gh=AG.h;
+ for(var ri=0;ri<rows.length;ri++){var R=rows[ri],oy=ri*LH;
+  for(var rep=0;rep<2;rep++){var ox=R.pos+rep*R.w;if(ox>W||ox+R.w<0)continue;
+   for(var k=0;k<R.cells.length;k++){var c=R.cells[k],px=c.x+ox,py=c.y+oy;if(px<-CW||px>W)continue;
+    if(c.w===act&&act>=0)continue; /* the hovered word is drawn as clean type below */
+    var dx=px-lx,dy=py-ly,d2=dx*dx+dy*dy;
+    if(d2<RAD*RAD){var d=Math.sqrt(d2)||1,f=(1-d/RAD);f*=f;px+=dx/d*f*RAD*.55;py+=dy/d*f*RAD*.55} /* symbols scatter around the cursor */
+    if(Math.random()<.004)c.c=Math.random()*SYM.length|0;
+    x.drawImage(AT,c.c*gw,c.t*gh,gw,gh,Math.round(px*dpr),Math.round(py*dpr),gw,gh)}}}
+ if(act>=0){x.setTransform(dpr,0,0,dpr,0,0);x.font=font();x.textBaseline='alphabetic';x.fillStyle='#F2E7DC';
+  for(ri=0;ri<rows.length;ri++){R=rows[ri];for(var q=0;q<R.parts.length;q++){var P=R.parts[q];if(P.i!==act)continue;
+   for(rep=0;rep<2;rep++){var X=R.pos+rep*R.w+P.x0;if(X<W&&X+(P.x1-P.x0)>0)x.fillText(D[act][0],X,ri*LH+LH*.8)}}}}}
+function tick(t){if(!vis||!ready){last=0;return}var dt=last?Math.min(.05,(t-last)/1000):0;last=t;
+ if(!RM){var sp=boost;boost*=Math.pow(.04,dt);for(var i=0;i<rows.length;i++){var R=rows[i];R.pos+=dir[i]*(base[i]+sp)*dt;if(R.pos<=-R.w)R.pos+=R.w;if(R.pos>0)R.pos-=R.w}}
+ if(hover&&inside){var h=hit(mx,my);if(h>=0)show(h)}
+ if(hover&&cur>=0)follow();
+ draw(t);requestAnimationFrame(tick)}
 if(hover){
- stage.addEventListener('pointermove',function(e){mx=e.clientX;my=e.clientY;if(!card.classList.contains('show')){var r=stage.getBoundingClientRect();cx=mx-r.left+24;cy=my-r.top+24}if(!raf)raf=requestAnimationFrame(follow);
-  var w=e.target.closest&&e.target.closest('.exp-w');if(w)show(+w.getAttribute('data-i'))});
- stage.addEventListener('pointerleave',hide);
- S.addEventListener('focusin',function(e){var w=e.target.closest('.exp-w');if(!w)return;var b=w.getBoundingClientRect();mx=b.left+b.width/2;my=b.bottom;show(+w.getAttribute('data-i'));if(!raf)raf=requestAnimationFrame(follow)});
- S.addEventListener('focusout',function(e){if(!S.contains(e.relatedTarget))hide()});
+ stage.addEventListener('pointermove',function(e){mx=e.clientX;my=e.clientY;if(!inside){var r=stage.getBoundingClientRect();cx=mx-r.left+24;cy=my-r.top+24}inside=true;var h=hit(mx,my);if(h>=0)show(h)});
+ stage.addEventListener('pointerleave',function(){inside=false;mx=my=-9999;hide()});
 }else{
  S.classList.add('touch');show(0);
- S.addEventListener('click',function(e){var w=e.target.closest('.exp-w');if(w)show(+w.getAttribute('data-i'))});
+ cv.addEventListener('click',function(e){var h=hit(e.clientX,e.clientY);if(h>=0)show(h)});
 }
-/* marquee: steady drift, speeds up with scroll velocity, keeps moving on hover */
-var rows=S.querySelectorAll('.exp-track'),pos=[0,0,0],dir=[-1,1,-1],base=[34,28,40],boost=0,lastY=scrollY,vis=true,last=0,inside=false;
-if('IntersectionObserver'in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis)requestAnimationFrame(tick)}).observe(S);
-addEventListener('scroll',function(){var dy=Math.abs(scrollY-lastY);lastY=scrollY;boost=Math.min(boost+dy*3.5,700)},{passive:true});
-if(hover){stage.addEventListener('pointerenter',function(){inside=true});stage.addEventListener('pointerleave',function(){inside=false})}
-function tick(t){if(!vis){last=0;return}var dt=last?Math.min(.05,(t-last)/1000):0;last=t;
- if(!RM){var sp=boost;boost*=Math.pow(.04,dt);
-  for(var i=0;i<rows.length;i++){var wd=rows[i].firstElementChild.offsetWidth;if(!wd)continue;
-   pos[i]+=dir[i]*(base[i]+sp)*dt;if(pos[i]<=-wd)pos[i]+=wd;if(pos[i]>0)pos[i]-=wd;
-   rows[i].style.transform='translate3d('+pos[i].toFixed(1)+'px,0,0)'}}
- /* words slide under a still cursor: keep the active word in sync */
- if(hover&&inside){var el=document.elementFromPoint(mx,my),w=el&&el.closest&&el.closest('.exp-w');if(w)show(+w.getAttribute('data-i'))}
- requestAnimationFrame(tick)}
-for(var i=0;i<rows.length;i++)if(dir[i]>0)pos[i]=-(rows[i].firstElementChild.offsetWidth||0);
-requestAnimationFrame(tick);
+/* keyboard: hidden buttons, one per direction */
+[].forEach.call(S.querySelectorAll('.exp-keys button'),function(b){b.addEventListener('focus',function(){var r=stage.getBoundingClientRect();mx=r.left+r.width/2-200;my=r.top+40;cx=mx-r.left;cy=my-r.top+H/2;show(+b.getAttribute('data-i'));follow()});b.addEventListener('blur',function(){if(hover)hide()})});
+function start(){build();if('IntersectionObserver'in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis)requestAnimationFrame(tick)}).observe(S);else requestAnimationFrame(tick)}
+var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(build,200)});
+Promise.all([document.fonts?document.fonts.load('italic 900 80px Inter'):0,document.fonts?document.fonts.load('500 10px "Sometype Mono"'):0,new Promise(function(r){if(star.complete)r();else{star.onload=star.onerror=r}})]).then(start,start);
 })();
