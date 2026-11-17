@@ -31,15 +31,15 @@ function frame(p,t){
    else if(g>-.05&&ahead[i]<.25){x.fillStyle='rgba(255,179,173,'+(.35*(1+g/.05)).toFixed(2)+')'} /* a few pixels jump ahead */
    else{x.fillStyle='rgba(242,231,220,.035)'}                                         /* dim grid */
    x.fillRect(px,py,S,S)}}}
-var t0=performance.now(),loaded=d.readyState==='complete',MIN=innerWidth<810?1300:1700,pv=0,out=0;
+var t0=performance.now(),loaded=d.readyState==='complete',MIN=innerWidth<810?650:800,pv=0,out=0;
 addEventListener('load',function(){loaded=true});
 function ease(v){return 1-Math.pow(1-v,2.2)}
 function loop(now){var e=now-t0;
  var target=ease(Math.min(1,e/MIN));if(!loaded&&e<6000)target=Math.min(target,.9);
- pv+=(target-pv)*.12;if(target>=1&&pv>.995)pv=1;
+ pv+=(target-pv)*.25;if(target>=1&&pv>.995)pv=1;
  num.textContent=Math.round(pv*100)+'%';box.setAttribute('data-n',Math.floor(e/180)%4);
  frame(pv,now);
- if(pv>=1&&!out){out=1;setTimeout(function(){el.classList.add('done');h.classList.remove('pre-lock');setTimeout(function(){el.remove()},650)},180)}
+ if(pv>=1&&!out){out=1;setTimeout(function(){el.classList.add('done');h.classList.remove('pre-lock');setTimeout(function(){el.remove()},420)},60)}
  if(!out||el.isConnected)requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
 })();
