@@ -386,9 +386,9 @@ b,strong,h1,h2,h3,h4,h5,h6,th,label,button,em,i{font-weight:400}
 .exp-stage{position:relative}
 .exp-rows{width:calc(100vw / var(--dz,1));margin-left:calc(50% - 50vw / var(--dz,1))}
 .exp-rows{position:relative}
-.exp-cv{display:block;width:100%;filter:blur(5px)}
+.exp-cv{display:block;width:100%;filter:blur(3.5px)}
 .exp-cv2{position:absolute;left:0;top:0;width:100%;pointer-events:none}
-.exp.touch .exp-cv{cursor:pointer;filter:blur(4px)}
+.exp.touch .exp-cv{cursor:pointer;filter:blur(3px)}
 .exp-row{white-space:nowrap}
 .exp-rows{overflow-x:clip;overflow-y:visible}
 .exp-track{display:inline-flex;will-change:transform}

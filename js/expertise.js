@@ -14,7 +14,7 @@ function atlas(){var g=Math.ceil(CW*dpr),h=Math.ceil(CHh*dpr);AT=document.create
 function font(){return 'italic 700 '+FS+'px Inter, sans-serif'}
 /* lay out one set per row on an offscreen canvas, sample it into ascii cells */
 function build(){
- W=cv.parentNode.clientWidth;dpr=Math.min(2,devicePixelRatio||1);FS=W<810?Math.max(60,W*.17):Math.max(72,Math.min(120,W*.072));LH=Math.round(FS*1.12);H=LH*3;
+ W=cv.parentNode.clientWidth;dpr=Math.min(2,devicePixelRatio||1);FS=W<810?Math.max(60,W*.17):Math.max(72,Math.min(120,W*.072));LH=Math.round(FS*1.4);H=LH*3;
  CW=W<810?2.9:3.9;CHh=W<810?4.2:5.6;
  cv.width=cv2.width=W*dpr;cv.height=cv2.height=H*dpr;cv.style.height=cv2.style.height=H+'px';atlas();
  var o=document.createElement('canvas'),ox=o.getContext('2d');rows=[];
@@ -22,7 +22,7 @@ function build(){
   ox.font=font();var gap=FS*.42,sw=FS*.42,parts=[],w=0;
   ids.forEach(function(i){var tw=ox.measureText(D[i][0]).width;parts.push({i:i,x0:w,x1:w+tw});w+=tw+gap+sw+gap});
   o.width=Math.ceil(w)+4;o.height=LH;ox.font=font();ox.textBaseline='alphabetic';ox.fillStyle='#000';
-  parts.forEach(function(p){ox.fillText(D[p.i][0],p.x0,LH*.8);if(star.complete&&star.naturalWidth)ox.drawImage(star,p.x1+gap,LH*.8-sw*1.08,sw,sw)});
+  parts.forEach(function(p){ox.fillText(D[p.i][0],p.x0,LH*.74);if(star.complete&&star.naturalWidth)ox.drawImage(star,p.x1+gap,LH*.74-sw*1.08,sw,sw)});
   var dat=ox.getImageData(0,0,o.width,o.height).data,cells=[];
   for(var yy=CHh/2;yy<LH;yy+=CHh)for(var xx=CW/2;xx<o.width;xx+=CW){var a=dat[((yy|0)*o.width+(xx|0))*4+3];if(a>120)cells.push({x:xx-CW/2,y:yy-CHh/2,c:Math.random()*SYM.length|0,t:Math.random()<.12?1:0,w:wordAt(parts,xx)})}
   rows.push({w:w,parts:parts,cells:cells,pos:0})});
