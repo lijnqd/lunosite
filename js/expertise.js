@@ -73,11 +73,16 @@ if(hover){
  stage.addEventListener('pointermove',function(e){mx=e.clientX;my=e.clientY;if(!inside){var r=stage.getBoundingClientRect();cx=mx-r.left+24;cy=my-r.top+24}inside=true;var h=hit(mx,my);if(h>=0)show(h)});
  stage.addEventListener('pointerleave',function(){inside=false;mx=my=-9999;hide()});
 }else{
- S.classList.add('touch');show(0);
+ S.classList.add('touch');
+ var keys=S.querySelector('.exp-keys'),kb=keys.querySelectorAll('button');keys.classList.remove('sr');
+ function gut(){keys.style.setProperty('--g',Math.max(8,Math.round(stage.getBoundingClientRect().left))+'px')}gut();addEventListener('resize',gut);
+ function pick(i){show(i);[].forEach.call(kb,function(b){var on=+b.getAttribute('data-i')===i;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);if(on)b.scrollIntoView({inline:'start',block:'nearest',behavior:'smooth'})})}
+ [].forEach.call(kb,function(b){b.addEventListener('click',function(){pick(+b.getAttribute('data-i'))})});
+ pick(0);
  cv.addEventListener('click',function(e){var h=hit(e.clientX,e.clientY);if(h>=0)show(h)});
 }
 /* keyboard: hidden buttons, one per direction */
-[].forEach.call(S.querySelectorAll('.exp-keys button'),function(b){b.addEventListener('focus',function(){var r=stage.getBoundingClientRect();mx=r.left+r.width/2-200;my=r.top+40;cx=mx-r.left;cy=my-r.top+H/2;show(+b.getAttribute('data-i'));follow()});b.addEventListener('blur',function(){if(hover)hide()})});
+[].forEach.call(S.querySelectorAll('.exp-keys button'),function(b){b.addEventListener('focus',function(){if(!hover)return;var r=stage.getBoundingClientRect();mx=r.left+r.width/2-200;my=r.top+40;cx=mx-r.left;cy=my-r.top+H/2;show(+b.getAttribute('data-i'));follow()});b.addEventListener('blur',function(){if(hover)hide()})});
 function start(){build();if('IntersectionObserver'in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis)requestAnimationFrame(tick)}).observe(S);else requestAnimationFrame(tick)}
 var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(build,200)});
 Promise.all([document.fonts?document.fonts.load('italic 700 80px Inter'):0,document.fonts?document.fonts.load('500 10px "Sometype Mono"'):0,new Promise(function(r){if(star.complete)r();else{star.onload=star.onerror=r}})]).then(start,start);
