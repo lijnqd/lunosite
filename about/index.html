@@ -25,7 +25,7 @@
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="/assets/img/about-cover.webp" imagesrcset="/assets/img/about-cover-640.webp 640w, /assets/img/about-cover-1000.webp 1000w, /assets/img/about-cover.webp 2000w" imagesizes="(max-width:809px) 50vw, 100vw" fetchpriority="high">
-<link rel="stylesheet" href="/css/style.css?v=1794999400">
+<link rel="stylesheet" href="/css/style.css?v=1795024576">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About lunö studio","url":"https://designluno.com/about/","description":"design studio that gives visuals a meaning: brand identities, websites and digital products for startups and growing businesses, from idea to interface."}</script>
 <style>
 .ab{padding-top:72px}
@@ -88,6 +88,14 @@
 .pet-say.pop{transform:scale(.9)}
 @media (max-width:1199px){.ab-face{left:62%;top:44%;height:62%}}
 @media (max-width:809px){.ab-face{left:44%;top:84px;height:auto;width:min(60%,250px);transform:translateX(-50%)}.pet-say{left:74%;bottom:80%;font-size:14px;padding:8px 13px}}
+@media (max-width:809px){
+ .ab-sk{padding:0 18px}
+ .ab-sk h3{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:72px;font-size:24px;cursor:pointer}
+ .ab-sk h3:after{content:"";flex:none;width:14px;height:14px;background:linear-gradient(currentColor,currentColor) center/14px 1.5px no-repeat,linear-gradient(currentColor,currentColor) center/1.5px 14px no-repeat;color:var(--pink);transition:transform .35s}
+ .ab-sk.open h3:after{transform:rotate(45deg)}
+ .ab-sk .cols{margin-top:0!important;overflow:hidden;max-height:0;transition:max-height .45s cubic-bezier(.65,0,.25,1),padding .45s}
+ .ab-sk.open .cols{padding-bottom:20px}
+}
 </style>
 </head>
 <body>
@@ -296,7 +304,7 @@ addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addE
 <script src="/js/track.js?v=1" defer></script>
 <script src="/js/form.js?v=13" defer></script>
 <script src="/js/faq.js?v=5" defer></script>
-<script src="/js/reviews.js?v=7" defer></script>
+<script src="/js/reviews.js?v=8" defer></script>
 <script>
 (function(){var els=[].slice.call(document.querySelectorAll('.reveal'));
 if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
@@ -334,5 +342,12 @@ document.addEventListener("visibilitychange",function(){if(!document.hidden)go()
 go()})();</script>
 
 <!-- <script src="/js/expertise.js?v=23" defer></script> -->
+<script>/* skills: dropdowns on phones */(function(){var mq=matchMedia('(max-width:809px)'),c=[].slice.call(document.querySelectorAll('.ab-sk'));
+function tg(a,o){var k=a.querySelector('.cols');a.classList.toggle('open',o);a.querySelector('h3').setAttribute('aria-expanded',o?'true':'false');k.style.maxHeight=o?(k.scrollHeight+40)+'px':''}
+c.forEach(function(a,i){var h=a.querySelector('h3');h.setAttribute('role','button');h.setAttribute('tabindex','0');
+ function go(){if(!mq.matches)return;tg(a,!a.classList.contains('open'))}
+ h.addEventListener('click',go);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+function reset(){c.forEach(function(a,i){if(mq.matches)tg(a,i===0);else{a.classList.remove('open');a.querySelector('.cols').style.maxHeight=''}})}
+reset();mq.addEventListener?mq.addEventListener('change',reset):mq.addListener(reset);})();</script>
 </body>
 </html>
