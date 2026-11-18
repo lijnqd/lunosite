@@ -496,9 +496,9 @@ html.cur-on input:not([type=checkbox]):not([type=radio]),html.cur-on textarea{cu
   html.menu-open,html.menu-open body{overflow:hidden}
 }
 /* ---------- inline reviews ---------- */
-.ilr{max-width:1000px;margin-top:56px;overflow-x:clip;padding-top:44px;margin-top:12px}
+.ilr{max-width:none;margin-top:56px;overflow-x:clip;padding-top:44px;margin-top:12px}
 .ilm.r{left:auto;right:0;align-items:flex-end}
-.ilr p{font-size:32px;line-height:1.45;letter-spacing:-0.02em;color:var(--beige)}
+.ilr p{font-size:32px;line-height:1.4;letter-spacing:-0.02em;color:var(--beige)}
 .ilq{transition:filter .4s,opacity .4s,color .4s;outline:none;cursor:default}
 .ilq.alt{color:var(--beige-2)}
 .ilr.focus .ilq{filter:blur(4px);opacity:.35}
