@@ -95,3 +95,9 @@ $('form').addEventListener('submit',function(e){
   fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){if(!r.ok)throw 0;note.textContent='thank you! we’ll get back to you within 24 hours';f.reset()}).catch(function(){note.textContent='something went wrong — please write to hey.lunostudio@gmail.com'});
 });
 })();
+/* process line (tablet/phone): run only from the first marker to the bottom of the last one */
+(function(){var st=document.querySelector('.steps');if(!st)return;
+function fit(){if(innerWidth>1199){st.style.removeProperty('--lt');st.style.removeProperty('--lh');return}
+ var m=st.querySelectorAll('.mkv');if(!m.length)return;var r=st.getBoundingClientRect(),a=m[0].getBoundingClientRect(),b=m[m.length-1].getBoundingClientRect();
+ var k=st.offsetHeight?r.height/st.offsetHeight:1;st.style.setProperty('--lt',((a.top-r.top)/k+5)+'px');st.style.setProperty('--lh',((b.bottom-a.top)/k-10)+'px')}
+addEventListener('load',fit);addEventListener('resize',fit);setTimeout(fit,500);})();

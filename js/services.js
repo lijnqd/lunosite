@@ -33,9 +33,9 @@ if('IntersectionObserver'in window)new IntersectionObserver(function(e){vis=e[0]
 /* pinned stepping (desktop/tablet) */
 function set(i){if(i===cur)return;cur=i;items.forEach(function(it,k){it.classList.toggle('on',k===i)})}
 function z(){var r=parseFloat(getComputedStyle(document.querySelector('main')).zoom);return r>0?r:1}
-var stick=sec.querySelector('.svc-stick'),STEP=.55;
+var stick=sec.querySelector('.svc-stick'),STEP=.8;
 function size(){if(innerWidth<810){tr.style.height='';return}
- var zz=z();tr.style.height=(stick.offsetHeight+2*STEP*innerHeight/zz)+'px'}
+ var zz=z();tr.style.height=(stick.offsetHeight+3*STEP*innerHeight/zz)+'px'}
 function step(){if(innerWidth<810){items.forEach(function(it){it.classList.add('on')});return}
  var r=tr.getBoundingClientRect(),sh=stick.getBoundingClientRect().height,run=r.height-sh;
  var pinTop=parseFloat(getComputedStyle(stick).top)*z(),p=run>0?(pinTop-r.top)/run:0;
