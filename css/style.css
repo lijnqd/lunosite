@@ -35,7 +35,7 @@ h1,h2,h3,h4{font-weight:400}
 .nav{position:absolute;left:50%;transform:translateX(calc(-50% - 46px));height:42px;padding:3px;display:flex;gap:2px;align-items:stretch;border-radius:var(--r-btn);background:rgba(20,20,20,.72);border:1px solid rgba(242,231,220,.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .nav a{position:relative;z-index:1;display:flex;align-items:center;font-family:Inter,sans-serif;font-size:16px;letter-spacing:-0.01em;padding:0 16px;border-radius:9px;background:var(--glass-2);color:var(--beige);transition:color .3s}
 .nav a.on{color:var(--bg)}
-.nav .nav-ind{position:absolute;z-index:0;top:3px;bottom:3px;left:0;width:0;border-radius:9px;background:var(--beige);opacity:0;pointer-events:none;transition:transform .5s cubic-bezier(.34,1.35,.64,1),width .5s cubic-bezier(.34,1.35,.64,1),opacity .25s}
+.nav .nav-ind{position:absolute;z-index:0;top:3px;bottom:3px;left:0;width:0;border-radius:9px;background:var(--pink);opacity:0;pointer-events:none;transition:transform .5s cubic-bezier(.34,1.35,.64,1),width .5s cubic-bezier(.34,1.35,.64,1),opacity .25s}
 .nav .nav-ind.go{opacity:1}
 .header .btn-pink{margin-right:-2px}
 
@@ -83,7 +83,7 @@ main{padding-top:66px}
 .folder{position:absolute;width:332px;height:233px;z-index:2;display:block;color:var(--bg)}
 .fold{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 332 233'%3E%3Cpath d='M111.451 0C115.648 0 119.677 1.649 122.67 4.592L144 25.568 129.668 28H312C323.046 28 332 36.954 332 48V213C332 224.046 323.046 233 312 233H20C8.954 233 0 224.046 0 213V16C0 7.163 7.163 0 16 0Z' fill='%23FFB3AD'/%3E%3C/svg%3E") no-repeat;background-size:100% 100%}
 .folder img{position:absolute;left:53px;top:18px;width:226px;height:152px;border-radius:var(--r-btn);object-fit:cover;transition:transform .35s}
-.glass{position:absolute;left:0;top:28px;width:332px;height:205px;border-radius:var(--r);background:rgba(242,231,220,.5);backdrop-filter:blur(2.5px);-webkit-backdrop-filter:blur(2.5px);}
+.glass{position:absolute;left:0;top:28px;width:332px;height:205px;border-radius:20px;background:rgba(242,231,220,.5);backdrop-filter:blur(2.5px);-webkit-backdrop-filter:blur(2.5px);}
 .folder b{position:absolute;left:20px;bottom:16px;font-size:24px;font-weight:400;line-height:1.2;letter-spacing:-0.01em}
 .folder em{position:absolute;right:20px;bottom:20px;font-family:var(--mono);font-style:normal;font-size:16px;line-height:1.4;letter-spacing:0}
 .folder:hover img{transform:translateY(-10px)}
@@ -423,3 +423,10 @@ b,strong,h1,h2,h3,h4,h5,h6,th,label,button,em,i{font-weight:400}
 
 /* buttons: corner radius never above 12px */
 .btn,.nav,.th,.c-offer,#ck button,.blog-filter button,.exp-keys button,.pc .copy{border-radius:var(--r-btn)}
+/* custom cursor: small beige dot, grows into a frosted lens over interactive elements */
+html.cur-on,html.cur-on *{cursor:none!important}
+html.cur-on input:not([type=checkbox]):not([type=radio]),html.cur-on textarea{cursor:text!important}
+#cur{position:fixed;left:0;top:0;z-index:10000;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;pointer-events:none;background:var(--beige);transform:translate3d(-100px,-100px,0) scale(.2);transition:transform .35s cubic-bezier(.34,1.35,.64,1) 0s,background .3s,opacity .25s,backdrop-filter .3s;transition-property:background,opacity,backdrop-filter;will-change:transform}
+#cur.big{background:rgba(242,231,220,.28);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+#cur.hide{opacity:0}
+#cur:not(.big){mix-blend-mode:difference}
