@@ -56,7 +56,7 @@ main{padding-top:66px}
 .about-text .w{opacity:.25;transition:opacity .25s}
 .about-text .w.on{opacity:1}
 .about-text .eye{display:inline-block;height:.7em;width:auto;vertical-align:-.04em;margin:0 .1em}
-.pill{display:inline-block;color:var(--pink);border:1px solid var(--pink);border-radius:100px;padding:0 20px;margin-top:2px}
+.pill{display:inline-block;color:var(--pink);border:1px solid var(--pink);border-radius:12px;padding:0 20px;margin-top:2px}
 
 /* advantages */
 .adv{display:flex;flex-direction:column;gap:28px}
@@ -418,3 +418,6 @@ b,strong,h1,h2,h3,h4,h5,h6,th,label,button,em,i{font-weight:400}
 .exp.touch .exp-card{margin-top:28px;max-width:none}
 
 @media (max-width:809px){:root{--r:12px}}
+
+/* buttons: corner radius never above 12px */
+.btn,.nav,.pill,.th,.c-offer,#ck button,.blog-filter button,.exp-keys button,.pc .copy{border-radius:min(var(--r),12px)}
