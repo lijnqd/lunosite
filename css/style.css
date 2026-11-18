@@ -107,8 +107,8 @@ main{padding-top:66px}
 /* reviews */
 .reviews{position:relative;display:flex;flex-direction:column;gap:12px}
 .rev-head{position:relative}
-.chat{margin:34px 15px 0;height:564px;border-radius:var(--r);border:1px solid rgba(242,231,220,.14);background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;overflow:hidden}
-.threads{width:289px;flex:none;border-right:1px solid rgba(242,231,220,.14);background:rgba(20,20,20,.35);padding:12px 10px}
+.chat{margin:34px 15px 0;height:564px;border-radius:var(--r);border:1px solid rgba(242,231,220,.12);background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;overflow:hidden}
+.threads{width:289px;flex:none;border-right:1px solid rgba(242,231,220,.12);background:rgba(20,20,20,.35);padding:12px 10px}
 .threads-head{height:46px;display:flex;justify-content:space-between;align-items:center;padding:0 12px;margin-bottom:4px}
 .threads-head b{font-size:14px;font-weight:400;letter-spacing:-0.01em}
 .threads-head i{width:22px;height:22px;border-radius:50%;background:var(--beige);color:var(--bg);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;font-weight:400;line-height:1}
@@ -124,11 +124,11 @@ main{padding-top:66px}
 .th .top span{font-size:12px;font-weight:400;color:#c7c7c7}
 .th .pv{font-size:12px;color:#c7c7c7;line-height:1.4;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pane{flex:1;display:flex;flex-direction:column;min-width:0}
-.pane-head{height:66px;border-bottom:1px solid rgba(242,231,220,.14);display:flex;align-items:center;gap:12px;padding:0 20px}
+.pane-head{height:66px;border-bottom:1px solid rgba(242,231,220,.12);display:flex;align-items:center;gap:12px;padding:0 20px}
 .pane-head img{width:38px;height:38px;border-radius:50%;object-fit:cover}
 .pane-head b{display:block;font-size:14px;font-weight:400;line-height:1.4}
 .pane-head div span{font-size:12px;color:#c7c7c7}
-.verified{margin-left:auto;display:flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid rgba(255,179,173,.45);border-radius:var(--r);color:var(--pink);font-size:12px}
+.verified{margin-left:auto;display:flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid rgba(255,179,173,.5);border-radius:var(--r);color:var(--pink);font-size:12px}
 .msgs{flex:1;padding:24px 28px;overflow:hidden}
 .day{text-align:center;font-size:12px;color:#c7c7c7;margin-bottom:22px}
 .bubble-row{display:flex;gap:12px;align-items:flex-end;max-width:640px}
@@ -136,7 +136,7 @@ main{padding-top:66px}
 .bubble{background:rgba(242,231,220,.1);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:var(--r) var(--r) var(--r) 4px;padding:12px 16px;font-size:14px;line-height:1.4;color:var(--beige);min-height:44px}
 .bubble .caret{display:inline-block;width:2px;height:15px;background:var(--pink);vertical-align:-2px;margin-left:1px;animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:0}}
-.pane-foot{height:64px;border-top:1px solid rgba(242,231,220,.14);display:flex;align-items:center;padding:0 20px;gap:10px}
+.pane-foot{height:64px;border-top:1px solid rgba(242,231,220,.12);display:flex;align-items:center;padding:0 20px;gap:10px}
 .replay{display:flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:var(--r);border:1px solid rgba(242,231,220,.25);background:transparent;color:var(--beige);font:400 12px Inter,sans-serif;cursor:pointer}
 .count{margin-left:auto;font-size:12px;color:#c7c7c7;margin-right:6px}
 .round{width:auto;height:38px;padding:0 6px;border:0;background:transparent;color:var(--beige);display:grid;place-items:center;cursor:pointer;font:400 12px "Sometype Mono",monospace;letter-spacing:0;text-transform:none}
@@ -271,7 +271,7 @@ main{padding-top:66px}
   .stitle h3{font-size:24px}
   .chat{margin:20px 0 0;border-radius:var(--r)}
   .chat{flex-direction:column;height:auto}
-  .threads{width:100%;display:flex;gap:4px;overflow-x:auto;padding:10px;border-right:0;border-bottom:1px solid rgba(242,231,220,.14)}
+  .threads{width:100%;display:flex;gap:4px;overflow-x:auto;padding:10px;border-right:0;border-bottom:1px solid rgba(242,231,220,.12)}
   .threads-head{display:none}
   .th{width:auto;flex:1 0 auto;height:auto;flex-direction:column;gap:6px;padding:8px 10px;margin:0;min-width:70px}
   .th .tx .top span,.th .pv{display:none}
