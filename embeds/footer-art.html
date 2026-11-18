@@ -271,4 +271,5 @@ window.addEventListener('load', checkContainer);
             })
         </script>
     <body>
+<script>/* luno-cur: hide native cursor and hand pointer to the parent dot */(function(){if(!matchMedia("(hover:hover) and (pointer:fine)").matches||parent===window)return;var s=document.createElement("style");s.textContent="html,html *{cursor:none!important}";document.head.appendChild(s);document.addEventListener("mousemove",function(e){parent.postMessage({luno:"cur",x:e.clientX,y:e.clientY,w:innerWidth},"*")},{passive:true})})();</script>
 </html>

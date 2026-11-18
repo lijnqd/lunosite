@@ -8,6 +8,10 @@ var SEL='a,button,[role=button],label,select,summary,.folder,input[type=checkbox
 d.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;if(!seen){x=tx;y=ty;seen=true}
  var t=e.target,txt=t.closest&&t.closest('input:not([type=checkbox]):not([type=radio]):not([type=submit]),textarea');
  var big=!txt&&t.closest&&t.closest(SEL);ts=big?1:.2;c.classList.toggle('big',!!big);c.classList.toggle('hide',!!txt)},{passive:true});
+addEventListener('message',function(e){var m=e.data;if(!m||m.luno!=='cur')return;
+ var fr=[].filter.call(d.querySelectorAll('iframe'),function(f){return f.contentWindow===e.source})[0];if(!fr)return;
+ var r=fr.getBoundingClientRect(),k=m.w?r.width/m.w:1;tx=r.left+m.x*k;ty=r.top+m.y*k;if(!seen){x=tx;y=ty;seen=true}
+ ts=.2;c.classList.remove('big');c.classList.remove('hide')});
 d.addEventListener('mouseleave',function(){c.classList.add('hide')});
 d.documentElement.addEventListener('mouseenter',function(){c.classList.remove('hide')});
 d.addEventListener('mousedown',function(){ts*=.8});
