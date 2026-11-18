@@ -1,7 +1,10 @@
-/* inline reviews: hover (or tap) a quote — the rest blur, the author's name and role appear above the avatar */
-(function(){var w=document.getElementById('ilr');if(!w)return;var qs=[].slice.call(w.querySelectorAll('.ilq'));
-function on(q){if(q){var m=q.querySelector(".ilm");m.classList.remove("r");var a=m.getBoundingClientRect(),c=w.getBoundingClientRect();if(a.right>c.right-2)m.classList.add("r")}w.classList.toggle('focus',!!q);qs.forEach(function(x){x.classList.toggle('on',x===q)})}
-qs.forEach(function(q){q.addEventListener('mouseenter',function(){on(q)});q.addEventListener('focus',function(){on(q)});
- q.addEventListener('click',function(e){if(matchMedia('(hover:none)').matches){e.stopPropagation();on(q.classList.contains('on')?null:q)}})});
-w.addEventListener('mouseleave',function(){on(null)});document.addEventListener('click',function(e){if(!w.contains(e.target))on(null)});
-})();
+/* reviews accordion: narrow tabs (number, name, avatar) and one open card; autoplay pauses on hover/focus */
+(function(){var w=document.getElementById('txw');if(!w)return;var c=[].slice.call(w.querySelectorAll('.tx')),cur=0,t=null,hold=false;
+function set(i){cur=(i+c.length)%c.length;c.forEach(function(x,k){x.classList.toggle('on',k===cur);x.querySelector('.tx-tab').setAttribute('aria-expanded',k===cur?'true':'false')})}
+c.forEach(function(x,k){x.querySelector('.tx-tab').addEventListener('click',function(){set(k);restart()})});
+function restart(){clearInterval(t);if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;t=setInterval(function(){if(!hold&&vis)set(cur+1)},7000)}
+var vis=false;if('IntersectionObserver'in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(w);else vis=true;
+w.addEventListener('mouseenter',function(){hold=true});w.addEventListener('mouseleave',function(){hold=false});
+w.addEventListener('focusin',function(){hold=true});w.addEventListener('focusout',function(){hold=false});
+function fit(){var o=c[cur===0?1:0];w.style.setProperty("--txw",(w.clientWidth-(c.length-1)*(o.offsetWidth+10))+"px")}
+addEventListener("resize",fit);fit();restart();})();
