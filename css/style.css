@@ -437,10 +437,10 @@ html.cur-on input:not([type=checkbox]):not([type=radio]),html.cur-on textarea{cu
 .up{text-transform:uppercase}
 .svc-list{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;column-gap:40px}
 .svc-item{display:contents}
-.svc-row{grid-column:1;display:flex;align-items:flex-end;gap:20px;padding:0 0 28px;background:none;border:0;color:var(--beige);text-align:left;font:inherit;cursor:pointer;filter:blur(5px);opacity:.45;transition:filter .5s,opacity .5s}
+.svc-row{grid-column:1;display:flex;align-items:flex-end;gap:12px;padding:0 0 28px;background:none;border:0;color:var(--beige);text-align:left;font:inherit;cursor:pointer;filter:blur(5px);opacity:.45;transition:filter .5s,opacity .5s}
 .svc-item:nth-child(1) .svc-row{grid-row:1}.svc-item:nth-child(2) .svc-row{grid-row:2}.svc-item:nth-child(3) .svc-row{grid-row:3}
 .svc-item.on .svc-row{filter:none;opacity:1}
-.svc-num{display:block;width:180px;height:120px;flex:none}
+.svc-num{display:block;width:150px;height:92px;flex:none}
 .svc-nm{display:none}
 .svc-row h3{font-size:32px;line-height:1.15;letter-spacing:-0.03em;font-weight:400;white-space:nowrap;margin-bottom:6px}
 .svc-pr{font-family:var(--mono);font-size:16px;color:var(--pink);white-space:nowrap;margin-bottom:12px}
@@ -451,7 +451,7 @@ html.cur-on input:not([type=checkbox]):not([type=radio]),html.cur-on textarea{cu
 .svc-li b{font-weight:400;color:var(--pink);margin-right:4px}
 .svc-panel .btn{width:100%;height:48px}
 @media (max-width:1199px){
-  .svc-num{width:140px;height:94px}
+  .svc-num{height:76px}
   .svc-row h3{font-size:24px}
   .svc-lead{font-size:24px}
   .svc-li{font-size:16px;grid-template-columns:1fr;grid-auto-flow:row;grid-template-rows:none}
@@ -464,7 +464,7 @@ html.cur-on input:not([type=checkbox]):not([type=radio]),html.cur-on textarea{cu
   .svc-list{display:flex;flex-direction:column;gap:40px}
   .svc-item{display:block}
   .svc-row{filter:none;opacity:1;padding:0 0 16px;gap:14px;cursor:default;width:100%}
-  .svc-num{width:108px;height:72px}
+  .svc-num{height:60px}
   .svc-row h3{font-size:24px;margin-bottom:2px}
   .svc-pr{font-size:14px;margin-bottom:6px;margin-left:auto}
   .svc-panel{opacity:1;visibility:visible;transform:none}
