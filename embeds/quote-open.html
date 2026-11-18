@@ -223,6 +223,7 @@ resizeObserver.observe(container);
 
 let __vis = true, __fr = 0, __busy = 2;
 try { new IntersectionObserver((e) => { __vis = e[0].isIntersecting; }).observe(canvas); } catch (err) {}
+const __col = /[?&]c=d/.test(location.search) ? '#141414' : '#FFB3AD';
 function animate() {
   requestAnimationFrame(animate);
   if (!__vis || document.hidden) return;
@@ -258,7 +259,7 @@ function animate() {
 
     if (item.vx > 0.02 || item.vx < -0.02 || item.vy > 0.02 || item.vy < -0.02) __moving = true;
     if (__font !== item.fontSize) { __font = item.fontSize; ctx.font = `500 ${item.fontSize}px 'Sometype Mono', monospace`; }
-    ctx.fillStyle = '#FFB3AD';
+    ctx.fillStyle = __col;
     ctx.fillText(item.char, item.x, item.y);
   }
   __busy = __moving ? 2 : __busy - 1;
