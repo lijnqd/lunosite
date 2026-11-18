@@ -463,7 +463,7 @@ html.cur-on input:not([type=checkbox]):not([type=radio]),html.cur-on textarea{cu
   .svc-h{margin-bottom:32px;font-size:24px}
   .svc-list{display:flex;flex-direction:column;gap:40px}
   .svc-item{display:block}
-  .svc-row{filter:none;opacity:1;padding:0 0 16px;gap:4px 12px;cursor:default;width:100%;flex-wrap:wrap;align-items:baseline}
+  .svc-row{filter:none;opacity:1;padding:0 0 16px;gap:14px 12px;cursor:default;width:100%;flex-wrap:wrap;align-items:baseline}
   .svc-row .svc-num{flex-basis:auto;margin-right:100%}
   .svc-row h3{white-space:normal;min-width:0}
   .svc-num{height:60px}
@@ -495,3 +495,19 @@ html.cur-on input:not([type=checkbox]):not([type=radio]),html.cur-on textarea{cu
   .menu-open .mmenu a{opacity:1;transform:none}
   html.menu-open,html.menu-open body{overflow:hidden}
 }
+/* ---------- inline reviews ---------- */
+.ilr{max-width:1000px;margin-top:56px;overflow-x:clip;padding-top:44px;margin-top:12px}
+.ilm.r{left:auto;right:0;align-items:flex-end}
+.ilr p{font-size:32px;line-height:1.45;letter-spacing:-0.02em;color:var(--beige)}
+.ilq{transition:filter .4s,opacity .4s,color .4s;outline:none;cursor:default}
+.ilq.alt{color:var(--beige-2)}
+.ilr.focus .ilq{filter:blur(4px);opacity:.35}
+.ilr.focus .ilq.on{filter:none;opacity:1;color:var(--beige)}
+.ilw{position:relative;display:inline-block;width:30px;height:30px;margin-right:8px;vertical-align:-4px}
+.ilw img{width:30px;height:30px;border-radius:50%;object-fit:cover;display:block}
+.ilm{position:absolute;left:0;bottom:calc(100% + 6px);display:flex;flex-direction:column;gap:2px;white-space:nowrap;line-height:1.2;pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
+.ilm b{font-weight:400;font-size:16px;letter-spacing:-0.01em;color:var(--pink)}
+.ilm i{font-style:normal;font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--beige-2)}
+.ilq.on .ilm{opacity:1;transform:none}
+@media (max-width:1199px){.ilr p{font-size:24px}.ilw,.ilw img{width:24px;height:24px}.ilw{vertical-align:-3px}}
+@media (max-width:809px){.ilr{margin-top:32px}.ilr p{font-size:20px;line-height:1.5}.ilw,.ilw img{width:22px;height:22px}.ilq{cursor:pointer}}
