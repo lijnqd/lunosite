@@ -644,3 +644,4 @@ body:after{content:"";position:fixed;inset:-100%;z-index:-1;pointer-events:none;
 @keyframes vt-out{0%{transform:none;border-radius:0}32%{transform:scale(.86);border-radius:28px}68%,100%{transform:translateY(-110%) scale(.86);border-radius:28px}}
 @keyframes vt-in{0%,32%{transform:translateY(110%) scale(.86);border-radius:28px}68%{transform:translateY(0) scale(.86);border-radius:28px}100%{transform:none;border-radius:0}}
 @media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}}
+iframe{color-scheme:normal}
