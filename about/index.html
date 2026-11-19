@@ -99,7 +99,9 @@
  .ab-sk.open .cols{padding-bottom:20px}
 }
 .ab-lead .pink{font-style:italic}
-.ab-big-wrap{display:block;overflow:hidden}
+.ab-big-wrap{display:block;position:relative}
+.ab-big-stick{width:auto!important;max-width:none!important;position:sticky;top:0;height:100vh;height:calc(100vh / var(--dz,1));display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+@media (max-width:809px){.ab-big-wrap{height:auto!important}.ab-big-stick{position:static;height:auto;overflow:visible}}
 .ab-big-wrap .label{margin-bottom:24px}
 .ab-big{font-family:var(--serif);font-size:52px;line-height:1.1;letter-spacing:-0.01em;max-width:900px}
 .ab-big em{font-style:italic;color:var(--pink)}
@@ -136,10 +138,10 @@
   <a class="btn btn-pink" href="/#cases"><i></i>view cases</a>
 </section>
 <div class="stack">
-  <section class="ab-about ab-big-wrap">
+  <section class="ab-about ab-big-wrap" id="abTrack"><div class="ab-big-stick">
     <p class="label">#about us</p>
     <p class="ab-big" id="abBig">lunö is an independent design studio. we make <em>brand identities, logos and websites</em> for startups and growing businesses across europe and the us. over the last 4 years we’ve designed everything from one-page landings to large digital systems.<br>we work with <em>any business</em> that makes something real, from toothbrushes to travel agencies. just not casinos or <em>“get rich quick”</em> courses.</p>
-  </section>
+  </div></section>
   <section class="ab-h"><p class="label">#how to work with us</p><h2 class="reveal">what working with us feels like</h2>
     <div class="ab-feel">
       <div class="reveal"><div><img src="/assets/img/ab-star-sq.webp" alt=""><h3>you talk to a real person</h3></div><p>no managers in the middle and no long email chains. you work directly with the designer</p></div>
@@ -362,8 +364,15 @@ reset();mq.addEventListener?mq.addEventListener('change',reset):mq.addListener(r
 <script>/* about: words fly in from the right and settle into place one by one as you scroll */(function(){var at=document.getElementById('abBig');if(!at)return;
 (function walk(n){[].slice.call(n.childNodes).forEach(function(c){if(c.nodeType===3){var f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(function(p){if(!p)return;if(/^\s+$/.test(p))f.appendChild(document.createTextNode(p));else{var s=document.createElement('span');s.className='w';s.textContent=p;f.appendChild(s)}});n.replaceChild(f,c)}else if(c.nodeType===1&&c.tagName!=='BR')walk(c)})})(at);
 var ws=at.querySelectorAll('.w'),N=ws.length,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
-function upd(){var r=at.getBoundingClientRect(),vh=innerHeight,W=innerWidth,p=(vh*.95-r.top)/(r.height+vh*.35);p=Math.max(0,Math.min(1,p))*1.12;
- for(var i=0;i<N;i++){var d=RM?0:Math.max(0,i/N-p+.04);ws[i].style.transform=d>0?'translate3d('+(d*W*2.4).toFixed(1)+'px,'+Math.min(d*260,26).toFixed(1)+'px,0)':''}}
+var tr=document.getElementById('abTrack');
+function z(){var m=document.querySelector('main');var r=m?parseFloat(getComputedStyle(m).zoom):1;return r>0?r:1}
+function size(){tr.style.height=innerWidth<810?'':(innerHeight/z()*2.2)+'px'}
+function upd(){var vh=innerHeight,W=innerWidth,p;
+ if(innerWidth<810){var r0=at.getBoundingClientRect();p=(vh*.9-r0.top)/(r0.height+vh*.3)}
+ else{var r=tr.getBoundingClientRect();p=(-r.top+vh*.35)/(r.height-vh*.6)}
+ p=Math.max(0,Math.min(1,p))*1.18;
+ for(var i=0;i<N;i++){var d=RM?0:Math.max(0,i/N-p+.03);ws[i].style.transform=d>0?'translate3d('+(Math.pow(d,1.5)*W*3).toFixed(1)+'px,0,0)':''}}
+addEventListener('resize',size);size();
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();</script>
 </body>
 </html>
