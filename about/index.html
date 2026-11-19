@@ -26,7 +26,7 @@
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="/assets/img/about-cover.webp" imagesrcset="/assets/img/about-cover-640.webp 640w, /assets/img/about-cover-1000.webp 1000w, /assets/img/about-cover.webp 2000w" imagesizes="(max-width:809px) 50vw, 100vw" fetchpriority="high">
-<link rel="stylesheet" href="/css/style.css?v=1795097724">
+<link rel="stylesheet" href="/css/style.css?v=1795098246">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About lunö studio","url":"https://designluno.com/about/","description":"design studio that gives visuals a meaning: brand identities, websites and digital products for startups and growing businesses, from idea to interface."}</script>
 <style>
 .ab{padding-top:72px}
@@ -306,7 +306,7 @@ $('form').addEventListener('submit',function(e){
 })();
 </script>
 <script>
-(function(){var c=document.getElementById('dots'),x=c.getContext('2d'),mx=-999,my=-999,dpr=window.devicePixelRatio||1,W,H;
+(function(){var c=document.getElementById('dots');if(!c||getComputedStyle(c).display==='none')return;var x=c.getContext('2d'),mx=-999,my=-999,dpr=window.devicePixelRatio||1,W,H;
 function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;draw()}
 function draw(){x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);if(mx<0)return;var sy=scrollY,y0=30-(sy%60);for(var y=y0;y<H+4;y+=60){for(var px=30;px<W+4;px+=60){var d=Math.hypot(px-mx,y-my);if(d>170)continue;var t=1-d/170,a=.75*t*t;x.fillStyle='rgba(255,179,173,'+(.4*a).toFixed(3)+')';x.beginPath();x.arc(px,y,2.2,0,6.283);x.fill()}}}
 addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addEventListener('scroll',draw,{passive:true});addEventListener('resize',size);size()})();
@@ -366,7 +366,9 @@ reset();mq.addEventListener?mq.addEventListener('change',reset):mq.addListener(r
 var ws=at.querySelectorAll('.w'),N=ws.length,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 var tr=document.getElementById('abTrack');
 function z(){var m=document.querySelector('main');var r=m?parseFloat(getComputedStyle(m).zoom):1;return r>0?r:1}
-function size(){tr.style.height=innerWidth<810?'':(innerHeight/z()*2.2)+'px'}
+function size(){if(innerWidth<810){tr.style.height='';tr.style.marginTop=tr.style.marginBottom='';return}
+ var vh=innerHeight/z(),st=tr.querySelector('.ab-big-stick'),lb=st.querySelector('.label'),h=at.offsetHeight+(lb?lb.offsetHeight+24:0),gap=Math.max(0,(vh-h)/2-20);
+ tr.style.height=(vh*2.2)+'px';tr.style.marginTop=(-gap)+'px';tr.style.marginBottom=(-gap)+'px'}
 function upd(){var vh=innerHeight,W=innerWidth,p;
  if(innerWidth<810){var r0=at.getBoundingClientRect();p=(vh*.9-r0.top)/(r0.height+vh*.3)}
  else{var r=tr.getBoundingClientRect();p=(-r.top+vh*.35)/(r.height-vh*.6)}
