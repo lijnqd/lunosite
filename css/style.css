@@ -622,3 +622,9 @@ h1,h2:not(.label):not(.sr),h3,.h40,.about-text,.quote blockquote{font-family:var
 .sv-w{align-items:baseline}
 .sv-st{display:inline-block;margin:0 .05em 0 .3em}
 .sv-st .sv-star{display:block;width:.34em;height:.34em;margin-bottom:.12em}
+/* perf: no backdrop blur on big static cards (it was barely visible and re-rendered on every scroll frame) */
+.card,.acard,.fq,.c-card,#form input,#form select,#form textarea,.luna p,.bubble,.st-dark,.chat{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+/* only the open review card runs its ascii quote */
+.tx:not(.on) .tx-q{display:none}
+/* cursor: no full-page blending */
+#cur:not(.big){mix-blend-mode:normal;box-shadow:0 0 0 1.5px rgba(20,20,20,.55)}

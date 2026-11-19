@@ -16,6 +16,9 @@ d.addEventListener('mouseleave',function(){c.classList.add('hide')});
 d.documentElement.addEventListener('mouseenter',function(){c.classList.remove('hide')});
 d.addEventListener('mousedown',function(){ts*=.8});
 d.addEventListener('mouseup',function(){ts=ts<.5?.2:1});
-(function loop(){var k=RM?1:.28;x+=(tx-x)*k;y+=(ty-y)*k;s+=(ts-s)*(RM?1:.18);
- c.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) scale('+s.toFixed(3)+')';requestAnimationFrame(loop)})();
+var run=0;function loop(){var k=RM?1:.28;x+=(tx-x)*k;y+=(ty-y)*k;s+=(ts-s)*(RM?1:.18);
+ c.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) scale('+s.toFixed(3)+')';
+ if(Math.abs(tx-x)+Math.abs(ty-y)+Math.abs(ts-s)*40>.15)run=requestAnimationFrame(loop);else run=0}
+function kick(){if(!run)run=requestAnimationFrame(loop)}
+['mousemove','mousedown','mouseup','message'].forEach(function(ev){addEventListener(ev,kick,{passive:true})});kick();
 })();
