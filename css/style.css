@@ -605,3 +605,20 @@ h1,h2:not(.label):not(.sr),h3,.h40,.about-text,.quote blockquote{font-family:var
 @media (max-width:809px){.sv-track{margin:0}}
 
 
+
+/* ---------- stats ---------- */
+.stats{display:flex;gap:10px}
+.st{position:relative;flex:1 1 0;height:308px;border-radius:var(--r);padding:28px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.st p{font-size:20px;line-height:1.2;letter-spacing:-0.01em;max-width:338px}
+.st b{font-family:var(--serif);font-weight:400;font-size:150px;line-height:.72;letter-spacing:-0.01em}
+.st b sup{font-size:.645em;vertical-align:top;line-height:1;position:relative;top:-.12em}
+.st img{position:absolute;right:28px;bottom:28px;width:50px;height:auto}
+.st-pink{background:var(--pink);color:var(--bg)}
+.st-dark{background:rgba(242,231,220,.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);color:var(--beige)}
+.st-beige{background:var(--beige);color:var(--bg)}
+@media (max-width:1199px){.st{height:260px;padding:22px}.st p{font-size:16px}.st b{font-size:110px}.st img{right:22px;bottom:22px;width:40px}}
+@media (max-width:809px){.stats{flex-direction:column}.st{flex:none;height:220px;padding:20px}.st b{font-size:110px}}
+/* star lives inside the marquee text line */
+.sv-w{align-items:baseline}
+.sv-st{display:inline-block;margin:0 .05em 0 .3em}
+.sv-st .sv-star{display:block;width:.34em;height:.34em;margin-bottom:.12em}

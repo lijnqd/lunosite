@@ -131,7 +131,7 @@ const asciiArt = [
 
 function init() {
   // Принудительно повышаем плотность пикселей канваса в 2 раза для максимальной четкости рендеринга шрифта
-  dpr = (window.devicePixelRatio || 1) * 2;
+  dpr = Math.min(2, (window.devicePixelRatio || 1) * 1.5);
   width = container.clientWidth;
   height = container.clientHeight;
 

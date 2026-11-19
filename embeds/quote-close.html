@@ -129,7 +129,7 @@ const asciiArt = [
 ];
 
 function init() {
-  dpr = (window.devicePixelRatio || 1) * 2;
+  dpr = Math.min(2, (window.devicePixelRatio || 1) * 1.5);
   width = container.clientWidth;
   height = container.clientHeight;
 

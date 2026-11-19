@@ -21,7 +21,7 @@ addEventListener('resize',f);f();var again=function(){f()};setTimeout(again,100)
 // vertical markers for process (tablet/phone)
 document.querySelectorAll('.step').forEach(function(s,i){var m=document.createElement('div');m.className='mkv';if(i===0){m.appendChild(document.createElement('i'))}else{var im=document.createElement('img');im.src='assets/img/marker-'+(i+1)+'.png';im.alt='';im.style.width=[0,28,45,62][i]+'px';m.style.height=[11,28,45,62][i]+'px';m.appendChild(im)}s.insertBefore(m,s.firstChild)});
 // footer art: word-only variant on phones
-(function(){var f=document.getElementById('fArt');if(!f)return;function go(){if(!f.src)f.src='embeds/footer-art.html?v=4'+(innerWidth<810?'&w=1':'')}if('IntersectionObserver'in window){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){o.disconnect();go()}},{rootMargin:'500px'});o.observe(f)}else go()})();
+(function(){var f=document.getElementById('fArt');if(!f)return;function go(){if(!f.src)f.src='embeds/footer-art.html?v=5'+(innerWidth<810?'&w=1':'')}if('IntersectionObserver'in window){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){o.disconnect();go()}},{rootMargin:'500px'});o.observe(f)}else go()})();
 
 // reveal on scroll
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
