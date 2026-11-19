@@ -552,10 +552,10 @@ html.cur-on input:not([type=checkbox]):not([type=radio]),html.cur-on textarea{cu
 .sv-stage{position:sticky;top:0;height:100vh;height:calc(100vh / var(--dz,1));display:flex;align-items:center;justify-content:center;overflow:hidden}
 .sv-h{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .sv-mq{position:absolute;left:0;right:0;top:50%;transform:translateY(-60%);pointer-events:none}
-.sv-mq-in{display:flex;align-items:center;white-space:nowrap;will-change:transform}
+.sv-mq-in{display:flex;align-items:baseline;white-space:nowrap;will-change:transform}
 .sv-w{flex:none;display:inline-flex;font-family:var(--serif);font-size:200px;line-height:1.05;letter-spacing:-0.03em;color:var(--beige);padding:0 40px}
 .sv-w span{display:inline-block;will-change:transform}
-.sv-star{width:68px;height:68px;flex:none}
+.sv-star{width:68px;height:68px;flex:none;align-self:baseline;margin-bottom:18px}
 .sv-cards{position:relative;display:flex;gap:10px;width:100%;justify-content:center}
 .sv-card{flex:0 1 460px;height:449px;display:flex;flex-direction:column;padding:28px;border-radius:var(--r);background:rgba(242,231,220,.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);will-change:transform}
 .sv-top{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
