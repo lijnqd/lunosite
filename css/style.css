@@ -55,7 +55,8 @@ main{padding-top:66px}
 .about{min-height:608px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:100px 0}
 .about .btn{flex:none;width:180px;margin-top:12px}
 .about-text{width:1011px;text-align:center;font-size:60px;line-height:1.05;letter-spacing:-0.01em}
-.about-text .w{display:inline-block;will-change:transform}
+.about-text .w{opacity:.25;transition:opacity .25s}
+.about-text .w.on{opacity:1}
 
 .about-text .eye{display:inline-block;height:.7em;width:auto;vertical-align:-.04em;margin:0 .1em}
 .pill{display:inline-block;color:var(--pink);border:1px solid var(--pink);border-radius:100px;padding:0 20px;margin-top:2px}
@@ -603,9 +604,4 @@ h1,h2:not(.label):not(.sr),h3,.h40,.about-text,.quote blockquote{font-family:var
 .sv-track{margin-top:calc((520px - 100vh / var(--dz,1)) / 2);margin-bottom:calc((520px - 100vh / var(--dz,1)) / 2)}
 @media (max-width:809px){.sv-track{margin:0}}
 
-/* about statement v2 */
-.about{overflow:hidden}
-.about-text{width:1180px;font-size:60px;line-height:1.08;text-align:left}
-.about-text+.about-text{margin-top:-4px}
-@media (max-width:1199px){.about-text{font-size:44px}}
-@media (max-width:809px){.about-text{font-size:30px;line-height:1.1}}
+

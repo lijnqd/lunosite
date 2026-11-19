@@ -26,7 +26,7 @@
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="/assets/img/about-cover.webp" imagesrcset="/assets/img/about-cover-640.webp 640w, /assets/img/about-cover-1000.webp 1000w, /assets/img/about-cover.webp 2000w" imagesizes="(max-width:809px) 50vw, 100vw" fetchpriority="high">
-<link rel="stylesheet" href="/css/style.css?v=1795094556">
+<link rel="stylesheet" href="/css/style.css?v=1795094652">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About lunö studio","url":"https://designluno.com/about/","description":"design studio that gives visuals a meaning: brand identities, websites and digital products for startups and growing businesses, from idea to interface."}</script>
 <style>
 .ab{padding-top:72px}
@@ -99,6 +99,12 @@
  .ab-sk.open .cols{padding-bottom:20px}
 }
 .ab-lead .pink{font-style:italic}
+.ab-big-wrap{display:block;overflow:hidden}
+.ab-big-wrap .label{margin-bottom:24px}
+.ab-big{font-family:var(--serif);font-size:72px;line-height:1.05;letter-spacing:-0.01em;max-width:1280px}
+.ab-big .w{display:inline-block;will-change:transform}
+@media (max-width:1199px){.ab-big{font-size:52px}}
+@media (max-width:809px){.ab-big{font-size:34px;line-height:1.08}}
 </style>
 </head>
 <body>
@@ -129,9 +135,9 @@
   <a class="btn btn-pink" href="/#cases"><i></i>view cases</a>
 </section>
 <div class="stack">
-  <section class="ab-about">
-    <div><p class="label">#about us</p><p class="ab-lead reveal">lunö is a design studio that <span class="pink">gives visuals a meaning.</span> we make brand identities, websites, and digital products for startups and growing businesses</p></div>
-    <div class="ab-side reveal"><p>most of our clients come to us with the same problem: they’re great at what they do, but their brand or website doesn’t show it. people don’t get what they offer, or don’t trust it enough to reach out. that’s the part we fix</p><p>we don’t start with pretty pictures. we start by asking questions: who your customers are, what they need, what makes you different. then we turn all of that into a brand and a website that feel clear and honest, and that look like you</p></div>
+  <section class="ab-about ab-big-wrap">
+    <p class="label">#about us</p>
+    <p class="ab-big" id="abBig">lunö is an independent design studio. we make brand identities, logos and websites for startups and growing businesses across europe and the us. over the last 4 years we’ve designed everything from one-page landings to large digital systems.<br><br>we work with any business that makes something real, from toothbrushes to travel agencies. just not casinos or “get rich quick” courses.</p>
   </section>
   <section class="ab-h"><p class="label">#how to work with us</p><h2 class="reveal">what working with us feels like</h2>
     <div class="ab-feel">
@@ -352,5 +358,11 @@ c.forEach(function(a,i){var h=a.querySelector('h3');h.setAttribute('role','butto
  h.addEventListener('click',go);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
 function reset(){c.forEach(function(a,i){if(mq.matches)tg(a,i===0);else{a.classList.remove('open');a.querySelector('.cols').style.maxHeight=''}})}
 reset();mq.addEventListener?mq.addEventListener('change',reset):mq.addListener(reset);})();</script>
+<script>/* about: words fly in from the right and settle into place one by one as you scroll */(function(){var at=document.getElementById('abBig');if(!at)return;
+(function walk(n){[].slice.call(n.childNodes).forEach(function(c){if(c.nodeType===3){var f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(function(p){if(!p)return;if(/^\s+$/.test(p))f.appendChild(document.createTextNode(p));else{var s=document.createElement('span');s.className='w';s.textContent=p;f.appendChild(s)}});n.replaceChild(f,c)}else if(c.nodeType===1&&c.tagName!=='BR')walk(c)})})(at);
+var ws=at.querySelectorAll('.w'),N=ws.length,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function upd(){var r=at.getBoundingClientRect(),vh=innerHeight,W=innerWidth,p=(vh*.95-r.top)/(r.height+vh*.35);p=Math.max(0,Math.min(1,p))*1.12;
+ for(var i=0;i<N;i++){var d=RM?0:Math.max(0,i/N-p+.04);ws[i].style.transform=d>0?'translate3d('+(d*W*2.4).toFixed(1)+'px,'+Math.min(d*260,26).toFixed(1)+'px,0)':''}}
+addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();</script>
 </body>
 </html>

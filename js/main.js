@@ -36,11 +36,7 @@ var at=document.getElementById('aboutText');
     else if(c.nodeType===1&&c.tagName!=='IMG'){walk(c)}
   })})(at);
   var ws=at.querySelectorAll('.w');
-  /* words fly in from the right and settle into place one by one as you scroll */
-  var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,N=ws.length;
-  function upd(){var r=at.getBoundingClientRect(),vh=innerHeight,W=innerWidth;var p=(vh*.95-r.top)/(r.height+vh*.35);p=Math.max(0,Math.min(1,p))*1.12;
-   for(var i=0;i<N;i++){var d=RM?0:Math.max(0,i/N-p+.04),w=ws[i];
-    w.style.transform=d>0?'translate3d('+(d*W*2.4).toFixed(1)+'px,'+Math.min(d*260,26).toFixed(1)+'px,0)':''}}
+  function upd(){var r=at.getBoundingClientRect(),vh=innerHeight;var p=(vh*.85-r.top)/(r.height+vh*.25);p=Math.max(0,Math.min(1,p));var k=Math.round(p*ws.length*1.05);ws.forEach(function(w,i){w.classList.toggle('on',i<k)})}
   addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
 })();
 
