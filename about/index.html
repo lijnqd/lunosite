@@ -24,8 +24,9 @@
 <link rel="icon" type="image/png" href="/assets/img/favicon-light.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="/assets/img/about-cover.webp" imagesrcset="/assets/img/about-cover-640.webp 640w, /assets/img/about-cover-1000.webp 1000w, /assets/img/about-cover.webp 2000w" imagesizes="(max-width:809px) 50vw, 100vw" fetchpriority="high">
-<link rel="stylesheet" href="/css/style.css?v=1795024576">
+<link rel="stylesheet" href="/css/style.css?v=1795093867">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About lunö studio","url":"https://designluno.com/about/","description":"design studio that gives visuals a meaning: brand identities, websites and digital products for startups and growing businesses, from idea to interface."}</script>
 <style>
 .ab{padding-top:72px}
@@ -35,7 +36,7 @@
 .ab-cover{position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;pointer-events:none}
 .ab-hero .tags{position:absolute;z-index:2;left:40px;top:40px;font-size:16px;line-height:1;letter-spacing:-0.01em;color:var(--pink)}
 .ab-txt{position:absolute;left:40px;bottom:40px;width:385px;display:flex;flex-direction:column;gap:20px}
-.ab-hero h1{font-size:72px;line-height:1;letter-spacing:-0.01em;font-weight:400}
+.ab-hero h1{font-size:84px;line-height:1;letter-spacing:-0.01em;font-weight:400}
 .ab-hero h1 em{font-style:italic;color:var(--pink)}
 .ab-hero .ab-txt p{font-size:18px;line-height:1.4;letter-spacing:-0.01em}
 .ab-hero .btn{position:absolute;right:40px;bottom:40px;width:167px}
@@ -43,23 +44,23 @@
 .ab-about{display:flex;gap:28px}
 .ab-about>div:first-child{width:705px;flex:none}
 .ab-about .label{margin-bottom:16px}
-.ab-lead{font-size:48px;line-height:1.05;letter-spacing:-0.01em;width:677px}
+.ab-lead{font-family:var(--serif);font-size:60px;line-height:1.05;letter-spacing:-0.01em;width:677px}
 .ab-lead .pink,.ab-q .pink{color:var(--pink)}
 .ab-side{padding-top:32px;width:516px;font-size:18px;line-height:1.4;letter-spacing:-0.01em;opacity:.9}
 .ab-side p+p{margin-top:21.6px}
 .ab-h{max-width:1058px}
 .ab-h .label{margin-bottom:16px}
-.ab-h h2{max-width:850px;font-size:40px;line-height:1.15;letter-spacing:-0.01em;font-weight:400}
+.ab-h h2{max-width:850px;font-size:52px;line-height:1.15;letter-spacing:-0.01em;font-weight:400}
 .ab-h h2 .pink{color:var(--pink)}
 .ab-feel{display:flex;gap:10px;margin-top:32px}
 .ab-feel>div{flex:1;min-height:283px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(242,231,220,.16)}
 .ab-feel>div:last-child{border-right:0}
 .ab-feel img{display:block;height:44px;width:auto;margin-bottom:20px}
-.ab-feel h3{font-size:24px;line-height:1;letter-spacing:-0.01em;font-weight:400;max-width:254px}
+.ab-feel h3{font-size:32px;line-height:1;letter-spacing:-0.01em;font-weight:400;max-width:254px}
 .ab-feel p{font-size:18px;line-height:1.4;letter-spacing:-0.01em;max-width:323px;padding-right:12px}
 .ab-skills{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:32px}
 .ab-sk{position:relative;height:330px;border-radius:var(--r);background:var(--glass);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);padding:20px 18px}
-.ab-sk h3{font-size:32px;line-height:1.15;letter-spacing:-0.01em;font-weight:400;padding-left:2px}
+.ab-sk h3{font-size:40px;line-height:1.15;letter-spacing:-0.01em;font-weight:400;padding-left:2px}
 .ab-sk .cols{position:absolute;left:18px;right:18px;bottom:20px;display:flex;gap:16px;align-items:flex-end}
 .ab-sk ul{list-style:none;width:209px;display:flex;flex-direction:column;gap:16px}
 .ab-sk li{font-size:16px;line-height:1.4;letter-spacing:-0.01em;padding-bottom:12px;position:relative;white-space:nowrap}
@@ -67,7 +68,7 @@
 .ab-adv-ico{display:inline-block;width:29px;height:29px;vertical-align:-3px;margin:0 6px}
 .ab-quote-wrap .quote{width:100%}
 @media (max-width:1199px){
- .ab-hero{height:560px}.ab-hero h1{font-size:48px;line-height:1.05}
+ .ab-hero{height:560px}.ab-hero h1{font-size:60px;line-height:1.05}
  .ab-about{flex-direction:column;gap:32px}.ab-about>div:first-child,.ab-lead,.ab-side{width:100%;max-width:760px}.ab-side{padding-top:0}
  .ab-feel{flex-wrap:wrap;gap:32px 10px}.ab-feel>div{flex:1 1 calc(50% - 10px);min-height:220px}.ab-feel>div:nth-child(2){border-right:0}
  .ab-skills{grid-template-columns:1fr}
@@ -75,9 +76,9 @@
 @media (max-width:809px){
  .ab{padding-top:64px}.ab-hero{margin:0 12px;height:auto;min-height:620px;padding:24px}
  .ab-hero .tags{position:relative;z-index:2;left:auto;top:auto;display:block;margin-bottom:12px}.ab-contacts{padding-top:60px!important}
- .ab-txt{left:24px;bottom:88px;width:calc(100% - 48px)}.ab-hero h1{font-size:40px;line-height:1.15}.ab-hero .btn{left:24px;right:24px;width:auto;bottom:24px}
-.ab-lead{font-size:32px;line-height:1.15;letter-spacing:-0.01em}
- .ab-h h2{font-size:32px;line-height:1.15}
+ .ab-txt{left:24px;bottom:88px;width:calc(100% - 48px)}.ab-hero h1{font-size:52px;line-height:1.15}.ab-hero .btn{left:24px;right:24px;width:auto;bottom:24px}
+.ab-lead{font-size:40px;line-height:1.1;letter-spacing:-0.01em}
+ .ab-h h2{font-size:40px;line-height:1.15}
  .ab-feel{margin-top:32px;gap:24px}.ab-feel>div{flex:1 1 100%;border-right:0;min-height:0;gap:24px}
  .ab-skills{margin-top:32px}.ab-sk{height:auto;padding:20px 18px}.ab-sk .cols{position:static;flex-direction:column;gap:16px;margin-top:28px}.ab-sk ul{width:100%}
 }
@@ -90,12 +91,13 @@
 @media (max-width:809px){.ab-face{left:44%;top:84px;height:auto;width:min(60%,250px);transform:translateX(-50%)}.pet-say{left:74%;bottom:80%;font-size:14px;padding:8px 13px}}
 @media (max-width:809px){
  .ab-sk{padding:0 18px}
- .ab-sk h3{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:72px;font-size:24px;cursor:pointer}
+ .ab-sk h3{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:72px;font-size:32px;cursor:pointer}
  .ab-sk h3:after{content:"";flex:none;width:14px;height:14px;background:linear-gradient(currentColor,currentColor) center/14px 1.5px no-repeat,linear-gradient(currentColor,currentColor) center/1.5px 14px no-repeat;color:var(--pink);transition:transform .35s}
  .ab-sk.open h3:after{transform:rotate(45deg)}
  .ab-sk .cols{margin-top:0!important;overflow:hidden;max-height:0;transition:max-height .45s cubic-bezier(.65,0,.25,1),padding .45s}
  .ab-sk.open .cols{padding-bottom:20px}
 }
+.ab-lead .pink{font-style:italic}
 </style>
 </head>
 <body>
