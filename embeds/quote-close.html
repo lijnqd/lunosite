@@ -34,7 +34,7 @@
         </style>
     </head>
     <body>
-        <style>@font-face{font-family:'Sometype Mono';font-weight:400;font-display:swap;src:url(/assets/fonts/sometype-mono-latin-500-normal.woff2) format('woff2')}</style>
+        <style>@font-face{font-family:Inter;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-latin-wght-normal.woff2) format('woff2')}</style>
 <style>
   body, html { 
     margin: 0; 
@@ -255,7 +255,7 @@ function animate() {
     item.y += item.vy;
 
     if (item.vx > 0.02 || item.vx < -0.02 || item.vy > 0.02 || item.vy < -0.02) __moving = true;
-    if (__font !== item.fontSize) { __font = item.fontSize; ctx.font = `500 ${item.fontSize}px 'Sometype Mono', monospace`; }
+    if (__font !== item.fontSize) { __font = item.fontSize; ctx.font = `500 ${item.fontSize}px Inter, sans-serif`; }
     ctx.fillStyle = '#FFB3AD';
     ctx.fillText(item.char, item.x, item.y);
   }

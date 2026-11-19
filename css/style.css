@@ -2,9 +2,7 @@
 @font-face{font-family:Inter;font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-cyrillic-wght-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
 @font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/instrument-serif-latin-400-normal.woff2) format('woff2')}
 @font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/instrument-serif-latin-400-italic.woff2) format('woff2')}
-@font-face{font-family:'Sometype Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/sometype-mono-latin-400-normal.woff2) format('woff2')}
-@font-face{font-family:'Sometype Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/sometype-mono-latin-500-normal.woff2) format('woff2')}
-:root{--serif:"Instrument Serif",Georgia,"Times New Roman",serif;--r:20px;--glass-2:rgba(242,231,220,.08);--beige-2:rgba(242,231,220,.72);--r-in:12px;--r-btn:12px;--bg:#141414;--beige:#F2E7DC;--pink:#FFB3AD;--glass:rgba(242,231,220,.05);--mono:"Sometype Mono","Office Code Pro D",ui-monospace,monospace}
+:root{--serif:"Instrument Serif",Georgia,"Times New Roman",serif;--r:20px;--glass-2:rgba(242,231,220,.08);--beige-2:rgba(242,231,220,.72);--r-in:12px;--r-btn:12px;--bg:#141414;--beige:#F2E7DC;--pink:#FFB3AD;--glass:rgba(242,231,220,.05);--mono:Inter,system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{background:var(--bg) radial-gradient(circle,rgba(255,179,173,.1) 2px,transparent 2.6px) 0 0/60px 60px;color:var(--beige);font-family:Inter,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden;
@@ -552,9 +550,9 @@ html.cur-on input:not([type=checkbox]):not([type=radio]),html.cur-on textarea{cu
 .sv-track{position:relative}
 .sv-stage{position:sticky;top:0;height:100vh;height:calc(100vh / var(--dz,1));display:flex;align-items:center;justify-content:center;overflow:hidden}
 .sv-h{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.sv-mq{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);pointer-events:none;overflow:hidden}
+.sv-mq{position:absolute;left:0;right:0;top:50%;transform:translateY(-60%);pointer-events:none}
 .sv-mq-in{display:flex;align-items:center;white-space:nowrap;will-change:transform}
-.sv-w{flex:none;display:inline-flex;font-family:var(--serif);font-size:200px;line-height:1.05;letter-spacing:-0.03em;color:var(--beige);padding:0 40px;overflow:hidden}
+.sv-w{flex:none;display:inline-flex;font-family:var(--serif);font-size:200px;line-height:1.05;letter-spacing:-0.03em;color:var(--beige);padding:0 40px}
 .sv-w span{display:inline-block;will-change:transform}
 .sv-star{width:68px;height:68px;flex:none}
 .sv-cards{position:relative;display:flex;gap:10px;width:100%;justify-content:center}
@@ -581,3 +579,26 @@ html.cur-on input:not([type=checkbox]):not([type=radio]),html.cur-on textarea{cu
 h1,h2:not(.label):not(.sr),h3,.h40,.about-text,.quote blockquote{font-family:var(--serif);font-weight:400;letter-spacing:-0.01em}
 :is(h1,h2,h3,.h40,.about-text,.quote blockquote) .pink{font-style:italic}
 :is(h1,h2,h3,.h40,.about-text,.quote blockquote) .pill{padding:0 .25em}
+
+/* ---------- nov 19 fixes ---------- */
+/* quote: flowing layout, serif 40 like the mockup */
+.quote{height:auto;padding:120px 40px 110px}
+.quote blockquote{position:static;width:100%;max-width:802px;margin:0 auto;font-size:40px;line-height:1.1}
+.quote .author{position:static;margin-top:32px}
+@media (max-width:809px){.quote{padding:84px 20px 76px}.quote blockquote{font-size:30px;line-height:1.1}}
+/* about statement */
+.about-text{width:1003px;max-width:100%;font-size:60px;line-height:1.1}
+.about-text .pill{font-style:italic;padding:0 .3em;margin-top:6px}
+@media (max-width:1199px){.about-text{font-size:48px}}
+@media (max-width:809px){.about-text{font-size:32px;line-height:1.1}}
+/* faq + footer headings in serif */
+.fq .q{font-family:Inter,sans-serif}
+.fq .q .qt{display:block;font-family:var(--serif);font-size:32px;line-height:1.05;letter-spacing:-0.01em;margin-top:6px}
+.fq .q .qn{font-size:16px}
+.f-h{font-family:var(--serif);font-size:40px;line-height:1;letter-spacing:-0.01em}
+@media (max-width:809px){.fq .q .qt{font-size:28px}.f-h{font-size:32px}}
+/* phone header: logo + menu only */
+@media (max-width:809px){.header .btn-pink{display:none}.header .menu-btn{margin-left:auto}}
+/* services: less air around the pinned stage */
+.sv-track{margin-top:calc((520px - 100vh / var(--dz,1)) / 2);margin-bottom:calc((520px - 100vh / var(--dz,1)) / 2)}
+@media (max-width:809px){.sv-track{margin:0}}
