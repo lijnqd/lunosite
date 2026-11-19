@@ -26,19 +26,20 @@
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="/assets/img/about-cover.webp" imagesrcset="/assets/img/about-cover-640.webp 640w, /assets/img/about-cover-1000.webp 1000w, /assets/img/about-cover.webp 2000w" imagesizes="(max-width:809px) 50vw, 100vw" fetchpriority="high">
-<link rel="stylesheet" href="/css/style.css?v=1795094210">
+<link rel="stylesheet" href="/css/style.css?v=1795094556">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About lunö studio","url":"https://designluno.com/about/","description":"design studio that gives visuals a meaning: brand identities, websites and digital products for startups and growing businesses, from idea to interface."}</script>
 <style>
 .ab{padding-top:72px}
-.ab-hero{position:relative;height:646px;margin:0 20px;border-radius:var(--r);overflow:hidden}
+.ab-hero{position:relative;height:780px;margin:0 20px;border-radius:var(--r);overflow:hidden}
 .ab-hero:before{content:"";position:absolute;inset:0;z-index:1;background:var(--glass);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .ab-hero>*:not(.ab-cover){z-index:2}
 .ab-cover{position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;pointer-events:none}
 .ab-hero .tags{position:absolute;z-index:2;left:40px;top:40px;font-size:16px;line-height:1;letter-spacing:-0.01em;color:var(--pink)}
-.ab-txt{position:absolute;left:40px;bottom:40px;width:385px;display:flex;flex-direction:column;gap:20px}
+.ab-txt{position:absolute;left:40px;bottom:40px;width:auto;max-width:calc(100% - 300px);display:flex;flex-direction:column;gap:20px}
 .ab-hero h1{font-size:84px;line-height:1;letter-spacing:-0.01em;font-weight:400}
-.ab-hero h1 em{font-style:italic;color:var(--pink)}
-.ab-hero .ab-txt p{font-size:18px;line-height:1.4;letter-spacing:-0.01em}
+.ab-hero h1 em{display:block;font-style:italic;color:var(--pink)}
+.ab-hero h1{white-space:nowrap}
+.ab-hero .ab-txt p{max-width:385px;font-size:18px;line-height:1.4;letter-spacing:-0.01em}
 .ab-hero .btn{position:absolute;right:40px;bottom:40px;width:167px}
 .ab .stack{padding-top:80px;gap:140px}
 .ab-about{display:flex;gap:28px}
@@ -68,13 +69,13 @@
 .ab-adv-ico{display:inline-block;width:29px;height:29px;vertical-align:-3px;margin:0 6px}
 .ab-quote-wrap .quote{width:100%}
 @media (max-width:1199px){
- .ab-hero{height:560px}.ab-hero h1{font-size:60px;line-height:1.05}
+ .ab-hero{height:680px}.ab-hero h1{font-size:60px;line-height:1.05}
  .ab-about{flex-direction:column;gap:32px}.ab-about>div:first-child,.ab-lead,.ab-side{width:100%;max-width:760px}.ab-side{padding-top:0}
  .ab-feel{flex-wrap:wrap;gap:32px 10px}.ab-feel>div{flex:1 1 calc(50% - 10px);min-height:220px}.ab-feel>div:nth-child(2){border-right:0}
  .ab-skills{grid-template-columns:1fr}
 }
 @media (max-width:809px){
- .ab{padding-top:64px}.ab-hero{margin:0 12px;height:auto;min-height:620px;padding:24px}
+ .ab{padding-top:64px}.ab-hero{margin:0 12px;height:auto;min-height:680px;padding:24px}
  .ab-hero .tags{position:relative;z-index:2;left:auto;top:auto;display:block;margin-bottom:12px}.ab-contacts{padding-top:60px!important}
  .ab-txt{left:24px;bottom:88px;width:calc(100% - 48px)}.ab-hero h1{font-size:52px;line-height:1.15}.ab-hero .btn{left:24px;right:24px;width:auto;bottom:24px}
 .ab-lead{font-size:40px;line-height:1.1;letter-spacing:-0.01em}

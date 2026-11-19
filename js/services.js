@@ -19,9 +19,9 @@ function frame(){
  var p=run>0?cl(-r.top/run):0,q=cl((vh-r.top)/vh);
  var mw=mq.scrollWidth*z();
  mq.style.transform='translate3d('+(-(p*0.55+q*0.08)*mw/3).toFixed(1)+'px,0,0)';
- var tx=-(p*0.55+q*0.08)*mw/3,vw=innerWidth,zz=z();
+ var tx=-(p*0.55+q*0.08)*mw/3,vw=innerWidth,zz=z(),amp=1-ease(cl((p-0.04)/0.32));
  letters.forEach(function(l,k){var x=(lx[k]||0)*zz+tx,u=cl((x-vw*.18)/(vw*.8));if(RM)u=0;
-  var y=Math.pow(u,1.35)*170+Math.sin(u*Math.PI)*18*u;l.style.transform='translate3d(0,'+y.toFixed(1)+'%,0)'});
+  var y=(Math.pow(u,1.35)*170+Math.sin(u*Math.PI)*18*u)*amp;l.style.transform='translate3d(0,'+y.toFixed(1)+'%,0)'});
  cards.forEach(function(c,i){var t=RM?1:ease(cl((p-0.05-i*0.13)/0.42));c.style.transform='translate3d(0,'+((1-t)*vh/z()*0.95).toFixed(1)+'px,0)'});
 }
 var tick=false;function req(){if(!tick){tick=true;requestAnimationFrame(function(){tick=false;frame()})}}
