@@ -350,7 +350,7 @@ function draw(){x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);if(mx<0)ret
 addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addEventListener('scroll',draw,{passive:true});addEventListener('resize',size);size()})();
 </script>
 <script src="/js/cookies.js?v=10" defer></script>
-<script src="/js/dotmorph.js?v=11" defer></script>
+<script src="/js/dotmorph.js?v=12" defer></script>
 <script src="/js/track.js?v=1" defer></script>
 <script src="/js/form.js?v=13" defer></script>
 <script>document.querySelectorAll(".copy").forEach(function(b){b.addEventListener("click",function(){var t=b.nextElementSibling.textContent;function ok(){b.textContent="copied";setTimeout(function(){b.textContent="copy template"},1800)}if(navigator.clipboard)navigator.clipboard.writeText(t).then(ok,ok);else{var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove();ok()}})})</script>
