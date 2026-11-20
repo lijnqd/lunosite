@@ -567,12 +567,11 @@ html.cur-on input:not([type=checkbox]):not([type=radio]),html.cur-on textarea{cu
 .sv-li b{font-weight:400;color:var(--pink);margin-right:4px}
 @media (max-width:1199px){.sv-w{font-size:150px}.sv-card{padding:22px;height:420px}.sv-top h3{font-size:36px}.sv-lead{font-size:18px}.sv-li{font-size:14px;gap:10px}}
 @media (max-width:809px){
-  .sv-track{height:auto!important}
   .sv-stage{position:static;height:auto;display:block;overflow:visible}
   .sv-mq{display:none}
   .sv-h{position:static;width:auto;height:auto;clip:auto;overflow:visible;font-family:var(--serif);font-size:56px;line-height:1;letter-spacing:-0.02em;margin-bottom:24px}
   .sv-cards{flex-direction:column;gap:10px}
-  .sv-card{flex:none;height:auto;padding:22px 20px;transform:none!important}
+  .sv-card{flex:none;height:auto;padding:22px 20px}
   .sv-top h3{font-size:40px}
   .sv-li{margin-top:28px;font-size:16px}
 }
@@ -688,3 +687,17 @@ iframe{color-scheme:normal}
 .cs-card i.cs-dot.dm{position:absolute;width:8px;height:8px;color:var(--pink)}
 .cs-card:hover .cs-dot{transform:none}
 .cs-card i.dm span{background:var(--pink)!important}
+/* case cards: picture wrapper behaves like the img */
+.cs-card picture{position:absolute;inset:0}
+.cs-card picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (max-width:809px){.cs-info{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(18,18,18,.82)}}
+/* services on phones: same pinned scene — wavy marquee behind, cards slide up and stack */
+@media (max-width:809px){
+  .sv-stage{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden}
+  .sv-mq{display:block;top:22%;transform:translateY(-50%)}
+  .sv-w{font-size:96px;padding:0 20px}
+  .sv-h{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0}
+  .sv-cards{display:grid;grid-template-columns:1fr;margin-top:18vh}
+  .sv-card{grid-area:1/1;margin-top:calc(var(--k,0) * 14px);transform:translate3d(0,110vh,0);background:#1c1b1a;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 -10px 30px rgba(0,0,0,.35)}
+  .sv-card:nth-child(2){--k:1}.sv-card:nth-child(3){--k:2}
+}
