@@ -632,7 +632,7 @@ h1,h2:not(.label):not(.sr),h3,.h40,.about-text,.quote blockquote{font-family:var
 
 /* moving film grain instead of the dot grid */
 #dots{display:none!important}
-body:after{content:"";position:fixed;inset:-100%;z-index:-1;pointer-events:none;background:url(/assets/img/grain.png) 0 0/180px 180px;opacity:.09;animation:grain .9s steps(6) infinite}
+body:after{content:"";position:fixed;inset:-100%;z-index:-1;pointer-events:none;background:url(/assets/img/grain.png?v=2) 0 0/128px 128px;opacity:.05;animation:grain 2.4s steps(6) infinite}
 @keyframes grain{0%{transform:translate(0,0)}17%{transform:translate(-7%,4%)}33%{transform:translate(5%,-9%)}50%{transform:translate(-11%,-3%)}67%{transform:translate(8%,10%)}83%{transform:translate(-3%,7%)}100%{transform:translate(0,0)}}
 @media (prefers-reduced-motion:reduce){body:after{animation:none}}
 /* page transitions (cross-document view transitions; browsers without support just navigate) */
