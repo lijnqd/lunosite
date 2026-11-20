@@ -23,7 +23,7 @@
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1795156534">
+<link rel="stylesheet" href="/css/style.css?v=1795156822">
 <style>
 .cs{position:relative;z-index:1;max-width:1430px;margin:0 auto;padding:110px 20px 0}
 .cs-back{display:inline-flex;gap:10px;align-items:center;font-size:16px;opacity:.7;margin-bottom:28px}
@@ -218,7 +218,7 @@ function draw(){x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);if(mx<0)ret
 addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addEventListener('scroll',draw,{passive:true});addEventListener('resize',size);size()})();
 </script>
 <script src="/js/cookies.js?v=10" defer></script>
-<script src="/js/dotmorph.js?v=9" defer></script>
+<script src="/js/dotmorph.js?v=10" defer></script>
 <script src="/js/track.js?v=1" defer></script>
 <script src="/js/form.js?v=13" defer></script>
 <script>(function(){var bs=document.querySelectorAll(".blog-filter button"),cs=document.querySelectorAll(".blog-grid .bc");[].forEach.call(bs,function(b){b.addEventListener("click",function(){var f=b.getAttribute("data-f");[].forEach.call(bs,function(o){var on=o===b;o.classList.toggle("on",on);o.setAttribute("aria-pressed",on?"true":"false")});[].forEach.call(cs,function(c){c.hidden=!!f&&c.getAttribute("data-cat")!==f})})})})();</script>

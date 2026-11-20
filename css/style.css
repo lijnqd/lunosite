@@ -684,3 +684,7 @@ iframe{color-scheme:normal}
 .csp-grid .cs-info{left:32px;bottom:32px}
 @media (max-width:1199px){.csp-grid .cs-info{left:16px;bottom:16px;width:auto;right:16px;min-height:0;padding:20px}.csp-grid .cs-info b{font-size:40px}}
 @media (max-width:809px){.csp-grid{grid-template-columns:1fr;margin-top:24px}.csp-grid .cs-card{aspect-ratio:4/5}}
+
+.cs-card i.cs-dot.dm{position:absolute;width:8px;height:8px;color:var(--pink)}
+.cs-card:hover .cs-dot{transform:none}
+.cs-card i.dm span{background:var(--pink)!important}
