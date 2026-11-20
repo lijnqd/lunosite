@@ -208,11 +208,37 @@ canvas.addEventListener('mousedown', (e) => {
 
 window.addEventListener('resize', init);
 
+/* scroll dissolve: as the hero leaves, every glyph turns into a dot and drifts out over the page */
+let __ov=null,__ox=null,__dp=0,__dl=[];
+const __RM=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+const __hero=canvas.closest?canvas.closest('.hero'):null;
+function __seed(){__dl=chars.map(()=>({d:Math.random()*0.55,tx:Math.random(),ty:Math.random(),w:(Math.random()-.5)*2}))}
+function __ensure(){if(__ov)return;__ov=document.createElement('canvas');__ov.setAttribute('aria-hidden','true');__ov.style.cssText='position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:40';document.body.appendChild(__ov);__ox=__ov.getContext('2d');__osz()}
+function __osz(){if(!__ov)return;const r=Math.min(1.5,window.devicePixelRatio||1);__ov.width=Math.round(innerWidth*r);__ov.height=Math.round(innerHeight*r);__ox.setTransform(r,0,0,r,0,0)}
+function __prog(){if(!__hero)return 0;const r=__hero.getBoundingClientRect();return Math.max(0,Math.min(1.4,(-r.top+20)/(r.height*0.75)))}
+function __ease(v){return v<0?0:v>1?1:1-Math.pow(1-v,3)}
+function __draw(){__dp=__prog();
+  if(__dp<=0.001){if(__ov&&__ov.style.display!=='none'){__ox.clearRect(0,0,innerWidth,innerHeight);__ov.style.display='none'}__busy=2;return}
+  __ensure();__ov.style.display='';if(__dl.length!==chars.length)__seed();
+  ctx.clearRect(0,0,width,height);
+  const W=innerWidth,H=innerHeight,cr=canvas.getBoundingClientRect(),G=W<810?28:40,fade=1-Math.max(0,Math.min(1,(__dp-1)/0.35));
+  __ox.clearRect(0,0,W,H);if(fade<=0)return;
+  const fs=chars.length?chars[0].fontSize:8;__ox.font=`500 ${fs}px 'Sometype Mono', monospace`;
+  for(let i=0;i<chars.length;i++){const it=chars[i],q=__dl[i],t=__ease((__dp*1.5-q.d)/0.9);
+    const sx=cr.left+it.originX,sy=cr.top+it.originY,gx=Math.round(q.tx*W/G)*G+G/2,gy=Math.round(q.ty*H/G)*G+G/2;
+    const x=sx+(gx-sx)*t+Math.sin(t*Math.PI)*q.w*120,y=sy+(gy-sy)*t-Math.sin(t*Math.PI)*60;
+    if(t<0.25){__ox.globalAlpha=fade;__ox.fillStyle='#000';__ox.fillText(it.char,x,y)}
+    else{const k=Math.min(1,(t-.25)/.4);__ox.globalAlpha=fade*(1-k*0.45);__ox.fillStyle=k<1?`rgb(${Math.round(255*k)},${Math.round(179*k)},${Math.round(173*k)})`:'#FFB3AD';const s=Math.max(2,fs*0.55*(1-k)+2*k);__ox.fillRect(x-s/2,y-fs*0.35-s/2,s,s)}}
+  __ox.globalAlpha=1}
+if(!__RM&&__hero){let __tk=false;const __rq=()=>{if(!__tk){__tk=true;requestAnimationFrame(()=>{__tk=false;__draw()})}};window.addEventListener('scroll',__rq,{passive:true});window.addEventListener('resize',()=>{__osz();__rq()});}
+
+
 let __vis = true, __fr = 0, __busy = 2;
 try { new IntersectionObserver((e) => { __vis = e[0].isIntersecting; }).observe(canvas); } catch (err) {}
 function animate() {
   requestAnimationFrame(animate);
   if (!__vis || document.hidden) return;
+  if (typeof __dp!=='undefined' && __dp>0.001) return;
   // idle (no pointer, everything settled): redraw at ~10fps, full speed while interacting
   __fr++;
   if (mouse.x < -9000 && __busy <= 0 && __fr % 6) return;

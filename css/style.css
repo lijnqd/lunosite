@@ -701,3 +701,11 @@ iframe{color-scheme:normal}
   .sv-card{grid-area:1/1;margin-top:calc(var(--k,0) * 14px);transform:translate3d(0,110vh,0);background:#1c1b1a;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 -10px 30px rgba(0,0,0,.35)}
   .sv-card:nth-child(2){--k:1}.sv-card:nth-child(3){--k:2}
 }
+/* hero: bigger headline, mascot sits lower right */
+@media (min-width:1200px){.hero{height:max(774px,calc(100vh / var(--dz,1) - 110px))}}
+.hero h1{width:auto;right:32px;font-size:136px;line-height:.9;letter-spacing:-0.025em}
+@media (min-width:1200px){.hero-art{top:auto;bottom:-20px;left:auto;right:20px;width:680px;height:470px}}
+@media (max-width:1199px){.hero{height:auto;min-height:760px}.hero h1{font-size:96px;line-height:.92}}
+@media (max-width:809px){.hero{min-height:680px}.hero h1{font-size:56px;line-height:.95}}
+/* reduced motion: no transitions or looping animations anywhere */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}}

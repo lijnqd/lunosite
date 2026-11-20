@@ -10,10 +10,10 @@ function load(url){if(!cache[url])cache[url]=fetch(url).then(function(r){return 
   return ''});return cache[url]}
 function run(el){var src=el.getAttribute('data-src'),q=(src.split('?')[1]||'');
   if(el.hasAttribute('data-mobile')&&innerWidth<810)q+=(q?'&':'')+el.getAttribute('data-mobile');
-  load(src.split('?')[0]+'?v=8').then(function(code){if(!code)return;
+  load(src.split('?')[0]+'?v=9').then(function(code){if(!code)return;
     var cv=document.createElement('canvas');cv.setAttribute('aria-hidden','true');el.appendChild(cv);
     code=code.replace("document.getElementById('canvas')","__cv").replace("document.getElementById('container')","__cv.parentElement").replace(/location\.search/g,'__qs').replace(/parent\.innerWidth/g,'window.innerWidth');
-    code+="\n;if(typeof checkContainer==='function')checkContainer();";try{new Function('__cv','__qs',code)(cv,'?'+q)}catch(e){console.warn('ascii',e)}
+    code+="\n;if(typeof checkContainer==='function')checkContainer();";var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,n=0,raf=RM?function(f){return ++n<40?requestAnimationFrame(f):0}:requestAnimationFrame.bind(window);try{new Function('__cv','__qs','requestAnimationFrame',code)(cv,'?'+q,raf)}catch(e){console.warn('ascii',e)}
     /* a block that was hidden (size 0) re-measures when it appears */
     if('ResizeObserver'in window){var w0=el.clientWidth;new ResizeObserver(function(){var w=el.clientWidth;if(w&&w!==w0){w0=w;dispatchEvent(new Event('resize'))}}).observe(el)}})}
 var go=function(el){if(el.__on)return;el.__on=1;run(el)};
