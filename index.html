@@ -29,7 +29,7 @@
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=1795154523">
+<link rel="stylesheet" href="css/style.css?v=1795156222">
 </head>
 <body>
 <a class="skip" href="#content">skip to content</a>
@@ -38,6 +38,7 @@
 <script src="/js/nav.js?v=2" defer></script>
 <script src="/js/cursor.js?v=3" defer></script>
 <script src="/js/reviews.js?v=8" defer></script>
+<script src="/js/cases.js?v=1" defer></script>
 <script src="/js/services.js?v=15" defer></script>
 <script src="/js/preloader.js?v=19"></script>
 <noscript><style>#pre{display:none}html.pre-lock{overflow:auto}</style></noscript>
@@ -103,18 +104,20 @@
       </div></div>
     </section>
 
-    <section id="cases" class="cases">
-      <img class="cases-bg" src="assets/img/texture-4.webp?v=2" srcset="assets/img/texture-4-1000.webp 1000w, assets/img/texture-4.webp?v=2 1600w" sizes="100vw" width="1600" height="977" alt="" loading="lazy" decoding="async">
-      <div class="cases-in"><h2 class="h40 cases-title">our <span class="pink">case</span> studies</h2>
-      <a class="folder f1" href="cases/set/"><span class="fold"></span><img src="assets/img/case-set-452.webp" srcset="assets/img/case-set-452.webp 452w, assets/img/case-set.png 904w" sizes="226px" alt="SET e-commerce website design — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>SET</b><em>#e-commerce</em></a>
-      <a class="folder f2" href="cases/beeyawn/"><span class="fold"></span><img src="assets/img/case-beeyown-452.webp" srcset="assets/img/case-beeyown-452.webp 452w, assets/img/case-beeyown.png 904w" sizes="226px" alt="Beeyawn corporate website design — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>Beeyawn</b><em>#corporate</em></a>
-      <a class="folder f3" href="cases/project-54/"><span class="fold"></span><img src="assets/img/case-project54-452.webp" srcset="assets/img/case-project54-452.webp 452w, assets/img/case-project54.png 904w" sizes="226px" alt="Project 54 corporate website design — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>Project 54</b><em>#corporate</em></a>
-      <a class="folder f4" href="cases/midas/"><span class="fold"></span><img src="assets/img/case-midas-452.webp" srcset="assets/img/case-midas-452.webp 452w, assets/img/case-midas.png 904w" sizes="226px" alt="Midas corporate website design — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>Midas</b><em>#corporate</em></a>
-      <a class="folder f5" href="cases/orta/"><span class="fold"></span><img src="assets/img/case-orta-452.webp" srcset="assets/img/case-orta-452.webp 452w, assets/img/case-orta.png 904w" sizes="226px" alt="ORTA community website design — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>ORTA</b><em>#corporate</em></a>
-      <a class="folder f6" href="cases/form/"><span class="fold"></span><img src="assets/img/case-form-v3-452.webp" srcset="assets/img/case-form-v3-452.webp 452w, assets/img/case-form-v3.webp 904w" sizes="226px" alt="førm brand identity for modular homes — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>førm</b><em>#branding</em></a>
-      <a class="folder f7" href="cases/media-brothers/"><span class="fold"></span><img src="assets/img/case-media-brothers-452.webp" srcset="assets/img/case-media-brothers-452.webp 452w, assets/img/case-media-brothers.webp 904w" sizes="226px" alt="Media brothers website design — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>Media brothers</b><em>#corporate</em></a>
-      <a class="folder f8" href="cases/portfolio/"><span class="fold"></span><img src="assets/img/case-portfolio-452.webp" srcset="assets/img/case-portfolio-452.webp 452w, assets/img/case-portfolio.png 904w" sizes="226px" alt="UX/UI designer portfolio website — lunö studio case" loading="lazy" decoding="async" width="904" height="608"><span class="glass"></span><b>Portfolio</b><em>#portfolio</em></a>
-    </div></section>
+    <section id="cases" class="cases cs2">
+      <p class="label">#cases</p>
+      <h2 class="h40 cs-title">our <span class="pink">case</span> studies</h2>
+      <div class="cs-stack" id="csStack">
+        <a class="cs-card" href="cases/set/" style="--i:0"><img src="assets/img/case-set-cover.webp" srcset="assets/img/case-set-cover-800.webp 800w, assets/img/case-set-cover.webp 1600w" sizes="(max-width:809px) 100vw, 1400px" alt="SET — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>SET</b><p>online store and brand identity for handmade bags</p><em>#e-commerce / ux/ui</em></div></a>
+        <a class="cs-card" href="cases/beeyawn/" style="--i:1"><img src="assets/img/case-bee-cover.webp" alt="Beeyawn — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>Beeyawn</b><p>corporate website for an ai-powered production studio</p><em>#corporate / ux/ui</em></div></a>
+        <a class="cs-card" href="cases/project-54/" style="--i:2"><img src="assets/img/case-p54-cover.webp" srcset="assets/img/case-p54-cover-800.webp 800w, assets/img/case-p54-cover.webp 1600w" sizes="(max-width:809px) 100vw, 1400px" alt="Project 54 — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>Project 54</b><p>four-page website for an ai marketing company in energy</p><em>#corporate / ux/ui</em></div></a>
+        <a class="cs-card" href="cases/midas/" style="--i:3"><img src="assets/img/case-midas-cover.webp" srcset="assets/img/case-midas-cover-800.webp 800w, assets/img/case-midas-cover.webp 1600w" sizes="(max-width:809px) 100vw, 1400px" alt="Midas — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>Midas</b><p>bold multi-page website for a digital marketing agency</p><em>#corporate / ux/ui</em></div></a>
+        <a class="cs-card" href="cases/orta/" style="--i:4"><img src="assets/img/case-orta-cover.webp" alt="ORTA — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>ORTA</b><p>colorful animated website for a creative community space</p><em>#community / ux/ui</em></div></a>
+        <a class="cs-card" href="cases/form/" style="--i:5"><img src="assets/img/case-form-cover.webp" srcset="assets/img/case-form-cover-800.webp 800w, assets/img/case-form-cover.webp 1600w" sizes="(max-width:809px) 100vw, 1400px" alt="førm — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>førm</b><p>brand identity for a company building modular autonomous homes</p><em>#branding</em></div></a>
+        <a class="cs-card" href="cases/media-brothers/" style="--i:6"><img src="assets/img/case-mb-cover.webp" srcset="assets/img/case-mb-cover-800.webp 800w, assets/img/case-mb-cover.webp 1600w" sizes="(max-width:809px) 100vw, 1400px" alt="Media brothers — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>Media brothers</b><p>content-led website for a digital marketing agency</p><em>#corporate / ux/ui</em></div></a>
+        <a class="cs-card" href="cases/portfolio/" style="--i:7"><img src="assets/img/case-yana-cover.webp" srcset="assets/img/case-yana-cover-800.webp 800w, assets/img/case-yana-cover.webp 1600w" sizes="(max-width:809px) 100vw, 1400px" alt="Portfolio — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>Portfolio</b><p>personal portfolio for a ux/ui and web designer</p><em>#portfolio / readymag</em></div></a>
+      </div>
+    </section>
 
     
 
