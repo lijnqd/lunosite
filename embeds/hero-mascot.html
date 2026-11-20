@@ -208,29 +208,32 @@ canvas.addEventListener('mousedown', (e) => {
 
 window.addEventListener('resize', init);
 
-/* scroll dissolve: as the hero leaves, every glyph turns into a dot and drifts out over the page */
-let __ov=null,__ox=null,__dp=0,__dl=[];
+/* scroll dissolve: as the hero leaves, glyphs turn into dots and drift apart, staying inside the hero card; eased */
+let __ov=null,__ox=null,__dp=0,__dt=0,__dl=[],__run=false;
 const __RM=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
 const __hero=canvas.closest?canvas.closest('.hero'):null;
-function __seed(){__dl=chars.map(()=>({d:Math.random()*0.55,tx:Math.random(),ty:Math.random(),w:(Math.random()-.5)*2}))}
+function __seed(){__dl=chars.map(()=>({d:Math.random()*0.5,tx:Math.random(),ty:Math.random(),w:(Math.random()-.5)*2}))}
 function __ensure(){if(__ov)return;__ov=document.createElement('canvas');__ov.setAttribute('aria-hidden','true');__ov.style.cssText='position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:40';document.body.appendChild(__ov);__ox=__ov.getContext('2d');__osz()}
 function __osz(){if(!__ov)return;const r=Math.min(1.5,window.devicePixelRatio||1);__ov.width=Math.round(innerWidth*r);__ov.height=Math.round(innerHeight*r);__ox.setTransform(r,0,0,r,0,0)}
-function __prog(){if(!__hero)return 0;const r=__hero.getBoundingClientRect();return Math.max(0,Math.min(1.4,(-r.top+20)/(r.height*0.75)))}
-function __ease(v){return v<0?0:v>1?1:1-Math.pow(1-v,3)}
-function __draw(){__dp=__prog();
-  if(__dp<=0.001){if(__ov&&__ov.style.display!=='none'){__ox.clearRect(0,0,innerWidth,innerHeight);__ov.style.display='none'}__busy=2;return}
+function __prog(){if(!__hero)return 0;const r=__hero.getBoundingClientRect();return Math.max(0,Math.min(1.3,(-r.top+10)/(r.height*0.7)))}
+function __es(v){v=v<0?0:v>1?1:v;return v*v*(3-2*v)}
+function __draw(){
+  if(__dp<=0.002){if(__ov&&__ov.style.display!=='none'){__ox.clearRect(0,0,innerWidth,innerHeight);__ov.style.display='none'}__busy=2;return}
   __ensure();__ov.style.display='';if(__dl.length!==chars.length)__seed();
   ctx.clearRect(0,0,width,height);
-  const W=innerWidth,H=innerHeight,cr=canvas.getBoundingClientRect(),G=W<810?28:40,fade=1-Math.max(0,Math.min(1,(__dp-1)/0.35));
-  __ox.clearRect(0,0,W,H);if(fade<=0)return;
-  const fs=chars.length?chars[0].fontSize:8;__ox.font=`500 ${fs}px 'Sometype Mono', monospace`;
-  for(let i=0;i<chars.length;i++){const it=chars[i],q=__dl[i],t=__ease((__dp*1.5-q.d)/0.9);
-    const sx=cr.left+it.originX,sy=cr.top+it.originY,gx=Math.round(q.tx*W/G)*G+G/2,gy=Math.round(q.ty*H/G)*G+G/2;
-    const x=sx+(gx-sx)*t+Math.sin(t*Math.PI)*q.w*120,y=sy+(gy-sy)*t-Math.sin(t*Math.PI)*60;
-    if(t<0.25){__ox.globalAlpha=fade;__ox.fillStyle='#000';__ox.fillText(it.char,x,y)}
-    else{const k=Math.min(1,(t-.25)/.4);__ox.globalAlpha=fade*(1-k*0.45);__ox.fillStyle=k<1?`rgb(${Math.round(255*k)},${Math.round(179*k)},${Math.round(173*k)})`:'#FFB3AD';const s=Math.max(2,fs*0.55*(1-k)+2*k);__ox.fillRect(x-s/2,y-fs*0.35-s/2,s,s)}}
-  __ox.globalAlpha=1}
-if(!__RM&&__hero){let __tk=false;const __rq=()=>{if(!__tk){__tk=true;requestAnimationFrame(()=>{__tk=false;__draw()})}};window.addEventListener('scroll',__rq,{passive:true});window.addEventListener('resize',()=>{__osz();__rq()});}
+  const W=innerWidth,H=innerHeight,cr=canvas.getBoundingClientRect(),hr=__hero.getBoundingClientRect(),fade=1-__es((__dp-0.8)/0.45);
+  __ox.clearRect(0,0,W,H);if(fade<=0.001)return;
+  __ox.save();__ox.beginPath();const rad=parseFloat(getComputedStyle(__hero).borderTopLeftRadius)||0;if(__ox.roundRect)__ox.roundRect(hr.left,hr.top,hr.width,hr.height,rad);else __ox.rect(hr.left,hr.top,hr.width,hr.height);__ox.clip();
+  const fs=chars.length?chars[0].fontSize:8,pad=16;__ox.font=`500 ${fs}px 'Sometype Mono', monospace`;__ox.fillStyle='#000';
+  for(let i=0;i<chars.length;i++){const it=chars[i],q=__dl[i],t=__es((__dp*1.4-q.d)/0.9);
+    const sx=cr.left+it.x,sy=cr.top+it.y,gx=hr.left+pad+q.tx*(hr.width-pad*2),gy=hr.top+pad+q.ty*(hr.height-pad*2);
+    const x=sx+(gx-sx)*t+Math.sin(t*Math.PI)*q.w*40,y=sy+(gy-sy)*t;
+    if(t<0.2){__ox.globalAlpha=fade;__ox.fillText(it.char,x,y)}
+    else{const k=__es((t-.2)/.5),s=fs*0.5*(1-k)+2.2*k;__ox.globalAlpha=fade*(1-k*0.35);__ox.fillRect(x-s/2,y-fs*0.35-s/2,s,s)}}
+  __ox.restore();__ox.globalAlpha=1}
+function __loop(){const d=__dt-__dp;__dp+=d*0.09;if(Math.abs(d)<0.0015)__dp=__dt;__draw();if(__dp!==__dt)requestAnimationFrame(__loop);else __run=false}
+function __kick(){__dt=__prog();if(!__run){__run=true;requestAnimationFrame(__loop)}}
+if(!__RM&&__hero){window.addEventListener('scroll',__kick,{passive:true});window.addEventListener('resize',()=>{__osz();__kick()});}
 
 
 let __vis = true, __fr = 0, __busy = 2;
