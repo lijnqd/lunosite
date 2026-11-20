@@ -233,7 +233,7 @@ function __draw(){
   __ox.restore();__ox.globalAlpha=1}
 let __k=0.09;function __loop(){const d=__dt-__dp;__dp+=d*__k;if(Math.abs(d)<0.05)__k=0.09;if(Math.abs(d)<0.004)__dp=__dt;__draw();if(__dp!==__dt)requestAnimationFrame(__loop);else __run=false}
 function __kick(){__dt=__prog();if(!__run){__run=true;requestAnimationFrame(__loop)}}
-if(!__RM&&__hero){window.addEventListener('scroll',__kick,{passive:true});window.addEventListener('resize',()=>{__osz();__kick()});
+if(false&&!__RM&&__hero){window.addEventListener('scroll',__kick,{passive:true});window.addEventListener('resize',()=>{__osz();__kick()});
   /* intro: the mascot gathers out of scattered dots once the page is shown */
   (function __intro(){if(document.documentElement.classList.contains('pre-lock')||!chars.length){setTimeout(__intro,80);return}__dp=1.2;__k=0.035;__kick()})();}
 
