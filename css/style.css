@@ -671,3 +671,16 @@ iframe{color-scheme:normal}
   .cs-info b{font-size:40px}.cs-info p{font-size:16px;margin-top:12px}.cs-info em{padding-top:16px;font-size:14px}
   .cs-dot{right:20px;top:20px}
 }
+/* case card title: beige, pink on hover */
+.cs-info b{color:var(--beige);transition:color .3s}
+.cs-card:hover .cs-info b,.cs-card:focus-visible .cs-info b{color:var(--pink)}
+/* home cases head with "view all" button */
+.cs-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px}
+.cs-head .cs-title{margin-bottom:0}
+@media (max-width:809px){.cs-head{flex-direction:column;align-items:flex-start;margin-bottom:24px}}
+/* cases page grid */
+.csp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:40px}
+.csp-grid .cs-card{position:relative;top:auto;height:auto;aspect-ratio:818/663;margin:0;transform:none!important}
+.csp-grid .cs-info{left:32px;bottom:32px}
+@media (max-width:1199px){.csp-grid .cs-info{left:16px;bottom:16px;width:auto;right:16px;min-height:0;padding:20px}.csp-grid .cs-info b{font-size:40px}}
+@media (max-width:809px){.csp-grid{grid-template-columns:1fr;margin-top:24px}.csp-grid .cs-card{aspect-ratio:4/5}}
