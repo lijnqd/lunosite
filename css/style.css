@@ -703,9 +703,9 @@ iframe{color-scheme:normal}
 }
 /* hero: bigger headline, mascot sits lower right */
 @media (min-width:1200px){.hero{height:max(774px,calc(100vh / var(--dz,1) - 110px))}}
-.hero h1{width:auto;right:32px;font-size:136px;line-height:.9;letter-spacing:-0.025em}
-@media (min-width:1200px){.hero-art{top:auto;bottom:-20px;left:auto;right:20px;width:680px;height:470px}}
-@media (max-width:1199px){.hero{height:auto;min-height:760px}.hero h1{font-size:96px;line-height:.92}}
-@media (max-width:809px){.hero{min-height:680px}.hero h1{font-size:56px;line-height:.95}}
+.hero h1{width:auto;right:32px;font-size:100px;line-height:.95;letter-spacing:-0.02em}
+@media (min-width:1200px){.hero-art{top:auto;bottom:-24px;left:50%;right:auto;width:680px;height:470px;transform:translateX(-50%)}.hero-bottom{right:32px;width:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}.hero-bottom p{max-width:360px;margin:0;font-size:16px}.hero-bottom .btn{width:auto;padding:0 28px;white-space:nowrap}}
+@media (max-width:1199px){.hero{height:auto;min-height:760px}.hero h1{font-size:80px;line-height:.95}}
+@media (max-width:809px){.hero{min-height:680px}.hero h1{font-size:48px;line-height:1}}
 /* reduced motion: no transitions or looping animations anywhere */
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}}

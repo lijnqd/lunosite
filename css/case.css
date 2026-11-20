@@ -109,3 +109,24 @@ html,body{overflow-x:clip}
 }
 .cx-win img{display:block;width:100%;height:auto}
 .cx-next picture{position:absolute;inset:0}
+/* v2.1: compact hero (100px title), smaller cover, tighter rhythm, images in the right column */
+.cx-hero{min-height:0;padding:150px 20px 40px;justify-content:flex-start}
+.cx-top{margin-bottom:0}
+.cx-title{font-size:100px;line-height:.9;letter-spacing:-0.02em;margin-top:56px}
+.cx-row{margin-top:32px}
+.cx-cover{height:min(640px,62vh)}
+.cx-ch{padding:80px 20px 40px}
+.cx-m{max-width:1470px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px}
+.cx-m>*{grid-column:7/13;margin:0!important}
+.cx-m+.cx-m{margin-top:10px}
+.cx-img{margin:0}
+.cx-quote{padding:100px 20px 40px}
+.cx-more{padding-top:80px}
+@media (max-width:1199px){.cx-ch{padding:64px 20px 32px}.cx-m>*{grid-column:6/13}}
+@media (max-width:809px){
+  .cx-hero{padding:100px 12px 24px}.cx-title{font-size:64px;margin-top:32px}
+  .cx-cover{height:auto;aspect-ratio:4/3}
+  .cx-ch{padding:56px 12px 24px}
+  .cx-m{display:block;padding:0 6px}
+  .cx-quote{padding:64px 12px 24px}
+}
