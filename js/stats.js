@@ -7,6 +7,8 @@ els.forEach(function(b){var t=b.firstChild;if(!t||t.nodeType!==3)return;var m=t.
 function run(b){if(!b.__t)return;var n=b.__n,d=Math.min(1600,500+n*25),t0=performance.now();
  (function f(now){var p=Math.min(1,(now-t0)/d),e=1-Math.pow(1-p,3);b.__t.textContent=Math.max(1,Math.round(1+(n-1)*e))+b.__s;if(p<1)requestAnimationFrame(f)})(t0)}
 if(!('IntersectionObserver'in window)){els.forEach(run);return}
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);setTimeout(function(){run(e.target)},200)}})},{threshold:.6});
-els.forEach(function(b){io.observe(b)});
+/* start when the block's top passes 75% of the screen height (checked on scroll; IO thresholds missed it under the zoomed layout) */
+var sec=document.querySelector('.stats'),done=false;
+function chk(){if(done)return;var r=sec.getBoundingClientRect();if(r.top<innerHeight*.75&&r.bottom>0){done=true;removeEventListener('scroll',chk);els.forEach(function(b,i){setTimeout(function(){run(b)},150+i*120)})}}
+addEventListener('scroll',chk,{passive:true});chk();
 })();
