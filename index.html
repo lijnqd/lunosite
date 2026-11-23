@@ -31,7 +31,7 @@
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
 <script>/* desktop zoom before first paint */(function(){function dz(){var w=innerWidth;document.documentElement.style.setProperty("--dz",w>=1200&&w<1470?(w/1470).toFixed(4):1)}dz();addEventListener("resize",dz)})();</script>
-<link rel="stylesheet" href="css/style.css?v=1795454595">
+<link rel="stylesheet" href="css/style.css?v=1795455014">
 </head>
 <body>
 <a class="skip" href="#content">skip to content</a>
@@ -42,6 +42,7 @@
 <script src="/js/cursor.js?v=5" defer></script>
 <script src="/js/reviews.js?v=10" defer></script>
 <script src="/js/cases.js?v=7" defer></script>
+<script src="/js/adv.js?v=1" defer></script>
 <script src="/js/services.js?v=17" defer></script>
 <script src="/js/stats.js?v=3" defer></script>
 <script src="/js/preloader.js?v=20"></script>
@@ -102,24 +103,19 @@
         </div>
       </div></div>
     </section>
-    <section class="adv">
-      <div class="adv-head">
-        <div>
-          <p class="label">#our advantages</p>
-          <h2 class="h40 reveal">what you can <span class="pink">count on</span></h2>
+    <section class="adv av" style="--n:5">
+      <div class="av-stage">
+        <div class="av-left">
+          <div class="av-head"><p class="label">#our advantages</p><h2 class="h40 reveal">what you can <span class="pink">count on</span></h2></div>
+          <ol class="av-list" id="avList">
+          <li class="av-item on" data-icon="/assets/svg/icon-purposeful.svg?v=2"><h3 class="av-t">deadlines with a guarantee</h3><div class="av-d"><p>a landing page in 2–3 weeks, a full website in 4–6 weeks. if we’re more than 20% late, your next project is 20% off.</p></div></li>
+          <li class="av-item" data-icon="/assets/svg/icon-honesty.svg?v=2"><h3 class="av-t">a fixed price, in writing</h3><div class="av-d"><p>you know the full cost before we start. 50% upfront, 50% before handover. nothing gets added without your ok.</p></div></li>
+          <li class="av-item" data-icon="/assets/svg/icon-empathy.svg?v=2"><h3 class="av-t">you see the direction first</h3><div class="av-d"><p>you approve the concept before we design the pages, so the final result holds no surprises.</p></div></li>
+          <li class="av-item" data-icon="/assets/svg/icon-detail.svg?v=2"><h3 class="av-t">straight answers</h3><div class="av-d"><p>if an idea could hurt your brand, we’ll tell you, and we’ll bring a better option with it.</p></div></li>
+          <li class="av-item" data-icon="/assets/svg/icon-collab.svg?v=2"><h3 class="av-t">updates you don’t have to chase</h3><div class="av-d"><p>regular updates in whatsapp or telegram. you always know what’s done and what’s next.</p></div></li>
+          </ol>
         </div>
-        <a class="btn btn-pink" href="#contacts"><i></i>discuss a project</a>
-      </div>
-      <div class="adv-grid">
-        <div class="adv-row r1">
-          <article class="acard reveal"><img src="assets/svg/icon-purposeful.svg?v=2" alt="" loading="lazy" decoding="async"><div><h3>deadlines with a guarantee</h3><p>a landing page in 2–3 weeks, a full website in 4–6 weeks. if we’re more than 20% late, your next project is 20% off.</p></div></article>
-          <article class="acard reveal"><img src="assets/svg/icon-honesty.svg?v=2" alt="" loading="lazy" decoding="async"><div><h3>a fixed price, in writing</h3><p>you know the full cost before we start. 50% upfront, 50% before handover. nothing gets added without your ok.</p></div></article>
-        </div>
-        <div class="adv-row r2">
-          <article class="acard reveal"><img src="assets/svg/icon-empathy.svg?v=2" alt="" loading="lazy" decoding="async"><div><h3>you see the direction first</h3><p>you approve the concept before we design the pages, so the final result holds no surprises.</p></div></article>
-          <article class="acard reveal"><img src="assets/svg/icon-detail.svg?v=2" alt="" loading="lazy" decoding="async"><div><h3>straight answers</h3><p>if an idea could hurt your brand, we’ll tell you, and we’ll bring a better option with it.</p></div></article>
-          <article class="acard reveal"><img src="assets/svg/icon-collab.svg?v=2" alt="" loading="lazy" decoding="async"><div><h3>updates you don’t have to chase</h3><p>regular updates in whatsapp or telegram. you always know what’s done and what’s next.</p></div></article>
-        </div>
+        <div class="av-art" aria-hidden="true"><canvas id="avCv"></canvas></div>
       </div>
     </section>
 

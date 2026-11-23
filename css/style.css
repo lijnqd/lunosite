@@ -1084,3 +1084,26 @@ html.scrolled .hdr-fade{opacity:1}
 .quote.q-pink .author .pink{color:var(--bg)}
 /* full-screen stack: drop the old fixed-height case block */
 .cases.cs-wide{height:auto;overflow:visible;border-radius:0;padding:0;background:none}
+/* advantages v2: one pinned screen. Left: the list, the active point bright with its text open,
+   the rest dimmed. Right: an ascii icon that morphs into the next point's icon as you scroll. */
+.adv.av{display:block;position:relative;height:calc(100vh / var(--dz,1) * (1 + var(--n) * .55));gap:0}
+.av-stage{position:sticky;top:0;height:calc(100vh / var(--dz,1));display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center;padding-top:70px}
+.av-head{margin-bottom:28px}.av-head .label{margin-bottom:16px}.av-head h2{font-size:52px;margin:0}
+.av-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.av-item{padding:4px 0}
+.av-t{font-family:var(--serif);font-weight:400;font-size:64px;line-height:1.02;letter-spacing:-.01em;color:var(--beige);opacity:.16;transition:opacity .45s;margin:0}
+.av-item.on .av-t{opacity:1}
+.av-d{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.2,.7,.2,1)}
+.av-d p{overflow:hidden;margin:0;max-width:480px;font-size:17px;line-height:1.35;opacity:0;transition:opacity .4s}
+.av-item.on .av-d{grid-template-rows:1fr}.av-item.on .av-d p{opacity:.85;padding:12px 0 10px}
+.av-art{position:relative;height:min(70vh,560px);display:flex;align-items:center;justify-content:center}
+.av-art canvas{width:100%;height:100%;display:block}
+@media (max-width:1199px){.av-t{font-size:48px}}
+@media (max-width:809px){
+ .adv.av{height:calc(100vh * (1 + var(--n) * .5))}
+ .av-stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:8px;align-items:start;padding-top:72px;height:100vh;height:100svh}
+ .av-art{order:-1;height:28vh}
+ .av-head{margin-bottom:14px}.av-head h2{font-size:32px}
+ .av-t{font-size:30px;line-height:1.08}.av-d p{font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){.adv.av{height:auto}.av-stage{position:static;height:auto}.av-t{opacity:1}.av-d{grid-template-rows:1fr}.av-d p{opacity:.85;padding:8px 0}}
