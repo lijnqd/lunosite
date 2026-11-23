@@ -4,7 +4,7 @@
 (function(){var sec=document.querySelector('.adv.av'),cv=document.getElementById('avCv');if(!sec||!cv)return;
 var items=[].slice.call(sec.querySelectorAll('.av-item')),n=items.length,x=cv.getContext('2d'),
  RM=matchMedia('(prefers-reduced-motion:reduce)').matches,DPR=Math.min(2,devicePixelRatio||1),G=34,
- GL='.:-=+*',shapes=[],pairs={},act=0,raf=0,S=0;
+ GL='.:-=+*',shapes=[],mx=-1e4,my=-1e4,hv=0,hvT=0,pairs={},act=0,raf=0,S=0;
 function hash(k,m){var h=(k*374761393+m*668265263)|0;h=Math.imul(h^(h>>>13),1274126177);return((h^(h>>>16))>>>0)/4294967296}
 function cl(v){return v<0?0:v>1?1:v}function ease(v){return v<.5?4*v*v*v:1-Math.pow(-2*v+2,3)/2}
 /* an svg icon -> the grid cells it covers, with how much of each cell it covers */
@@ -39,11 +39,17 @@ function draw(){raf=0;if(!shapes.length)return;var r=sec.getBoundingClientRect()
   var gx=A[0]+(B[0]-A[0])*tk,gy=A[1]+(B[1]-A[1])*tk,c=A[2]+(B[2]-A[2])*tk;
   var sw=Math.sin(tk*Math.PI);if(e>=1&&(tk<=0||tk>=1)){var ck=Math.round(gx)+','+Math.round(gy);if(seen[ck])continue;seen[ck]=1}gx+=(hash(id,8)-.5)*3*sw;gy+=(hash(id,9)-.5)*3*sw;
   if(e<1){var sx=hash(id,13)*G*1.6-G*.3,sy=hash(id,14)*G*1.6-G*.3,ek=cl((e-hash(id,15)*.4)/.6);gx=sx+(gx-sx)*ek;gy=sy+(gy-sy)*ek;x.globalAlpha=ek}else x.globalAlpha=1;
-  var g=(sw>.6||(e<1&&x.globalAlpha<.9))?GL[(id+((tk*9+e*9)|0))%GL.length]:glyph(c,id+(tk>.5?1e4:0));
+  if(hv>.01){var px=ox+(gx+.5)*cell,py=oy+(gy+.5)*cell,dx=px-mx,dy=py-my,dd=Math.sqrt(dx*dx+dy*dy)||1,RR=cell*6;
+   if(dd<RR){var f2=Math.pow(1-dd/RR,2)*hv;gx+=dx/dd*f2*2.4;gy+=dy/dd*f2*2.4;c*=1-f2*.7;if(f2>.35)sw=1}}
+  var g=(sw>.6||(e<1&&x.globalAlpha<.9))?GL[(id+((tk*9+e*9+hv*performance.now()/90)|0))%GL.length]:glyph(c,id+(tk>.5?1e4:0));
   x.fillText(g,ox+(gx+.5)*cell,oy+(gy+.5)*cell)}
- x.globalAlpha=1}
+ x.globalAlpha=1;
+ hv+=(hvT-hv)*.12;if(Math.abs(hvT-hv)>.005||hvT>0&&mv>performance.now()-500)req()}
 function req(){if(!raf)raf=requestAnimationFrame(draw)}
 Promise.all(items.map(function(it){return sample(it.dataset.icon)})).then(function(sh){shapes=sh;size();
  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(req);req()});
+var mv=0;/* the glyphs shy away from the pointer and ripple while it moves */
+if(!RM&&matchMedia('(hover:hover)').matches){cv.parentNode.addEventListener('pointermove',function(ev){var r=cv.getBoundingClientRect();mx=(ev.clientX-r.left)*cv.__w/r.width;my=(ev.clientY-r.top)*cv.__h/r.height;hvT=1;mv=performance.now();req()});
+ cv.parentNode.addEventListener('pointerleave',function(){hvT=0;req()})}
 addEventListener('scroll',req,{passive:true});addEventListener('resize',function(){size();req()});
 })();

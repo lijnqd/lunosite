@@ -88,7 +88,7 @@ const ctx = canvas.getContext('2d');
 
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 /* lightest to densest; the first is always a blank, the last three are drawn blocks */
-const RAMP = [" ", ".", ":", "-", "=", "+", "*", "/", "%", "#", "\u2591", "\u2592", "\u2593"];
+const RAMP = [" ", ".", ":", "-", "=", "+", "*", "/", "%", "#", "#", "%", "@"];
 /* the resting field: the mascot's own characters, as before the wake */
 /* each cell's grain: a small random step, 0..6 */
 const rest = () => (Math.random() * 7) | 0;
@@ -190,6 +190,20 @@ function hash(k, n) {
   return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
 }
 
+/* the art at half resolution: each cell is a 2x2 patch of the source, filled
+   when at least two of the four are, so every glyph is twice the size and reads as type */
+function coarse(a) {
+  const out = [];
+  for (let j = 0; j < a.length; j += 2) { let r = '';
+    const w = Math.max(a[j].length, (a[j + 1] || '').length);
+    for (let i = 0; i < w; i += 2) { let n = 0;
+      for (const q of [a[j][i], a[j][i + 1], (a[j + 1] || '')[i], (a[j + 1] || '')[i + 1]]) if (q && q !== ' ') n++;
+      r += n >= 2 ? '#' : ' '; }
+    out.push(r); }
+  return out;
+}
+const ART = coarse(asciiArt);
+
 /* the grid for the block's size, cut to the mascot */
 function init() {
   dpr = Math.min(2, window.devicePixelRatio || 1);
@@ -200,14 +214,14 @@ function init() {
   canvas.style.width = width + 'px';
   canvas.style.height = height + 'px';
 
-  const rows = asciiArt.length;
+  const rows = ART.length;
   let cols = 0;
-  for (let r = 0; r < rows; r++) cols = Math.max(cols, asciiArt[r].length);
+  for (let r = 0; r < rows; r++) cols = Math.max(cols, ART[r].length);
   const fs = Math.max(3, Math.min((width - 40) / cols * 1.5, (height - 40) / rows * 1.2));
   st.fs = fs; st.cols = cols; st.rows = rows;
   st.cw = fs * 0.58; st.ch = fs * 0.95;
   st.u = st.cw / 6.2;
-  st.font = `500 ${fs}px 'Sometype Mono', monospace`;
+  st.font = `700 ${fs}px 'Sometype Mono', monospace`;
   st.ox = (width - cols * st.cw) / 2;
   let bottomAlign = false;
   try { bottomAlign = parent.innerWidth < 1200; } catch (err) {}
@@ -217,7 +231,7 @@ function init() {
      so the dots shrink toward the outline like a halftone and are
      fullest in the body */
   const b = new Uint8Array(cols * rows);
-  for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) b[j * cols + i] = (asciiArt[j][i] || ' ') !== ' ' ? 1 : 0;
+  for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) b[j * cols + i] = (ART[j][i] || ' ') !== ' ' ? 1 : 0;
   st.heat = new Float32Array(cols * rows);
   st.mask = new Float32Array(cols * rows);
   st.base = Uint8Array.from({ length: cols * rows }, rest);
@@ -251,7 +265,7 @@ function init() {
   for (let j = rows - 1; j >= 0; j--) for (let i = cols - 1; i >= 0; i--) { const k = j * cols + i; if (!D[k]) continue;
     D[k] = Math.min(D[k], rd(i + 1, j) + 1, rd(i, j + 1) + ar, rd(i + 1, j + 1) + Math.hypot(1, ar), rd(i - 1, j + 1) + Math.hypot(1, ar)); }
   /* height: a dome that rises fast at the edge and flattens inside */
-  const R0 = 14, H = new Float32Array(D.length);
+  const R0 = 7, H = new Float32Array(D.length);
   for (let k = 0; k < D.length; k++) { const t = Math.min(1, D[k] / R0); H[k] = D[k] ? Math.sqrt(1 - (1 - t) * (1 - t)) : 0; }
   st.hgt = H;
   st.nx = new Float32Array(D.length); st.ny = new Float32Array(D.length); st.nz = new Float32Array(D.length);
@@ -396,8 +410,7 @@ function paint() {
       }
       const idx = clamp(lv, 0, top);
       if (idx < 1) continue;
-      if (idx >= top - 2) { ctx.drawImage(st.tile[idx - (top - 2)], x - st.cw / 2, yy - st.ch / 2, st.cw, st.ch); continue; }
-      ctx.fillText(RAMP[idx], x, yy);
+            ctx.fillText(RAMP[idx], x, yy);
     }
   }
 }
