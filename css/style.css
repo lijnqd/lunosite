@@ -852,3 +852,14 @@ div.c-offer:hover{background:none;color:var(--pink)}
   .hero-bottom .hero-btns .btn{width:100%;flex:none}
   .hero{height:auto;min-height:680px}
 }
+/* hero v3: title in two lines (second pushed right), mascot big in the middle and cut by the card, button bottom-right */
+@media (min-width:1200px){
+  .hero h1 .h1-a,.hero h1 .h1-b{display:block}
+  .hero h1 .h1-b{text-align:right}
+  .hero-art{left:calc(50% - 400px);top:295px;width:800px;height:580px}
+}
+.hero>.hero-btns{position:absolute;right:32px;bottom:32px;z-index:2}
+.hero>.hero-btns .btn{width:auto;padding:0 24px}
+@media (max-width:1199px){.hero>.hero-btns{position:relative;right:auto;bottom:auto;margin-top:20px}}
+@media (max-width:809px){.hero>.hero-btns .btn{width:100%}}
+@media (min-width:1200px){.hero-art{top:345px}.hero-bottom{width:330px}}

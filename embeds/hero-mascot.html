@@ -89,6 +89,9 @@ const ctx = canvas.getContext('2d');
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 /* lightest to densest; the first is always a blank */
 const RAMP = [" ", ".", ":", "-", "=", "+", "*", "#", "%", "@"];
+/* the resting field: the mascot's own characters, as before the wake */
+const REST = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-/<>=?";
+const rest = () => REST[(Math.random() * REST.length) | 0];
 /* below this much heat a cell is the field: a dot */
 const COLD = 0.04;
 /* how long a press's ring takes to spread and fade, s */
@@ -158,6 +161,8 @@ const st = {
   heat: new Float32Array(0),
   /* how far inside the shape each cell is, 0 outside to 1 */
   mask: new Float32Array(0),
+  /* each cell's resting character, dealt once and re-dealt now and then */
+  base: [],
   /* the hand: where it is, where it was last stamped, and how
      present it is (for the lean, which follows it out) */
   hx: -9999, hy: -9999, lx: NaN, ly: NaN, near: 0, inside: false,
@@ -191,9 +196,7 @@ function init() {
   st.fs = fs; st.cols = cols; st.rows = rows;
   st.cw = fs * 0.58; st.ch = fs * 0.95;
   st.u = st.cw / 6.2;
-  /* glyphs a little larger than the cell, so a warm patch reads as
-     dense as the dots around it rather than lighter */
-  st.font = `500 ${fs * 1.3}px 'Sometype Mono', monospace`;
+  st.font = `500 ${fs}px 'Sometype Mono', monospace`;
   st.ox = (width - cols * st.cw) / 2;
   let bottomAlign = false;
   try { bottomAlign = parent.innerWidth < 1200; } catch (err) {}
@@ -206,6 +209,7 @@ function init() {
   for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) b[j * cols + i] = (asciiArt[j][i] || ' ') !== ' ' ? 1 : 0;
   st.heat = new Float32Array(cols * rows);
   st.mask = new Float32Array(cols * rows);
+  st.base = Array.from({ length: cols * rows }, rest);
   for (let j = 0; j < rows; j++) {
     for (let i = 0; i < cols; i++) {
       const k = j * cols + i;
@@ -254,9 +258,6 @@ function paint() {
   ctx.clearRect(0, 0, width, height);
   /* one ink for everything, the hero's own */
   ctx.fillStyle = getComputedStyle(canvas).color || '#141414';
-  /* a halftone: the dot's AREA follows the density, up to nearly
-     touching its neighbours where the shape is fullest */
-  const dot = Math.min(st.cw, st.ch) * 0.44;
   ctx.font = st.font;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
@@ -285,8 +286,7 @@ function paint() {
       const k = j * st.cols + i;
       const m = st.mask[k];
       if (m <= 0) continue;
-      /* odd rows sit half a cell over: a halftone screen */
-      const cx = st.ox + (i + 0.5 + (j & 1) * 0.5) * st.cw;
+      const cx = st.ox + (i + 0.5) * st.cw;
       let h = st.heat[k];
       if (st.near > 0.002) {
         const q = ((cx - st.hx) ** 2 + (y - st.hy) ** 2) / R2;
@@ -319,13 +319,11 @@ function paint() {
           yy += (dy / d) * mm;
         }
       }
-      /* cold, or the lightest step: the dot, smaller toward the
-         shape's edge, so the wake fades back into the field
-         without a glyph popping in or out */
-      if (h <= COLD || idx === 1) {
-        ctx.beginPath();
-        ctx.arc(x, yy, Math.max(0.45, dot * Math.sqrt(m)), 0, Math.PI * 2);
-        ctx.fill();
+      /* cold: the cell's own resting character, so the mascot is
+         ASCII from the start; the wake thickens it toward @ and
+         cools back to it without a glyph popping in or out */
+      if (h <= COLD || idx <= 4) {
+        ctx.fillText(st.base[k], x, yy);
         continue;
       }
       ctx.fillText(RAMP[idx], x, yy);
@@ -393,6 +391,16 @@ canvas.addEventListener('pointerdown', (e) => { const { x, y } = where(e); st.ri
 window.addEventListener('resize', init);
 /* the face may arrive after the first paint */
 if (document.fonts && document.fonts.load) document.fonts.load(`500 12px 'Sometype Mono'`).then(() => paint());
+
+/* now and then a few resting characters are re-dealt, so the field
+   breathes quietly; skipped while the wake loop is running or off screen */
+let vis = true;
+try { new IntersectionObserver((e) => { vis = e[0].isIntersecting; }).observe(canvas); } catch (err) {}
+if (!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches)) setInterval(() => {
+  if (!vis || document.hidden || st.raf || !st.base.length) return;
+  for (let n = 0; n < st.base.length * 0.015; n++) { const k = (Math.random() * st.base.length) | 0; st.base[k] = rest(); }
+  paint();
+}, 300);
 
 init();
 </script>
