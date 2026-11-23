@@ -72,7 +72,7 @@ function frame(){raf=0;if(!ready)return;
   var al=tk<.5?(fa.a||.3)*(1-tr)+.42*tr:fb.a*(1-tr)+.42*tr;
   /* the hero form itself is drawn by the hero canvas: only its escaping particles show here */
   if(i===0&&tk<.02)continue;
-  al*=Math.max(pa,pb,tr);if(al<.01)continue;x.globalAlpha=al;
+  al*=Math.max(pa,pb);if(al<.01)continue;x.globalAlpha=al;
   if(lv>=10){x.fillRect(px-cw/2+.5,py-ch/2+.5,cw-1,ch-1);continue}
   if(x.__fs!==fs){x.font='500 '+fs.toFixed(1)+"px 'Sometype Mono',monospace";x.__fs=fs}
   x.fillText(RAMP[lv],px,py)}
