@@ -46,8 +46,8 @@ function go(el){if(el.__px)return;el.__px=1;
 
 function hero(){var hr=d.querySelector('.hero');if(!hr)return;
  var t=hr.querySelector('h1');if(t){t.__px=1;scr(t,850,0)}
- [].slice.call(hr.querySelectorAll('.hero-bottom p')).forEach(function(p){p.__px=1;scr(p,700,150)});
- [].slice.call(hr.querySelectorAll('.hero-art,.hero-bottom .btn')).forEach(function(b,i){b.__px=1;pix(b,600,100+i*100)})}
+ [].slice.call(hr.querySelectorAll('.hero-sub')).forEach(function(p){p.__px=1;scr(p,700,150)});
+ [].slice.call(hr.querySelectorAll('.hero-art,.hero-btns .btn')).forEach(function(b,i){b.__px=1;pix(b,600,100+i*100)})}
 
 function start(){hero();
  var els=[].slice.call(d.querySelectorAll('.reveal,.rv,.label,h2.h40')).filter(function(e){return !e.closest('.hero')&&!e.closest('.cx-title')});
