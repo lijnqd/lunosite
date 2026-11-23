@@ -5,8 +5,8 @@ var css='#form .ff{display:flex;flex-direction:column;min-width:0}#form .ff inpu
 var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
 form.setAttribute('novalidate','');
 var rules={
- phone:function(v){v=v.trim();if(!v)return'enter the phone number you use for whatsapp or telegram';if((v.match(/\d/g)||[]).length<6||!/^[+\d\s().\-]+$/.test(v))return'that doesn’t look like a phone number';return''},
- email:function(v){v=v.trim();if(!v)return'enter your email';if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return'check the email address';return''}
+ phone:function(v){v=v.trim();if(!v)return'leave your whatsapp number or telegram @username';if(/^@?[a-z][a-z0-9_]{3,}$/i.test(v))return'';if((v.match(/\d/g)||[]).length<6||!/^[+\d\s().\-]+$/.test(v))return'that doesn’t look like a phone number or @username';return''},
+ email:function(v){v=v.trim();if(!v)return'';if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return'check the email address';return''}
 };
 var fields=[];
 Array.prototype.forEach.call(form.querySelectorAll('input'),function(inp){

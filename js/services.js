@@ -7,7 +7,7 @@ var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 /* split marquee words into letters */
 var letters=[];[].forEach.call(mq.querySelectorAll('.sv-w'),function(w){var st=w.querySelector('.sv-st'),t='';
  [].slice.call(w.childNodes).forEach(function(n){if(n.nodeType===3){t+=n.textContent;w.removeChild(n)}});
- t.split('').forEach(function(ch){var s=document.createElement('span');s.textContent=ch;if(ch===' ')s.style.width='.25em';w.insertBefore(s,st);letters.push(s)});
+ t.split('').forEach(function(ch){var s=document.createElement('span');s.setAttribute('aria-hidden','true');s.textContent=ch;if(ch===' ')s.style.width='.25em';w.insertBefore(s,st);letters.push(s)});
  if(st)letters.push(st)});
 function z(){var r=parseFloat(getComputedStyle(document.querySelector('main')).zoom);return r>0?r:1}
 function cl(v){return v<0?0:v>1?1:v}

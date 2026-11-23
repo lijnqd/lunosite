@@ -6,7 +6,7 @@ var as=[].slice.call(w.querySelectorAll('.wk-list a[data-i]')),ims=[].slice.call
 function pad(i){return(i<9?'0':'')+(i+1)}
 function set(i){if(i===cur)return;var prev=cur;cur=i;var a=as[i];
  as.forEach(function(x,k){x.classList.toggle('on',k===i)});
- media.href=a.getAttribute('href');dd.textContent=a.dataset.d;tt.textContent=a.dataset.t;cc.textContent=pad(i)+' / '+pad(as.length-1);
+ media.href=a.getAttribute('href');media.setAttribute('aria-label',a.textContent.trim()+' case study');dd.textContent=a.dataset.d;tt.textContent=a.dataset.t;cc.textContent=pad(i)+' / '+pad(as.length-1);
  var im=ims[i];if(im.loading==='lazy')im.loading='eager';
  ims.forEach(function(x,k){if(k!==i&&k!==prev)x.classList.remove('on','top')});
  if(prev>=0)ims[prev].classList.remove('top');
