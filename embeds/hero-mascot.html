@@ -383,8 +383,9 @@ function paint() {
       /* scrolling away, the mascot comes apart and drifts off */
       let x = cx + st.px[k], yy = y + st.py[k];
       if (gone > 0) {
-        const g = Math.pow(gone, 1.4), r = (120 + st.dl[k] * 600) * st.u * g;
-        x += Math.cos(st.an[k]) * r; yy += Math.sin(st.an[k]) * r * 0.7 + g * 140 * st.u;
+        /* the cells pour downward out of the card: the page canvas carries them on */
+        const g = Math.pow(gone, 1.3);
+        yy += g * (260 + st.dl[k] * 900) * st.u; x += Math.cos(st.an[k]) * g * 40 * st.u;
         lv -= Math.round(gone * (6 + st.dl[k] * 14));
       }
       /* the entrance: in flight a cell is a dot; it lands as itself */
