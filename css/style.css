@@ -822,7 +822,7 @@ html.pxfx .reveal.px-in,html.pxfx .rv.px-in{opacity:1!important}
 }
 /* ---------- copy update (nov 23) ---------- */
 .hero-eye{position:absolute;left:32px;top:40px;font-size:16px;letter-spacing:-0.01em;opacity:.7}
-.hero h1{top:72px}
+
 .hero-trust{margin-top:14px!important;margin-bottom:0!important;font-size:14px!important;opacity:.7}
 @media (max-width:1199px){.hero-eye{position:static;margin-bottom:16px}}
 .about-more{max-width:640px;margin:0 auto;text-align:center;font-size:18px;line-height:1.4;letter-spacing:-0.01em;opacity:.75;display:flex;flex-direction:column;gap:12px}
@@ -850,5 +850,5 @@ div.c-offer:hover{background:none;color:var(--pink)}
 @media (max-width:809px){
   .hero-btns{flex-direction:column;flex-wrap:nowrap}
   .hero-bottom .hero-btns .btn{width:100%;flex:none}
-  .hero{height:auto;min-height:780px}
+  .hero{height:auto;min-height:680px}
 }
