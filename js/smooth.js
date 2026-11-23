@@ -7,6 +7,9 @@
    reduced motion: none of this runs */
 (function(){
 var d=document,h=d.documentElement,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* articles: a thin pink bar shows how far you have read */
+var art=d.querySelector('article.p-body');if(art){var rb=d.createElement('div');rb.className='read-bar';rb.setAttribute('aria-hidden','true');d.body.appendChild(rb);
+ var rp=function(){var r=art.getBoundingClientRect(),t=Math.min(1,Math.max(0,(innerHeight*.35-r.top)/(r.height-innerHeight*.5)));rb.style.transform='scaleX('+t.toFixed(4)+')'};addEventListener('scroll',rp,{passive:true});rp()}
 /* a dark fade under the fixed header once the page has moved, so text never runs into the logo and menu */
 var fade=d.createElement('div');fade.className='hdr-fade';fade.setAttribute('aria-hidden','true');d.body.appendChild(fade);
 function sc(){h.classList.toggle('scrolled',scrollY>40)}addEventListener('scroll',sc,{passive:true});sc();

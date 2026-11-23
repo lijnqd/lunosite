@@ -972,3 +972,14 @@ html.scrolled .hdr-fade{opacity:1}
 .f-stamp{display:inline-block;align-self:center;margin:6px auto 0;padding:8px 18px;border:2px solid var(--pink);border-radius:var(--r-btn);color:var(--pink);font:400 28px/1 var(--serif);letter-spacing:.02em;transform:rotate(-6deg);animation:stamp .45s cubic-bezier(.34,1.56,.64,1) both}
 @keyframes stamp{from{transform:rotate(-6deg) scale(1.6);opacity:0}to{transform:rotate(-6deg) scale(1);opacity:1}}
 .wk-ascii{position:absolute;inset:0;width:100%;height:100%;z-index:9999;pointer-events:none;opacity:0}
+/* blog list: read time, topic and author under the date */
+.bc .bc-meta{grid-column:1;grid-row:1;align-self:start;margin-top:36px;font-size:14px;line-height:1.3;opacity:.65;text-transform:lowercase}
+@media (max-width:809px){.bc .bc-meta{grid-column:1;grid-row:auto;margin-top:6px}}
+/* case pages: behance link at the end, outlined in pink */
+.cx-bh{max-width:1470px;margin:0 auto;padding:40px 20px 0;display:flex;justify-content:center}
+.btn-line-pink{background:transparent;color:var(--pink);box-shadow:inset 0 0 0 1px rgba(255,179,173,.5);width:auto;padding:0 24px}
+.btn-line-pink i{background:var(--pink)}
+.btn-line-pink:hover{background:var(--pink);color:var(--bg)}
+.btn-line-pink:hover i{background:var(--bg)}
+/* article reading progress */
+.read-bar{position:fixed;left:0;top:0;height:3px;width:100%;z-index:60;background:var(--pink);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
