@@ -90,8 +90,19 @@ const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 /* lightest to densest; the first is always a blank */
 const RAMP = [" ", ".", ":", "-", "=", "+", "*", "#", "%", "@"];
 /* the resting field: the mascot's own characters, as before the wake */
-const REST = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-/<>=?";
-const rest = () => REST[(Math.random() * REST.length) | 0];
+/* ── VOLUME: SHADED, LIKE A LIT OBJECT ──────────────────
+   The mascot is treated as a soft inflated body: each cell's height
+   comes from how far it sits inside the outline, its normal from the
+   slope of that height, and a light from the upper left shades it.
+   Shadowed cells take dense, dark characters, lit cells sparse, pale
+   ones, so the figure reads as round rather than flat, the way a
+   rendered 3D object reads in ASCII. The light leans toward the hand,
+   so the shading slides across the body as the pointer moves.
+   Each band runs dark to light; a cell keeps one random slot in it
+   (its "seed") and the slot is re-dealt now and then, so the
+   characters keep changing without the shading flickering. */
+const BANDS = ["@#%&8BM", "$0OXW*Q", "+x=?/<>", "~-:;!ic", ".,'`:. "];
+const rest = () => (Math.random() * 7) | 0;
 /* below this much heat a cell is the field: a dot */
 const COLD = 0.04;
 /* how long a press's ring takes to spread and fade, s */
@@ -211,7 +222,7 @@ function init() {
   for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) b[j * cols + i] = (asciiArt[j][i] || ' ') !== ' ' ? 1 : 0;
   st.heat = new Float32Array(cols * rows);
   st.mask = new Float32Array(cols * rows);
-  st.base = Array.from({ length: cols * rows }, rest);
+  st.base = Uint8Array.from({ length: cols * rows }, rest);
   st.px = new Float32Array(cols * rows); st.py = new Float32Array(cols * rows);
   st.vx = new Float32Array(cols * rows); st.vy = new Float32Array(cols * rows);
   for (let j = 0; j < rows; j++) {
@@ -228,6 +239,27 @@ function init() {
          reads as the mascot, and is still a field the wake can write on */
       st.mask[k] = 0.35 + 0.65 * clamp((f / n - 0.4) / 0.6, 0, 1);
     }
+  }
+  /* distance to the outline, in cell widths (rows count as ch/cw wide):
+     a two-pass chamfer, cheap and good enough for shading */
+  const ar = st.ch / st.cw, D = new Float32Array(cols * rows), BIG = 1e6;
+  for (let k = 0; k < D.length; k++) D[k] = b[k] ? BIG : 0;
+  const rd = (i, j) => (i < 0 || j < 0 || i >= cols || j >= rows) ? 0 : D[j * cols + i];
+  for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) { const k = j * cols + i; if (!D[k]) continue;
+    D[k] = Math.min(D[k], rd(i - 1, j) + 1, rd(i, j - 1) + ar, rd(i - 1, j - 1) + Math.hypot(1, ar), rd(i + 1, j - 1) + Math.hypot(1, ar)); }
+  for (let j = rows - 1; j >= 0; j--) for (let i = cols - 1; i >= 0; i--) { const k = j * cols + i; if (!D[k]) continue;
+    D[k] = Math.min(D[k], rd(i + 1, j) + 1, rd(i, j + 1) + ar, rd(i + 1, j + 1) + Math.hypot(1, ar), rd(i - 1, j + 1) + Math.hypot(1, ar)); }
+  /* height: a dome that rises fast at the edge and flattens inside */
+  const R0 = 14, H = new Float32Array(D.length);
+  for (let k = 0; k < D.length; k++) { const t = Math.min(1, D[k] / R0); H[k] = D[k] ? Math.sqrt(1 - (1 - t) * (1 - t)) : 0; }
+  st.nx = new Float32Array(D.length); st.ny = new Float32Array(D.length); st.nz = new Float32Array(D.length);
+  const hh = (i, j) => (i < 0 || j < 0 || i >= cols || j >= rows) ? 0 : H[j * cols + i];
+  for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+    const k = j * cols + i; if (!b[k]) continue;
+    /* the slope, in units where a full rise over R0 cells is 1 */
+    const gx = (hh(i + 1, j) - hh(i - 1, j)) * R0 / 2, gy = (hh(i, j + 1) - hh(i, j - 1)) * R0 / (2 * ar);
+    const l = Math.hypot(gx, gy, 1);
+    st.nx[k] = -gx / l; st.ny[k] = -gy / l; st.nz[k] = 1 / l;
   }
   paint();
 }
@@ -267,6 +299,13 @@ function paint() {
   ctx.textBaseline = 'middle';
   const top = RAMP.length - 1;
   const rad = radius();
+  /* the light: upper left, leaning toward the hand while it is near */
+  let Lx = -0.55, Ly = -0.6, Lz = 0.58;
+  if (st.near > 0.002) {
+    Lx += clamp((st.hx - width / 2) / width, -0.6, 0.6) * 1.4 * st.near;
+    Ly += clamp((st.hy - height / 2) / height, -0.6, 0.6) * 1.4 * st.near;
+  }
+  const Ll = Math.hypot(Lx, Ly, Lz); Lx /= Ll; Ly /= Ll; Lz /= Ll;
   /* the hand's own heat, worked out fresh each frame rather than
      stored, so it never cools: a hand at rest keeps its patch */
   const R2 = rad * rad;
@@ -313,12 +352,18 @@ function paint() {
          ASCII from the start; the wake thickens it toward @ and
          cools back to it without a glyph popping in or out */
       if (h <= COLD || idx <= 4) {
-        ctx.fillText(st.base[k], x, yy);
+        /* lit: 0 in shadow, 1 facing the light */
+        const lit = Math.max(0, st.nx[k] * Lx + st.ny[k] * Ly + st.nz[k] * Lz);
+        const band = Math.min(BANDS.length - 1, Math.floor(lit * lit * BANDS.length * 1.05));
+        ctx.globalAlpha = 0.34 + 0.66 * (1 - lit * 0.85);
+        ctx.fillText(BANDS[band][st.base[k] % BANDS[band].length], x, yy);
         continue;
       }
+      ctx.globalAlpha = 1;
       ctx.fillText(RAMP[idx], x, yy);
     }
   }
+  ctx.globalAlpha = 1;
 }
 
 /* the loop runs only while the wake is warm or the hand is moving */
