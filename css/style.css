@@ -1046,3 +1046,7 @@ html.scrolled .hdr-fade{opacity:1}
 @keyframes tl{to{transform:translateX(-50%)}}
 @media (max-width:809px){.tools{margin:80px -12px 0;padding:60px 0}.tl-x{height:130px}.tl-r{height:60px}.tl-in span{font-size:34px}.tl-in{gap:26px;animation-duration:30s}.tl-in.rev{gap:36px}.tl-in img{width:18px;height:18px}}
 @media (prefers-reduced-motion:reduce){.tl-in{animation:none}}
+/* the see-through tape lies on top */
+.tl-dark{z-index:3;background:rgba(32,32,32,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);-webkit-mask:none;mask:none}
+.tl-pink{z-index:2}
+.tl-in.rev{gap:44px}
