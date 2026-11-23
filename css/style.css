@@ -1086,7 +1086,7 @@ html.scrolled .hdr-fade{opacity:1}
 .cases.cs-wide{height:auto;overflow:visible;border-radius:0;padding:0;background:none}
 /* advantages v2: one pinned screen. Left: the list, the active point bright with its text open,
    the rest dimmed. Right: an ascii icon that morphs into the next point's icon as you scroll. */
-.adv.av{display:block;position:relative;height:calc(100vh / var(--dz,1) * (1 + var(--n) * .55));gap:0}
+.adv.av{display:block;position:relative;height:calc(100vh / var(--dz,1) * (1 + var(--n) * .42));gap:0}
 .av-stage{position:sticky;top:0;height:calc(100vh / var(--dz,1));display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center;padding-top:70px}
 .av-head{margin-bottom:28px}.av-head .label{margin-bottom:16px}.av-head h2{font-size:52px;margin:0}
 .av-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
@@ -1133,3 +1133,8 @@ html.scrolled .hdr-fade{opacity:1}
 .av-stage{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}
 .av-t{white-space:nowrap}
 @media (max-width:809px){.av-stage{grid-template-columns:1fr}.av-t{white-space:normal}}
+/* case dot: a pink dot at the top right; on hover it opens into a 3x3 grid (dotmorph, same as the buttons) */
+.cs-full .cs-dot{position:absolute;right:28px;top:28px;z-index:3;width:8px;height:8px;border-radius:50%;background:var(--pink);color:var(--pink)}
+@media (max-width:809px){.cs-full .cs-dot{right:20px;top:20px}}
+/* phones: no stacking, each case reads in full before the next */
+@media (max-width:809px){.cs-full{position:relative;top:auto;margin-bottom:16px;transform:none!important}.cs-full:after{display:none}}

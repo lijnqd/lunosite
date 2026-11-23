@@ -24,8 +24,32 @@
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1795455493">
+<link rel="stylesheet" href="/css/style.css?v=1795456330">
 <style>
+.cl-list{list-style:none;margin:48px 0 0;padding:0;border-top:1px solid rgba(242,231,220,.14)}
+.cl-row{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,380px);align-items:center;gap:24px;padding:22px 0;border-bottom:1px solid rgba(242,231,220,.14);color:var(--beige);text-decoration:none}
+.cl-n{font-size:16px;opacity:.5;align-self:start;padding-top:18px}
+.cl-name{font-family:var(--serif);font-weight:400;font-size:72px;line-height:1;letter-spacing:-.01em;transition:color .3s,transform .5s cubic-bezier(.2,.7,.2,1)}
+.cl-meta{display:flex;flex-direction:column;gap:8px;font-size:16px;line-height:1.3}
+.cl-meta .cl-d{opacity:.8}.cl-meta em{font-style:normal;color:var(--pink)}
+.cl-img{display:none}
+.cl-list:hover .cl-name{opacity:.35}
+.cl-row:hover .cl-name,.cl-row:focus-visible .cl-name{opacity:1;color:var(--pink);transform:translateX(16px)}
+.cl-name{transition:color .3s,opacity .3s,transform .5s cubic-bezier(.2,.7,.2,1)}
+.cl-prev{position:fixed;left:0;top:0;z-index:40;width:460px;aspect-ratio:16/10;border-radius:16px;overflow:hidden;pointer-events:none;opacity:0;scale:.85;transition:opacity .3s,scale .4s cubic-bezier(.2,.7,.2,1)}
+.cl-prev.on{opacity:1;scale:1}
+.cl-prev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s}
+.cl-prev img.on{opacity:1}
+@media (max-width:1199px){.cl-name{font-size:56px}.cl-row{grid-template-columns:48px minmax(0,1fr) minmax(0,300px)}}
+@media (max-width:809px),(hover:none){
+ .cl-list{margin-top:28px}
+ .cl-row{grid-template-columns:36px minmax(0,1fr);gap:8px 12px;padding:18px 0}
+ .cl-n{padding-top:8px}.cl-name{font-size:44px}
+ .cl-meta{grid-column:2;font-size:15px}
+ .cl-img{display:block;grid-column:1/-1;margin-top:10px;aspect-ratio:16/10;border-radius:14px;overflow:hidden}
+ .cl-img img{width:100%;height:100%;object-fit:cover;display:block}
+ .cl-prev{display:none}.cl-list:hover .cl-name{opacity:1}
+}
 .cs{position:relative;z-index:1;max-width:1430px;margin:0 auto;padding:110px 20px 0}
 .cs-back{display:inline-flex;gap:10px;align-items:center;font-size:16px;opacity:.7;margin-bottom:28px}
 .cs-back:hover{opacity:1}
@@ -117,17 +141,8 @@ html,body{overflow-x:clip}
 <body>
 <a class="skip" href="#content">skip to content</a>
 <div id="pre" aria-hidden="true"></div>
-<script src="/js/ascii.js?v=29" defer></script>
-<script src="/js/pixfx.js?v=6" defer></script>
-<script src="/js/nav.js?v=3" defer></script>
-<script src="/js/cursor.js?v=5" defer></script>
-<script src="/js/preloader.js?v=20"></script>
-<script src="/js/cookies.js?v=10" defer></script>
-<script src="/js/dotmorph.js?v=12" defer></script>
-<script src="/js/track.js?v=1" defer></script>
-<script src="/js/form.js?v=20" defer></script>
-<script src="/js/lenis.min.js?v=1" defer></script>
-<script src="/js/smooth.js?v=5" defer></script>
+<script src="/js/app.min.js?v=1795456344" defer></script>
+<script id="pre-js">!function(){var e=document,t=e.documentElement,a=window,n=e.getElementById("pre"),r=!0;try{r=!sessionStorage.getItem("luno_pre"),sessionStorage.setItem("luno_pre","1")}catch(e){}var i=a.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;if(n)if(r&&!i){t.classList.add("pre-lock");var o=e.createElement("canvas"),s=o.getContext("2d"),l=e.createElement("div");l.className="pc",l.innerHTML='<i class="pi"><b></b><b></b><b></b><b></b></i><span>0%</span>',n.appendChild(o),n.appendChild(l);var d,c,m,h,f,u,v,M,p,b,y,g=l.querySelector("span");E(),addEventListener("resize",E);var w=.5,S=performance.now(),A=!1,F=innerWidth<810?500:600,L=0,C=0;"loading"===e.readyState?e.addEventListener("DOMContentLoaded",x):x(),requestAnimationFrame((function e(a){var r,i=a-S,o=(r=Math.min(1,i/F),1-Math.pow(1-r,2.2));!A&&i<2500&&(o=Math.min(o,.9)),L+=.25*(o-L),o>=1&&L>.995&&(L=1),g.textContent=Math.round(100*L)+"%",l.setAttribute("data-n",Math.floor(i/180)%4),function(e,t){s.setTransform(m,0,0,m,0,0),s.fillStyle="#141414",s.fillRect(0,0,d,c);var a,n,r,i=e*(1+w+.06);for(a=0;a<u;a++){var o=i-M[a],l=a*f;for(n=0;n<v;n++){r=a*v+n;var g=c-(n+1)*f,S=o-(n+.5)/v;if(S>.09){var A=.93+.07*Math.sin(t/300+6.28*p[r]);s.fillStyle=b[r]&&S<.27?"rgba(255,179,173,.9)":"rgba(242,231,220,"+A.toFixed(2)+")"}else S>0?s.fillStyle=b[r]?"rgba(20,20,20,1)":"rgba(255,179,173,1)":S>-.05&&y[r]<.25?s.fillStyle="rgba(255,179,173,"+(.35*(1+S/.05)).toFixed(2)+")":s.fillStyle="rgba(242,231,220,.035)";s.fillRect(l,g,h,h)}}}(L,a),L>=1&&!C&&(C=1,setTimeout((function(){n.classList.add("done"),t.classList.remove("pre-lock"),setTimeout((function(){n.remove()}),420)}),60)),C&&!n.isConnected||requestAnimationFrame(e)}))}else n.remove();function E(){d=innerWidth,c=innerHeight,m=Math.min(2,a.devicePixelRatio||1),o.width=d*m,o.height=c*m,1,f=(h=d<810?7:9)+1,u=Math.ceil(d/f)+1,v=Math.ceil(c/f)+1,M=new Float32Array(u),p=new Float32Array(u*v),b=new Uint8Array(u*v),y=new Float32Array(u*v);for(var e=6*Math.random(),t=6*Math.random(),n=0;n<u;n++)M[n]=.16*(.5+.5*Math.sin(.11*n+e))+.1*(.5+.5*Math.sin(.37*n+t))+.22*Math.random();for(var r=0;r<u*v;r++)p[r]=Math.random(),b[r]=Math.random()<.18?1:0,y[r]=Math.random()}function x(){(e.fonts&&e.fonts.ready?e.fonts.ready:Promise.resolve()).then((function(){A=!0}))}}();</script>
 <noscript><style>#pre{display:none}html.pre-lock{overflow:auto}</style></noscript>
 <canvas id="dots"></canvas>
 <header class="header">
@@ -140,17 +155,27 @@ html,body{overflow-x:clip}
 
 <main id="content" class="blog casesp">
   <h1>our <span class="pink">case</span> studies</h1>
-  <div class="csp-grid">
-    <a class="cs-card" data-cursor="view" href="/cases/set/"><img srcset="/assets/img/case-set-cover-800.webp 800w, /assets/img/case-set-cover-1200.webp 1200w, /assets/img/case-set-cover.webp 2000w" sizes="(max-width:809px) 100vw, 50vw" src="/assets/img/case-set-cover.webp" alt="SET — lunö studio case" width="1600" height="874" loading="eager" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>SET</b><p>online store and brand identity for handmade bags</p><em>#e-commerce / ux/ui</em></div></a>
-    <a class="cs-card" data-cursor="view" href="/cases/beeyawn/"><picture><source media="(max-width:809px)" srcset="/assets/img/case-bee-cover-m.webp"><img srcset="/assets/img/case-bee-cover-800.webp 800w, /assets/img/case-bee-cover-1200.webp 1200w, /assets/img/case-bee-cover.webp 2000w" sizes="(max-width:809px) 100vw, 50vw" src="/assets/img/case-bee-cover.webp" alt="Beeyawn — lunö studio case" width="1600" height="874" loading="eager" decoding="async"></picture><div class="cs-info"><i class="cs-dot"></i><b>Beeyawn</b><p>corporate website for an ai-powered production studio</p><em>#corporate / ux/ui</em></div></a>
-    <a class="cs-card" data-cursor="view" href="/cases/midas/"><img srcset="/assets/img/case-midas-cover-800.webp 800w, /assets/img/case-midas-cover-1200.webp 1200w, /assets/img/case-midas-cover.webp 1600w" sizes="(max-width:809px) 100vw, 50vw" src="/assets/img/case-midas-cover.webp" alt="Midas — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>Midas</b><p>bold multi-page website for a digital marketing agency</p><em>#corporate / ux/ui</em></div></a>
-    <a class="cs-card" data-cursor="view" href="/cases/orta/"><img srcset="/assets/img/case-orta-cover-800.webp 800w, /assets/img/case-orta-cover-1200.webp 1200w, /assets/img/case-orta-cover.webp 2000w" sizes="(max-width:809px) 100vw, 50vw" src="/assets/img/case-orta-cover.webp" alt="ORTA — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>ORTA</b><p>colorful animated website for a creative community space</p><em>#community / ux/ui</em></div></a>
-    <a class="cs-card" data-cursor="view" href="/cases/form/"><img srcset="/assets/img/case-form-cover-800.webp 800w, /assets/img/case-form-cover-1200.webp 1200w, /assets/img/case-form-cover.webp 2000w" sizes="(max-width:809px) 100vw, 50vw" src="/assets/img/case-form-cover.webp" alt="førm — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>førm</b><p>brand identity for a company building modular autonomous homes</p><em>#branding</em></div></a>
-    <a class="cs-card" data-cursor="view" href="/cases/project-54/"><img srcset="/assets/img/case-p54-cover-800.webp 800w, /assets/img/case-p54-cover-1200.webp 1200w, /assets/img/case-p54-cover.webp 2000w" sizes="(max-width:809px) 100vw, 50vw" src="/assets/img/case-p54-cover.webp" alt="Project 54 — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>Project 54</b><p>four-page website for an ai marketing company in energy</p><em>#corporate / ux/ui</em></div></a>
-    <a class="cs-card" data-cursor="view" href="/cases/media-brothers/"><img srcset="/assets/img/case-mb-cover-800.webp 800w, /assets/img/case-mb-cover-1200.webp 1200w, /assets/img/case-mb-cover.webp 1600w" sizes="(max-width:809px) 100vw, 50vw" src="/assets/img/case-mb-cover.webp" alt="Media brothers — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>Media brothers</b><p>content-led website for a digital marketing agency</p><em>#corporate / ux/ui</em></div></a>
-    <a class="cs-card" data-cursor="view" href="/cases/portfolio/"><img srcset="/assets/img/case-yana-cover-800.webp 800w, /assets/img/case-yana-cover-1200.webp 1200w, /assets/img/case-yana-cover.webp 1600w" sizes="(max-width:809px) 100vw, 50vw" src="/assets/img/case-yana-cover.webp" alt="Portfolio — lunö studio case" width="1600" height="874" loading="lazy" decoding="async"><div class="cs-info"><i class="cs-dot"></i><b>Portfolio</b><p>personal portfolio for a ux/ui and web designer</p><em>#portfolio / readymag</em></div></a>
-  </div>
+  <ol class="cl-list" id="clList">
+    <li><a class="cl-row" href="/cases/set/" data-cursor="view"><span class="cl-n">01</span><b class="cl-name">SET</b><span class="cl-meta"><span class="cl-d">online store and brand identity for handmade bags</span><em>#e-commerce · ux/ui</em></span><span class="cl-img"><img srcset="/assets/img/case-set-cover-800.webp 800w, /assets/img/case-set-cover-1200.webp 1200w, /assets/img/case-set-cover.webp 2000w" sizes="(max-width:809px) 100vw, 460px" src="/assets/img/case-set-cover.webp" alt="SET — lunö studio case" width="1600" height="900" loading="eager" decoding="async"></span></a></li>
+    <li><a class="cl-row" href="/cases/beeyawn/" data-cursor="view"><span class="cl-n">02</span><b class="cl-name">Beeyawn</b><span class="cl-meta"><span class="cl-d">corporate website for an ai-powered production studio</span><em>#corporate · ux/ui</em></span><span class="cl-img"><img srcset="/assets/img/case-bee-cover-800.webp 800w, /assets/img/case-bee-cover-1200.webp 1200w, /assets/img/case-bee-cover.webp 2000w" sizes="(max-width:809px) 100vw, 460px" src="/assets/img/case-bee-cover.webp" alt="Beeyawn — lunö studio case" width="1600" height="900" loading="eager" decoding="async"></span></a></li>
+    <li><a class="cl-row" href="/cases/midas/" data-cursor="view"><span class="cl-n">03</span><b class="cl-name">Midas</b><span class="cl-meta"><span class="cl-d">bold multi-page website for a digital marketing agency</span><em>#corporate · ux/ui</em></span><span class="cl-img"><img srcset="/assets/img/case-midas-cover-800.webp 800w, /assets/img/case-midas-cover-1200.webp 1200w, /assets/img/case-midas-cover.webp 1600w" sizes="(max-width:809px) 100vw, 460px" src="/assets/img/case-midas-cover.webp" alt="Midas — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></span></a></li>
+    <li><a class="cl-row" href="/cases/orta/" data-cursor="view"><span class="cl-n">04</span><b class="cl-name">ORTA</b><span class="cl-meta"><span class="cl-d">colorful animated website for a creative community space</span><em>#community · ux/ui</em></span><span class="cl-img"><img srcset="/assets/img/case-orta-cover-800.webp 800w, /assets/img/case-orta-cover-1200.webp 1200w, /assets/img/case-orta-cover.webp 2000w" sizes="(max-width:809px) 100vw, 460px" src="/assets/img/case-orta-cover.webp" alt="ORTA — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></span></a></li>
+    <li><a class="cl-row" href="/cases/form/" data-cursor="view"><span class="cl-n">05</span><b class="cl-name">førm</b><span class="cl-meta"><span class="cl-d">brand identity for a company building modular autonomous homes</span><em>#branding</em></span><span class="cl-img"><img srcset="/assets/img/case-form-cover-800.webp 800w, /assets/img/case-form-cover-1200.webp 1200w, /assets/img/case-form-cover.webp 2000w" sizes="(max-width:809px) 100vw, 460px" src="/assets/img/case-form-cover.webp" alt="førm — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></span></a></li>
+    <li><a class="cl-row" href="/cases/project-54/" data-cursor="view"><span class="cl-n">06</span><b class="cl-name">Project 54</b><span class="cl-meta"><span class="cl-d">four-page website for an ai marketing company in energy</span><em>#corporate · ux/ui</em></span><span class="cl-img"><img srcset="/assets/img/case-p54-cover-800.webp 800w, /assets/img/case-p54-cover-1200.webp 1200w, /assets/img/case-p54-cover.webp 2000w" sizes="(max-width:809px) 100vw, 460px" src="/assets/img/case-p54-cover.webp" alt="Project 54 — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></span></a></li>
+    <li><a class="cl-row" href="/cases/media-brothers/" data-cursor="view"><span class="cl-n">07</span><b class="cl-name">Media brothers</b><span class="cl-meta"><span class="cl-d">content-led website for a digital marketing agency</span><em>#corporate · ux/ui</em></span><span class="cl-img"><img srcset="/assets/img/case-mb-cover-800.webp 800w, /assets/img/case-mb-cover-1200.webp 1200w, /assets/img/case-mb-cover.webp 1600w" sizes="(max-width:809px) 100vw, 460px" src="/assets/img/case-mb-cover.webp" alt="Media brothers — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></span></a></li>
+    <li><a class="cl-row" href="/cases/portfolio/" data-cursor="view"><span class="cl-n">08</span><b class="cl-name">Portfolio</b><span class="cl-meta"><span class="cl-d">personal portfolio for a ux/ui and web designer</span><em>#portfolio · readymag</em></span><span class="cl-img"><img srcset="/assets/img/case-yana-cover-800.webp 800w, /assets/img/case-yana-cover-1200.webp 1200w, /assets/img/case-yana-cover.webp 1600w" sizes="(max-width:809px) 100vw, 460px" src="/assets/img/case-yana-cover.webp" alt="Portfolio — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></span></a></li>
+  </ol>
+  <div class="cl-prev" id="clPrev" aria-hidden="true"></div>
 </main>
+<script>/* cases list: hovering a name brings its cover along with the cursor */
+(function(){var l=document.getElementById('clList'),pv=document.getElementById('clPrev');if(!l||!pv||!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,x=0,y=0,cx=0,cy=0,raf=0,on=false,cur=null;
+[].forEach.call(l.querySelectorAll('.cl-row'),function(a){var im=a.querySelector('img').cloneNode();im.removeAttribute('loading');im.alt='';im.dataset.h=a.getAttribute('href');pv.appendChild(im);
+ a.addEventListener('mouseenter',function(){if(cur)cur.classList.remove('on');cur=im;im.classList.add('on');on=true;pv.classList.add('on');go()})});
+l.addEventListener('mouseleave',function(){on=false;pv.classList.remove('on')});
+addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;if(!cx&&!cy){cx=x;cy=y}if(on)go()},{passive:true});
+function f(){raf=0;var k=RM?1:.16;cx+=(x-cx)*k;cy+=(y-cy)*k;var r=(x-cx)*.04;pv.style.transform='translate3d('+cx.toFixed(1)+'px,'+cy.toFixed(1)+'px,0) translate(-50%,-50%) rotate('+Math.max(-6,Math.min(6,r)).toFixed(2)+'deg)';if(on&&(Math.abs(x-cx)>.3||Math.abs(y-cy)>.3))go()}
+function go(){if(!raf)raf=requestAnimationFrame(f)}})();</script>
 
 <div class="main2 stack" style="padding-top:0">
     <section id="contacts" class="contacts">

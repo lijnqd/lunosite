@@ -10,13 +10,18 @@ function load(url){if(!cache[url])cache[url]=fetch(url).then(function(r){return 
   return ''});return cache[url]}
 function run(el){var src=el.getAttribute('data-src'),q=(src.split('?')[1]||'');
   if(el.hasAttribute('data-mobile')&&innerWidth<810)q+=(q?'&':'')+el.getAttribute('data-mobile');
-  load(src.split('?')[0]+'?v=34').then(function(code){if(!code)return;
+  load(src.split('?')[0]+'?v=37').then(function(code){if(!code)return;
     var cv=document.createElement('canvas');cv.setAttribute('aria-hidden','true');el.appendChild(cv);
     code=code.replace("document.getElementById('canvas')","__cv").replace("document.getElementById('container')","__cv.parentElement").replace(/location\.search/g,'__qs').replace(/parent\.innerWidth/g,'window.innerWidth');
-    code+="\n;if(typeof checkContainer==='function')checkContainer();";var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,n=0,raf=RM?function(f){return ++n<40?requestAnimationFrame(f):0}:requestAnimationFrame.bind(window);try{new Function('__cv','__qs','requestAnimationFrame',code)(cv,'?'+q,raf)}catch(e){console.warn('ascii',e)}
+    code+="\n;if(typeof checkContainer==='function')checkContainer();";var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,n=0,
+     /* frames run only while the block is on screen: off screen the next frame is held and handed back when it returns */
+     raf=function(f){if(RM&&++n>=40)return 0;if(el.__vis!==false)return requestAnimationFrame(f);el.__q=f;return -1};
+    el.__wake=function(){var f=el.__q;el.__q=null;if(f)requestAnimationFrame(f)};try{new Function('__cv','__qs','requestAnimationFrame',code)(cv,'?'+q,raf)}catch(e){console.warn('ascii',e)}
     /* a block that was hidden (size 0) re-measures when it appears */
     if('ResizeObserver'in window){var w0=el.clientWidth;new ResizeObserver(function(){var w=el.clientWidth;if(w&&w!==w0){w0=w;dispatchEvent(new Event('resize'))}}).observe(el)}})}
 var go=function(el){if(el.__on)return;el.__on=1;run(el)};
-if('IntersectionObserver'in window){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){o.unobserve(e.target);go(e.target)}})},{rootMargin:'400px'});els.forEach(function(e){o.observe(e)})}
+if('IntersectionObserver'in window){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){o.unobserve(e.target);go(e.target)}})},{rootMargin:'400px'});els.forEach(function(e){o.observe(e)});
+ /* on/off screen, for pausing the animation loops */
+ var v=new IntersectionObserver(function(es){es.forEach(function(e){var el=e.target;el.__vis=e.isIntersecting;if(el.__vis&&el.__wake)el.__wake()})},{rootMargin:'100px'});els.forEach(function(e){v.observe(e)})}
 else els.forEach(go);
 })();

@@ -75,7 +75,8 @@ if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',ready);else re
 
 /* ---- pink pixel fill on hover for blog cards ---- */
 if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
-function hov(el){el.classList.add('px');var cv=d.createElement('canvas'),x=cv.getContext('2d');cv.className='px-hv';cv.setAttribute('aria-hidden','true');el.insertBefore(cv,el.firstChild);
+/* the canvas is made on the first hover, not up front */
+function hov(el){el.classList.add('px');var cv,x;function mk(){if(cv)return;cv=d.createElement('canvas');x=cv.getContext('2d');cv.className='px-hv';cv.setAttribute('aria-hidden','true');el.insertBefore(cv,el.firstChild)}
  var p=0,tg=0,raf=0,W,H,S=10,C,R,th,last=0;
  function size(){W=el.offsetWidth;H=el.offsetHeight;cv.width=Math.ceil(W*DPR);cv.height=Math.ceil(H*DPR);C=Math.ceil(W/S);R=Math.ceil(H/S);th=new Float32Array(C*R);
   for(var j=0;j<R;j++)for(var i=0;i<C;i++)th[j*C+i]=.45*(j/R)+.55*Math.random()}
@@ -87,8 +88,8 @@ function hov(el){el.classList.add('px');var cv=d.createElement('canvas'),x=cv.ge
    else if(t<q){x.fillStyle=PINK;x.globalAlpha=.45;x.fillRect(i*S+2,j*S+2,S-4,S-4);x.globalAlpha=1}}}
  function f(now){var dt=Math.min(50,now-(last||now));last=now;p+=(tg?1:-1)*dt/(tg?380:300);p=Math.max(0,Math.min(1,p));draw();
   if((tg&&p<1)||(!tg&&p>0))raf=requestAnimationFrame(f);else{raf=0;last=0}}
- function run(v){tg=v;if(v&&p===0)size();if(!raf)raf=requestAnimationFrame(f)}
+ function run(v){mk();tg=v;if(v&&p===0)size();if(!raf)raf=requestAnimationFrame(f)}
  el.addEventListener('mouseenter',function(){run(1)});el.addEventListener('mouseleave',function(){run(0)});
- addEventListener('resize',function(){if(p>0){size();draw()}})}
+ addEventListener('resize',function(){if(cv&&p>0){size();draw()}})}
 [].slice.call(d.querySelectorAll('.bc')).forEach(hov);
 })();

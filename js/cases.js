@@ -5,7 +5,7 @@
    deliberate, like a picture resolving, not noise. Reduced motion: plain photo. */
 (function(){var st=document.getElementById('csStack');if(!st)return;
 var cs=[].slice.call(st.querySelectorAll('.cs-card')),RM=matchMedia('(prefers-reduced-motion:reduce)').matches,tick=0;
-function f(){tick=0;
+function f(){tick=0;var R=st.getBoundingClientRect();if(R.bottom<0||R.top>innerHeight)return;
  for(var i=0;i<cs.length-1;i++){var a=cs[i].getBoundingClientRect(),b=cs[i+1].getBoundingClientRect(),p=1-Math.max(0,Math.min(1,(b.top-a.top)/(a.height||1)));
   if(!RM){cs[i].style.transform='scale('+(1-p*.06).toFixed(4)+')';cs[i].style.setProperty('--dim',(p*.55).toFixed(3))}}}
 function req(){if(!tick)tick=requestAnimationFrame(f)}

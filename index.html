@@ -31,29 +31,13 @@
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
 <script>/* desktop zoom before first paint */(function(){function dz(){var w=innerWidth;document.documentElement.style.setProperty("--dz",w>=1200&&w<1470?(w/1470).toFixed(4):1)}dz();addEventListener("resize",dz)})();</script>
-<link rel="stylesheet" href="css/style.css?v=1795455493">
+<link rel="stylesheet" href="css/style.css?v=1795456330">
 </head>
 <body>
 <a class="skip" href="#content">skip to content</a>
 <div id="pre" aria-hidden="true"></div>
-<script src="/js/ascii.js?v=29" defer></script>
-<script src="/js/pixfx.js?v=6" defer></script>
-<script src="/js/nav.js?v=3" defer></script>
-<script src="/js/cursor.js?v=5" defer></script>
-<script src="/js/reviews.js?v=10" defer></script>
-<script src="/js/cases.js?v=7" defer></script>
-<script src="/js/adv.js?v=2" defer></script>
-<script src="/js/services.js?v=17" defer></script>
-<script src="/js/stats.js?v=3" defer></script>
-<script src="/js/preloader.js?v=20"></script>
-<script src="/js/main.js?v=17" defer></script>
-<script src="/js/cookies.js?v=10" defer></script>
-<script src="/js/dotmorph.js?v=12" defer></script>
-<script src="/js/track.js?v=1" defer></script>
-<script src="/js/form.js?v=20" defer></script>
-<script src="/js/faq.js?v=5" defer></script>
-<script src="/js/lenis.min.js?v=1" defer></script>
-<script src="/js/smooth.js?v=5" defer></script>
+<script src="/js/app.min.js?v=1795456344" defer></script>
+<script id="pre-js">!function(){var e=document,t=e.documentElement,a=window,n=e.getElementById("pre"),r=!0;try{r=!sessionStorage.getItem("luno_pre"),sessionStorage.setItem("luno_pre","1")}catch(e){}var i=a.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;if(n)if(r&&!i){t.classList.add("pre-lock");var o=e.createElement("canvas"),s=o.getContext("2d"),l=e.createElement("div");l.className="pc",l.innerHTML='<i class="pi"><b></b><b></b><b></b><b></b></i><span>0%</span>',n.appendChild(o),n.appendChild(l);var d,c,m,h,f,u,v,M,p,b,y,g=l.querySelector("span");E(),addEventListener("resize",E);var w=.5,S=performance.now(),A=!1,F=innerWidth<810?500:600,L=0,C=0;"loading"===e.readyState?e.addEventListener("DOMContentLoaded",x):x(),requestAnimationFrame((function e(a){var r,i=a-S,o=(r=Math.min(1,i/F),1-Math.pow(1-r,2.2));!A&&i<2500&&(o=Math.min(o,.9)),L+=.25*(o-L),o>=1&&L>.995&&(L=1),g.textContent=Math.round(100*L)+"%",l.setAttribute("data-n",Math.floor(i/180)%4),function(e,t){s.setTransform(m,0,0,m,0,0),s.fillStyle="#141414",s.fillRect(0,0,d,c);var a,n,r,i=e*(1+w+.06);for(a=0;a<u;a++){var o=i-M[a],l=a*f;for(n=0;n<v;n++){r=a*v+n;var g=c-(n+1)*f,S=o-(n+.5)/v;if(S>.09){var A=.93+.07*Math.sin(t/300+6.28*p[r]);s.fillStyle=b[r]&&S<.27?"rgba(255,179,173,.9)":"rgba(242,231,220,"+A.toFixed(2)+")"}else S>0?s.fillStyle=b[r]?"rgba(20,20,20,1)":"rgba(255,179,173,1)":S>-.05&&y[r]<.25?s.fillStyle="rgba(255,179,173,"+(.35*(1+S/.05)).toFixed(2)+")":s.fillStyle="rgba(242,231,220,.035)";s.fillRect(l,g,h,h)}}}(L,a),L>=1&&!C&&(C=1,setTimeout((function(){n.classList.add("done"),t.classList.remove("pre-lock"),setTimeout((function(){n.remove()}),420)}),60)),C&&!n.isConnected||requestAnimationFrame(e)}))}else n.remove();function E(){d=innerWidth,c=innerHeight,m=Math.min(2,a.devicePixelRatio||1),o.width=d*m,o.height=c*m,1,f=(h=d<810?7:9)+1,u=Math.ceil(d/f)+1,v=Math.ceil(c/f)+1,M=new Float32Array(u),p=new Float32Array(u*v),b=new Uint8Array(u*v),y=new Float32Array(u*v);for(var e=6*Math.random(),t=6*Math.random(),n=0;n<u;n++)M[n]=.16*(.5+.5*Math.sin(.11*n+e))+.1*(.5+.5*Math.sin(.37*n+t))+.22*Math.random();for(var r=0;r<u*v;r++)p[r]=Math.random(),b[r]=Math.random()<.18?1:0,y[r]=Math.random()}function x(){(e.fonts&&e.fonts.ready?e.fonts.ready:Promise.resolve()).then((function(){A=!0}))}}();</script>
 <noscript><style>#pre{display:none}html.pre-lock{overflow:auto}</style></noscript>
 <canvas id="dots"></canvas>
 
@@ -85,11 +69,11 @@
     <section id="cases" class="cases cs-wide">
       <div class="cs-head"><div><p class="label">#cases</p><h2 class="h40 cs-title">selected <span class="pink">cases</span></h2></div><a class="btn btn-pink" href="/cases/"><i></i>see all cases</a></div>
       <div class="cs-stack" id="csStack">
-        <a class="cs-card cs-full" href="cases/set/" style="--i:0" data-cursor="view"><div class="cs-top"><b class="cs-name">SET</b><div class="cs-meta"><em>#e-commerce · ux/ui · branding</em><p>online store and brand identity for handmade bags</p></div></div><div class="cs-img"><img srcset="assets/img/case-set-cover-800.webp 800w, assets/img/case-set-cover-1200.webp 1200w, assets/img/case-set-cover.webp 2000w" sizes="(max-width:809px) 100vw, 1430px" src="assets/img/case-set-cover-1200.webp" alt="SET — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></div></a>
-        <a class="cs-card cs-full" href="cases/beeyawn/" style="--i:1" data-cursor="view"><div class="cs-top"><b class="cs-name">Beeyawn</b><div class="cs-meta"><em>#corporate · ux/ui</em><span class="cs-y">2025</span><p>corporate website for an ai-powered production studio</p></div></div><div class="cs-img"><img srcset="assets/img/case-bee-cover-800.webp 800w, assets/img/case-bee-cover-1200.webp 1200w, assets/img/case-bee-cover.webp 2000w" sizes="(max-width:809px) 100vw, 1430px" src="assets/img/case-bee-cover-1200.webp" alt="Beeyawn — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></div></a>
-        <a class="cs-card cs-full" href="cases/midas/" style="--i:2" data-cursor="view"><div class="cs-top"><b class="cs-name">Midas</b><div class="cs-meta"><em>#corporate · ux/ui</em><p>bold multi-page website for a digital marketing agency</p></div></div><div class="cs-img"><img srcset="assets/img/case-midas-cover-800.webp 800w, assets/img/case-midas-cover-1200.webp 1200w, assets/img/case-midas-cover.webp 1600w" sizes="(max-width:809px) 100vw, 1430px" src="assets/img/case-midas-cover-1200.webp" alt="Midas — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></div></a>
-        <a class="cs-card cs-full" href="cases/orta/" style="--i:3" data-cursor="view"><div class="cs-top"><b class="cs-name">ORTA</b><div class="cs-meta"><em>#community · ux/ui</em><p>colorful animated website for a creative community space</p></div></div><div class="cs-img"><img srcset="assets/img/case-orta-cover-800.webp 800w, assets/img/case-orta-cover-1200.webp 1200w, assets/img/case-orta-cover.webp 2000w" sizes="(max-width:809px) 100vw, 1430px" src="assets/img/case-orta-cover-1200.webp" alt="ORTA — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></div></a>
-        <a class="cs-card cs-full" href="cases/form/" style="--i:4" data-cursor="view"><div class="cs-top"><b class="cs-name">førm</b><div class="cs-meta"><em>#branding</em><p>brand identity for a company building modular autonomous homes</p></div></div><div class="cs-img"><img srcset="assets/img/case-form-cover-800.webp 800w, assets/img/case-form-cover-1200.webp 1200w, assets/img/case-form-cover.webp 2000w" sizes="(max-width:809px) 100vw, 1430px" src="assets/img/case-form-cover-1200.webp" alt="førm — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></div></a>
+        <a class="cs-card cs-full" href="cases/set/" style="--i:0" data-cursor="view"><i class="cs-dot" aria-hidden="true"></i><div class="cs-top"><b class="cs-name">SET</b><div class="cs-meta"><em>#e-commerce · ux/ui · branding</em><p>online store and brand identity for handmade bags</p></div></div><div class="cs-img"><img srcset="assets/img/case-set-cover-800.webp 800w, assets/img/case-set-cover-1200.webp 1200w, assets/img/case-set-cover.webp 2000w" sizes="(max-width:809px) 100vw, 1430px" src="assets/img/case-set-cover-1200.webp" alt="SET — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></div></a>
+        <a class="cs-card cs-full" href="cases/beeyawn/" style="--i:1" data-cursor="view"><i class="cs-dot" aria-hidden="true"></i><div class="cs-top"><b class="cs-name">Beeyawn</b><div class="cs-meta"><em>#corporate · ux/ui</em><span class="cs-y">2025</span><p>corporate website for an ai-powered production studio</p></div></div><div class="cs-img"><img srcset="assets/img/case-bee-cover-800.webp 800w, assets/img/case-bee-cover-1200.webp 1200w, assets/img/case-bee-cover.webp 2000w" sizes="(max-width:809px) 100vw, 1430px" src="assets/img/case-bee-cover-1200.webp" alt="Beeyawn — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></div></a>
+        <a class="cs-card cs-full" href="cases/midas/" style="--i:2" data-cursor="view"><i class="cs-dot" aria-hidden="true"></i><div class="cs-top"><b class="cs-name">Midas</b><div class="cs-meta"><em>#corporate · ux/ui</em><p>bold multi-page website for a digital marketing agency</p></div></div><div class="cs-img"><img srcset="assets/img/case-midas-cover-800.webp 800w, assets/img/case-midas-cover-1200.webp 1200w, assets/img/case-midas-cover.webp 1600w" sizes="(max-width:809px) 100vw, 1430px" src="assets/img/case-midas-cover-1200.webp" alt="Midas — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></div></a>
+        <a class="cs-card cs-full" href="cases/orta/" style="--i:3" data-cursor="view"><i class="cs-dot" aria-hidden="true"></i><div class="cs-top"><b class="cs-name">ORTA</b><div class="cs-meta"><em>#community · ux/ui</em><p>colorful animated website for a creative community space</p></div></div><div class="cs-img"><img srcset="assets/img/case-orta-cover-800.webp 800w, assets/img/case-orta-cover-1200.webp 1200w, assets/img/case-orta-cover.webp 2000w" sizes="(max-width:809px) 100vw, 1430px" src="assets/img/case-orta-cover-1200.webp" alt="ORTA — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></div></a>
+        <a class="cs-card cs-full" href="cases/form/" style="--i:4" data-cursor="view"><i class="cs-dot" aria-hidden="true"></i><div class="cs-top"><b class="cs-name">førm</b><div class="cs-meta"><em>#branding</em><p>brand identity for a company building modular autonomous homes</p></div></div><div class="cs-img"><img srcset="assets/img/case-form-cover-800.webp 800w, assets/img/case-form-cover-1200.webp 1200w, assets/img/case-form-cover.webp 2000w" sizes="(max-width:809px) 100vw, 1430px" src="assets/img/case-form-cover-1200.webp" alt="førm — lunö studio case" width="1600" height="900" loading="lazy" decoding="async"></div></a>
       </div>
     </section>
     <section id="services" class="services sv">
@@ -124,19 +108,19 @@
 
     
 
+    <section class="stats" aria-label="lunö in numbers">
+      <div class="st st-pink reveal"><p>our clients raised their prices after a rebrand by up to</p><b>30<sup>%</sup></b><img src="assets/svg/stat-1.svg" width="50" height="50" alt="" loading="lazy" decoding="async"></div>
+      <div class="st st-dark reveal"><p>years designing brands and websites</p><b>4+</b><img src="assets/svg/stat-2.svg" width="50" height="48" alt="" loading="lazy" decoding="async"></div>
+      <div class="st st-beige reveal"><p>of projects delivered on time</p><b>95<sup>%</sup></b><img src="assets/svg/stat-3.svg" width="50" height="50" alt="" loading="lazy" decoding="async"></div>
+    </section>
+
+    
+
     <section class="quote card q-pink">
       <div class="q-open ascii" data-src="/embeds/quote-open.html?c=d" aria-hidden="true"></div>
       <div class="q-close ascii" data-src="/embeds/quote-close.html?c=d" aria-hidden="true"></div>
       <blockquote class="reveal">for me, design is about <span class="pink">listening, asking questions and making sense of complexity.</span> it’s not about decoration or trends. it’s about clarity, structure and decisions that help brands feel understandable and trustworthy.</blockquote>
       <p class="author"><span class="pink">— yana s.</span>founder of lunö studio</p>
-    </section>
-
-    
-
-    <section class="stats" aria-label="lunö in numbers">
-      <div class="st st-pink reveal"><p>our clients raised their prices after a rebrand by up to</p><b>30<sup>%</sup></b><img src="assets/svg/stat-1.svg" width="50" height="50" alt="" loading="lazy" decoding="async"></div>
-      <div class="st st-dark reveal"><p>years designing brands and websites</p><b>4+</b><img src="assets/svg/stat-2.svg" width="50" height="48" alt="" loading="lazy" decoding="async"></div>
-      <div class="st st-beige reveal"><p>of projects delivered on time</p><b>95<sup>%</sup></b><img src="assets/svg/stat-3.svg" width="50" height="50" alt="" loading="lazy" decoding="async"></div>
     </section>
 
     <section id="reviews" class="reviews rq-wrap">
@@ -232,6 +216,6 @@
   <div class="f-art ascii" id="fArt" data-src="/embeds/footer-art.html" data-mobile="w=1" aria-hidden="true"></div>
 </footer>
 
-<!-- <script src="js/expertise.js?v=23" defer></script> -->
+<!-- -->
 </body>
 </html>

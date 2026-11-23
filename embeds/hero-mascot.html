@@ -88,7 +88,7 @@ const ctx = canvas.getContext('2d');
 
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 /* lightest to densest; the first is always a blank, the last three are drawn blocks */
-const RAMP = [" ", ".", ":", "-", "=", "+", "*", "/", "%", "#", "#", "%", "@"];
+const RAMP = [" ", ".", ":", "-", "=", "+", "*", "/", "+", "*", "#", "%", "#"];
 /* the resting field: the mascot's own characters, as before the wake */
 /* each cell's grain: a small random step, 0..6 */
 const rest = () => (Math.random() * 7) | 0;
@@ -221,7 +221,7 @@ function init() {
   st.fs = fs; st.cols = cols; st.rows = rows;
   st.cw = fs * 0.58; st.ch = fs * 0.95;
   st.u = st.cw / 6.2;
-  st.font = `700 ${fs}px 'Sometype Mono', monospace`;
+  st.font = `400 ${fs * 0.92}px 'Sometype Mono', monospace`;
   st.ox = (width - cols * st.cw) / 2;
   let bottomAlign = false;
   try { bottomAlign = parent.innerWidth < 1200; } catch (err) {}
