@@ -166,15 +166,13 @@ function init() {
   let cols = 0;
   for (let r = 0; r < rows; r++) cols = Math.max(cols, asciiArt[r].length);
   /* pinned to the left, right and bottom edges of the footer */
-  /* leave room on the right for the extrusion (DEPTH steps of a third of a cell) */
-  const fs = width / (cols + 6 * 0.34) / 0.58;
+  const fs = width / cols / 0.58;
   st.fs = fs; st.cols = cols; st.rows = rows;
   st.cw = fs * 0.58; st.ch = fs * 0.95;
   st.u = st.cw / 6.2;
   st.font = `500 ${fs}px 'Sometype Mono', monospace`;
   st.ox = 0;
-  /* and room below it for the extrusion's last step */
-  st.oy = height - rows * st.ch - 6 * st.ch * 0.26;
+  st.oy = height - rows * st.ch;
 
   /* the shape, then its depth: a cell's share of filled neighbours,
      so the dots shrink toward the outline like a halftone and are
@@ -201,55 +199,7 @@ function init() {
       st.mask[k] = 0.35 + 0.65 * clamp((f / n - 0.4) / 0.6, 0, 1);
     }
   }
-  depth();
   paint();
-}
-
-/* ── VOLUME ───────────────────────────────────────────
-   The wordmark is lit from the upper left, so it casts a solid
-   extrusion down and to the right: the same grid of characters
-   stacked DEPTH times, each layer a little further back and a
-   little fainter, drawn once into an offscreen canvas and laid
-   under the live letters every frame. Dense glyphs (# % @ & 8)
-   fill the sides so they read as a body, not as a shadow. */
-const DEPTH = 6, SIDE = '#%@&8';
-let side = null;
-function depth() {
-  side = document.createElement('canvas');
-  side.width = canvas.width; side.height = canvas.height;
-  const g = side.getContext('2d');
-  g.setTransform(dpr, 0, 0, dpr, 0, 0);
-  g.font = st.font; g.textAlign = 'center'; g.textBaseline = 'middle';
-  g.fillStyle = getComputedStyle(canvas).color || '#141414';
-  /* each layer steps a third of a cell right and a quarter of a row down */
-  const sx = st.cw * 0.34, sy = st.ch * 0.26;
-  for (let e = DEPTH; e >= 1; e--) {
-    /* far layers fade, the nearest sits just under the face */
-    g.globalAlpha = 0.12 + 0.5 * (1 - (e - 1) / DEPTH);
-    for (let j = 0; j < st.rows; j++) {
-      const y = st.oy + (j + 0.5) * st.ch + e * sy;
-      for (let i = 0; i < st.cols; i++) {
-        const k = j * st.cols + i;
-        if (st.mask[k] <= 0) continue;
-        g.fillText(SIDE[(k * 7 + e) % SIDE.length], st.ox + (i + 0.5) * st.cw + e * sx, y);
-      }
-    }
-  }
-  /* the face is cut clean out of the extrusion, so the lit front
-     reads as a flat plate standing proud of its darker sides */
-  g.globalAlpha = 1;
-  g.globalCompositeOperation = 'destination-out';
-  for (let j = 0; j < st.rows; j++) for (let i = 0; i < st.cols; i++) {
-    if (st.mask[j * st.cols + i] <= 0) continue;
-    g.fillRect(st.ox + i * st.cw - 0.5, st.oy + j * st.ch - 0.5, st.cw + 1, st.ch + 1);
-  }
-  /* then the front is lit: a pale plate under the live letters */
-  g.globalCompositeOperation = 'source-over';
-  g.fillStyle = 'rgba(242,231,220,.7)';
-  for (let j = 0; j < st.rows; j++) for (let i = 0; i < st.cols; i++) {
-    if (st.mask[j * st.cols + i] <= 0) continue;
-    g.fillRect(st.ox + i * st.cw - 0.5, st.oy + j * st.ch - 0.5, st.cw + 1, st.ch + 1);
-  }
 }
 
 /* heat dropped on the grid in a soft round at a point */
@@ -281,7 +231,6 @@ function paint() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, width, height);
   /* one ink for everything, the hero's own */
-  if (side) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(side, 0, 0); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
   ctx.fillStyle = getComputedStyle(canvas).color || '#141414';
   ctx.font = st.font;
   ctx.textAlign = 'center';
@@ -364,6 +313,9 @@ function run() {
     st.near += ((st.inside ? 1 : 0) - st.near) * (1 - Math.pow(0.004, dt));
     st.tick += dt;
     if (st.tick > 0.07) { st.tick = 0; st.deal++; }
+    /* the resting characters keep changing while the hand is here too */
+    st.churn = (st.churn || 0) + dt;
+    if (st.churn > 0.1) { st.churn = 0; redeal(); }
     push(dt);
     paint();
     const still = warm === 0 && !st.rings.length && !st.moving && Math.abs((st.inside ? 1 : 0) - st.near) < 0.004;
@@ -451,13 +403,14 @@ window.addEventListener('resize', init);
 /* the face may arrive after the first paint */
 if (document.fonts && document.fonts.load) document.fonts.load(`500 12px 'Sometype Mono'`).then(() => paint());
 
+function redeal() { for (let n = 0; n < st.base.length * 0.03; n++) { const k = (Math.random() * st.base.length) | 0; st.base[k] = rest(); } }
 /* the resting characters keep changing, about 3% of them ten times a
-   second, so the mascot is always alive; skipped while the wake loop is running or off screen */
+   second, so the mascot is always alive; the wake loop does the same while it runs */
 let vis = true;
 try { new IntersectionObserver((e) => { vis = e[0].isIntersecting; }).observe(canvas); } catch (err) {}
 if (!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches)) setInterval(() => {
   if (!vis || document.hidden || st.raf || !st.base.length) return;
-  for (let n = 0; n < st.base.length * 0.03; n++) { const k = (Math.random() * st.base.length) | 0; st.base[k] = rest(); }
+  redeal();
   paint();
 }, 100);
 

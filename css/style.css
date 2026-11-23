@@ -908,3 +908,11 @@ div.c-offer:hover{background:none;color:var(--pink)}
 .nt-b{width:auto;height:40px;padding:0 14px;border-radius:var(--r-btn);border:0;background:var(--glass-2);font:400 16px Inter,sans-serif;letter-spacing:0;white-space:nowrap}
 .nt-b:hover{background:var(--pink);color:var(--bg)}
 .rq-head .nt-b:disabled{background:var(--glass-2);border:0}
+/* review arrows: just the typed brackets, no plate */
+.nt-b,.rq-head .nt-b:disabled{background:none;padding:0 4px;height:32px;color:var(--beige)}
+.nt-b:hover{background:none;color:var(--pink)}
+.rq-head .nt-b:disabled{opacity:.3}
+.rq-head .nt-ctl{gap:12px}
+/* review quote mark: the serif's own opening quote, in pink */
+.rq-q{width:auto;height:auto;left:32px;top:20px;font-family:var(--serif);font-size:96px;line-height:1;color:var(--pink)}
+@media (max-width:809px){.rq-q{left:20px;top:12px;font-size:72px}}

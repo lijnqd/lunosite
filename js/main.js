@@ -53,9 +53,9 @@ function drawTime(hh,mm){var c=$('time'),x=c.getContext('2d');x.clearRect(0,0,20
   dg(hh[0],pk,ox);dg(hh[1],pk,ox+44);
   x.fillStyle=pk;[2,4].forEach(function(ry){x.beginPath();x.arc(ox+93,oy+ry*pitch+r,r,0,7);x.fill()});
   dg(mm[0],wh,ox+104);dg(mm[1],wh,ox+148)}
-function tick(){var n=new Date(),h=n.getHours(),m=n.getMinutes(),s=n.getSeconds();
+function tick(){var n=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Ho_Chi_Minh'})),h=n.getHours(),m=n.getMinutes(),s=n.getSeconds();
   function p(v){return(v<10?'0':'')+v}
-  drawTime(p(h),p(m));$('date').textContent=n.getDate()+' '+M[n.getMonth()]+' '+n.getFullYear()+' | '+D[n.getDay()];
+  drawTime(p(h),p(m));$('date').textContent=n.getDate()+' '+M[n.getMonth()]+' · ho chi minh';
   $('hh').setAttribute('transform','rotate('+((h%12)*30+m/2)+' 50 50)');$('mm').setAttribute('transform','rotate('+(m*6+s/10)+' 50 50)');$('ss').setAttribute('transform','rotate('+(s*6)+' 50 50)')}
 tick();setInterval(tick,1000);
 

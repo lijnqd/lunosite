@@ -343,6 +343,9 @@ function run() {
     st.near += ((st.inside ? 1 : 0) - st.near) * (1 - Math.pow(0.004, dt));
     st.tick += dt;
     if (st.tick > 0.07) { st.tick = 0; st.deal++; }
+    /* the resting characters keep changing while the hand is here too */
+    st.churn = (st.churn || 0) + dt;
+    if (st.churn > 0.1) { st.churn = 0; redeal(); }
     push(dt);
     paint();
     const still = warm === 0 && !st.rings.length && !st.moving && Math.abs((st.inside ? 1 : 0) - st.near) < 0.004;
@@ -430,13 +433,14 @@ window.addEventListener('resize', init);
 /* the face may arrive after the first paint */
 if (document.fonts && document.fonts.load) document.fonts.load(`500 12px 'Sometype Mono'`).then(() => paint());
 
+function redeal() { for (let n = 0; n < st.base.length * 0.03; n++) { const k = (Math.random() * st.base.length) | 0; st.base[k] = rest(); } }
 /* the resting characters keep changing, about 3% of them ten times a
-   second, so the mascot is always alive; skipped while the wake loop is running or off screen */
+   second, so the mascot is always alive; the wake loop does the same while it runs */
 let vis = true;
 try { new IntersectionObserver((e) => { vis = e[0].isIntersecting; }).observe(canvas); } catch (err) {}
 if (!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches)) setInterval(() => {
   if (!vis || document.hidden || st.raf || !st.base.length) return;
-  for (let n = 0; n < st.base.length * 0.03; n++) { const k = (Math.random() * st.base.length) | 0; st.base[k] = rest(); }
+  redeal();
   paint();
 }, 100);
 

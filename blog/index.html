@@ -23,7 +23,7 @@
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1795432793">
+<link rel="stylesheet" href="/css/style.css?v=1795433510">
 <style>
 .cs{position:relative;z-index:1;max-width:1430px;margin:0 auto;padding:110px 20px 0}
 .cs-back{display:inline-flex;gap:10px;align-items:center;font-size:16px;opacity:.7;margin-bottom:28px}
@@ -132,7 +132,7 @@ html,body{overflow-x:clip}
 <body>
 <a class="skip" href="#content">skip to content</a>
 <div id="pre" aria-hidden="true"></div>
-<script src="/js/ascii.js?v=16" defer></script>
+<script src="/js/ascii.js?v=17" defer></script>
 <script src="/js/pixfx.js?v=3" defer></script>
 <script src="/js/nav.js?v=2" defer></script>
 <script src="/js/cursor.js?v=3" defer></script>
@@ -218,9 +218,9 @@ function drawTime(hh,mm){var c=$('time'),x=c.getContext('2d');x.clearRect(0,0,20
   dg(hh[0],pk,ox);dg(hh[1],pk,ox+44);
   x.fillStyle=pk;[2,4].forEach(function(ry){x.beginPath();x.arc(ox+93,oy+ry*pitch+r,r,0,7);x.fill()});
   dg(mm[0],wh,ox+104);dg(mm[1],wh,ox+148)}
-function tick(){var n=new Date(),h=n.getHours(),m=n.getMinutes(),s=n.getSeconds();
+function tick(){var n=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Ho_Chi_Minh'})),h=n.getHours(),m=n.getMinutes(),s=n.getSeconds();
   function p(v){return(v<10?'0':'')+v}
-  drawTime(p(h),p(m));$('date').textContent=n.getDate()+' '+M[n.getMonth()]+' '+n.getFullYear()+' | '+D[n.getDay()];
+  drawTime(p(h),p(m));$('date').textContent=n.getDate()+' '+M[n.getMonth()]+' · ho chi minh';
   $('hh').setAttribute('transform','rotate('+((h%12)*30+m/2)+' 50 50)');$('mm').setAttribute('transform','rotate('+(m*6+s/10)+' 50 50)');$('ss').setAttribute('transform','rotate('+(s*6)+' 50 50)')}
 tick();setInterval(tick,1000);
 
