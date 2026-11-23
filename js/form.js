@@ -13,7 +13,7 @@ Array.prototype.forEach.call(form.querySelectorAll('input'),function(inp){
  if(inp.name==='website')return;
  var w=document.createElement('div');w.className='ff';inp.parentNode.insertBefore(w,inp);w.appendChild(inp);
  var p=document.createElement('p');p.className='err';p.id='err-'+inp.name;p.setAttribute('role','alert');w.appendChild(p);
- inp.removeAttribute('required');
+ if(inp.hasAttribute('required'))inp.setAttribute('aria-required','true');
  var f={inp:inp,w:w,p:p,rule:rules[inp.name]};fields.push(f);
  function clear(){w.classList.remove('bad');inp.removeAttribute('aria-invalid');inp.removeAttribute('aria-describedby')}
  inp.addEventListener('input',clear);
@@ -21,7 +21,7 @@ Array.prototype.forEach.call(form.querySelectorAll('input'),function(inp){
 });
 var btn0=form.querySelector('button[type=submit]');
 var cw=document.createElement('div');cw.className='ff ck';
-cw.innerHTML='<label><input type="checkbox" name="consent" value="yes"><span>i agree to the processing of my personal data in line with the <a href="/privacy/" target="_blank" rel="noopener">privacy policy</a></span></label><p class="err" id="err-consent" role="alert"></p>';
+cw.innerHTML='<label><input type="checkbox" name="consent" value="yes" required aria-required="true"><span>i agree to the processing of my personal data in line with the <a href="/privacy/" target="_blank" rel="noopener">privacy policy</a></span></label><p class="err" id="err-consent" role="alert"></p>';
 form.insertBefore(cw,btn0);
 var ci=cw.querySelector('input');
 fields.push({inp:ci,w:cw,p:cw.querySelector('.err'),rule:function(){return ci.checked?'':'please confirm your consent to send the form'}});
