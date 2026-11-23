@@ -371,15 +371,9 @@ function paint() {
         const d = (Math.hypot(cx - r.x, y - r.y) - r.R) / band;
         if (d > -2.5 && d < 2.5) h += r.amp * Math.exp(-d * d);
       }
-      /* ── WHY IT READS ─────────────────────────────────
-         The reference is crisp because the body is one even surface:
-         solid woven blocks, three tones at most, no per-cell noise,
-         and no light glyphs inside it. So the resting cell is always a
-         block, its tone set only by the light: the face turned to the
-         light (upper left, or toward the hand) ▓, the flat middle ▒,
-         the side turned away ░, and the deepest shadow rim #. */
-      const lit = Math.max(0, st.nx[k] * Lx + st.ny[k] * Ly + st.nz[k] * Lz);
-      let lv = lit > 0.74 ? 12 : lit > 0.5 ? 11 : lit > 0.2 ? 10 : 9;
+      /* the body is one even surface of the same block, like the reference: no shadows, no noise */
+      /* one tone, no shading: every resting cell is the same solid block */
+      let lv = 12;
       /* the hand breaks the surface: warm cells fall apart into lighter
          glyphs, the way the reference star frays under the pointer */
       if (h > COLD) lv -= Math.round(Math.min(1, h) * 9 + (hash(k, st.deal) - 0.5) * 2);
