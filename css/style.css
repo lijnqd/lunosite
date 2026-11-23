@@ -904,3 +904,7 @@ div.c-offer:hover{background:none;color:var(--pink)}
 @media (max-width:809px){.rq-head{margin-bottom:24px}.rq-row{margin:0 -12px;padding:0 12px;scroll-padding:0 12px}.rq{flex-basis:84vw;min-height:360px;padding:80px 22px 24px}.rq-q{left:18px;top:20px;width:50px;height:32px}.rq-n{right:22px;top:24px}.rq blockquote{font-size:22px}}
 /* hero v6: mascot back in the middle, no button in the card */
 @media (min-width:1200px){.hero-art{left:calc(50% - 400px);right:auto;top:330px}}
+/* arrows are typed, not drawn: [<] and [>] */
+.nt-b{width:auto;height:40px;padding:0 14px;border-radius:var(--r-btn);border:0;background:var(--glass-2);font:400 16px Inter,sans-serif;letter-spacing:0;white-space:nowrap}
+.nt-b:hover{background:var(--pink);color:var(--bg)}
+.rq-head .nt-b:disabled{background:var(--glass-2);border:0}
