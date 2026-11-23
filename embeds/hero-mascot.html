@@ -98,6 +98,13 @@ const COLD = 0.04;
 const RING_S = 2.2;
 /* the knobs, in the component's own units */
 const REACH = 50, TRAIL = 1.2;
+/* ?ghost: the same mascot drawn again further down the page (behind the
+   contact card), faint, assembling when it scrolls into view */
+const GHOST = /ghost/.test(location.search);
+const RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
+/* the entrance: every cell flies in from a scattered start and lands;
+   INTRO_S is the whole flight, each cell waits up to DELAY_S first */
+const INTRO_S = 1.1, DELAY_S = 0.55;
 
 const asciiArt = [
   "                                @@@@@@@@                        @@@@@@@@                            ",
@@ -170,7 +177,9 @@ const st = {
   hx: -9999, hy: -9999, lx: NaN, ly: NaN, near: 0, inside: false,
   /* rings going out from presses */
   rings: [],
-  deal: 0, tick: 0, raf: 0
+  deal: 0, tick: 0, raf: 0,
+  /* entrance clock (s since it started; -1 = not yet) and scroll dissolve 0..1 */
+  it: -1, gone: 0
 };
 
 /* a stable 0..1 per cell per deal, so the shimmer is noise that
@@ -214,6 +223,9 @@ function init() {
   st.base = Uint8Array.from({ length: cols * rows }, rest);
   st.px = new Float32Array(cols * rows); st.py = new Float32Array(cols * rows);
   st.vx = new Float32Array(cols * rows); st.vy = new Float32Array(cols * rows);
+  /* where each cell starts its entrance, and which way it leaves on scroll */
+  st.sx = new Float32Array(cols * rows); st.sy = new Float32Array(cols * rows); st.dl = new Float32Array(cols * rows); st.an = new Float32Array(cols * rows);
+  for (let k = 0; k < cols * rows; k++) { st.sx[k] = (Math.random() - 0.5) * width * 1.2; st.sy[k] = (Math.random() - 0.6) * height * 1.1; st.dl[k] = Math.random() * DELAY_S; st.an[k] = Math.random() * Math.PI * 2; }
   for (let j = 0; j < rows; j++) {
     for (let i = 0; i < cols; i++) {
       const k = j * cols + i;
@@ -340,6 +352,8 @@ function paint() {
     return { x: r.x, y: r.y, R: (8 + e * 260) * st.u, amp: 0.6 * (1 - p) * (1 - p) * Math.min(1, p * 6) };
   });
   const band = 24 * st.u;
+  const intro = st.it < 0 ? 0 : Math.min(1, st.it / INTRO_S), gone = st.gone;
+  ctx.globalAlpha = GHOST ? 1 : 1 - gone * 0.6;
   for (let j = 0; j < st.rows; j++) {
     const y = st.oy + (j + 0.5) * st.ch;
     for (let i = 0; i < st.cols; i++) {
@@ -357,22 +371,33 @@ function paint() {
         const d = (Math.hypot(cx - r.x, y - r.y) - r.R) / band;
         if (d > -2.5 && d < 2.5) h += r.amp * Math.exp(-d * d);
       }
-      /* the resting density: the body is shaded like a lit object, the
-         face toward the light (upper left, or the hand) densest, the
-         far side and the thin outline thinning out to dots */
+      /* ── WHY IT READS ─────────────────────────────────
+         The reference is crisp because the body is one even surface:
+         solid woven blocks, three tones at most, no per-cell noise,
+         and no light glyphs inside it. So the resting cell is always a
+         block, its tone set only by the light: the face turned to the
+         light (upper left, or toward the hand) ▓, the flat middle ▒,
+         the side turned away ░, and the deepest shadow rim #. */
       const lit = Math.max(0, st.nx[k] * Lx + st.ny[k] * Ly + st.nz[k] * Lz);
-      let d = 0.18 + 0.92 * (0.4 * st.hgt[k] + 0.6 * lit);
-      /* a small fixed grain per cell, re-dealt now and then, so the
-         surface is even but alive */
-      d += (st.base[k] / 6 - 0.5) * 0.07;
-      /* the wake thickens it toward the solid block */
-      d += h * 0.75 * (0.55 + 0.45 * m);
-      /* the warm part shimmers, the cold field holds still */
-      if (h > COLD) d += (hash(k, st.deal) - 0.5) * 0.12 * Math.min(1, h * 2);
-      const idx = clamp(Math.round(d * top), 1, top);
-      /* the characters run from the hand: each is drawn where its
-         spring has carried it */
-      const x = cx + st.px[k], yy = y + st.py[k];
+      let lv = lit > 0.74 ? 12 : lit > 0.5 ? 11 : lit > 0.2 ? 10 : 9;
+      /* the hand breaks the surface: warm cells fall apart into lighter
+         glyphs, the way the reference star frays under the pointer */
+      if (h > COLD) lv -= Math.round(Math.min(1, h) * 9 + (hash(k, st.deal) - 0.5) * 2);
+      /* scrolling away, the mascot comes apart and drifts off */
+      let x = cx + st.px[k], yy = y + st.py[k];
+      if (gone > 0) {
+        const g = Math.pow(gone, 1.4), r = (120 + st.dl[k] * 600) * st.u * g;
+        x += Math.cos(st.an[k]) * r; yy += Math.sin(st.an[k]) * r * 0.7 + g * 140 * st.u;
+        lv -= Math.round(gone * (6 + st.dl[k] * 14));
+      }
+      /* the entrance: in flight a cell is a dot; it lands as itself */
+      if (intro < 1) {
+        const e = clamp((intro * INTRO_S - st.dl[k]) / (INTRO_S - DELAY_S), 0, 1), q = 1 - Math.pow(1 - e, 3);
+        x += st.sx[k] * (1 - q); yy += st.sy[k] * (1 - q);
+        if (e < 0.92) lv = e > 0.6 ? 5 : 1;
+      }
+      const idx = clamp(lv, 0, top);
+      if (idx < 1) continue;
       if (idx >= top - 2) { ctx.drawImage(st.tile[idx - (top - 2)], x - st.cw / 2, yy - st.ch / 2, st.cw, st.ch); continue; }
       ctx.fillText(RAMP[idx], x, yy);
     }
@@ -384,7 +409,8 @@ function run() {
   if (st.raf) return;
   let prev = performance.now();
   const step = (t) => {
-    const dt = Math.min(0.05, (t - prev) / 1000);
+    /* rAF can hand a timestamp from just before prev: never step backwards */
+    const dt = clamp((t - prev) / 1000, 0, 0.05);
     prev = t;
     /* the cooling: the same fraction off every cell, so a trail
        of seconds T is down to a twentieth after T */
@@ -401,12 +427,10 @@ function run() {
     st.near += ((st.inside ? 1 : 0) - st.near) * (1 - Math.pow(0.004, dt));
     st.tick += dt;
     if (st.tick > 0.07) { st.tick = 0; st.deal++; }
-    /* the resting characters keep changing while the hand is here too */
-    st.churn = (st.churn || 0) + dt;
-    if (st.churn > 0.1) { st.churn = 0; redeal(); }
+    if (st.it >= 0 && st.it < INTRO_S) st.it += dt;
     push(dt);
     paint();
-    const still = warm === 0 && !st.rings.length && !st.moving && Math.abs((st.inside ? 1 : 0) - st.near) < 0.004;
+    const still = warm === 0 && !st.rings.length && !st.moving && !(st.it >= 0 && st.it < INTRO_S) && Math.abs((st.inside ? 1 : 0) - st.near) < 0.004;
     st.raf = still ? 0 : requestAnimationFrame(step);
   };
   st.raf = requestAnimationFrame(step);
@@ -491,17 +515,30 @@ window.addEventListener('resize', init);
 /* the face may arrive after the first paint */
 if (document.fonts && document.fonts.load) document.fonts.load(`500 12px 'Sometype Mono'`).then(() => paint());
 
-function redeal() { for (let n = 0; n < st.base.length * 0.03; n++) { const k = (Math.random() * st.base.length) | 0; st.base[k] = rest(); } }
-/* the resting characters keep changing, about 3% of them ten times a
-   second, so the mascot is always alive; the wake loop does the same while it runs */
-let vis = true;
-try { new IntersectionObserver((e) => { vis = e[0].isIntersecting; }).observe(canvas); } catch (err) {}
-if (!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches)) setInterval(() => {
-  if (!vis || document.hidden || st.raf || !st.base.length) return;
-  redeal();
-  paint();
-}, 100);
-
+/* ── ENTRANCE AND EXIT ──────────────────────────────
+   The hero mascot assembles from scattered dots once the page is
+   shown (after the preloader), and comes apart as the hero scrolls
+   away, drifting down toward the next blocks; scrolling back up
+   gathers it again. The ghost copy lower on the page assembles the
+   first time it comes into view. Reduced motion: it is simply there. */
+function begin() { if (st.it >= 0) return; if (RM) { st.it = INTRO_S; paint(); return; } st.it = 0; run(); }
+if (GHOST) {
+  try { new IntersectionObserver((es) => { if (es[0].isIntersecting) begin(); }, { threshold: 0.25 }).observe(canvas); } catch (err) { begin(); }
+} else {
+  const h = document.documentElement;
+  if (h.classList.contains('pre-lock') && window.MutationObserver) {
+    new MutationObserver((_, o) => { if (!h.classList.contains('pre-lock')) { o.disconnect(); setTimeout(begin, 120); } }).observe(h, { attributes: true, attributeFilter: ['class'] });
+  } else setTimeout(begin, 120);
+  if (!RM) {
+    const hero = canvas.closest('.hero');
+    let pend = 0;
+    const onScroll = () => { if (!hero) return; const r = hero.getBoundingClientRect();
+      const g = clamp(-r.top / (r.height * 0.75), 0, 1);
+      if (Math.abs(g - st.gone) < 0.002) return; st.gone = g;
+      if (!st.raf && !pend) pend = requestAnimationFrame(() => { pend = 0; paint(); }); };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  }
+}
 init();
 </script>
 

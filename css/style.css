@@ -958,7 +958,6 @@ html.scrolled .hdr-fade{opacity:1}
 .quote .author .sig{display:block;font-family:'Saint Delafield',cursive;font-size:64px;line-height:.8;color:var(--beige);margin-bottom:6px;text-transform:none}
 @media (max-width:809px){.quote .author .sig{font-size:48px}}
 /* process: the line fills in pink */
-.steps::before{background:var(--pink);opacity:.7}
 /* magnetic buttons ease back */
 .btn-pink,.btn-dark{transition:transform .35s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
 /* back to top */
@@ -983,3 +982,6 @@ html.scrolled .hdr-fade{opacity:1}
 .btn-line-pink:hover i{background:var(--bg)}
 /* article reading progress */
 .read-bar{position:fixed;left:0;top:0;height:3px;width:100%;z-index:60;background:var(--pink);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+/* the hero mascot again, faint, behind the contact card: it assembles when the block comes into view */
+.c-ghost{position:absolute;left:calc(50% - 400px);top:40px;width:800px;height:580px;z-index:0;color:var(--beige);opacity:.13;pointer-events:none}
+@media (max-width:809px){.c-ghost{display:none}}

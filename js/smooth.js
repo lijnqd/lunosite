@@ -43,9 +43,6 @@ if(matchMedia('(hover:hover) and (pointer:fine)').matches)d.querySelectorAll('.n
 if(matchMedia('(hover:hover) and (pointer:fine)').matches)d.querySelectorAll('.btn-pink,.btn-dark').forEach(function(b){
  b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;b.style.transform='translate('+(x*10).toFixed(1)+'px,'+(y*8).toFixed(1)+'px)'});
  b.addEventListener('mouseleave',function(){b.style.transform=''})});
-/* back to top, at the end of every footer */
-var ft=d.querySelector('.footer');if(ft&&!ft.querySelector('.to-top')){var tt=d.createElement('button');tt.type='button';tt.className='to-top';tt.textContent='[^] top';tt.setAttribute('aria-label','back to top');
- tt.addEventListener('click',function(){if(lenis)lenis.scrollTo(0,{duration:1.4});else scrollTo({top:0,behavior:'smooth'});var f=d.querySelector('a,button');f&&f.focus({preventScroll:true})});ft.appendChild(tt)}
 /* a case cover flies into the case page (cross-document view transition, chrome and safari) */
 d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="/cases/"],a[href^="cases/"]');if(!a)return;
  var im=a.matches('.wk-media')?a.querySelector('img.top')||a.querySelector('img.on'):a.querySelector('img');
