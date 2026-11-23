@@ -430,15 +430,15 @@ window.addEventListener('resize', init);
 /* the face may arrive after the first paint */
 if (document.fonts && document.fonts.load) document.fonts.load(`500 12px 'Sometype Mono'`).then(() => paint());
 
-/* now and then a few resting characters are re-dealt, so the field
-   breathes quietly; skipped while the wake loop is running or off screen */
+/* the resting characters keep changing, about 3% of them ten times a
+   second, so the mascot is always alive; skipped while the wake loop is running or off screen */
 let vis = true;
 try { new IntersectionObserver((e) => { vis = e[0].isIntersecting; }).observe(canvas); } catch (err) {}
 if (!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches)) setInterval(() => {
   if (!vis || document.hidden || st.raf || !st.base.length) return;
-  for (let n = 0; n < st.base.length * 0.015; n++) { const k = (Math.random() * st.base.length) | 0; st.base[k] = rest(); }
+  for (let n = 0; n < st.base.length * 0.03; n++) { const k = (Math.random() * st.base.length) | 0; st.base[k] = rest(); }
   paint();
-}, 300);
+}, 100);
 
 init();
 </script>
