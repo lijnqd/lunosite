@@ -1,6 +1,6 @@
 /* the mascot flows down the page into other shapes, like the reference star:
-   one set of ascii particles, three forms — the mascot in the hero, the lunö
-   star behind the about statement, the mascot again behind the founder quote.
+   one set of ascii particles, two forms — the mascot in the hero and the lunö
+   star behind the about statement.
    Between two forms every particle travels on its own from its cell in the
    first shape to its cell in the next, each a little later than the last, so
    the figure pours from one form into the other as a stream of glyphs,
@@ -10,8 +10,8 @@
    Reduced motion: nothing runs. */
 (function(){
 var d=document,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
-var heroArt=d.querySelector('.hero-art'),about=d.querySelector('#about'),quote=d.querySelector('.quote');
-if(RM||!heroArt||!about||!quote)return;
+var heroArt=d.querySelector('.hero-art'),about=d.querySelector('#about');
+if(RM||!heroArt||!about)return;
 var RAMP=[' ','.',':','-','=','+','*','/','%','#','░','▒','▓'];
 var STAR='M28.6569 14.0705L18.8811 11.9709L24.5867 5.04269C24.9272 4.62999 24.3777 4.08058 23.965 4.42106L17.0368 10.1267L14.9346 0.348217C14.834 -0.116072 14.1711 -0.116072 14.0705 0.348217L11.9709 10.1241L5.04269 4.41848C4.62999 4.078 4.08058 4.62741 4.42106 5.04011L10.1267 11.9683L0.348217 14.0705C-0.116072 14.1711 -0.116072 14.834 0.348217 14.9346L10.1267 17.0368L4.42106 23.965C4.08058 24.3777 4.62999 24.9272 5.04269 24.5867L11.9709 18.8811L14.0705 28.6569C14.1711 29.1214 14.834 29.1214 14.9346 28.6569L17.0368 18.8811L23.965 24.5867C24.3777 24.9272 24.9272 24.3777 24.5867 23.965L18.8811 17.0368L28.6569 14.9346C29.1214 14.834 29.1214 14.1711 28.6569 14.0705Z';
 var cv=d.createElement('canvas'),x=cv.getContext('2d');cv.className='m-flow';cv.setAttribute('aria-hidden','true');d.body.appendChild(cv);
@@ -28,14 +28,14 @@ function shape(b,cols,rows){var cells=[];
 function starShape(){var cols=72,rows=Math.round(72*.58/.95),c=d.createElement('canvas');c.width=cols;c.height=rows;var g=c.getContext('2d');
  g.setTransform(cols/29,0,0,rows/29,0,0);g.fill(new Path2D(STAR));var px=g.getImageData(0,0,cols,rows).data,b=new Uint8Array(cols*rows);
  for(var k=0;k<cols*rows;k++)b[k]=px[k*4+3]>110?1:0;return shape(b,cols,rows)}
-var forms=[];
+var forms=[],sm={i:-1,t:0};
 fetch('/embeds/hero-mascot.html?v=32').then(function(r){return r.text()}).then(function(t){
  var m=t.match(/const asciiArt = \[([\s\S]*?)\];/);if(!m)return;
  var rs=(m[1].match(/"([^"]*)"/g)||[]).map(function(q){return q.slice(1,-1)}),rows=rs.length,cols=0;rs.forEach(function(r){cols=Math.max(cols,r.length)});
  var b=new Uint8Array(cols*rows);for(var j=0;j<rows;j++)for(var i=0;i<cols;i++)b[j*cols+i]=(rs[j][i]||' ')!==' '?1:0;
  var masc=shape(b,cols,rows),star=starShape();
  /* each form: its element, its shape, how big it sits in the element, how strong it is drawn */
- forms=[{el:heroArt,s:masc,k:1,fit:'hero',a:.0},{el:about,s:star,k:.78,a:.16},{el:quote,s:masc,k:.82,a:.18}];
+ forms=[{el:heroArt,s:masc,k:1,fit:'hero',a:.0},{el:about,s:star,k:.78,a:.16}];
  N=Math.max(masc.cells.length,star.cells.length);
  /* every particle sets off a little later than the one above it, so the shape pours */
  lag=new Float32Array(N);for(var k=0;k<N;k++){var c=masc.cells[Math.floor(k*masc.cells.length/N)];lag[k]=.55*(c.j/masc.rows)+.25*hash(k,3)}
@@ -51,7 +51,9 @@ function frame(){raf=0;if(!ready)return;
  /* the two forms around the middle of the screen, and how far we are between them */
  var i=0;while(i<P.length-1&&P[i+1].mid<c)i++;
  if(i>=P.length-1){var last=P[P.length-1];if(last.r.bottom<0)return;i=P.length-2}
- var A=P[i],B=P[i+1],t=cl((c-A.mid)/(B.mid-A.mid));
+ var A=P[i],B=P[i+1],tt=cl((c-A.mid)/(B.mid-A.mid));
+ /* the shown progress follows the scroll with a soft lag, so the pour never jerks */
+ if(sm.i!==i){sm.i=i;sm.t=tt}sm.t+=(tt-sm.t)*.12;var t=sm.t;if(Math.abs(tt-sm.t)>.0008)req();
  /* strength: each form shows while its element is on screen; in the gap, only the stream near the screen */
  var pa=cl(1-Math.abs(A.mid-c)/(H*.75)),pb=cl(1-Math.abs(B.mid-c)/(H*.75));
  var fa=forms[i],fb=forms[i+1];
@@ -60,7 +62,7 @@ function frame(){raf=0;if(!ready)return;
  var SA=fa.s,SB=fb.s;
  for(var k=0;k<N;k++){
   var ca=SA.cells[Math.floor(k*SA.cells.length/N)],cb=SB.cells[Math.floor(k*SB.cells.length/N)];
-  var tk=ease(cl((t-lag[k]*.6)/.4));
+  var tk=ease(cl((t-lag[k]*.5)/.5));
   var ax=A.ox+(ca.i+.5)*A.cw,ay=A.oy+(ca.j+.5)*A.ch,bx=B.ox+(cb.i+.5)*B.cw,by=B.oy+(cb.j+.5)*B.ch;
   /* the path bows sideways a little, so the stream has a body */
   var sw=Math.sin(tk*Math.PI)*(hash(k,5)-.5)*W*.18;
