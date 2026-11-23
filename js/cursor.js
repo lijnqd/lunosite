@@ -5,9 +5,12 @@ var d=document,c=d.createElement('div');c.id='cur';c.className='hide';d.body.app
 var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 var tx=-100,ty=-100,x=-100,y=-100,s=.2,ts=.2,seen=false;
 var SEL='a,button,[role=button],label,select,summary,.folder,input[type=checkbox],input[type=submit]';
-d.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;if(!seen){x=tx;y=ty;seen=true}
- var t=e.target,txt=t.closest&&t.closest('input:not([type=checkbox]):not([type=radio]):not([type=submit]),textarea');
- var big=!txt&&t.closest&&t.closest(SEL);ts=big?1:.2;c.classList.toggle('big',!!big);c.classList.toggle('hide',!!txt)},{passive:true});
+function look(t){
+ var txt=t.closest&&t.closest('input:not([type=checkbox]):not([type=radio]):not([type=submit]),textarea');
+ var lab=!txt&&t.closest&&t.closest('[data-cursor]'),big=!txt&&t.closest&&(lab||t.closest(SEL));ts=lab?1.5:big?1:.2;c.classList.toggle('big',!!big);c.classList.toggle('lab',!!lab);c.setAttribute('data-label',lab?lab.getAttribute('data-cursor'):'');c.classList.toggle('hide',!!txt)}
+d.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;if(!seen){x=tx;y=ty;seen=true}look(e.target)},{passive:true});
+/* the page can scroll under a still pointer: re-read what is under it */
+addEventListener('scroll',function(){if(!seen)return;var t=d.elementFromPoint(tx,ty);if(t)look(t)},{passive:true});
 addEventListener('message',function(e){var m=e.data;if(!m||m.luno!=='cur')return;
  var fr=[].filter.call(d.querySelectorAll('iframe'),function(f){return f.contentWindow===e.source})[0];if(!fr)return;
  var r=fr.getBoundingClientRect(),k=m.w?r.width/m.w:1;tx=r.left+m.x*k;ty=r.top+m.y*k;if(!seen){x=tx;y=ty;seen=true}

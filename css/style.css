@@ -940,3 +940,35 @@ html.lenis,html.lenis body{height:auto}
 .pt-curtain.now{transition:none}
 .pt-curtain.out{transform:translateY(-100%);transition-duration:.6s}
 .pt-curtain.out:before{top:auto;bottom:0}
+/* ---------- a11y and polish (doc P0) ---------- */
+.hdr-fade{position:fixed;left:0;right:0;top:0;height:96px;z-index:49;pointer-events:none;background:linear-gradient(#141414 0%,rgba(20,20,20,.86) 45%,rgba(20,20,20,0) 100%);opacity:0;transition:opacity .35s}
+html.scrolled .hdr-fade{opacity:1}
+#form input::placeholder,#form textarea::placeholder{color:#9a9590}
+.rq-n,.nt-hint{opacity:.7}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.scr-v{display:contents}
+/* cursor words: view over cases, drag over reviews */
+#cur.lab{background:var(--pink);backdrop-filter:none}
+#cur.lab:after{content:attr(data-label);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 11px/1 Inter,sans-serif;color:var(--bg);letter-spacing:0}
+/* review: link to the case */
+.rq figcaption{flex-wrap:wrap}
+.rq-case{margin-left:auto;font-size:14px;color:var(--pink);white-space:nowrap}
+.rq-case:hover{color:var(--beige)}
+/* founder signature */
+.quote .author .sig{display:block;font-family:'Saint Delafield',cursive;font-size:64px;line-height:.8;color:var(--beige);margin-bottom:6px;text-transform:none}
+@media (max-width:809px){.quote .author .sig{font-size:48px}}
+/* process: the line fills in pink */
+.steps::before{background:var(--pink);opacity:.7}
+/* magnetic buttons ease back */
+.btn-pink,.btn-dark{transition:transform .35s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
+/* back to top */
+.to-top{position:absolute;right:40px;bottom:auto;top:250px;z-index:3;border:0;background:none;color:var(--bg);font:400 16px Inter,sans-serif;cursor:pointer;padding:4px}
+.to-top:hover{text-decoration:underline}
+@media (max-width:1199px){.to-top{top:auto;bottom:16px;right:20px}}
+/* shared cover between case list and case page */
+::view-transition-group(case-cover){animation-duration:.8s;animation-timing-function:cubic-bezier(.76,0,.24,1)}
+/* form sent: the approved stamp */
+#form{position:relative}
+.f-stamp{display:inline-block;align-self:center;margin:6px auto 0;padding:8px 18px;border:2px solid var(--pink);border-radius:var(--r-btn);color:var(--pink);font:400 28px/1 var(--serif);letter-spacing:.02em;transform:rotate(-6deg);animation:stamp .45s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes stamp{from{transform:rotate(-6deg) scale(1.6);opacity:0}to{transform:rotate(-6deg) scale(1);opacity:1}}
+.wk-ascii{position:absolute;inset:0;width:100%;height:100%;z-index:9999;pointer-events:none;opacity:0}

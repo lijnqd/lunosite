@@ -7,6 +7,9 @@
    reduced motion: none of this runs */
 (function(){
 var d=document,h=d.documentElement,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* a dark fade under the fixed header once the page has moved, so text never runs into the logo and menu */
+var fade=d.createElement('div');fade.className='hdr-fade';fade.setAttribute('aria-hidden','true');d.body.appendChild(fade);
+function sc(){h.classList.toggle('scrolled',scrollY>40)}addEventListener('scroll',sc,{passive:true});sc();
 if(RM)return;
 var lenis=null;
 if(window.Lenis&&matchMedia('(hover:hover) and (pointer:fine)').matches){
@@ -31,6 +34,20 @@ d.addEventListener('click',function(e){
  if(/\.(pdf|png|jpe?g|webp|zip)$/i.test(u.pathname))return;
  e.preventDefault();cover(function(){location.href=u.href})
 },false);
+/* menu items scramble into place on hover, the same glyphs as everywhere else */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches)d.querySelectorAll('.nav a,.f-cols a').forEach(function(a){a.addEventListener('mouseenter',function(){window.pxScramble&&pxScramble(a,360)})});
+/* magnetic main buttons: they lean a few pixels toward the pointer and settle back */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches)d.querySelectorAll('.btn-pink,.btn-dark').forEach(function(b){
+ b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;b.style.transform='translate('+(x*10).toFixed(1)+'px,'+(y*8).toFixed(1)+'px)'});
+ b.addEventListener('mouseleave',function(){b.style.transform=''})});
+/* back to top, at the end of every footer */
+var ft=d.querySelector('.footer');if(ft&&!ft.querySelector('.to-top')){var tt=d.createElement('button');tt.type='button';tt.className='to-top';tt.textContent='[^] top';tt.setAttribute('aria-label','back to top');
+ tt.addEventListener('click',function(){if(lenis)lenis.scrollTo(0,{duration:1.4});else scrollTo({top:0,behavior:'smooth'});var f=d.querySelector('a,button');f&&f.focus({preventScroll:true})});ft.appendChild(tt)}
+/* a case cover flies into the case page (cross-document view transition, chrome and safari) */
+d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="/cases/"],a[href^="cases/"]');if(!a)return;
+ var im=a.matches('.wk-media')?a.querySelector('img.top')||a.querySelector('img.on'):a.querySelector('img');
+ d.querySelectorAll('[style*="view-transition-name"]').forEach(function(x){x.style.viewTransitionName=''});
+ if(im)im.style.viewTransitionName='case-cover'},true);
 /* the curtain */
 function curtain(){var c=d.createElement('div');c.className='pt-curtain';d.body.appendChild(c);return c}
 function cover(go){var c=curtain();c.offsetWidth;c.classList.add('in');try{sessionStorage.setItem('luno_pt','1')}catch(e){}setTimeout(go,520)}

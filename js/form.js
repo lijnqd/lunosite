@@ -56,3 +56,8 @@ if(window.dataLayer)window.dataLayer.push({event:'cta_click',label:'free review'
 // "book a review" in services: pre-fill the message once contacts are reached
 (function(){var f=document.getElementById('form');if(!f)return;
 document.querySelectorAll('.review-cta').forEach(function(a){a.addEventListener('click',function(){var m=f.querySelector('[name=message]');if(m)m.value='free 15-minute video review — my site / brand link: '})})})();
+/* sent: an "approved" stamp is set on the card, its letters scrambling into place */
+(function(){var n=document.getElementById('formNote');if(!n||!window.MutationObserver)return;
+new MutationObserver(function(){if(n.hidden||!/thank/i.test(n.textContent)||n.parentNode.querySelector('.f-stamp'))return;
+ var s=document.createElement('span');s.className='f-stamp';s.setAttribute('aria-hidden','true');s.textContent='approved';n.parentNode.insertBefore(s,n);
+ if(window.pxScramble)pxScramble(s,700)}).observe(n,{attributes:true,childList:true,characterData:true,subtree:true})})();

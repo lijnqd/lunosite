@@ -11,6 +11,11 @@ function rg(){return GL[(Math.random()*GL.length)|0]}
 
 /* ---- text scramble ---- */
 function scr(el,dur,delay){if(!el||el.__sc)return;el.__sc=1;dur=dur||900;delay=delay||0;
+ /* screen readers and search see the real words: they sit in a visually hidden copy,
+    and only an aria-hidden twin of the text is scrambled on screen */
+ if(!el.querySelector(':scope>.scr-v')){var real=el.textContent.replace(/\s+/g,' ').trim(),sr=d.createElement('span'),v=d.createElement('span');
+  sr.className='sr';sr.textContent=real;v.className='scr-v';v.setAttribute('aria-hidden','true');
+  while(el.firstChild)v.appendChild(el.firstChild);el.appendChild(sr);el.appendChild(v)}
  var w=d.createTreeWalker(el,NodeFilter.SHOW_TEXT,{acceptNode:function(n){return n.nodeValue.trim()&&!(n.parentNode.closest&&n.parentNode.closest('.ascii,svg,script,style,.sr'))?1:3}}),ns=[],n,tot=0;
  while(n=w.nextNode()){ns.push({n:n,o:n.nodeValue});tot+=n.nodeValue.length}
  if(!tot)return;var k=0;
@@ -19,6 +24,9 @@ function scr(el,dur,delay){if(!el||el.__sc)return;el.__sc=1;dur=dur||900;delay=d
  (function f(now){var e=now-t0,done=true;if(now-last<32&&e<delay+dur){requestAnimationFrame(f);return}last=now;
   ns.forEach(function(x){var s='';for(var i=0;i<x.o.length;i++){var c=x.o[i];if(e>=x.t[i]||c===' '||c==='\n')s+=c;else{done=false;s+=rg()}}x.n.nodeValue=s});
   if(!done)requestAnimationFrame(f);else ns.forEach(function(x){x.n.nodeValue=x.o})})(t0)}
+
+/* other scripts can scramble a word on demand (menu items on hover) */
+window.pxScramble=function(el,dur){if(el.__busy)return;el.__busy=1;el.__sc=0;scr(el,dur||380);setTimeout(function(){el.__busy=0},(dur||380)+60)};
 
 /* ---- pixel dissolve: a canvas in the page colour sits over the block and loses its pixels ---- */
 function pix(el,dur,delay,cb){dur=dur||520;delay=delay||0;var r=el.getBoundingClientRect();

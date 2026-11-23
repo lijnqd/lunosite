@@ -130,3 +130,4 @@ html,body{overflow-x:clip}
   .cx-m{display:block;padding:0 6px}
   .cx-quote{padding:64px 12px 24px}
 }
+.cx-cover img{view-transition-name:case-cover}
