@@ -916,3 +916,13 @@ div.c-offer:hover{background:none;color:var(--pink)}
 /* review quote mark: the serif's own opening quote, in pink */
 .rq-q{width:auto;height:auto;left:32px;top:20px;font-family:var(--serif);font-size:96px;line-height:1;color:var(--pink)}
 @media (max-width:809px){.rq-q{left:20px;top:12px;font-size:72px}}
+/* reviews v4: bigger cards, the founder quote's ASCII mark at a size it draws cleanly */
+.rq{flex-basis:640px;min-height:520px;padding:140px 44px 40px}
+.rq-q{left:40px;top:40px;width:104px;height:65px;font-size:0}
+.rq-n{right:40px;top:44px}
+.rq blockquote{font-size:34px;line-height:1.12}
+.rq figcaption{padding-top:32px;font-size:16px}
+.rq figcaption img{width:48px;height:48px}
+.rq figcaption b{font-size:18px}
+@media (max-width:1199px){.rq{flex-basis:520px;min-height:460px;padding:120px 32px 32px}.rq-q{left:30px;top:30px;width:86px;height:54px}.rq blockquote{font-size:28px}}
+@media (max-width:809px){.rq{flex-basis:88vw;min-height:420px;padding:96px 22px 24px}.rq-q{left:20px;top:22px;width:72px;height:45px}.rq-n{right:22px;top:26px}.rq blockquote{font-size:24px}}
