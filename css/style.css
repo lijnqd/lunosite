@@ -1032,3 +1032,17 @@ html.scrolled .hdr-fade{opacity:1}
 @media (prefers-reduced-motion:reduce){.tl-in{animation:none}}
 /* softer fade under the header */
 .hdr-fade{height:130px;background:linear-gradient(rgba(20,20,20,.72) 0%,rgba(20,20,20,.38) 45%,rgba(20,20,20,0) 100%)}
+/* about: two crossing tapes of tools — pink with dark stars over a dark one, running opposite ways */
+.tools{margin:140px -20px 0;overflow:hidden;padding:120px 0}
+.tl-x{position:relative;height:200px}
+.tl-r{position:absolute;left:-5%;right:-5%;top:50%;height:92px;overflow:hidden;display:flex;align-items:center}
+.tl-pink{background:var(--pink);color:var(--bg);transform:translateY(-50%) rotate(4deg);z-index:2}
+.tl-dark{background:#202020;color:var(--beige);transform:translateY(-50%) rotate(-4deg);z-index:1;-webkit-mask:linear-gradient(90deg,#000 0 30%,rgba(0,0,0,.55) 45% 55%,#000 70%);mask:linear-gradient(90deg,#000 0 30%,rgba(0,0,0,.55) 45% 55%,#000 70%)}
+.tl-in{display:flex;align-items:center;gap:44px;width:max-content;animation:tl 44s linear infinite;padding-left:24px}
+.tl-in.rev{animation-direction:reverse;gap:64px}
+.tl-in span{font-family:var(--serif);font-size:56px;line-height:1;letter-spacing:-0.02em;white-space:nowrap}
+.tl-in img{width:28px;height:28px;flex:none}
+.tl-in img.dk{filter:brightness(0)}
+@keyframes tl{to{transform:translateX(-50%)}}
+@media (max-width:809px){.tools{margin:80px -12px 0;padding:60px 0}.tl-x{height:130px}.tl-r{height:60px}.tl-in span{font-size:34px}.tl-in{gap:26px;animation-duration:30s}.tl-in.rev{gap:36px}.tl-in img{width:18px;height:18px}}
+@media (prefers-reduced-motion:reduce){.tl-in{animation:none}}
