@@ -863,3 +863,9 @@ div.c-offer:hover{background:none;color:var(--pink)}
 @media (max-width:1199px){.hero>.hero-btns{position:relative;right:auto;bottom:auto;margin-top:20px}}
 @media (max-width:809px){.hero>.hero-btns .btn{width:100%}}
 @media (min-width:1200px){.hero-art{top:345px}.hero-bottom{width:330px}}
+/* hero v4 (reference Nov 23): subtitle beside the second title line, button bottom-left, mascot bottom-right cut by the card */
+@media (min-width:1200px){
+  .hero-art{left:auto;right:-90px;top:290px;width:800px;height:580px}
+  .hero-bottom{top:198px;bottom:auto;width:350px}
+  .hero>.hero-btns{right:auto;left:32px;bottom:32px}
+}

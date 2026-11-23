@@ -65,7 +65,7 @@ const ctx = canvas.getContext('2d');
    right under the hand the characters thicken to their densest
    and stay that way while the hand rests, and along the path it
    came from they thin back out, @ to # to + to a dot, as the wake
-   cools. The glyphs lean toward the hand while it is near. Press
+   cools. The characters run from the hand and spring back behind it. Press
    and a ring goes out from the press.
 
    ── A GRID OF NUMBERS, THEN A RAMP ──────────────────────
@@ -97,7 +97,7 @@ const COLD = 0.04;
 /* how long a press's ring takes to spread and fade, s */
 const RING_S = 2.2;
 /* the knobs, in the component's own units */
-const REACH = 50, TRAIL = 1.2, PULL = 40;
+const REACH = 50, TRAIL = 1.2;
 
 const asciiArt = [
   "                                @@@@@@@@                        @@@@@@@@                            ",
@@ -163,8 +163,10 @@ const st = {
   mask: new Float32Array(0),
   /* each cell's resting character, dealt once and re-dealt now and then */
   base: [],
+  /* each character's push away from the hand: offset and velocity, px */
+  px: new Float32Array(0), py: new Float32Array(0), vx: new Float32Array(0), vy: new Float32Array(0), moving: false,
   /* the hand: where it is, where it was last stamped, and how
-     present it is (for the lean, which follows it out) */
+     present it is (for its own patch of heat, which follows it out) */
   hx: -9999, hy: -9999, lx: NaN, ly: NaN, near: 0, inside: false,
   /* rings going out from presses */
   rings: [],
@@ -210,6 +212,8 @@ function init() {
   st.heat = new Float32Array(cols * rows);
   st.mask = new Float32Array(cols * rows);
   st.base = Array.from({ length: cols * rows }, rest);
+  st.px = new Float32Array(cols * rows); st.py = new Float32Array(cols * rows);
+  st.vx = new Float32Array(cols * rows); st.vy = new Float32Array(cols * rows);
   for (let j = 0; j < rows; j++) {
     for (let i = 0; i < cols; i++) {
       const k = j * cols + i;
@@ -262,11 +266,7 @@ function paint() {
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   const top = RAMP.length - 1;
-  /* the lean: up to most of a cell toward the hand, fading with
-     distance over twice the wake's width */
-  const lean = (clamp(PULL, 0, 100) / 100) * st.near;
   const rad = radius();
-  const far = rad * 2, far2 = far * far;
   /* the hand's own heat, worked out fresh each frame rather than
      stored, so it never cools: a hand at rest keeps its patch */
   const R2 = rad * rad;
@@ -306,19 +306,9 @@ function paint() {
       let u = v * top + 0.5;
       if (h > COLD) u += (hash(k, st.deal) - 0.5) * 1.6 * Math.min(1, h * 2);
       const idx = clamp(Math.floor(u), 1, top);
-      let x = cx, yy = y;
-      if (lean > 0.002) {
-        const dx = st.hx - x, dy = st.hy - yy;
-        const d2 = dx * dx + dy * dy;
-        if (d2 < far2) {
-          const f = 1 - d2 / far2;
-          const d = Math.sqrt(d2) || 1;
-          /* toward the hand by a share of the gap, never past it */
-          const mm = Math.min(d * 0.6, 14 * st.u * lean * f * f);
-          x += (dx / d) * mm;
-          yy += (dy / d) * mm;
-        }
-      }
+      /* the characters run from the hand: each is drawn where its
+         spring has carried it */
+      const x = cx + st.px[k], yy = y + st.py[k];
       /* cold: the cell's own resting character, so the mascot is
          ASCII from the start; the wake thickens it toward @ and
          cools back to it without a glyph popping in or out */
@@ -349,15 +339,63 @@ function run() {
     }
     /* the rings run outward for RING_S and are gone */
     st.rings = st.rings.filter((r) => (r.t += dt) < RING_S);
-    /* the lean follows the hand in and out */
+    /* the hand's presence follows it in and out */
     st.near += ((st.inside ? 1 : 0) - st.near) * (1 - Math.pow(0.004, dt));
     st.tick += dt;
     if (st.tick > 0.07) { st.tick = 0; st.deal++; }
+    push(dt);
     paint();
-    const still = warm === 0 && !st.rings.length && Math.abs((st.inside ? 1 : 0) - st.near) < 0.004;
+    const still = warm === 0 && !st.rings.length && !st.moving && Math.abs((st.inside ? 1 : 0) - st.near) < 0.004;
     st.raf = still ? 0 : requestAnimationFrame(step);
   };
   st.raf = requestAnimationFrame(step);
+}
+
+/* ── RUNNING FROM THE HAND ─────────────────────────────
+   Inside a round around the pointer every character is shoved
+   straight away from it, harder the closer it is; a spring pulls
+   it home and friction calms it, so the mascot parts around the
+   hand and closes up behind it. Tuned per 60fps frame, scaled
+   by the real frame time so it feels the same on any screen. */
+const FLEE_R = 75, FLEE_F = 2.5, SPRING = 0.08, FRICTION = 0.85;
+function push(dt) {
+  const f = dt * 60, R = FLEE_R * st.u, damp = Math.pow(FRICTION, f);
+  let moving = false;
+  for (let j = 0; j < st.rows; j++) {
+    const y0 = st.oy + (j + 0.5) * st.ch;
+    for (let i = 0; i < st.cols; i++) {
+      const k = j * st.cols + i;
+      if (st.mask[k] <= 0) continue;
+      const x = st.ox + (i + 0.5) * st.cw + st.px[k], y = y0 + st.py[k];
+      if (st.inside) {
+        const dx = st.hx - x, dy = st.hy - y, d = Math.hypot(dx, dy);
+        if (d < R && d > 0.001) {
+          const force = (R - d) / R;
+          st.vx[k] -= (dx / d) * force * FLEE_F * f;
+          st.vy[k] -= (dy / d) * force * FLEE_F * f;
+        }
+      }
+      st.vx[k] = (st.vx[k] - st.px[k] * SPRING * f) * damp;
+      st.vy[k] = (st.vy[k] - st.py[k] * SPRING * f) * damp;
+      st.px[k] += st.vx[k] * f;
+      st.py[k] += st.vy[k] * f;
+      if (Math.abs(st.vx[k]) > 0.02 || Math.abs(st.vy[k]) > 0.02 || Math.abs(st.px[k]) > 0.05 || Math.abs(st.py[k]) > 0.05) moving = true;
+      else { st.px[k] = 0; st.py[k] = 0; st.vx[k] = 0; st.vy[k] = 0; }
+    }
+  }
+  st.moving = moving;
+}
+
+/* a press throws the characters near it outward, on top of the ring */
+function burst(x, y) {
+  const R = 90 * st.u;
+  for (let j = 0; j < st.rows; j++) for (let i = 0; i < st.cols; i++) {
+    const k = j * st.cols + i;
+    if (st.mask[k] <= 0) continue;
+    const dx = x - (st.ox + (i + 0.5) * st.cw), dy = y - (st.oy + (j + 0.5) * st.ch), d = Math.hypot(dx, dy);
+    if (d < R && d > 0.001) { const force = (R - d) / R; st.vx[k] -= (dx / d) * force * 4; st.vy[k] -= (dy / d) * force * 4; }
+  }
+  st.moving = true;
 }
 
 /* the pointer in the block's own units — the page zooms on wide screens */
@@ -387,7 +425,7 @@ function move(e) {
 canvas.addEventListener('pointerenter', (e) => { st.lx = NaN; move(e); });
 canvas.addEventListener('pointermove', move);
 canvas.addEventListener('pointerleave', () => { st.inside = false; st.lx = NaN; run(); });
-canvas.addEventListener('pointerdown', (e) => { const { x, y } = where(e); st.rings.push({ x, y, t: 0 }); run(); });
+canvas.addEventListener('pointerdown', (e) => { const { x, y } = where(e); st.rings.push({ x, y, t: 0 }); burst(x, y); run(); });
 window.addEventListener('resize', init);
 /* the face may arrive after the first paint */
 if (document.fonts && document.fonts.load) document.fonts.load(`500 12px 'Sometype Mono'`).then(() => paint());
