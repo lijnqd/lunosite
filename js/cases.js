@@ -1,7 +1,7 @@
 /* home works: hover a name on the left square, its cover reveals in the right square; on touch screens it cycles by itself */
 (function(){var w=document.getElementById('wk');if(!w)return;
 var as=[].slice.call(w.querySelectorAll('.wk-list a[data-i]')),ims=[].slice.call(w.querySelectorAll('.wk-media img')),
- media=w.querySelector('.wk-media'),go=w.querySelector('.wk-go'),dd=w.querySelector('.wk-d'),tt=w.querySelector('.wk-t'),cc=w.querySelector('.wk-c'),
+ media=w.querySelector('.wk-media'),dd=w.querySelector('.wk-d'),tt=w.querySelector('.wk-t'),cc=w.querySelector('.wk-c'),
  list=w.querySelector('.wk-list'),cur=-1,z=1;
 function pad(i){return(i<9?'0':'')+(i+1)}
 function set(i){if(i===cur)return;var prev=cur;cur=i;var a=as[i];
@@ -11,13 +11,9 @@ function set(i){if(i===cur)return;var prev=cur;cur=i;var a=as[i];
  ims.forEach(function(x,k){if(k!==i&&k!==prev)x.classList.remove('on','top')});
  if(prev>=0)ims[prev].classList.remove('top');
  im.classList.remove('on');im.style.zIndex=++z;im.offsetWidth;im.classList.add('on','top');
- place(a)}
-function place(a){go.style.transform='translate3d(0,'+(a.offsetTop+a.offsetHeight/2)+'px,0) translateY(-50%)';go.classList.add('in')}
+}
 as.forEach(function(a,k){a.addEventListener('mouseenter',function(){set(k)});a.addEventListener('focus',function(){set(k)})});
-var all=w.querySelector('.wk-all');all.addEventListener('mouseenter',function(){go.classList.remove('in')});
-list.addEventListener('mouseleave',function(){place(as[cur])});
 ims[0].classList.remove('on');set(0);
-addEventListener('resize',function(){var c=cur;cur=-1;set(c)});
 // touch screens: no hover, so the list steps through on its own while visible
 if(!matchMedia('(hover:hover)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){var vis=false,t;
  if('IntersectionObserver'in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(w);

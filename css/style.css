@@ -790,3 +790,14 @@ iframe{color-scheme:normal}
 .nt-stamp img{filter:brightness(0);opacity:.85}
 @media (max-width:1199px){.nt-deck{grid-column:6/13}.nt-card blockquote{font-size:20px}}
 @media (max-width:809px){.nt-deck{max-width:none}.nt-card blockquote{font-size:19px}}
+/* ---------- pixel fx (js/pixfx.js) ---------- */
+html.pxfx .reveal,html.pxfx .rv{transform:none!important;transition:none!important}
+html.pxfx .reveal:not(.px-in),html.pxfx .rv:not(.px-in){opacity:0!important}
+html.pxfx .reveal.px-in,html.pxfx .rv.px-in{opacity:1!important}
+.px-cv{position:absolute;z-index:60;pointer-events:none}
+.bc.px{overflow:hidden}
+.bc.px:hover{background:none!important}
+.bc .px-hv{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;border-radius:inherit}
+.bc.px time,.bc.px h2,.bc.px p,.bc.px .pl{position:relative;z-index:1}
+.bc.px .bl-dot{z-index:1}
+.bc.px,.bc.px time{transition:color .2s .16s,padding .35s,background .35s}
