@@ -830,7 +830,7 @@ html.pxfx .reveal.px-in,html.pxfx .rv.px-in{opacity:1!important}
 .quote blockquote{text-transform:none}
 .f-tag{position:absolute;left:40px;bottom:32px;z-index:2;font-size:16px;letter-spacing:-0.01em}
 @media (max-width:809px){.f-tag{position:relative;left:auto;bottom:auto;margin-top:28px}}
-.digital .date{display:none}
+
 .acard img[src*="star"]{width:40px;filter:brightness(0) invert(1)}
 /* form: one contact field, two selects, a textarea */
 .f-sel{display:grid;grid-template-columns:1fr 1fr;gap:10px}

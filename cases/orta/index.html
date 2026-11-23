@@ -27,7 +27,7 @@
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1795421727">
+<link rel="stylesheet" href="/css/style.css?v=1795422115">
 <link rel="stylesheet" href="/css/case.css?v=2">
 </head>
 <body>
@@ -43,7 +43,7 @@
 <header class="header">
   <a class="logo" href="/" aria-label="lunö"><img src="/assets/svg/logo.svg" alt="lunö"></a>
   <nav class="nav">
-    <a href="/about/">#about</a><a href="/#services">#services</a><a href="/cases/">#work</a><a href="/#faq">#faq</a><a href="/blog/">#blog</a><a href="/#contacts">#contact</a>
+    <a href="/about/">#about</a><a href="/#services">#services</a><a href="/cases/">#cases</a><a href="/#faq">#faq</a><a href="/blog/">#blog</a><a href="/#contacts">#contact</a>
   </nav>
   <a class="btn btn-pink" href="/#contacts"><i></i>discuss a project</a>
 </header>
@@ -68,23 +68,22 @@
 
 <div class="main2 stack" style="padding-top:0">
     <section id="contacts" class="contacts">
-      <h2 class="sr">tell us what you’re building</h2>
+      <h2 class="sr">contact lunö studio</h2>
       <img class="wordmark" src="/assets/img/contacts-wordmark.png" alt="lunö studio" loading="lazy" decoding="async">
       <div class="c-card">
         <div class="c-inner">
           <div class="luna">
-            <img src="/assets/img/cat-luna.webp" alt="Luna, the studio cat" loading="lazy" decoding="async">
-            <div><span>Luna, studio cat and head of morale</span><p>a few lines about your project and when you’d like to launch<br>we reply within 24 hours</p></div>
+            <img src="/assets/img/cat-luna.webp" alt="Luna, the studio founder’s cat" loading="lazy" decoding="async">
+            <div><span>Luna, founder’s cat</span><p>tell us what you’re building and when you’d like to launch<br>we reply within 24 hours</p></div>
           </div>
-          <div class="c-offer"><p>not ready to start yet? get a free 15-minute video review of your current site or brand. we’ll record what works, what doesn’t, and what to fix first.</p><button type="button" class="c-offer-b">get a free review</button></div>
+          <button type="button" class="c-offer">not sure where to start? get a free 15-minute video review of your site or brand</button>
           <form id="form" action="#" method="post">
-            <input type="text" name="name" placeholder="your name" autocomplete="name" maxlength="80" aria-label="name">
-            <input type="text" name="phone" placeholder="email, whatsapp or telegram*" autocomplete="email" maxlength="120" required aria-label="how can we reach you?">
-            <div class="f-sel"><select name="service" aria-label="what do you need?"><option value="" selected>what do you need?</option><option>brand identity</option><option>website</option><option>brand + website</option><option>not sure yet</option></select><select name="budget" aria-label="budget"><option value="" selected>budget</option><option>under $1,000</option><option>$1,000–3,000</option><option>$3,000+</option><option>not sure yet</option></select></div>
-            <textarea name="details" placeholder="what you do, who it’s for, and when you’d like to launch" maxlength="1000" rows="4" aria-label="about your project"></textarea>
-            <input type="hidden" name="message" value="">
+            <input type="text" name="name" placeholder="name" autocomplete="name" maxlength="80">
+            <input type="tel" name="phone" placeholder="phone (whatsapp or telegram)*" autocomplete="tel" inputmode="tel" maxlength="30" required>
+            <input type="email" name="email" placeholder="email*" autocomplete="email" maxlength="120" required>
+            <input type="text" name="message" placeholder="message" maxlength="1000">
             <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
-            <button class="btn btn-pink wide" type="submit"><i></i>send request</button>
+            <button class="btn btn-pink wide" type="submit"><i></i>Submit</button>
             <p class="form-note" id="formNote" hidden></p>
           </form>
         </div>
@@ -94,12 +93,11 @@
 
 <footer class="footer">
   <div class="f-cols">
-    <div><p class="f-h">studio</p><a href="/about/">about</a><a href="/#services">services</a><a href="/cases/">work</a><a href="/blog/">blog</a></div>
-    <div class="f-pages"><p class="f-h">help</p><a href="/#faq">faq</a><a href="#contacts">contact</a></div>
-    <div><p class="f-h">contact</p><a href="mailto:hey.lunostudio@gmail.com">hey.lunostudio@gmail.com</a><a href="https://wa.me/995599906542" target="_blank" rel="noopener">whatsapp</a><a href="https://t.me/lijnqd" target="_blank" rel="noopener">telegram</a><a href="https://www.instagram.com/dsgn.luno/" target="_blank" rel="noopener">instagram</a><a href="https://www.behance.net/dsgn_luno" target="_blank" rel="noopener">behance</a></div>
+    <div><p class="f-h">main</p><a href="/#services">services</a><a href="/#faq">faq</a><a href="/#contacts">contacts</a></div>
+    <div class="f-pages"><p class="f-h">pages</p><a href="/about/">about</a><a href="/cases/">cases</a><a href="/blog/">blog</a></div>
+    <div><p class="f-h">contacts</p><a href="mailto:hey.lunostudio@gmail.com">hey.lunostudio@gmail.com</a><a href="https://www.instagram.com/dsgn.luno/" target="_blank" rel="noopener">instagram</a><a href="https://t.me/lijnqd" target="_blank" rel="noopener">telegram</a><a href="https://wa.me/995599906542" target="_blank" rel="noopener">whatsapp</a><a href="https://www.behance.net/dsgn_luno" target="_blank" rel="noopener">behance</a></div>
     <div class="f-legal"><p class="f-h">legal</p><a href="/privacy/">privacy policy</a><a href="/cookies/">cookie policy</a><a href="#" onclick="window.openCookieSettings&amp;&amp;window.openCookieSettings();return false">cookie settings</a></div>
   </div>
-  <p class="f-tag">branding &amp; websites for founders, working worldwide</p>
   <div class="clock">
     <svg class="analog" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#E3E3E3"/><g id="ticks" fill="#8a8a8a"><circle cx="50" cy="6" r="2"/><circle cx="94" cy="50" r="2"/><circle cx="50" cy="94" r="2"/><circle cx="6" cy="50" r="2"/></g><line id="hh" x1="50" y1="50" x2="50" y2="26" stroke="#222" stroke-width="3.2" stroke-linecap="round"/><line id="mm" x1="50" y1="50" x2="50" y2="12" stroke="#222" stroke-width="2.4" stroke-linecap="round"/><line id="ss" x1="50" y1="50" x2="50" y2="14" stroke="#FFB3AD" stroke-width="2" stroke-linecap="round"/><circle cx="50" cy="50" r="3.2" fill="#222"/></svg>
     <div class="digital"><canvas class="time" id="time" width="200" height="56" style="width:100px;height:28px"></canvas><div class="date" id="date"></div></div>
@@ -131,7 +129,7 @@ var FORM_ENDPOINT='https://luno-form.dsgn-ys.workers.dev';
 $('form').addEventListener('submit',function(e){
   e.preventDefault();var f=e.target,note=$('formNote');note.hidden=false;
   if(!FORM_ENDPOINT){note.textContent='form is being connected — please write to hey.lunostudio@gmail.com';return}
-  fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){if(!r.ok)throw 0;note.innerHTML='thanks! we’ve got your request and will reply within 24 hours. in the meantime, have a look at our work on <a href="https://www.behance.net/dsgn_luno" target="_blank" rel="noopener">behance</a>';f.reset()}).catch(function(){note.textContent='something went wrong — please write to hey.lunostudio@gmail.com'});
+  fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){if(!r.ok)throw 0;note.textContent='thank you! we’ll get back to you within 24 hours';f.reset()}).catch(function(){note.textContent='something went wrong — please write to hey.lunostudio@gmail.com'});
 });
 })();
 </script>
@@ -145,6 +143,6 @@ addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;draw()});addE
 <script src="/js/case.js?v=1" defer></script>
 <script src="/js/dotmorph.js?v=12" defer></script>
 <script src="/js/track.js?v=1" defer></script>
-<script src="/js/form.js?v=15" defer></script>
+<script src="/js/form.js?v=16" defer></script>
 </body>
 </html>
