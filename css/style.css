@@ -882,3 +882,4 @@ div.c-offer:hover{background:none;color:var(--pink)}
 }
 @media (max-width:1199px){.hero-sub{margin-top:20px;font-size:18px;line-height:1.4;max-width:540px}}
 @media (max-width:809px){.hero-sub{font-size:16px}}
+.about-text .eye{margin:0 .3em 0 .1em}
