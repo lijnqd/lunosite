@@ -31,11 +31,14 @@ function frame(p,t){
    else if(g>-.05&&ahead[i]<.25){x.fillStyle='rgba(255,179,173,'+(.35*(1+g/.05)).toFixed(2)+')'} /* a few pixels jump ahead */
    else{x.fillStyle='rgba(242,231,220,.035)'}                                         /* dim grid */
    x.fillRect(px,py,S,S)}}}
-var t0=performance.now(),loaded=d.readyState==='complete',MIN=innerWidth<810?650:800,pv=0,out=0;
-addEventListener('load',function(){loaded=true});
+/* the page is ready to show once its html is parsed and the fonts are in; images keep
+   loading behind it, so nobody waits on them (they used to: the old gate was window.load) */
+var t0=performance.now(),loaded=false,MIN=innerWidth<810?500:600,pv=0,out=0;
+function ready(){var f=d.fonts&&d.fonts.ready?d.fonts.ready:Promise.resolve();f.then(function(){loaded=true})}
+if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',ready);else ready();
 function ease(v){return 1-Math.pow(1-v,2.2)}
 function loop(now){var e=now-t0;
- var target=ease(Math.min(1,e/MIN));if(!loaded&&e<6000)target=Math.min(target,.9);
+ var target=ease(Math.min(1,e/MIN));if(!loaded&&e<2500)target=Math.min(target,.9);
  pv+=(target-pv)*.25;if(target>=1&&pv>.995)pv=1;
  num.textContent=Math.round(pv*100)+'%';box.setAttribute('data-n',Math.floor(e/180)%4);
  frame(pv,now);

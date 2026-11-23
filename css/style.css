@@ -926,3 +926,17 @@ div.c-offer:hover{background:none;color:var(--pink)}
 .rq figcaption b{font-size:18px}
 @media (max-width:1199px){.rq{flex-basis:520px;min-height:460px;padding:120px 32px 32px}.rq-q{left:30px;top:30px;width:86px;height:54px}.rq blockquote{font-size:28px}}
 @media (max-width:809px){.rq{flex-basis:88vw;min-height:420px;padding:96px 22px 24px}.rq-q{left:20px;top:22px;width:72px;height:45px}.rq-n{right:22px;top:26px}.rq blockquote{font-size:24px}}
+/* ---------- smooth scroll (Lenis) and page transitions ---------- */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+::view-transition-group(root){animation-duration:.8s}
+::view-transition-old(root){animation-duration:.8s}
+::view-transition-new(root){animation-duration:.8s}
+.pt-curtain{position:fixed;inset:0;z-index:9998;background:#141414;transform:translateY(100%);transition:transform .52s cubic-bezier(.76,0,.24,1);pointer-events:none}
+.pt-curtain:before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--pink)}
+.pt-curtain.in{transform:none}
+.pt-curtain.now{transition:none}
+.pt-curtain.out{transform:translateY(-100%);transition-duration:.6s}
+.pt-curtain.out:before{top:auto;bottom:0}

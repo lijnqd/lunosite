@@ -40,9 +40,13 @@ function pix(el,dur,delay,cb){dur=dur||520;delay=delay||0;var r=el.getBoundingCl
 
 function under(el){for(var e=el.parentElement;e&&e!==d.documentElement;e=e.parentElement){var c=getComputedStyle(e).backgroundColor;if(c&&c!=='transparent'&&!/rgba\([^)]*,\s*0\)$/.test(c)){var m=c.match(/[\d.]+/g);if(!m||m.length<4||+m[3]>.9){under.el=e===d.body?null:e;return c}}}under.el=null;return BG}
 var TXT=/^(H1|H2|H3|P|BLOCKQUOTE|SPAN)$/;
+/* a block that is already well on screen when it is reached (the visitor scrolled fast,
+   or the page jumped) is shown at once: an effect that starts late reads as an empty screen */
+function late(el){var r=el.getBoundingClientRect();return r.top<innerHeight*.55||r.bottom<0}
 function go(el){if(el.__px)return;el.__px=1;
- if(TXT.test(el.tagName)){el.classList.add('px-in');scr(el,600);return}
- pix(el,520,0);[].slice.call(el.querySelectorAll('.label,h2:not(.sr),h3.h40')).forEach(function(t,i){scr(t,560,60+i*60)})}
+ if(late(el)){el.classList.add('px-in');return}
+ if(TXT.test(el.tagName)){el.classList.add('px-in');scr(el,450);return}
+ pix(el,400,0);[].slice.call(el.querySelectorAll('.label,h2:not(.sr),h3.h40')).forEach(function(t,i){scr(t,450,40+i*50)})}
 
 function hero(){var hr=d.querySelector('.hero');if(!hr)return;
  var t=hr.querySelector('h1');if(t){t.__px=1;scr(t,850,0)}
@@ -54,8 +58,9 @@ function start(){hero();
  // labels/headings inside a revealing block are handled by the block
  els=els.filter(function(e){var p=e.parentElement&&e.parentElement.closest('.reveal,.rv');return !(p&&!TXT.test(p.tagName))});
  if(!('IntersectionObserver'in window)){els.forEach(function(e){e.classList.add('px-in')});return}
- var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);go(e.target)}})},{rootMargin:'0px 0px -4% 0px'});
- els.forEach(function(e){io.observe(e)})}
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);go(e.target)}})},{rootMargin:'0px 0px 12% 0px'});
+ els.forEach(function(e){io.observe(e)});
+ var tm;addEventListener('scroll',function(){clearTimeout(tm);tm=setTimeout(function(){els.forEach(function(e){if(!e.__px&&e.getBoundingClientRect().top<innerHeight){e.__px=1;io.unobserve(e);e.classList.add('px-in')}})},90)},{passive:true})}
 
 function ready(){if(h.classList.contains('pre-lock')){var mo=new MutationObserver(function(){if(!h.classList.contains('pre-lock')){mo.disconnect();setTimeout(start,150)}});mo.observe(h,{attributes:true,attributeFilter:['class']})}else start()}
 if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',ready);else ready();
