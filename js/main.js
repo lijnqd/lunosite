@@ -64,7 +64,7 @@ var FORM_ENDPOINT='https://luno-form.dsgn-ys.workers.dev';
 $('form').addEventListener('submit',function(e){
   e.preventDefault();var f=e.target,note=$('formNote');note.hidden=false;
   if(!FORM_ENDPOINT){note.textContent='form is being connected — please write to hey.lunostudio@gmail.com';return}
-  fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){if(!r.ok)throw 0;note.textContent='thank you! we’ll get back to you within 24 hours';f.reset()}).catch(function(){note.textContent='something went wrong — please write to hey.lunostudio@gmail.com'});
+  fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){if(!r.ok)throw 0;note.innerHTML='thanks! we’ve got your request and will reply within 24 hours. in the meantime, have a look at our work on <a href="https://www.behance.net/dsgn_luno" target="_blank" rel="noopener">behance</a>';f.reset()}).catch(function(){note.textContent='something went wrong — please write to hey.lunostudio@gmail.com'});
 });
 })();
 /* process line (tablet/phone): run only from the first marker to the bottom of the last one */

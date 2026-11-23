@@ -24,7 +24,7 @@ export default {
     const text =
       '<b>New request from designluno.com</b>\n\n' +
       '<b>Name:</b> ' + esc(f.get('name')) + '\n' +
-      '<b>Phone:</b> ' + esc(f.get('phone')) + '\n' +
+      '<b>Contact:</b> ' + esc(f.get('phone')) + '\n' +
       '<b>Email:</b> ' + esc(f.get('email')) + '\n' +
       '<b>Message:</b> ' + esc(f.get('message'));
 

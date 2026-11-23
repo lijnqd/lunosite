@@ -5,12 +5,15 @@ var css='#form .ff{display:flex;flex-direction:column;min-width:0}#form .ff inpu
 var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
 form.setAttribute('novalidate','');
 var rules={
- phone:function(v){v=v.trim();if(!v)return'enter the phone number you use for whatsapp or telegram';if((v.match(/\d/g)||[]).length<6||!/^[+\d\s().\-]+$/.test(v))return'that doesn’t look like a phone number';return''},
- email:function(v){v=v.trim();if(!v)return'enter your email';if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return'check the email address';return''}
+ phone:function(v){v=v.trim();if(!v)return'leave an email, a whatsapp number or a telegram username';
+  if(/@/.test(v)&&!/^@/.test(v))return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)?'':'check the email address';
+  if(/^@?[a-z][a-z0-9_]{3,}$/i.test(v))return'';
+  if((v.match(/\d/g)||[]).length>=6&&/^[+\d\s().\-]+$/.test(v))return'';
+  return'that doesn’t look like an email, phone or telegram username'}
 };
 var fields=[];
 Array.prototype.forEach.call(form.querySelectorAll('input'),function(inp){
- if(inp.name==='website')return;
+ if(inp.name==='website'||inp.type==='hidden')return;
  var w=document.createElement('div');w.className='ff';inp.parentNode.insertBefore(w,inp);w.appendChild(inp);
  var p=document.createElement('p');p.className='err';p.id='err-'+inp.name;p.setAttribute('role','alert');w.appendChild(p);
  inp.removeAttribute('required');
@@ -37,7 +40,9 @@ document.addEventListener('submit',function(e){
  var first=null;fields.forEach(function(f){if(!check(f)&&!first)first=f});
  if(first){e.preventDefault();e.stopPropagation();first.inp.focus();if(note)note.hidden=true;return}
  /* honeypot: bots fill the hidden field -> pretend success, send nothing */
- var hp=form.querySelector('[name=website]');if(hp&&hp.value){e.preventDefault();e.stopPropagation();form.reset();if(note){note.hidden=false;note.textContent='thank you! we’ll get back to you within 24 hours'}return}
+ var hp=form.querySelector('[name=website]');if(hp&&hp.value){e.preventDefault();e.stopPropagation();form.reset();if(note){note.hidden=false;note.textContent='thanks! we’ve got your request and will reply within 24 hours'}return}
+ var mf=form.querySelector('input[name=message]'),sv=form.querySelector('[name=service]'),bg=form.querySelector('[name=budget]'),dt=form.querySelector('[name=details]');
+ if(mf)mf.value=[sv&&sv.value?'need: '+sv.value:'',bg&&bg.value?'budget: '+bg.value:'',dt?dt.value.trim():''].filter(Boolean).join('\n');
  if(window.DotMorph&&btn){clearTimeout(tm);DotMorph.set(btn,'loading');tm=setTimeout(function(){DotMorph.set(btn,'idle')},15000)}
 },true);
 if(note&&btn&&window.MutationObserver){new MutationObserver(function(){
@@ -47,10 +52,10 @@ if(note&&btn&&window.MutationObserver){new MutationObserver(function(){
 })();
 
 // free video review offer: pre-fills the message field
-(function(){var b=document.querySelector('.c-offer'),f=document.getElementById('form');if(!b||!f)return;
-b.addEventListener('click',function(){var m=f.querySelector('[name=message]');if(m){m.value='free 15-minute video review — my site / brand link: ';m.focus();var n=m.value.length;try{m.setSelectionRange(n,n)}catch(e){}}
+(function(){var b=document.querySelector('.c-offer-b'),f=document.getElementById('form');if(!b||!f)return;
+b.addEventListener('click',function(){var m=f.querySelector('[name=details]');if(m){m.value='free 15-minute video review — my site / brand link: ';m.focus();var n=m.value.length;try{m.setSelectionRange(n,n)}catch(e){}}
 if(window.dataLayer)window.dataLayer.push({event:'cta_click',label:'free review',link_url:'#form',location:'contacts'})})})();
 
 // "book a review" in services: pre-fill the message once contacts are reached
-(function(){var a=document.querySelector('.review-cta'),f=document.getElementById('form');if(!a||!f)return;
-a.addEventListener('click',function(){var m=f.querySelector('[name=message]');if(m)m.value='free 15-minute video review — my site / brand link: '})})();
+(function(){var f=document.getElementById('form');if(!f)return;
+document.querySelectorAll('.review-cta').forEach(function(a){a.addEventListener('click',function(){var m=f.querySelector('[name=details]');if(m)m.value='free 15-minute video review — my site / brand link: '})})})();
