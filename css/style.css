@@ -1284,3 +1284,15 @@ html,body{overflow-x:clip}
 .ab-face.ht .pet-svg{visibility:hidden}
 @media (max-width:809px){.ab-hero .ab-txt{max-width:none;width:calc(100% - 48px)}}
 .hero-c .cat-cv{inset:auto;left:-50%;top:-50%;width:200%;height:200%}
+/* cases page: the usual gap before contacts */
+.cl-after{padding-top:140px}
+@media (max-width:809px){.cl-after{padding-top:80px}}
+/* hero: availability note, top right */
+.hc-av{position:absolute;right:44px;top:44px;z-index:2;display:flex;align-items:center;gap:8px;margin:0;font-size:14px;line-height:1.4;color:var(--bg)}
+.hc-av i{width:8px;height:8px;border-radius:50%;background:var(--bg);animation:hcav 2.4s ease-in-out infinite}
+@keyframes hcav{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.hc-av i{animation:none}}
+@media (max-width:1199px){.hero-c .hc-av{position:static;order:-1;align-self:flex-start;margin-bottom:20px}}
+/* the drawn pictures never flash in before their dots are ready */
+.hero-c .cat:not(.asc) .cat-svg{visibility:hidden}
+@media (prefers-reduced-motion:no-preference){.ab-face:not(.ht) .pet-svg{visibility:hidden}}
