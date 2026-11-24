@@ -12,7 +12,7 @@ function hash(k){var h=(k*374761393)|0;h=Math.imul(h^(h>>>13),1274126177);return
 function build(o){var cv=o.cv,r=cv.getBoundingClientRect();o.W=r.width;o.H=r.height;if(!o.W)return;cv.width=Math.round(o.W*DPR);cv.height=Math.round(o.H*DPR);
  o.cell=o.W<80?4:o.W<130?5:6;o.cols=Math.ceil(o.W/o.cell);o.rows=Math.ceil(o.H/(o.cell*1.4));
  var c=document.createElement('canvas'),g=c.getContext('2d');c.width=o.cols*4;c.height=o.rows*4;g.scale(c.width/o.W,c.height/o.H);
- var F=o.H*1.02;g.fillStyle=g.strokeStyle='#000';g.lineWidth=F*.05;g.lineJoin='round';g.font=F+'px "Instrument Serif", serif';g.textBaseline='alphabetic';
+ var F=o.H*1.02;g.fillStyle=g.strokeStyle='#000';g.lineWidth=F*.05;g.lineJoin='round';g.font=F+'px '+(getComputedStyle(document.body).getPropertyValue('--serif')||'"Instrument Serif", serif');g.textBaseline='alphabetic';
  g.fillText(cv.dataset.n,2,o.H*.86);g.strokeText(cv.dataset.n,2,o.H*.86);
  var d=g.getImageData(0,0,c.width,c.height).data;o.g=new Float32Array(o.cols*o.rows);
  for(var j=0;j<o.rows;j++)for(var i=0;i<o.cols;i++){var s=0;for(var v=0;v<4;v++)for(var u=0;u<4;u++)s+=d[((j*4+v)*c.width+i*4+u)*4+3];o.g[j*o.cols+i]=s/(16*255)}}

@@ -3,6 +3,8 @@
 @font-face{font-family:'Sometype Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/sometype-mono-latin-500-normal.woff2) format('woff2')}
 @font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/instrument-serif-latin-400-normal.woff2) format('woff2')}
 @font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/instrument-serif-latin-400-italic.woff2) format('woff2')}
+@font-face{font-family:'Redaction 35';font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/redaction-35-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Redaction 35';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/redaction-35-latin-400-italic.woff2) format('woff2')}
 :root{--serif:"Instrument Serif",Georgia,"Times New Roman",serif;--r:20px;--glass-2:rgba(242,231,220,.08);--beige-2:rgba(242,231,220,.72);--r-in:12px;--r-btn:12px;--bg:#141414;--beige:#F2E7DC;--pink:#FFB3AD;--glass:rgba(242,231,220,.05);--mono:Inter,system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
@@ -1387,3 +1389,8 @@ html,body{overflow-x:clip}
 @media (max-width:809px){.cs-f .cs-top{padding:20px}}
 /* footer on phones: 16px links, tighter rows */
 @media (max-width:809px){.f-cols a{padding:6px 0;min-height:0}}
+
+/* home page: headings in Redaction 35 */
+body.home{--serif:"Redaction 35",Georgia,"Times New Roman",serif}
+body.home .hc-h{letter-spacing:-0.025em}
+@media (min-width:1200px){body.home .hc-h{font-size:88px;max-width:540px}}
