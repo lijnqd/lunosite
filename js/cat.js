@@ -3,7 +3,9 @@
    # % * + = : . — two tones, one colour, no noise. Her pupils follow the cursor (the grid is redrawn
    only when they move), her head sways after it, she breathes; left alone she dozes ("zzz…").
    Runs only while the hero is on screen. Reduced motion: eyes only. */
-(function(){var w=document.querySelector('.hero-c .cat');if(!w)return;
+(function(){function hsh(k){var h=(k*2654435761)|0;h=Math.imul(h^(h>>>15),2246822519);return((h^(h>>>13))>>>0)/4294967296}
+var lsp=-1,SPS=document.querySelector('.hero-c'),sp=0;function scrollP(){var r=SPS.getBoundingClientRect();var v=-r.top/(r.height*.85);sp=v<0?0:v>1?1:v}
+var w=document.querySelector('.hero-c .cat');if(!w)return;
 var pet=w.querySelector('.cat-pet'),cv=w.querySelector('.cat-cv'),say=w.querySelector('.cat-say'),txt=say.firstChild;
 var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,ACTIVE='Luna, head of the studio',IDLE='zzz…',INK='#141414';
 var SW=780,SH=770,P=[[192,403],[497,403]],PS=103;/* source layout (see the svg in the markup) */
@@ -47,15 +49,22 @@ function render(now){
  /* halftone: one round dot per cell on a square grid; its size follows how dark the cell is,
     so the darkest parts (outline, pupils, nose, mouth) grow into solid shapes where dots touch,
     and the lightest parts of the fur open up to bare pink. One colour, nothing else */
- var lo=TH.g[0],hi=TH.t0,cell=cw;x.globalAlpha=1;x.beginPath();
+ var lo=TH.g[0],hi=TH.t0,cell=cw,GLS=[];x.globalAlpha=1;x.beginPath();
  for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var D=Ds[j*cols+i];if(D<0)continue;
   if(intro<1&&ord[j*cols+i]>intro)continue;
   var E=Sm[j*cols+i]+(D-Sm[j*cols+i])*1.6,tn=(E-lo)/(hi-lo);tn=tn<0?0:tn>1?1:tn;
   var rr=cell*.5*1.22*Math.pow(tn,.62);if(rr<cell*.12)continue;
   var cx=ox+(i+.5)*cell,cy=oy+(j+.5)*cell;
   if(hv>.01){var ddx=cx-lx,ddy=cy-ly,dd=Math.sqrt(ddx*ddx+ddy*ddy)||1,RR=W*.3;if(dd<RR){var q0=1-dd/RR,ff=q0*q0*(3-2*q0)*hv;cx+=ddx/dd*ff*cell*5;cy+=ddy/dd*ff*cell*5;rr*=1-ff*.5}}
+  /* scroll: as the cover leaves, each dot turns into a character and drifts off, one by one, softly */
+  if(sp>0){var hk=(j*cols+i),tk=(sp*1.25-hsh(hk)*.45)/.8;tk=tk<0?0:tk>1?1:tk;tk=tk*tk*(3-2*tk);
+   if(tk>0){var gx2=cx+(hsh(hk+7)-.5)*cell*8*tk*tk,gy2=cy+tk*tk*cell*(3+hsh(hk+3)*10);GLS.push(gx2,gy2,tn,tk);rr*=1-tk;if(rr<cell*.05)continue}}
   x.moveTo(cx+rr,cy);x.arc(cx,cy,rr,0,6.2832)}
  x.fill();
+ if(GLS.length){x.font='600 '+Math.round(cell*1.35)+"px 'Sometype Mono',monospace";x.textAlign='center';x.textBaseline='middle';
+  for(var q2=0;q2<GLS.length;q2+=4){var t3=GLS[q2+2],a3=GLS[q2+3];x.globalAlpha=Math.min(1,a3*1.6)*(1-Math.max(0,a3-.75)*2.4);
+   x.fillText(t3>.8?'@':t3>.62?'#':t3>.46?'%':t3>.32?'*':t3>.2?'+':t3>.1?'=':':',GLS[q2],GLS[q2+1])}x.globalAlpha=1}
+
  x.globalAlpha=1;return intro<1}
 function setSay(a){if(asleep===a)return;asleep=a;say.classList.add('pop');setTimeout(function(){txt.textContent=a?IDLE:ACTIVE;say.classList.remove('pop')},120)}
 function wake(cx,cy){mx=cx;my=cy;has=true;last=performance.now();setSay(false);
@@ -74,8 +83,8 @@ function frame(now){raf=0;if(!vis||!W)return;
  var gx=asleep?0:lx*14,gy=asleep?8:ly*8;ex+=(gx-ex)*.22;ey+=(gy-ey)*.22;
  var busy=false;
  /* redraw the glyphs only when the pupils have moved enough to change a cell */
- follow();
- if(Math.abs(ex-dex)>.8||Math.abs(ey-dey)>.8||now-born<950||hv>0||(hvT===0&&hv>0)){dex=ex;dey=ey;busy=render(now)}
+ follow();scrollP();
+ if(Math.abs(ex-dex)>.8||Math.abs(ey-dey)>.8||now-born<950||hv>0||sp!==lsp){lsp=sp;dex=ex;dey=ey;busy=render(now)}
  raf=requestAnimationFrame(frame)}
 /* the hover point eases after the cursor (outside frame(), whose own lx/ly are the look direction) */
 function follow(){lx+=(tlx-lx)*.12;ly+=(tly-ly)*.12;hv+=(hvT-hv)*.06;if(hv<.005)hv=0}
