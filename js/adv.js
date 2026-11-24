@@ -29,8 +29,7 @@ function draw(){raf=0;if(!shapes.length)return;var r=sec.getBoundingClientRect()
  if(r.bottom<0||r.top>vh)return;
  var p=cl((top0-r.top)/span)*(n-1),s=Math.min(n-2,Math.floor(p)),f=p-s,t=RM?(f>.5?1:0):cl((f-.18)/.64);
  if(n<2){s=0;t=0}
- var a=Math.round(p);if(a!==act){items[act].classList.remove('on');items[a].classList.add('on');act=a;
-  var h=items[a].querySelector('.av-t');if(window.pxScramble&&!RM)window.pxScramble(h,420)}
+ var a=Math.round(p);if(a!==act){items[act].classList.remove('on');items[a].classList.add('on');act=a;}
  /* the first icon assembles from scattered glyphs as the block comes up */
  var e=RM?1:ease(cl((vh-r.top)/(vh*.9)));
  var W=cv.__w,H=cv.__h,cell=S/G,ox=(W-S)/2,oy=(H-S)/2;

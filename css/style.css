@@ -1384,7 +1384,8 @@ html,body{overflow-x:clip}
 @media (max-width:809px){.f-cols a{font-size:16px;line-height:1.3;padding:12px 0;min-height:44px;box-sizing:border-box}.f-cols .f-h{margin-bottom:4px}}
 /* case card hover: ascii break-up, then the cover again */
 .ch-asc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;border-radius:inherit}
-.ch-asc{z-index:1;transition:opacity .35s}
+.ch-asc{z-index:1;opacity:0;transition:opacity .45s cubic-bezier(.2,.7,.2,1)}
+.ch-asc.on{opacity:1}
 .dg-plate,.cs-info,.cs-full .cs-top{z-index:3}
 @media (max-width:809px){.cs-f .cs-top{padding:20px}}
 /* footer on phones: 16px links, tighter rows */
@@ -1418,7 +1419,7 @@ body.home .hc-h{letter-spacing:-0.025em}
 @media (max-width:809px){.about-text .nw{white-space:normal}.about-text .pill{font-size:.92em}}
 
 /* process: soft fade at the top and bottom of the drum instead of a hard cut */
-.pw-drum{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 26%,#000 74%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 26%,#000 74%,transparent 100%)}
+.pw-stage{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 24%,#000 76%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 24%,#000 76%,transparent 100%)}
 /* contacts: cöntact us sinks under the glass card, avatar + short bubble, softer fields */
 .contacts .wordmark.wm-t{z-index:0}
 .contacts .c-card{z-index:1;background:rgba(242,231,220,.05);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
@@ -1436,3 +1437,13 @@ body .contacts .c-card{top:128px}
 .bh-q{max-width:920px}.bh-p{left:-190px}.bh-p.r{left:auto;right:-190px}
 @media (max-width:1199px){.bh-q{max-width:640px}.bh-p{left:-130px}.bh-p.r{right:-130px}}
 @media (max-width:809px){.bh-q{max-width:none;padding:0 30px}.bh-p{left:-14px}.bh-p.r{right:-14px}}
+
+/* process: bigger step titles */
+.pw-c h3{font-size:76px;line-height:.98}
+@media (max-width:1199px){.pw-c h3{font-size:60px}}
+@media (max-width:809px){.pw-c h3{font-size:38px}}
+/* advantages: more air between items */
+.av-item{padding:16px 0}
+@media (max-width:809px){.av-item{padding:8px 0}}
+/* contacts wordmark in italic */
+.wordmark.wm-t{font-style:italic}
