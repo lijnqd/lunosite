@@ -89,12 +89,9 @@ const ctx = canvas.getContext('2d');
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 /* lightest to densest; the first is always a blank */
 const RAMP = [" ", ".", ":", "-", "=", "+", "*", "#", "%", "@"];
-const DEPTH = ["+", "*", "o", "%", "#", "#", "@"];
 /* the resting field: the mascot's own characters, as before the wake */
 const REST = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-/<>=?";
 const rest = () => REST[(Math.random() * REST.length) | 0];
-/* a cell's character: from its depth band, one step either way at random, so the letters keep changing but the shape holds */
-const dealAt = (m) => { const b = Math.floor(m * DEPTH.length) + ((Math.random() * 3) | 0) - 1; return DEPTH[Math.max(0, Math.min(DEPTH.length - 1, b))]; };
 /* below this much heat a cell is the field: a dot */
 const COLD = 0.04;
 /* how long a press's ring takes to spread and fade, s */
@@ -202,7 +199,6 @@ function init() {
       st.mask[k] = 0.35 + 0.65 * clamp((f / n - 0.4) / 0.6, 0, 1);
     }
   }
-  for (let k = 0; k < st.base.length; k++) if (st.mask[k] > 0) st.base[k] = dealAt(st.mask[k]);
   paint();
 }
 
@@ -236,7 +232,7 @@ function paint() {
   ctx.clearRect(0, 0, width, height);
   /* one ink for everything, the hero's own */
   ctx.fillStyle = getComputedStyle(canvas).color || '#141414';
-  ctx.font = st.font.replace('500','700');
+  ctx.font = st.font;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   const top = RAMP.length - 1;
@@ -286,11 +282,6 @@ function paint() {
       /* cold: the cell's own resting character, so the mascot is
          ASCII from the start; the wake thickens it toward @ and
          cools back to it without a glyph popping in or out */
-      /* cold: a round halftone dot, smaller toward the outline (same style as the hero cat);
-         a few of them flicker into their resting character, so the ascii is always there;
-         the wake turns the dots into characters, densest under the hand */
-      /* cold: a still character by depth (lighter toward the outline), no flicker;
-         the wake thickens it toward @ under the hand */
       if (h <= COLD || idx <= 4) {
         ctx.fillText(st.base[k], x, yy);
         continue;
@@ -321,12 +312,10 @@ function run() {
     /* the hand's presence follows it in and out */
     st.near += ((st.inside ? 1 : 0) - st.near) * (1 - Math.pow(0.004, dt));
     st.tick += dt;
-    st.churn = (st.churn || 0) + dt;
-    if (st.churn > 0.1) { st.churn = 0; redeal(); }
     if (st.tick > 0.07) { st.tick = 0; st.deal++; }
     /* the resting characters keep changing while the hand is here too */
     st.churn = (st.churn || 0) + dt;
-
+    if (st.churn > 0.1) { st.churn = 0; redeal(); }
     push(dt);
     paint();
     const still = warm === 0 && !st.rings.length && !st.moving && Math.abs((st.inside ? 1 : 0) - st.near) < 0.004;
@@ -414,7 +403,7 @@ window.addEventListener('resize', init);
 /* the face may arrive after the first paint */
 if (document.fonts && document.fonts.load) document.fonts.load(`500 12px 'Sometype Mono'`).then(() => paint());
 
-function redeal() { for (let n = 0; n < st.base.length * 0.04; n++) { const k = (Math.random() * st.base.length) | 0; if (st.mask[k] > 0) st.base[k] = dealAt(st.mask[k]); } }
+function redeal() { for (let n = 0; n < st.base.length * 0.03; n++) { const k = (Math.random() * st.base.length) | 0; st.base[k] = rest(); } }
 /* the resting characters keep changing, about 3% of them ten times a
    second, so the mascot is always alive; the wake loop does the same while it runs */
 let vis = true;

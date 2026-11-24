@@ -10,7 +10,7 @@ var SW=780,SH=770,P=[[192,403],[497,403]],PS=103;/* source layout (see the svg i
 var srcs=['/assets/img/cat/eyes.webp','/assets/img/cat/pupil-0.webp','/assets/img/cat/pupil-1.webp','/assets/img/cat/base.webp'],ims=[];
 var mx=0,my=0,has=false,px=0,py=0,vx=0,vy=0,ex=0,ey=0,dex=1e9,dey=1e9,last=performance.now(),asleep=false,vis=true,raf=0,t0=performance.now(),born=0;
 var x=cv.getContext('2d'),sm=document.createElement('canvas'),sx=sm.getContext('2d',{willReadFrequently:true}),DPR=Math.min(2,devicePixelRatio||1);
-var W=0,H=0,cw=0,ch=0,cols=0,rows=0,SS=4,tiles=[],ord=null,TH=null;
+var tlx=-1e4,tly=-1e4,W=0,H=0,cw=0,ch=0,cols=0,rows=0,SS=4,tiles=[],ord=null,TH=null;
 var SCR='#%&*+=/\\|~^01',lx=-1e4,ly=-1e4,hv=0,hvT=0,G=['.',':','-','=','+','/','*','%','#'],GA=[.62,.68,.74,.8,.9,.94,1,1,1];
 function hash(k){var h=(k*374761393)|0;h=Math.imul(h^(h>>>13),1274126177);return((h^(h>>>16))>>>0)/4294967296}
 function tile(dense){var c=document.createElement('canvas'),q=c.getContext('2d');c.width=Math.ceil(cw*DPR);c.height=Math.ceil(ch*DPR);q.scale(DPR,DPR);
@@ -53,13 +53,13 @@ function render(now){
   var E=Sm[j*cols+i]+(D-Sm[j*cols+i])*1.6,tn=(E-lo)/(hi-lo);tn=tn<0?0:tn>1?1:tn;
   var rr=cell*.5*1.22*Math.pow(tn,.62);if(rr<cell*.12)continue;
   var cx=ox+(i+.5)*cell,cy=oy+(j+.5)*cell;
-  if(hv>.01){var ddx=cx-lx,ddy=cy-ly,dd=Math.sqrt(ddx*ddx+ddy*ddy)||1,RR=W*.18;if(dd<RR){var ff=Math.pow(1-dd/RR,2)*hv;cx+=ddx/dd*ff*cell*5;cy+=ddy/dd*ff*cell*5;rr*=1-ff*.5}}
+  if(hv>.01){var ddx=cx-lx,ddy=cy-ly,dd=Math.sqrt(ddx*ddx+ddy*ddy)||1,RR=W*.3;if(dd<RR){var q0=1-dd/RR,ff=q0*q0*(3-2*q0)*hv;cx+=ddx/dd*ff*cell*5;cy+=ddy/dd*ff*cell*5;rr*=1-ff*.5}}
   x.moveTo(cx+rr,cy);x.arc(cx,cy,rr,0,6.2832)}
  x.fill();
  x.globalAlpha=1;return intro<1}
 function setSay(a){if(asleep===a)return;asleep=a;say.classList.add('pop');setTimeout(function(){txt.textContent=a?IDLE:ACTIVE;say.classList.remove('pop')},120)}
 function wake(cx,cy){mx=cx;my=cy;has=true;last=performance.now();setSay(false);
- var r=cv.getBoundingClientRect();lx=(cx-r.left)*W/(r.width||1);ly=(cy-r.top)*H/(r.height||1);hvT=(lx>-20&&ly>-20&&lx<W+20&&ly<H+20)?1:0;go()}
+ var r=cv.getBoundingClientRect();tlx=(cx-r.left)*W/(r.width||1);tly=(cy-r.top)*H/(r.height||1);if(hv<.01){lx=tlx;ly=tly}hvT=(tlx>-20&&tly>-20&&tlx<W+20&&tly<H+20)?1:0;go()}
 addEventListener('pointermove',function(e){wake(e.clientX,e.clientY)},{passive:true});
 addEventListener('pointerdown',function(e){wake(e.clientX,e.clientY)},{passive:true});
 function frame(now){raf=0;if(!vis||!W)return;
@@ -74,9 +74,11 @@ function frame(now){raf=0;if(!vis||!W)return;
  var gx=asleep?0:lx*14,gy=asleep?8:ly*8;ex+=(gx-ex)*.22;ey+=(gy-ey)*.22;
  var busy=false;
  /* redraw the glyphs only when the pupils have moved enough to change a cell */
- hv+=(hvT-hv)*.15;if(hv<.005)hv=0;
+ follow();
  if(Math.abs(ex-dex)>.8||Math.abs(ey-dey)>.8||now-born<950||hv>0||(hvT===0&&hv>0)){dex=ex;dey=ey;busy=render(now)}
  raf=requestAnimationFrame(frame)}
+/* the hover point eases after the cursor (outside frame(), whose own lx/ly are the look direction) */
+function follow(){lx+=(tlx-lx)*.12;ly+=(tly-ly)*.12;hv+=(hvT-hv)*.06;if(hv<.005)hv=0}
 function go(){if(!raf&&vis&&ims.length===4)raf=requestAnimationFrame(frame)}
 Promise.all(srcs.map(function(s){return new Promise(function(res,rej){var i=new Image();i.onload=function(){res(i)};i.onerror=rej;i.src=s})})).then(function(a){
  ims=a;return document.fonts&&document.fonts.load?document.fonts.load("500 14px 'Sometype Mono'"):0}).then(function(){
