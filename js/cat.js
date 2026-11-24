@@ -23,13 +23,14 @@ function tile(dense){var c=document.createElement('canvas'),q=c.getContext('2d')
  return c}
 function size(){var r=w.getBoundingClientRect();W=r.width;H=r.height;if(!W)return;
  ch=Math.max(6,Math.round(W/64));TH=null;cw=ch;cols=Math.floor(W/cw);rows=Math.floor(H/ch);
- cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);sm.width=cols*SS;sm.height=rows*SS;
+ /* the canvas reaches half a box past every edge, so drifting glyphs are never cut off */
+ cv.width=Math.round(W*2*DPR);cv.height=Math.round(H*2*DPR);sm.width=cols*SS;sm.height=rows*SS;
  tiles=[tile(true),tile(false)];ord=new Float32Array(cols*rows);for(var k=0;k<ord.length;k++)ord[k]=hash(k+7);dex=1e9}
 function render(now){
  sx.setTransform(1,0,0,1,0,0);sx.clearRect(0,0,sm.width,sm.height);sx.setTransform(sm.width/SW,0,0,sm.height/SH,0,0);
  sx.drawImage(ims[0],0,0,SW,SH);sx.drawImage(ims[1],P[0][0]+ex,P[0][1]+ey,PS,PS);sx.drawImage(ims[2],P[1][0]+ex,P[1][1]+ey,PS,PS);sx.drawImage(ims[3],0,0,SW,SH);
  var d=sx.getImageData(0,0,sm.width,sm.height).data,N=SS*SS,ox=(W-cols*cw)/2,oy=(H-rows*ch)/2,intro=RM?1:Math.min(1,(now-born)/900);
- x.setTransform(DPR,0,0,DPR,0,0);x.clearRect(0,0,W,H);x.fillStyle=INK;x.textAlign='center';x.textBaseline='middle';x.font='600 '+Math.round(ch*.95)+"px 'Sometype Mono',monospace";
+ x.setTransform(DPR,0,0,DPR,DPR*W*.5,DPR*H*.5);x.clearRect(-W*.5,-H*.5,W*2,H*2);x.fillStyle=INK;x.textAlign='center';x.textBaseline='middle';x.font='600 '+Math.round(ch*.95)+"px 'Sometype Mono',monospace";
  var Ds=new Float32Array(cols*rows).fill(-1);
  for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var a=0,l=0;
   for(var v=0;v<SS;v++)for(var u=0;u<SS;u++){var o=((j*SS+v)*sm.width+i*SS+u)*4,al=d[o+3]/255;a+=al;l+=al*(d[o]*.3+d[o+1]*.59+d[o+2]*.11)/255}
@@ -68,7 +69,7 @@ function render(now){
  x.globalAlpha=1;return intro<1}
 function setSay(a){if(asleep===a)return;asleep=a;say.classList.add('pop');setTimeout(function(){txt.textContent=a?IDLE:ACTIVE;say.classList.remove('pop')},120)}
 function wake(cx,cy){mx=cx;my=cy;has=true;last=performance.now();setSay(false);
- var r=cv.getBoundingClientRect();tlx=(cx-r.left)*W/(r.width||1);tly=(cy-r.top)*H/(r.height||1);if(hv<.01){lx=tlx;ly=tly}hvT=(tlx>-20&&tly>-20&&tlx<W+20&&tly<H+20)?1:0;go()}
+ var r=w.getBoundingClientRect();tlx=(cx-r.left)*W/(r.width||1);tly=(cy-r.top)*H/(r.height||1);if(hv<.01){lx=tlx;ly=tly}hvT=(tlx>-20&&tly>-20&&tlx<W+20&&tly<H+20)?1:0;go()}
 addEventListener('pointermove',function(e){wake(e.clientX,e.clientY)},{passive:true});
 addEventListener('pointerdown',function(e){wake(e.clientX,e.clientY)},{passive:true});
 function frame(now){raf=0;if(!vis||!W)return;

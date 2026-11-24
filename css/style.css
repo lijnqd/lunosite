@@ -1283,3 +1283,4 @@ html,body{overflow-x:clip}
 .ab-face .face-cv{position:absolute;left:0;top:0;pointer-events:none}
 .ab-face.ht .pet-svg{visibility:hidden}
 @media (max-width:809px){.ab-hero .ab-txt{max-width:none;width:calc(100% - 48px)}}
+.hero-c .cat-cv{inset:auto;left:-50%;top:-50%;width:200%;height:200%}
