@@ -1256,3 +1256,11 @@ html,body{overflow-x:clip}
 .adv.av{--sh:min(780px,calc(100vh / var(--dz,1) - 60px));height:calc(var(--sh) + 100vh / var(--dz,1) * var(--n) * .42)}
 .av-stage{top:calc((100vh / var(--dz,1) - var(--sh)) / 2);height:var(--sh);padding-top:0}
 @media (max-width:809px){.adv.av{--sh:calc(100svh - 80px);height:calc(var(--sh) + 100vh * var(--n) * .42)}.av-stage{top:72px;height:var(--sh);padding-top:0}}
+/* process v4: a dial turning round a centre far to the left (2D arc, no 3D) */
+.process.pw{height:calc(var(--sh) + 100vh / var(--dz,1) * var(--n) * .45)}
+.pw-drum{perspective:none}.pw-list{transform-style:flat}
+.pw-step{transform-origin:0 50%;backface-visibility:visible;transition:none}
+.pw-step:not(.on) .pw-c p{opacity:var(--po)}
+.pw-step:not(.on) .pw-c h3{opacity:.55}
+@media (max-width:809px){.process.pw{height:calc(var(--sh) + 100vh * var(--n) * .4)}}
+@media (max-width:809px){.pw-drum{overflow:hidden}}

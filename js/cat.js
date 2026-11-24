@@ -11,7 +11,7 @@ var srcs=['/assets/img/cat/eyes.webp','/assets/img/cat/pupil-0.webp','/assets/im
 var mx=0,my=0,has=false,px=0,py=0,vx=0,vy=0,ex=0,ey=0,dex=1e9,dey=1e9,last=performance.now(),asleep=false,vis=true,raf=0,t0=performance.now(),born=0;
 var x=cv.getContext('2d'),sm=document.createElement('canvas'),sx=sm.getContext('2d',{willReadFrequently:true}),DPR=Math.min(2,devicePixelRatio||1);
 var W=0,H=0,cw=0,ch=0,cols=0,rows=0,SS=4,tiles=[],ord=null,TH=null;
-var SCR='#%&*+=/\\|~^01',lx=-1e4,ly=-1e4,hv=0,hvT=0,G=['.',':','-','=','+','/','*','%','#'],GA=[.42,.48,.55,.62,.8,.9,1,1,1];
+var SCR='#%&*+=/\\|~^01',lx=-1e4,ly=-1e4,hv=0,hvT=0,G=['.',':','-','=','+','/','*','%','#'],GA=[.62,.68,.74,.8,.9,.94,1,1,1];
 function hash(k){var h=(k*374761393)|0;h=Math.imul(h^(h>>>13),1274126177);return((h^(h>>>16))>>>0)/4294967296}
 function tile(dense){var c=document.createElement('canvas'),q=c.getContext('2d');c.width=Math.ceil(cw*DPR);c.height=Math.ceil(ch*DPR);q.scale(DPR,DPR);
  var ix=cw*.08,iy=ch*.1;q.fillStyle=INK;q.beginPath();q.roundRect?q.roundRect(ix,iy,cw-2*ix,ch-2*iy,1.2):q.rect(ix,iy,cw-2*ix,ch-2*iy);q.fill();
@@ -42,7 +42,7 @@ function render(now){
  /* levels by rank, not by raw value: the fur is mostly mid grey, so raw values would make it all
     blocks. Only the darkest tenth (outline, pupils, nose) becomes tiles; the rest spreads over the glyphs */
  if(!TH){var vs=[].slice.call(Ds).filter(function(v){return v>=0}).sort(function(p,q){return p-q}),Q=function(f){return vs[Math.min(vs.length-1,Math.floor(vs.length*f))]};
-  TH={t0:Q(.89),t1:Q(.82),g:[Q(.05),Q(.22),Q(.38),Q(.52),Q(.63),Q(.71),Q(.76),Q(.8),Q(.84)]}}
+  TH={t0:Q(.86),t1:Q(.77),g:[Q(.04),Q(.12),Q(.2),Q(.29),Q(.38),Q(.47),Q(.56),Q(.64),Q(.71)]}}
 
  for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var D=Ds[j*cols+i];if(D<0)continue;
   if(intro<1&&ord[j*cols+i]>intro)continue;
@@ -51,7 +51,7 @@ function render(now){
   if(sc){x.globalAlpha=.9;x.fillText(SCR[(i*7+j*13+(now/70|0))%SCR.length],cx+cw/2,cy+ch/2);continue}
   if(D>=TH.t0){x.globalAlpha=1;x.drawImage(tiles[0],cx,cy,cw,ch);continue}
   if(D>=TH.t1){x.globalAlpha=1;x.drawImage(tiles[1],cx,cy,cw,ch);continue}
-  var E=Sm[j*cols+i],g=0;while(g<8&&E>=TH.g[g+1])g++;if(E<TH.g[0]&&D<TH.g[2])continue;
+  var E=Sm[j*cols+i]+(D-Sm[j*cols+i])*1.3,g=0;while(g<8&&E>=TH.g[g+1])g++;if(E<TH.g[0]&&D<TH.g[2])continue;
   x.globalAlpha=GA[g];x.fillText(G[g],cx+cw/2,cy+ch/2)}
  x.globalAlpha=1;return intro<1}
 function setSay(a){if(asleep===a)return;asleep=a;say.classList.add('pop');setTimeout(function(){txt.textContent=a?IDLE:ACTIVE;say.classList.remove('pop')},120)}
