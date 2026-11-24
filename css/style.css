@@ -1296,3 +1296,21 @@ html,body{overflow-x:clip}
 /* the drawn pictures never flash in before their dots are ready */
 .hero-c .cat:not(.asc) .cat-svg{visibility:hidden}
 @media (prefers-reduced-motion:no-preference){.ab-face:not(.ht) .pet-svg{visibility:hidden}}
+/* cases page: the cards travel up a diagonal as you scroll, from the bottom right corner to the top left;
+   the one in the middle is the one in focus. Phones: a plain column of cards. */
+.dg{position:relative;height:calc(100vh / var(--dz,1) * (1 + var(--n) * .55));margin-top:20px}
+.dg-stage{position:sticky;top:0;height:calc(100vh / var(--dz,1));overflow:hidden}
+.dg-card{position:absolute;left:50%;top:50%;width:min(620px,44vw);aspect-ratio:16/11.4;margin:calc(min(620px,44vw) * -11.4 / 32) 0 0 calc(min(620px,44vw) / -2);border-radius:var(--r);overflow:hidden;background:var(--surface,#1f1f1e);color:var(--beige);text-decoration:none;will-change:transform,opacity}
+.dg-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dg-plate{position:absolute;left:20px;bottom:20px;width:min(330px,calc(100% - 40px));padding:22px;border-radius:var(--r-in);background:rgba(30,30,30,.45);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);display:flex;flex-direction:column}
+.dg-plate b{font-family:var(--serif);font-weight:400;font-size:40px;line-height:.95;color:var(--pink);text-transform:none}
+.dg-plate p{margin:10px 0 0;font-size:15px;line-height:1.25;max-width:240px}
+.dg-plate em{margin-top:28px;font-style:normal;font-size:13px;opacity:.8}
+.dg-dot{position:absolute;right:20px;top:20px;width:7px;height:7px;border-radius:50%;background:var(--pink)}
+@media (max-width:809px){
+ .dg{height:auto;margin-top:28px}.dg-stage{position:static;height:auto;overflow:visible;display:flex;flex-direction:column;gap:10px}
+ .dg-card{position:relative;left:auto;top:auto;width:100%;margin:0;transform:none!important;opacity:1!important}
+ .dg-plate{left:12px;right:12px;bottom:12px;width:auto;padding:18px}.dg-plate b{font-size:34px}
+}
+@media (prefers-reduced-motion:reduce){.dg{height:auto}.dg-stage{position:static;height:auto;overflow:visible;display:grid;grid-template-columns:1fr 1fr;gap:10px}.dg-card{position:relative;left:auto;top:auto;width:100%;margin:0;transform:none!important;opacity:1!important}}
+.tl-in span{text-transform:none}

@@ -2,8 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://designluno.com/</loc><lastmod>2026-10-12</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://designluno.com/cases/set/</loc><lastmod>2026-10-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://designluno.com/cases/portfolio/</loc><lastmod>2026-10-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://designluno.com/cases/media-brothers/</loc><lastmod>2026-10-13</lastmod><priority>0.8</priority></url>
   <url><loc>https://designluno.com/cases/midas/</loc><lastmod>2026-10-12</lastmod><priority>0.8</priority></url>
   <url><loc>https://designluno.com/cases/orta/</loc><lastmod>2026-10-12</lastmod><priority>0.8</priority></url>
   <url><loc>https://designluno.com/cases/form/</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
@@ -14,16 +12,16 @@
   <url><loc>https://designluno.com/about/</loc></url>
   <url><loc>https://designluno.com/blog/</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
   <url><loc>https://designluno.com/cases/</loc><lastmod>2026-11-20</lastmod><priority>0.8</priority></url>
-  <url><loc>https://designluno.com/blog/how-to-explain-to-a-designer-what-you-want/</loc><lastmod>2026-11-05</lastmod><priority>0.7</priority></url>
-  <url><loc>https://designluno.com/blog/what-is-a-brand-guideline/</loc><lastmod>2026-11-05</lastmod><priority>0.7</priority></url>
-  <url><loc>https://designluno.com/blog/logo-vs-brand-identity/</loc><lastmod>2026-11-05</lastmod><priority>0.7</priority></url>
-  <url><loc>https://designluno.com/blog/brand-identity-package/</loc><lastmod>2026-11-05</lastmod><priority>0.7</priority></url>
-  <url><loc>https://designluno.com/blog/freelancer-vs-design-studio-vs-agency/</loc><lastmod>2026-11-05</lastmod><priority>0.7</priority></url>
-  <url><loc>https://designluno.com/blog/how-long-does-it-take-to-design-a-website/</loc><lastmod>2026-11-05</lastmod><priority>0.7</priority></url>
-  <url><loc>https://designluno.com/blog/signs-your-website-is-losing-customers/</loc><lastmod>2026-11-05</lastmod><priority>0.7</priority></url>
-  <url><loc>https://designluno.com/blog/can-ai-design-your-logo/</loc><lastmod>2026-11-05</lastmod><priority>0.7</priority></url>
-  <url><loc>https://designluno.com/blog/how-to-write-a-design-brief/</loc><lastmod>2026-11-05</lastmod><priority>0.7</priority></url>
-  <url><loc>https://designluno.com/blog/why-your-brand-looks-cheap/</loc><lastmod>2026-11-05</lastmod><priority>0.7</priority></url>
-  <url><loc>https://designluno.com/blog/website-looks-like-competitors/</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://designluno.com/blog/how-to-explain-to-a-designer-what-you-want/</loc><lastmod>2026-11-02</lastmod><priority>0.7</priority></url>
+  <url><loc>https://designluno.com/blog/what-is-a-brand-guideline/</loc><lastmod>2026-10-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://designluno.com/blog/logo-vs-brand-identity/</loc><lastmod>2026-10-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://designluno.com/blog/brand-identity-package/</loc><lastmod>2026-10-09</lastmod><priority>0.7</priority></url>
+  <url><loc>https://designluno.com/blog/freelancer-vs-design-studio-vs-agency/</loc><lastmod>2026-09-30</lastmod><priority>0.7</priority></url>
+  <url><loc>https://designluno.com/blog/how-long-does-it-take-to-design-a-website/</loc><lastmod>2026-09-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://designluno.com/blog/signs-your-website-is-losing-customers/</loc><lastmod>2026-09-12</lastmod><priority>0.7</priority></url>
+  <url><loc>https://designluno.com/blog/can-ai-design-your-logo/</loc><lastmod>2026-09-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://designluno.com/blog/how-to-write-a-design-brief/</loc><lastmod>2026-08-25</lastmod><priority>0.7</priority></url>
+  <url><loc>https://designluno.com/blog/why-your-brand-looks-cheap/</loc><lastmod>2026-08-14</lastmod><priority>0.7</priority></url>
+  <url><loc>https://designluno.com/blog/website-looks-like-competitors/</loc><lastmod>2026-11-10</lastmod><priority>0.7</priority></url>
   <url><loc>https://designluno.com/blog/website-first-screen/</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
 </urlset>
