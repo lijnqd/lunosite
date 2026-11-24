@@ -1447,3 +1447,19 @@ body .contacts .c-card{top:128px}
 @media (max-width:809px){.av-item{padding:8px 0}}
 /* contacts wordmark in italic */
 .wordmark.wm-t{font-style:italic}
+
+/* cases page: all six covers as one wall, visible from the first frame */
+.cwall{margin-top:40px}
+.cw-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px}
+.cwall .dg-card{position:relative;left:auto;top:auto;width:auto;margin:0;aspect-ratio:auto;height:clamp(300px,30vw,440px);transform:none;opacity:1;grid-column:span 4}
+.cwall .dg-card:nth-child(4n+1),.cwall .dg-card:nth-child(4n){grid-column:span 5}
+.cwall .dg-card:nth-child(4n+2),.cwall .dg-card:nth-child(4n+3){grid-column:span 7}
+.cwall .dg-card img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.cwall .dg-card:hover img{transform:scale(1.03)}
+.cwall .dg-plate{left:14px;bottom:14px;width:min(320px,calc(100% - 28px));padding:16px 18px}
+.cwall .dg-plate b{font-size:34px}
+.cwall .dg-plate p{max-height:0;opacity:0;overflow:hidden;margin:0;transition:max-height .4s cubic-bezier(.2,.7,.2,1),opacity .3s,margin .4s}
+.cwall .dg-plate em{margin-top:10px}
+.cwall .dg-card:hover .dg-plate p,.cwall .dg-card:focus-visible .dg-plate p{max-height:60px;opacity:1;margin-top:8px}
+@media (max-width:1199px){.cwall .dg-card{grid-column:span 6!important;height:clamp(260px,34vw,380px)}}
+@media (max-width:809px){.cwall{margin-top:28px}.cw-grid{grid-template-columns:1fr}.cwall .dg-card{grid-column:auto!important;height:auto;aspect-ratio:16/11}.cwall .dg-plate{left:10px;right:auto;bottom:10px;width:auto;padding:12px 16px}.cwall .dg-plate b{font-size:28px;padding-right:22px}.cwall .dg-plate em{margin-top:6px}.cwall .dg-dot{right:14px;top:14px}}
