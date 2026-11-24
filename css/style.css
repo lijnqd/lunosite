@@ -1316,3 +1316,8 @@ html,body{overflow-x:clip}
 .tl-in span{text-transform:none}
 /* cases page: cards meet corner to corner along the diagonal, never overlapping */
 .dg-card{width:min(560px,38vw);margin:calc(min(560px,38vw) * -11.4 / 32) 0 0 calc(min(560px,38vw) / -2)}
+/* blog: ascii cover on top of each article, schemes inside the text */
+.post .p-cover{margin:40px 0 0;border-radius:var(--r);overflow:hidden;background:#141414}
+.post .p-cover img,.post .p-fig img{display:block;width:100%;height:auto}
+.post .p-fig{margin:28px 0;border-radius:var(--r-in);overflow:hidden;border:1px solid rgba(242,231,220,.12)}
+@media (min-width:1200px){.post .pc:has(.p-fig){max-width:680px}}

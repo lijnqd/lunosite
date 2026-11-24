@@ -1,0 +1,165 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- lunö blog illustration template: 1200x750, dark background, pink accent, Instrument Serif + Inter,
+     ascii in Sometype Mono. Open illo.html#<id> to see one; tools/illo/render.js exports them all. -->
+<style>
+@font-face{font-family:Inter;font-weight:100 900;src:url(/assets/fonts/inter-latin-wght-normal.woff2) format('woff2')}
+@font-face{font-family:'Sometype Mono';src:url(/assets/fonts/sometype-mono-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Instrument Serif';src:url(/assets/fonts/instrument-serif-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:italic;src:url(/assets/fonts/instrument-serif-latin-400-italic.woff2) format('woff2')}
+@font-face{font-family:'Saint Delafield';src:url(/assets/fonts/mrs-saint-delafield-latin-400-normal.woff2) format('woff2')}
+:root{--bg:#141414;--beige:#F2E7DC;--pink:#FFB3AD;--glass:rgba(242,231,220,.05);--line:rgba(242,231,220,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#000;font-family:Inter,sans-serif;color:var(--beige)}
+.art{position:relative;width:1200px;height:750px;background:var(--bg);overflow:hidden}
+.tag{position:absolute;left:40px;top:34px;font-size:16px;color:var(--pink);letter-spacing:-.01em}
+.foot{position:absolute;right:40px;top:34px;font-family:'Instrument Serif';font-size:22px;color:rgba(242,231,220,.5)}
+.sf{font-family:'Instrument Serif';font-weight:400;letter-spacing:-.01em}
+.pane{position:absolute;top:96px;bottom:40px;width:550px;border-radius:20px;background:var(--glass);border:1px solid var(--line);padding:32px}
+.pane.l{left:40px}.pane.r{right:40px}
+.verdict{display:flex;align-items:center;gap:12px;font-size:18px}
+.verdict i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;font-style:normal;font-size:16px}
+.no i{border:1px solid rgba(242,231,220,.35);color:var(--beige)}
+.yes i{background:var(--pink);color:var(--bg)}
+.yes{color:var(--pink)}
+.cap{position:absolute;left:32px;right:32px;bottom:30px;font-size:15px;line-height:1.4;color:rgba(242,231,220,.65)}
+/* browser frame */
+.br{position:absolute;border-radius:16px;background:#1d1d1c;border:1px solid var(--line);overflow:hidden}
+.br .bar{height:36px;display:flex;align-items:center;gap:7px;padding:0 14px;border-bottom:1px solid var(--line)}
+.br .bar i{width:9px;height:9px;border-radius:50%;background:rgba(242,231,220,.25)}
+.br .bar span{margin-left:14px;font-size:12px;color:rgba(242,231,220,.45)}
+.co{position:absolute;display:flex;align-items:center;gap:10px;font-size:17px;line-height:1.25;color:var(--pink);white-space:nowrap}
+.co b{display:grid;place-items:center;flex:none;width:28px;height:28px;border-radius:50%;background:var(--pink);color:var(--bg);font-size:14px;font-weight:600}
+svg.ln{position:absolute;inset:0;pointer-events:none}
+canvas.asc{position:absolute;left:0;top:0;width:1200px;height:750px}
+</style></head><body>
+<div id="stage"></div>
+<script>
+const P='#FFB3AD',B='#F2E7DC',BG='#141414';
+const $=h=>{const d=document.createElement('div');d.innerHTML=h.trim();return d.firstChild};
+function frame(inner,tag){return `<div class="art">${inner}<div class="tag">${tag}</div><div class="foot">lunö studio</div></div>`}
+/* leader lines: [x1,y1,x2,y2] in px, pink, 1.5px, with a dot at the target */
+function lines(ls){return `<svg class="ln" width="1200" height="750">${ls.map(l=>`<path d="M${l[0]} ${l[1]} L${l[2]} ${l[3]}" stroke="${P}" stroke-width="1.5" fill="none"/><circle cx="${l[2]}" cy="${l[3]}" r="5" fill="${P}"/>`).join('')}</svg>`}
+
+/* ---------- ascii covers: an icon drawn as paths, then rebuilt as a glyph matrix ---------- */
+const ICONS={
+ tag(g){/* price tag */g.save();g.translate(600,375);g.rotate(-.5);g.beginPath();g.moveTo(-230,-120);g.lineTo(130,-120);g.lineTo(250,0);g.lineTo(130,120);g.lineTo(-230,120);g.closePath();g.fill();
+  g.globalCompositeOperation='destination-out';g.beginPath();g.arc(150,0,34,0,7);g.fill();g.fillRect(-190,-30,250,24);g.fillRect(-190,22,170,24);g.restore()},
+ screen(g){/* browser with a hero inside */g.lineWidth=26;g.strokeRect(250,150,700,450);g.fillRect(250,150,700,70);
+  g.fillRect(310,290,380,44);g.fillRect(310,356,260,22);g.fillRect(310,450,170,60);g.globalAlpha=.55;g.fillRect(730,280,160,250);g.globalAlpha=1},
+ twins(g){/* two identical pages */for(const x of [210,630]){g.lineWidth=20;g.strokeRect(x,190,360,370);g.fillRect(x,190,360,56);g.fillRect(x+40,300,240,34);g.fillRect(x+40,360,180,18);g.fillRect(x+40,450,120,46)}
+  g.fillRect(588,360,24,30)},
+ leak(g){/* line chart going down with an arrow */g.lineWidth=34;g.lineCap='round';g.lineJoin='round';g.beginPath();g.moveTo(240,230);g.lineTo(440,330);g.lineTo(580,290);g.lineTo(800,520);g.stroke();
+  g.beginPath();g.moveTo(800,520);g.lineTo(830,400);g.lineTo(940,555);g.lineTo(790,580);g.closePath();g.fill();g.lineWidth=16;g.beginPath();g.moveTo(200,180);g.lineTo(200,600);g.lineTo(1000,600);g.stroke()},
+ brief(g){/* a sheet with lines and a pencil */g.fillRect(330,110,420,530);g.globalCompositeOperation='destination-out';for(let i=0;i<7;i++)g.fillRect(380,190+i*58,i%3==2?200:320,20);g.globalCompositeOperation='source-over';
+  g.save();g.translate(820,430);g.rotate(.6);g.fillRect(-26,-220,52,330);g.beginPath();g.moveTo(-26,110);g.lineTo(26,110);g.lineTo(0,170);g.fill();g.restore()},
+ talk(g){/* two speech bubbles */g.beginPath();g.roundRect(200,160,470,250,60);g.fill();g.beginPath();g.moveTo(300,400);g.lineTo(280,500);g.lineTo(400,405);g.fill();
+  g.lineWidth=24;g.beginPath();g.roundRect(530,330,460,230,60);g.stroke();g.beginPath();g.moveTo(880,555);g.lineTo(920,640);g.lineTo(800,560);g.stroke();
+  g.globalCompositeOperation='destination-out';for(const x of [330,435,540])g.fillRect(x-25,260,50,50);g.globalCompositeOperation='source-over'},
+ spark(g){/* the ai sparkle */function st(cx,cy,r){g.beginPath();g.moveTo(cx,cy-r);g.quadraticCurveTo(cx,cy,cx+r,cy);g.quadraticCurveTo(cx,cy,cx,cy+r);g.quadraticCurveTo(cx,cy,cx-r,cy);g.quadraticCurveTo(cx,cy,cx,cy-r);g.fill()}
+  st(560,400,260);st(840,200,110);st(860,560,70)},
+ logovs(g){/* one mark vs a whole system */g.beginPath();g.arc(330,375,150,0,7);g.fill();g.globalCompositeOperation='destination-out';g.beginPath();g.arc(330,375,70,0,7);g.fill();g.globalCompositeOperation='source-over';
+  const cs=[[640,190,140,140],[800,190,240,140],[640,350,240,90],[900,350,140,240],[640,460,240,130]];g.lineWidth=14;cs.forEach((c,i)=>{if(i%2)g.fillRect(...c);else g.strokeRect(...c)})},
+ box(g){/* a package */g.beginPath();g.moveTo(600,130);g.lineTo(880,250);g.lineTo(880,520);g.lineTo(600,640);g.lineTo(320,520);g.lineTo(320,250);g.closePath();g.fill();
+  g.globalCompositeOperation='destination-out';g.lineWidth=22;g.beginPath();g.moveTo(320,250);g.lineTo(600,370);g.lineTo(880,250);g.moveTo(600,370);g.lineTo(600,640);g.stroke();g.globalCompositeOperation='source-over'},
+ book(g){/* an open guide with swatches */g.beginPath();g.moveTo(600,220);g.quadraticCurveTo(420,150,220,190);g.lineTo(220,580);g.quadraticCurveTo(420,540,600,610);g.quadraticCurveTo(780,540,980,580);g.lineTo(980,190);g.quadraticCurveTo(780,150,600,220);g.fill();
+  g.globalCompositeOperation='destination-out';g.fillRect(592,220,16,390);for(let i=0;i<3;i++)g.fillRect(670+i*95,280,70,70);for(let i=0;i<4;i++)g.fillRect(280,280+i*62,250-(i%2)*80,20);g.globalCompositeOperation='source-over'},
+ three(g){/* one, a few, many */g.beginPath();g.arc(260,400,90,0,7);g.fill();for(const [x,y] of [[520,330],[630,330],[575,450]]){g.beginPath();g.arc(x,y,62,0,7);g.fill()}
+  for(let i=0;i<3;i++)for(let j=0;j<3;j++){g.beginPath();g.arc(830+i*90,290+j*100,36,0,7);g.fill()}},
+ clock(g){/* hourglass */g.lineWidth=26;g.beginPath();g.moveTo(400,140);g.lineTo(800,140);g.moveTo(400,610);g.lineTo(800,610);g.stroke();
+  g.beginPath();g.moveTo(440,160);g.quadraticCurveTo(440,330,590,375);g.quadraticCurveTo(440,420,440,590);g.lineTo(760,590);g.quadraticCurveTo(760,420,610,375);g.quadraticCurveTo(760,330,760,160);g.closePath();g.stroke();
+  g.beginPath();g.moveTo(480,250);g.lineTo(720,250);g.lineTo(600,360);g.fill();g.beginPath();g.moveTo(600,470);g.lineTo(720,575);g.lineTo(480,575);g.fill()}
+};
+function cover(id,icon,tag){const a=$(frame(`<canvas class="asc" width="2400" height="1500"></canvas>`,tag));document.getElementById('stage').append(a);a.id=id;
+ const cv=a.querySelector('canvas'),x=cv.getContext('2d');x.scale(2,2);
+ const o=document.createElement('canvas');o.width=1200;o.height=750;const g=o.getContext('2d');g.fillStyle=g.strokeStyle='#000';ICONS[icon](g);
+ const d=g.getImageData(0,0,1200,750).data,C=13,R=19,cols=Math.floor(1200/C),rows=Math.floor(750/R),RAMP=' .:-=+*#%@';
+ const cov=new Float32Array(cols*rows);
+ for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){let s=0,n=0;for(let y=j*R;y<(j+1)*R;y+=3)for(let xx=i*C;xx<(i+1)*C;xx+=3){s+=d[(y*1200+xx)*4+3];n++}cov[j*cols+i]=s/n/255}
+ x.font="500 17px 'Sometype Mono'";x.textAlign='center';x.textBaseline='middle';
+ for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){const c=cov[j*cols+i];let near=0;
+  for(let q=-2;q<=2;q++)for(let r=-2;r<=2;r++){const k=(j+q)*cols+i+r;if(j+q>=0&&j+q<rows&&i+r>=0&&i+r<cols)near=Math.max(near,cov[k]*(1-(Math.abs(q)+Math.abs(r))*.2))}
+  const h=Math.sin(i*12.9898+j*78.233)*43758.5453%1;
+  if(c>.05){x.fillStyle=P;x.globalAlpha=1;x.fillText(RAMP[Math.min(9,Math.max(3,Math.round(c*9-(Math.abs(h)*1.5))))],(i+.5)*C,(j+.5)*R)}
+  else if(near>.3){x.fillStyle=B;x.globalAlpha=.22;x.fillText(Math.abs(h)>.5?'.':':',(i+.5)*C,(j+.5)*R)}}
+ x.globalAlpha=1}
+
+/* ---------- schemes ---------- */
+function fonts(){return frame(`
+ <div class="pane l"><div class="verdict no"><i>✕</i>five fonts</div>
+  <div style="margin-top:34px;display:flex;flex-direction:column;gap:14px">
+   <div style="font-family:'Saint Delafield';font-size:64px;line-height:1">Bloom Studio</div>
+   <div style="font-family:Impact,'Arial Black',sans-serif;font-weight:900;font-size:40px;text-transform:uppercase;letter-spacing:.02em">Grand opening</div>
+   <div style="font-family:'Sometype Mono';font-size:22px">// 20% off this week</div>
+   <div style="font-family:Georgia,serif;font-style:italic;font-size:30px">handmade with love</div>
+   <div style="font-family:'Comic Sans MS','Comic Neue',cursive;font-size:22px">Book your first class →</div>
+  </div><p class="cap">each one looks fine alone. together they say nobody is in charge</p></div>
+ <div class="pane r"><div class="verdict yes"><i>✓</i>two fonts</div>
+  <div style="margin-top:44px"><div class="sf" style="font-size:72px;line-height:.95">Bloom Studio</div>
+   <div style="margin-top:22px;font-size:20px;line-height:1.4;max-width:420px">Yoga and pilates in central Berlin. Small classes for beginners.</div>
+   <div style="margin-top:28px;display:flex;gap:10px;align-items:center"><span style="background:var(--pink);color:var(--bg);font-size:16px;padding:10px 18px;border-radius:12px">book a class</span><span style="font-size:14px;opacity:.6">grand opening · −20% this week</span></div>
+  </div>
+  <div class="cap" style="display:flex;gap:30px"><span><span class="sf" style="font-size:26px;color:var(--pink)">Aa</span> headings</span><span><span style="font-size:22px;color:var(--pink)">Aa</span> everything else</span></div></div>`,'#1 too many fonts')}
+function colors(){const rnd=['#e94f37','#3f88c5','#f6d743','#44bba4','#8e44ad','#ff8c42','#2e86ab','#a23b72','#6dd47e','#f15bb5'];
+ const pos=[[60,40,120],[230,20,90],[360,70,140],[120,190,100],[270,170,130],[430,230,80],[50,330,90],[190,300,120],[380,340,100],[460,30,70]];
+ return frame(`
+ <div class="pane l"><div class="verdict no"><i>✕</i>random colors</div>
+  <div style="position:absolute;left:32px;top:90px;right:32px;height:440px">${pos.map((p,i)=>`<div style="position:absolute;left:${p[0]}px;top:${p[1]}px;width:${p[2]}px;height:${p[2]}px;border-radius:${i%3?'50%':'14px'};background:${rnd[i]};opacity:.92"></div>`).join('')}</div>
+  <p class="cap">a new color for every post, button and banner. nothing comes back, so nothing is remembered</p></div>
+ <div class="pane r"><div class="verdict yes"><i>✓</i>a system</div>
+  <div style="margin-top:40px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;height:300px">
+   <div style="background:#2b3a2f;border-radius:14px;padding:18px;display:flex;flex-direction:column;justify-content:space-between"><span style="font-size:14px;opacity:.7">background · 60%</span><span class="sf" style="font-size:36px">#2B3A2F</span></div>
+   <div style="background:#efe8dc;color:#1b1b1b;border-radius:14px;padding:18px;display:flex;flex-direction:column;justify-content:space-between"><span style="font-size:14px;opacity:.7">text · 30%</span><span class="sf" style="font-size:26px">#EFE8DC</span></div>
+   <div style="background:#e8a23a;color:#1b1b1b;border-radius:14px;padding:18px;display:flex;flex-direction:column;justify-content:space-between"><span style="font-size:14px;opacity:.7">accent · 10%</span><span class="sf" style="font-size:26px">#E8A23A</span></div></div>
+  <div style="margin-top:10px;height:120px;border-radius:14px;background:#2b3a2f;display:flex;align-items:center;gap:16px;padding:0 22px"><span class="sf" style="font-size:34px;color:#efe8dc">Bloom Studio</span><span style="margin-left:auto;background:#e8a23a;color:#1b1b1b;font-size:15px;padding:9px 16px;border-radius:10px">book a class</span></div>
+  <p class="cap">three colors, each with one job. the accent only marks what to do next</p></div>`,'#2 random colors')}
+function wire(){return frame(`
+ <div class="br" style="left:300px;top:110px;width:600px;height:560px"><div class="bar"><i></i><i></i><i></i><span>bloomstudio.example</span></div>
+  <div style="padding:26px 34px;position:relative;height:524px">
+   <div style="display:flex;justify-content:space-between;align-items:center"><span class="sf" style="font-size:24px">Bloom</span><span style="display:flex;gap:16px;font-size:12px;opacity:.5">classes · prices · about</span><span style="font-size:12px;border:1px solid var(--line);padding:6px 10px;border-radius:8px">book</span></div>
+   <div class="sf" style="margin-top:60px;font-size:50px;line-height:.98;max-width:380px">Yoga and pilates in central Berlin</div>
+   <div style="margin-top:18px;font-size:15px;line-height:1.4;max-width:330px;opacity:.75">Small classes for beginners, so you’re never lost at the back of the room.</div>
+   <div style="margin-top:28px;display:inline-block;background:var(--pink);color:var(--bg);font-size:15px;padding:12px 20px;border-radius:12px">book your first class free</div>
+   <div style="margin-top:22px;font-size:13px;opacity:.7">★ 4.9 from 200+ reviews</div>
+   <div style="position:absolute;right:34px;top:96px;width:150px;height:230px;border-radius:12px;background:repeating-linear-gradient(135deg,rgba(242,231,220,.06) 0 10px,transparent 10px 20px);border:1px dashed rgba(242,231,220,.25);display:grid;place-items:center;font-size:12px;opacity:.6">a real photo</div>
+  </div></div>
+ <div class="co" style="left:40px;top:248px"><b>1</b>what is this?</div>
+ <div class="co" style="left:40px;top:358px"><b>2</b>who is it for?</div>
+ <div class="co" style="left:40px;top:470px"><b>3</b>what next?</div>
+ <div class="co" style="left:40px;top:540px"><b>4</b>why trust you?</div>
+ <div class="co" style="left:950px;top:300px"><b>5</b>show it, don’t<br>describe it</div>
+ ${lines([[228,262,336,262],[236,372,340,372],[200,484,336,484],[226,554,336,553],[944,316,884,316]])}`,'#first screen · what goes where')}
+function shot(after){const t=after?['Yoga and pilates in central Berlin','Small classes for beginners, so you’re never lost at the back of the room.','book your first class free']:['Welcome to Bloom Studio','Where innovation meets excellence.','learn more'];
+ return frame(`
+ <div class="br" style="left:60px;top:100px;width:760px;height:600px"><div class="bar"><i></i><i></i><i></i><span>bloomstudio.example</span></div>
+  <div style="position:relative;height:564px;background:${after?'#1d1d1c':'linear-gradient(135deg,#2a2440,#3d2b3a 50%,#24343d)'};padding:30px 40px">
+   <div style="display:flex;justify-content:space-between;align-items:center"><span class="sf" style="font-size:26px">Bloom${after?'':' Studio'}</span><span style="display:flex;gap:18px;font-size:13px;opacity:.6">${after?'classes · prices · about':'home · about · services · solutions · blog · contact'}</span></div>
+   <div class="sf" style="margin-top:${after?70:120}px;font-size:${after?54:64}px;line-height:1;max-width:520px;${after?'':'text-align:center;margin-left:auto;margin-right:auto'}">${t[0]}</div>
+   <div style="margin-top:18px;font-size:17px;line-height:1.4;max-width:${after?380:520}px;opacity:.75;${after?'':'text-align:center;margin-left:auto;margin-right:auto'}">${t[1]}</div>
+   <div style="margin-top:30px;${after?'':'text-align:center'}"><span style="display:inline-block;${after?'background:var(--pink);color:var(--bg)':'border:1px solid rgba(242,231,220,.4);color:rgba(242,231,220,.7)'};font-size:15px;padding:12px 22px;border-radius:12px">${t[2]}</span></div>
+   ${after?'<div style="margin-top:22px;font-size:14px;opacity:.75">★ 4.9 from 200+ reviews</div><div style="position:absolute;right:40px;top:110px;width:200px;height:300px;border-radius:14px;background:linear-gradient(160deg,#c9a89a,#7d6a62);display:grid;place-items:end start;padding:14px;font-size:12px;color:#141414">their studio, not stock</div>':''}
+  </div></div>
+ ${after?`<div class="co" style="left:860px;top:240px"><b>✓</b>says what it is<br>and where</div><div class="co" style="left:860px;top:360px"><b>✓</b>one clear action</div><div class="co" style="left:860px;top:440px"><b>✓</b>proof in one line</div>
+   ${lines([[852,258,560,300],[852,376,330,494],[852,456,300,546]])}`
+  :`<div class="co" style="left:860px;top:250px"><b>!</b>what do they sell?<br>a florist? a yoga studio?</div><div class="co" style="left:860px;top:400px"><b>!</b>no action here:<br>“learn more” about what?</div><div class="co" style="left:860px;top:150px"><b>!</b>six links, none<br>of them useful</div><div class="co" style="left:860px;top:540px"><b>!</b>no reason to trust</div>
+   ${lines([[852,272,560,360],[852,420,480,540],[852,168,760,154],[852,556,300,640]])}`}
+ <div style="position:absolute;left:62px;bottom:20px;font-size:13px;color:rgba(242,231,220,.45)">Bloom Studio is a made-up brand</div>`,after?'#after':'#before')}
+
+const ALL={
+ 'cover-why-your-brand-looks-cheap':()=>cover('cover-why-your-brand-looks-cheap','tag','#why your brand looks cheap'),
+ 'cover-website-first-screen':()=>cover('cover-website-first-screen','screen','#first screen'),
+ 'cover-website-looks-like-competitors':()=>cover('cover-website-looks-like-competitors','twins','#looks like competitors'),
+ 'cover-signs-your-website-is-losing-customers':()=>cover('cover-signs-your-website-is-losing-customers','leak','#losing customers'),
+ 'cover-how-to-write-a-design-brief':()=>cover('cover-how-to-write-a-design-brief','brief','#design brief'),
+ 'cover-how-to-explain-to-a-designer-what-you-want':()=>cover('cover-how-to-explain-to-a-designer-what-you-want','talk','#explain what you want'),
+ 'cover-can-ai-design-your-logo':()=>cover('cover-can-ai-design-your-logo','spark','#ai logo'),
+ 'cover-logo-vs-brand-identity':()=>cover('cover-logo-vs-brand-identity','logovs','#logo vs identity'),
+ 'cover-brand-identity-package':()=>cover('cover-brand-identity-package','box','#identity package'),
+ 'cover-what-is-a-brand-guideline':()=>cover('cover-what-is-a-brand-guideline','book','#brand guideline'),
+ 'cover-freelancer-vs-design-studio-vs-agency':()=>cover('cover-freelancer-vs-design-studio-vs-agency','three','#freelancer · studio · agency'),
+ 'cover-how-long-does-it-take-to-design-a-website':()=>cover('cover-how-long-does-it-take-to-design-a-website','clock','#how long it takes'),
+ 'scheme-fonts':()=>add('scheme-fonts',fonts()),'scheme-colors':()=>add('scheme-colors',colors()),
+ 'scheme-first-screen':()=>add('scheme-first-screen',wire()),'shot-before':()=>add('shot-before',shot(false)),'shot-after':()=>add('shot-after',shot(true))};
+function add(id,h){const e=$(h);e.id=id;document.getElementById('stage').append(e)}
+document.fonts.load("500 17px 'Sometype Mono'").then(()=>Promise.all(["40px 'Instrument Serif'","40px 'Saint Delafield'","16px Inter"].map(f=>document.fonts.load(f)))).then(()=>{
+ const only=location.hash.slice(1);Object.keys(ALL).forEach(k=>{if(!only||only===k)ALL[k]()});window.READY=Object.keys(ALL)});
+</script></body></html>
