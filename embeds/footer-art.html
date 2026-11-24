@@ -93,6 +93,8 @@ const DEPTH = ["+", "*", "o", "%", "#", "#", "@"];
 /* the resting field: the mascot's own characters, as before the wake */
 const REST = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-/<>=?";
 const rest = () => REST[(Math.random() * REST.length) | 0];
+/* a cell's character: from its depth band, one step either way at random, so the letters keep changing but the shape holds */
+const dealAt = (m) => { const b = Math.floor(m * DEPTH.length) + ((Math.random() * 3) | 0) - 1; return DEPTH[Math.max(0, Math.min(DEPTH.length - 1, b))]; };
 /* below this much heat a cell is the field: a dot */
 const COLD = 0.04;
 /* how long a press's ring takes to spread and fade, s */
@@ -200,6 +202,7 @@ function init() {
       st.mask[k] = 0.35 + 0.65 * clamp((f / n - 0.4) / 0.6, 0, 1);
     }
   }
+  for (let k = 0; k < st.base.length; k++) if (st.mask[k] > 0) st.base[k] = dealAt(st.mask[k]);
   paint();
 }
 
@@ -289,7 +292,7 @@ function paint() {
       /* cold: a still character by depth (lighter toward the outline), no flicker;
          the wake thickens it toward @ under the hand */
       if (h <= COLD || idx <= 4) {
-        ctx.fillText(DEPTH[Math.min(DEPTH.length - 1, Math.floor(m * DEPTH.length))], x, yy);
+        ctx.fillText(st.base[k], x, yy);
         continue;
       }
       ctx.fillText(RAMP[idx], x, yy);
@@ -318,6 +321,8 @@ function run() {
     /* the hand's presence follows it in and out */
     st.near += ((st.inside ? 1 : 0) - st.near) * (1 - Math.pow(0.004, dt));
     st.tick += dt;
+    st.churn = (st.churn || 0) + dt;
+    if (st.churn > 0.1) { st.churn = 0; redeal(); }
     if (st.tick > 0.07) { st.tick = 0; st.deal++; }
     /* the resting characters keep changing while the hand is here too */
     st.churn = (st.churn || 0) + dt;
@@ -409,13 +414,15 @@ window.addEventListener('resize', init);
 /* the face may arrive after the first paint */
 if (document.fonts && document.fonts.load) document.fonts.load(`500 12px 'Sometype Mono'`).then(() => paint());
 
-function redeal() { for (let n = 0; n < st.base.length * 0.03; n++) { const k = (Math.random() * st.base.length) | 0; st.base[k] = rest(); } }
+function redeal() { for (let n = 0; n < st.base.length * 0.04; n++) { const k = (Math.random() * st.base.length) | 0; if (st.mask[k] > 0) st.base[k] = dealAt(st.mask[k]); } }
 /* the resting characters keep changing, about 3% of them ten times a
    second, so the mascot is always alive; the wake loop does the same while it runs */
 let vis = true;
 try { new IntersectionObserver((e) => { vis = e[0].isIntersecting; }).observe(canvas); } catch (err) {}
 if (!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches)) setInterval(() => {
   if (!vis || document.hidden || st.raf || !st.base.length) return;
+  redeal();
+  paint();
 }, 100);
 
 init();

@@ -1279,3 +1279,7 @@ html,body{overflow-x:clip}
  .hero-c .hc-h .h1-a,.hero-c .hc-h .h1-b{display:inline;position:static;text-align:left}
  .hero-c .cat{order:1}.hero-c .hc-bot{order:2}
 }
+/* about: the face as halftone dots (the svg stays the source and the fallback) */
+.ab-face .face-cv{position:absolute;left:0;top:0;pointer-events:none}
+.ab-face.ht .pet-svg{visibility:hidden}
+@media (max-width:809px){.ab-hero .ab-txt{max-width:none;width:calc(100% - 48px)}}

@@ -10,7 +10,7 @@ var SW=780,SH=770,P=[[192,403],[497,403]],PS=103;/* source layout (see the svg i
 var srcs=['/assets/img/cat/eyes.webp','/assets/img/cat/pupil-0.webp','/assets/img/cat/pupil-1.webp','/assets/img/cat/base.webp'],ims=[];
 var mx=0,my=0,has=false,px=0,py=0,vx=0,vy=0,ex=0,ey=0,dex=1e9,dey=1e9,last=performance.now(),asleep=false,vis=true,raf=0,t0=performance.now(),born=0;
 var x=cv.getContext('2d'),sm=document.createElement('canvas'),sx=sm.getContext('2d',{willReadFrequently:true}),DPR=Math.min(2,devicePixelRatio||1);
-var lastR=0,W=0,H=0,cw=0,ch=0,cols=0,rows=0,SS=4,tiles=[],ord=null,TH=null;
+var W=0,H=0,cw=0,ch=0,cols=0,rows=0,SS=4,tiles=[],ord=null,TH=null;
 var SCR='#%&*+=/\\|~^01',lx=-1e4,ly=-1e4,hv=0,hvT=0,G=['.',':','-','=','+','/','*','%','#'],GA=[.62,.68,.74,.8,.9,.94,1,1,1];
 function hash(k){var h=(k*374761393)|0;h=Math.imul(h^(h>>>13),1274126177);return((h^(h>>>16))>>>0)/4294967296}
 function tile(dense){var c=document.createElement('canvas'),q=c.getContext('2d');c.width=Math.ceil(cw*DPR);c.height=Math.ceil(ch*DPR);q.scale(DPR,DPR);
@@ -20,7 +20,7 @@ function tile(dense){var c=document.createElement('canvas'),q=c.getContext('2d')
  for(var yy=iy+st/2;yy<ch-iy;yy+=st)for(var xx=ix+st/2+((Math.round(yy/st)%2)*st/2);xx<cw-ix;xx+=st){q.beginPath();q.arc(xx,yy,r,0,6.283);q.fill()}
  return c}
 function size(){var r=w.getBoundingClientRect();W=r.width;H=r.height;if(!W)return;
- ch=Math.max(8,Math.round(W/46));TH=null;cw=ch*.62;cols=Math.floor(W/cw);rows=Math.floor(H/ch);
+ ch=Math.max(6,Math.round(W/64));TH=null;cw=ch;cols=Math.floor(W/cw);rows=Math.floor(H/ch);
  cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);sm.width=cols*SS;sm.height=rows*SS;
  tiles=[tile(true),tile(false)];ord=new Float32Array(cols*rows);for(var k=0;k<ord.length;k++)ord[k]=hash(k+7);dex=1e9}
 function render(now){
@@ -47,18 +47,15 @@ function render(now){
  /* halftone: one round dot per cell on a square grid; its size follows how dark the cell is,
     so the darkest parts (outline, pupils, nose, mouth) grow into solid shapes where dots touch,
     and the lightest parts of the fur open up to bare pink. One colour, nothing else */
- /* halftone in characters: one glyph per cell, picked by how dark the cell is, from a light
-    dot to a full block of ink, so the face reads like the dot portrait but every mark is type.
-    Still: nothing flickers. Under the cursor the glyphs make way. */
- var lo=TH.g[0],hi=TH.t0,cell=cw,RMP=['.',':','-','=','+','*','o','%','@'];
- x.globalAlpha=1;x.textAlign='center';x.textBaseline='middle';x.font='800 '+Math.round(ch*1.02)+"px 'Sometype Mono',monospace";
+ var lo=TH.g[0],hi=TH.t0,cell=cw;x.globalAlpha=1;x.beginPath();
  for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var D=Ds[j*cols+i];if(D<0)continue;
   if(intro<1&&ord[j*cols+i]>intro)continue;
-  var E=Sm[j*cols+i],cx=ox+(i+.5)*cell,cy=oy+(j+.5)*ch,g;
-  /* the strongest marks (outline, pupils, nose, mouth) by the raw value; the fur by the smoothed one, capped below them */
-  if(D>=TH.t0)g='\u2588';else if(D>=TH.t1)g='#';else{var q=-1;while(q<8&&E>=TH.g[q+1])q++;if(q<1)continue;g=RMP[q]}
-  if(hv>.01){var ddx=cx-lx,ddy=cy-ly,dd=Math.sqrt(ddx*ddx+ddy*ddy)||1,RR=W*.18;if(dd<RR){var ff=Math.pow(1-dd/RR,2)*hv;cx+=ddx/dd*ff*cell*3;cy+=ddy/dd*ff*cell*3}}
-  x.globalAlpha=1;if(g==='\u2588'){x.fillRect(cx-cell*.5+.5,cy-ch*.5+.5,cell-1,ch-1);continue}x.fillText(g,cx,cy)}
+  var E=Sm[j*cols+i]+(D-Sm[j*cols+i])*1.6,tn=(E-lo)/(hi-lo);tn=tn<0?0:tn>1?1:tn;
+  var rr=cell*.5*1.22*Math.pow(tn,.62);if(rr<cell*.12)continue;
+  var cx=ox+(i+.5)*cell,cy=oy+(j+.5)*cell;
+  if(hv>.01){var ddx=cx-lx,ddy=cy-ly,dd=Math.sqrt(ddx*ddx+ddy*ddy)||1,RR=W*.18;if(dd<RR){var ff=Math.pow(1-dd/RR,2)*hv;cx+=ddx/dd*ff*cell*5;cy+=ddy/dd*ff*cell*5;rr*=1-ff*.5}}
+  x.moveTo(cx+rr,cy);x.arc(cx,cy,rr,0,6.2832)}
+ x.fill();
  x.globalAlpha=1;return intro<1}
 function setSay(a){if(asleep===a)return;asleep=a;say.classList.add('pop');setTimeout(function(){txt.textContent=a?IDLE:ACTIVE;say.classList.remove('pop')},120)}
 function wake(cx,cy){mx=cx;my=cy;has=true;last=performance.now();setSay(false);
@@ -78,7 +75,7 @@ function frame(now){raf=0;if(!vis||!W)return;
  var busy=false;
  /* redraw the glyphs only when the pupils have moved enough to change a cell */
  hv+=(hvT-hv)*.15;if(hv<.005)hv=0;
- if(Math.abs(ex-dex)>.8||Math.abs(ey-dey)>.8||now-born<950||hv>0){dex=ex;dey=ey;busy=render(now)}
+ if(Math.abs(ex-dex)>.8||Math.abs(ey-dey)>.8||now-born<950||hv>0||(hvT===0&&hv>0)){dex=ex;dey=ey;busy=render(now)}
  raf=requestAnimationFrame(frame)}
 function go(){if(!raf&&vis&&ims.length===4)raf=requestAnimationFrame(frame)}
 Promise.all(srcs.map(function(s){return new Promise(function(res,rej){var i=new Image();i.onload=function(){res(i)};i.onerror=rej;i.src=s})})).then(function(a){
