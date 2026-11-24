@@ -21,7 +21,7 @@
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument-serif-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=1795493282">
+<link rel="stylesheet" href="/css/style.css?v=1795494529">
 <style>
 .nf{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:110px 20px 120px;text-align:center;position:relative;z-index:1}
 .nf canvas{display:block;width:min(900px,100%);height:auto;touch-action:none}
@@ -31,7 +31,7 @@
 </head>
 <body>
 <div id="pre" aria-hidden="true"></div>
-<script src="/js/app.min.js?v=1795493258" defer></script>
+<script src="/js/app.min.js?v=1795494530" defer></script>
 <script id="pre-js">!function(){var e=document,t=e.documentElement,a=window,n=e.getElementById("pre"),r=!0;try{r=!sessionStorage.getItem("luno_pre"),sessionStorage.setItem("luno_pre","1")}catch(e){}var i=a.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;if(n)if(r&&!i){t.classList.add("pre-lock");var o=e.createElement("canvas"),s=o.getContext("2d"),l=e.createElement("div");l.className="pc",l.innerHTML='<i class="pi"><b></b><b></b><b></b><b></b></i><span>0%</span>',n.appendChild(o),n.appendChild(l);var d,c,m,h,f,u,v,M,p,b,y,g=l.querySelector("span");E(),addEventListener("resize",E);var w=.5,S=performance.now(),A=!1,F=innerWidth<810?500:600,L=0,C=0;"loading"===e.readyState?e.addEventListener("DOMContentLoaded",x):x(),requestAnimationFrame((function e(a){var r,i=a-S,o=(r=Math.min(1,i/F),1-Math.pow(1-r,2.2));!A&&i<2500&&(o=Math.min(o,.9)),L+=.25*(o-L),o>=1&&L>.995&&(L=1),g.textContent=Math.round(100*L)+"%",l.setAttribute("data-n",Math.floor(i/180)%4),function(e,t){s.setTransform(m,0,0,m,0,0),s.fillStyle="#141414",s.fillRect(0,0,d,c);var a,n,r,i=e*(1+w+.06);for(a=0;a<u;a++){var o=i-M[a],l=a*f;for(n=0;n<v;n++){r=a*v+n;var g=c-(n+1)*f,S=o-(n+.5)/v;if(S>.09){var A=.93+.07*Math.sin(t/300+6.28*p[r]);s.fillStyle=b[r]&&S<.27?"rgba(255,179,173,.9)":"rgba(242,231,220,"+A.toFixed(2)+")"}else S>0?s.fillStyle=b[r]?"rgba(20,20,20,1)":"rgba(255,179,173,1)":S>-.05&&y[r]<.25?s.fillStyle="rgba(255,179,173,"+(.35*(1+S/.05)).toFixed(2)+")":s.fillStyle="rgba(242,231,220,.035)";s.fillRect(l,g,h,h)}}}(L,a),L>=1&&!C&&(C=1,setTimeout((function(){n.classList.add("done"),t.classList.remove("pre-lock"),setTimeout((function(){n.remove()}),420)}),60)),C&&!n.isConnected||requestAnimationFrame(e)}))}else n.remove();function E(){d=innerWidth,c=innerHeight,m=Math.min(2,a.devicePixelRatio||1),o.width=d*m,o.height=c*m,1,f=(h=d<810?7:9)+1,u=Math.ceil(d/f)+1,v=Math.ceil(c/f)+1,M=new Float32Array(u),p=new Float32Array(u*v),b=new Uint8Array(u*v),y=new Float32Array(u*v);for(var e=6*Math.random(),t=6*Math.random(),n=0;n<u;n++)M[n]=.16*(.5+.5*Math.sin(.11*n+e))+.1*(.5+.5*Math.sin(.37*n+t))+.22*Math.random();for(var r=0;r<u*v;r++)p[r]=Math.random(),b[r]=Math.random()<.18?1:0,y[r]=Math.random()}function x(){(e.fonts&&e.fonts.ready?e.fonts.ready:Promise.resolve()).then((function(){A=!0}))}}();</script>
 <a class="skip" href="#content">skip to content</a>
 <canvas id="dots"></canvas>

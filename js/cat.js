@@ -11,7 +11,7 @@ var srcs=['/assets/img/cat/eyes.webp','/assets/img/cat/pupil-0.webp','/assets/im
 var mx=0,my=0,has=false,px=0,py=0,vx=0,vy=0,ex=0,ey=0,dex=1e9,dey=1e9,last=performance.now(),asleep=false,vis=true,raf=0,t0=performance.now(),born=0;
 var x=cv.getContext('2d'),sm=document.createElement('canvas'),sx=sm.getContext('2d',{willReadFrequently:true}),DPR=Math.min(2,devicePixelRatio||1);
 var W=0,H=0,cw=0,ch=0,cols=0,rows=0,SS=4,tiles=[],ord=null,TH=null;
-var G=['.',':','-','=','+','/','*','%','#'],GA=[.4,.45,.45,.55,.8,.8,.9,1,1];
+var G=['.',':','-','=','+','/','*','%','#'],GA=[.6,.65,.7,.75,.88,.88,.95,1,1];
 function hash(k){var h=(k*374761393)|0;h=Math.imul(h^(h>>>13),1274126177);return((h^(h>>>16))>>>0)/4294967296}
 function tile(dense){var c=document.createElement('canvas'),q=c.getContext('2d');c.width=Math.ceil(cw*DPR);c.height=Math.ceil(ch*DPR);q.scale(DPR,DPR);
  var ix=cw*.08,iy=ch*.1;q.fillStyle=INK;q.beginPath();q.roundRect?q.roundRect(ix,iy,cw-2*ix,ch-2*iy,1.2):q.rect(ix,iy,cw-2*ix,ch-2*iy);q.fill();
@@ -20,7 +20,7 @@ function tile(dense){var c=document.createElement('canvas'),q=c.getContext('2d')
  for(var yy=iy+st/2;yy<ch-iy;yy+=st)for(var xx=ix+st/2+((Math.round(yy/st)%2)*st/2);xx<cw-ix;xx+=st){q.beginPath();q.arc(xx,yy,r,0,6.283);q.fill()}
  return c}
 function size(){var r=w.getBoundingClientRect();W=r.width;H=r.height;if(!W)return;
- ch=Math.max(9,Math.round(W/44));TH=null;cw=ch*.72;cols=Math.floor(W/cw);rows=Math.floor(H/ch);
+ ch=Math.max(8,Math.round(W/52));TH=null;cw=ch*.72;cols=Math.floor(W/cw);rows=Math.floor(H/ch);
  cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);sm.width=cols*SS;sm.height=rows*SS;
  tiles=[tile(true),tile(false)];ord=new Float32Array(cols*rows);for(var k=0;k<ord.length;k++)ord[k]=hash(k+7);dex=1e9}
 function render(now){

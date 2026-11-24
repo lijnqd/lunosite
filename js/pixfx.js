@@ -91,5 +91,5 @@ function hov(el){el.classList.add('px');var cv,x;function mk(){if(cv)return;cv=d
  function run(v){mk();tg=v;if(v&&p===0)size();if(!raf)raf=requestAnimationFrame(f)}
  el.addEventListener('mouseenter',function(){run(1)});el.addEventListener('mouseleave',function(){run(0)});
  addEventListener('resize',function(){if(cv&&p>0){size();draw()}})}
-[].slice.call(d.querySelectorAll('.bc')).forEach(hov);
+[].slice.call(d.querySelectorAll('.bc,.aw-row')).forEach(hov);
 })();
