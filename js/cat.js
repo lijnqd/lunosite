@@ -11,7 +11,7 @@ var srcs=['/assets/img/cat/eyes.webp','/assets/img/cat/pupil-0.webp','/assets/im
 var mx=0,my=0,has=false,px=0,py=0,vx=0,vy=0,ex=0,ey=0,dex=1e9,dey=1e9,last=performance.now(),asleep=false,vis=true,raf=0,t0=performance.now(),born=0;
 var x=cv.getContext('2d'),sm=document.createElement('canvas'),sx=sm.getContext('2d',{willReadFrequently:true}),DPR=Math.min(2,devicePixelRatio||1);
 var W=0,H=0,cw=0,ch=0,cols=0,rows=0,SS=4,tiles=[],ord=null,TH=null;
-var G=['.',':','-','=','+','/','*','%','#'],GA=[.6,.65,.7,.75,.88,.88,.95,1,1];
+var SCR='#%&*+=/\\|~^01',lx=-1e4,ly=-1e4,hv=0,hvT=0,G=['.',':','-','=','+','/','*','%','#'],GA=[.42,.48,.55,.62,.8,.9,1,1,1];
 function hash(k){var h=(k*374761393)|0;h=Math.imul(h^(h>>>13),1274126177);return((h^(h>>>16))>>>0)/4294967296}
 function tile(dense){var c=document.createElement('canvas'),q=c.getContext('2d');c.width=Math.ceil(cw*DPR);c.height=Math.ceil(ch*DPR);q.scale(DPR,DPR);
  var ix=cw*.08,iy=ch*.1;q.fillStyle=INK;q.beginPath();q.roundRect?q.roundRect(ix,iy,cw-2*ix,ch-2*iy,1.2):q.rect(ix,iy,cw-2*ix,ch-2*iy);q.fill();
@@ -42,18 +42,21 @@ function render(now){
  /* levels by rank, not by raw value: the fur is mostly mid grey, so raw values would make it all
     blocks. Only the darkest tenth (outline, pupils, nose) becomes tiles; the rest spreads over the glyphs */
  if(!TH){var vs=[].slice.call(Ds).filter(function(v){return v>=0}).sort(function(p,q){return p-q}),Q=function(f){return vs[Math.min(vs.length-1,Math.floor(vs.length*f))]};
-  TH={t0:Q(.85),t1:Q(.75),g:[Q(.06),Q(.14),Q(.22),Q(.30),Q(.38),Q(.46),Q(.54),Q(.62),Q(.69)]}}
+  TH={t0:Q(.89),t1:Q(.82),g:[Q(.05),Q(.22),Q(.38),Q(.52),Q(.63),Q(.71),Q(.76),Q(.8),Q(.84)]}}
 
  for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var D=Ds[j*cols+i];if(D<0)continue;
   if(intro<1&&ord[j*cols+i]>intro)continue;
-  var cx=ox+i*cw,cy=oy+j*ch;
+  var cx=ox+i*cw,cy=oy+j*ch,sc=false;
+  if(hv>.01){var ddx=cx+cw/2-lx,ddy=cy+ch/2-ly,dd=Math.sqrt(ddx*ddx+ddy*ddy)||1,RR=W*.2;if(dd<RR){var ff=Math.pow(1-dd/RR,2)*hv;cx+=ddx/dd*ff*cw*4;cy+=ddy/dd*ff*ch*3;sc=ff>.3}}
+  if(sc){x.globalAlpha=.9;x.fillText(SCR[(i*7+j*13+(now/70|0))%SCR.length],cx+cw/2,cy+ch/2);continue}
   if(D>=TH.t0){x.globalAlpha=1;x.drawImage(tiles[0],cx,cy,cw,ch);continue}
   if(D>=TH.t1){x.globalAlpha=1;x.drawImage(tiles[1],cx,cy,cw,ch);continue}
   var E=Sm[j*cols+i],g=0;while(g<8&&E>=TH.g[g+1])g++;if(E<TH.g[0]&&D<TH.g[2])continue;
   x.globalAlpha=GA[g];x.fillText(G[g],cx+cw/2,cy+ch/2)}
  x.globalAlpha=1;return intro<1}
 function setSay(a){if(asleep===a)return;asleep=a;say.classList.add('pop');setTimeout(function(){txt.textContent=a?IDLE:ACTIVE;say.classList.remove('pop')},120)}
-function wake(cx,cy){mx=cx;my=cy;has=true;last=performance.now();setSay(false);go()}
+function wake(cx,cy){mx=cx;my=cy;has=true;last=performance.now();setSay(false);
+ var r=cv.getBoundingClientRect();lx=(cx-r.left)*W/(r.width||1);ly=(cy-r.top)*H/(r.height||1);hvT=(lx>-20&&ly>-20&&lx<W+20&&ly<H+20)?1:0;go()}
 addEventListener('pointermove',function(e){wake(e.clientX,e.clientY)},{passive:true});
 addEventListener('pointerdown',function(e){wake(e.clientX,e.clientY)},{passive:true});
 function frame(now){raf=0;if(!vis||!W)return;
@@ -68,7 +71,8 @@ function frame(now){raf=0;if(!vis||!W)return;
  var gx=asleep?0:lx*14,gy=asleep?8:ly*8;ex+=(gx-ex)*.22;ey+=(gy-ey)*.22;
  var busy=false;
  /* redraw the glyphs only when the pupils have moved enough to change a cell */
- if(Math.abs(ex-dex)>.8||Math.abs(ey-dey)>.8||now-born<950){dex=ex;dey=ey;busy=render(now)}
+ hv+=(hvT-hv)*.15;if(hv<.005)hv=0;
+ if(Math.abs(ex-dex)>.8||Math.abs(ey-dey)>.8||now-born<950||hv>0||(hvT===0&&hv>0)){dex=ex;dey=ey;busy=render(now)}
  raf=requestAnimationFrame(frame)}
 function go(){if(!raf&&vis&&ims.length===4)raf=requestAnimationFrame(frame)}
 Promise.all(srcs.map(function(s){return new Promise(function(res,rej){var i=new Image();i.onload=function(){res(i)};i.onerror=rej;i.src=s})})).then(function(a){

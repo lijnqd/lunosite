@@ -1227,36 +1227,32 @@ html,body{overflow-x:clip}
 .stack>.contacts,#contacts.contacts{margin-top:0}
 @media (max-width:809px){.cs-wide{margin-top:0}.ab .stack{gap:80px}.ab .tools{margin-top:0;margin-bottom:0}}
 .aw-t{text-transform:none}
-/* process v2: one pinned screen. Left: label and heading. Right: the steps on a drum that turns as you scroll:
-   the active step sits on the centre line, the others tilt away above and below and fade.
-   The active number is drawn in pink glyphs and re-forms into the next number. */
-.process.pw{height:calc(100vh / var(--dz,1) * (1 + (var(--n) - 1) * .5))}
-.pw-stage{position:sticky;top:0;height:calc(100vh / var(--dz,1));display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);column-gap:20px;align-items:center;overflow:hidden}
-.pw-left{align-self:center;transform:translateY(-28px)}
-.pw-left .label{margin:0 0 16px}.pw-left h2{margin:0}
-.pw-drum{position:relative;height:100%;perspective:1000px;--row:150px}
-.pw-list{list-style:none;margin:0;padding:0;position:absolute;inset:0;transform-style:preserve-3d}
-.pw-step{position:absolute;left:0;right:0;top:50%;display:grid;grid-template-columns:140px minmax(0,1fr);column-gap:24px;align-items:start;transform-origin:50% 50%;will-change:transform,opacity;margin-top:-36px}
-.pw-n{font-family:var(--serif);font-size:64px;line-height:1;color:var(--pink);opacity:.6}
-.pw-step.on .pw-n{visibility:hidden}
+
+
+/* process v3: a wheel. The steps sit around a cylinder that the scroll turns, all the way round:
+   the step in front is lit, its neighbours tilt away above and below, the rest are behind the wheel.
+   Numbers are always drawn in pink glyphs. The pinned stage is only as tall as the wheel and is
+   centred on screen, so the gaps to the blocks around stay the usual 140 */
+.process.pw{--sh:600px;height:calc(var(--sh) + 100vh / var(--dz,1) * (var(--n) - 1) * .45)}
+.pw-stage{position:sticky;top:calc((100vh / var(--dz,1) - var(--sh)) / 2);height:var(--sh);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);column-gap:20px;align-items:center;overflow:hidden}
+.pw-left{transform:translateY(-24px)}.pw-left .label{margin:0 0 16px}.pw-left h2{margin:0}
+.pw-drum{position:relative;height:100%;perspective:1200px;--r:190px}
+.pw-list{list-style:none;margin:0;padding:0;position:absolute;left:0;right:0;top:50%;height:0;transform-style:preserve-3d}
+.pw-step{position:absolute;left:0;right:0;top:0;display:grid;grid-template-columns:170px minmax(0,1fr);column-gap:24px;align-items:start;transform-origin:50% 50%;backface-visibility:hidden;will-change:transform,opacity;margin-top:-40px}
+.pw-num{display:block;width:170px;height:96px;margin-top:-12px}
 .pw-c h3{margin:0;font-family:var(--serif);font-weight:400;font-size:64px;line-height:1;letter-spacing:-0.015em}
-.pw-c p{margin:16px 0 0;max-width:480px;font-size:18px;line-height:1.35;opacity:var(--po,1)}
-.pw-dot{position:absolute;left:-28px;top:50%;width:10px;height:10px;margin-top:-17px;border-radius:50%;background:var(--pink)}
-.pw-asc{position:absolute;left:0;top:50%;width:140px;height:84px;margin-top:-52px;pointer-events:none}
-@media (max-width:1199px){.pw-step{grid-template-columns:100px minmax(0,1fr)}.pw-n,.pw-c h3{font-size:48px}.pw-asc{width:100px;height:64px;margin-top:-42px}.pw-drum{--row:130px}}
+.pw-c p{margin:16px 0 0;max-width:540px;font-size:18px;line-height:1.35;opacity:var(--po,1)}
+@media (max-width:1199px){.pw-step{grid-template-columns:120px minmax(0,1fr)}.pw-num{width:120px;height:70px;margin-top:-6px}.pw-c h3{font-size:48px}.pw-drum{--r:170px}}
 @media (max-width:809px){
- .process.pw{height:calc(100vh * (1 + (var(--n) - 1) * .45))}
- .pw-stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-items:start;padding-top:88px;height:100vh;height:100svh}
+ .process.pw{--sh:520px}
+ .pw-stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-items:start}
  .pw-left{transform:none}.pw-left .label{margin-bottom:24px}
- .pw-drum{--row:110px;margin-left:18px}
- .pw-step{grid-template-columns:56px minmax(0,1fr);column-gap:12px;margin-top:-20px}
- .pw-n,.pw-c h3{font-size:32px}.pw-c p{font-size:16px;margin-top:10px}
- .pw-asc{width:56px;height:40px;margin-top:-26px}.pw-dot{left:-16px;width:8px;height:8px;margin-top:-8px}
+ .pw-drum{--r:150px}
+ .pw-step{grid-template-columns:64px minmax(0,1fr);column-gap:12px;margin-top:-24px}
+ .pw-num{width:64px;height:40px;margin-top:-2px}.pw-c h3{font-size:32px}.pw-c p{font-size:16px;margin-top:10px}
 }
-@media (prefers-reduced-motion:reduce){.process.pw{height:auto}.pw-stage{position:static;height:auto;display:block}.pw-drum{height:auto;perspective:none}.pw-list{position:static}.pw-step{position:static;margin:0 0 40px;transform:none!important;opacity:1!important}.pw-step.on .pw-n{visibility:visible}.pw-asc,.pw-dot{display:none}.pw-c p{opacity:1}}
-.pw-step{grid-template-columns:170px minmax(0,1fr)}
-.pw-drum{--row:175px}.pw-c p{max-width:540px}
-.pw-asc{width:170px;height:104px;margin-top:-62px;left:-6px}
-@media (max-width:1199px){.pw-step{grid-template-columns:120px minmax(0,1fr)}.pw-asc{width:120px;height:78px;margin-top:-48px}.pw-drum{--row:150px}}
-@media (max-width:809px){.pw-step{grid-template-columns:64px minmax(0,1fr)}.pw-asc{width:64px;height:46px;margin-top:-28px;left:-4px}.pw-drum{--row:120px}}
-@media (max-width:809px){.pw-drum{--row:150px}}
+@media (prefers-reduced-motion:reduce){.process.pw{height:auto}.pw-stage{position:static;height:auto;display:block}.pw-drum{height:auto;perspective:none}.pw-list{position:static;height:auto}.pw-step{position:static;margin:0 0 40px;transform:none!important;opacity:1!important}.pw-c p{opacity:1}}
+/* advantages: the pinned stage is only as tall as its content and centred on screen */
+.adv.av{--sh:min(780px,calc(100vh / var(--dz,1) - 60px));height:calc(var(--sh) + 100vh / var(--dz,1) * var(--n) * .42)}
+.av-stage{top:calc((100vh / var(--dz,1) - var(--sh)) / 2);height:var(--sh);padding-top:0}
+@media (max-width:809px){.adv.av{--sh:calc(100svh - 80px);height:calc(var(--sh) + 100vh * var(--n) * .42)}.av-stage{top:72px;height:var(--sh);padding-top:0}}

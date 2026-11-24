@@ -24,10 +24,10 @@ function pair(a,b){var key=a+'-'+b;if(pairs[key])return pairs[key];var A=shapes[
  return pairs[key]=out}
 function glyph(c,k){if(c>.88)return'#%@'[Math.floor(hash(k,2)*3)];if(c>.6)return'*+='[Math.floor(hash(k,3)*3)];if(c>.32)return':-'[Math.floor(hash(k,5)*2)];return'.'}
 function size(){var r=cv.getBoundingClientRect();S=Math.min(r.width,r.height);cv.width=r.width*DPR;cv.height=r.height*DPR;cv.__w=r.width;cv.__h=r.height}
-function draw(){raf=0;if(!shapes.length)return;var r=sec.getBoundingClientRect(),vh=innerHeight,span=Math.max(1,r.height-vh);
+function draw(){raf=0;if(!shapes.length)return;var r=sec.getBoundingClientRect(),vh=innerHeight,z=r.height/(sec.offsetHeight||1)||1,shv=sec.querySelector('.av-stage').offsetHeight*z,span=Math.max(1,r.height-shv),top0=(vh-shv)/2;
  /* nothing to draw while the block is off screen */
  if(r.bottom<0||r.top>vh)return;
- var p=cl(-r.top/span)*(n-1),s=Math.min(n-2,Math.floor(p)),f=p-s,t=RM?(f>.5?1:0):cl((f-.18)/.64);
+ var p=cl((top0-r.top)/span)*(n-1),s=Math.min(n-2,Math.floor(p)),f=p-s,t=RM?(f>.5?1:0):cl((f-.18)/.64);
  if(n<2){s=0;t=0}
  var a=Math.round(p);if(a!==act){items[act].classList.remove('on');items[a].classList.add('on');act=a;
   var h=items[a].querySelector('.av-t');if(window.pxScramble&&!RM)window.pxScramble(h,420)}
