@@ -1466,10 +1466,7 @@ body .contacts .c-card{top:128px}
 /* case plates: names beige, pink on hover; the dot pulses */
 .cwall .dg-plate b,.csp-grid .cs-info b{color:var(--beige);transition:color .3s}
 .cwall .dg-card:hover .dg-plate b,.csp-grid .cs-card:hover .cs-info b{color:var(--pink)}
-.dg-dot,.cs-dot{animation:cdot 1.6s ease-in-out infinite}
-.dg-card:hover .dg-dot,.cs-card:hover .cs-dot{animation-duration:.9s}
-@keyframes cdot{50%{transform:scale(1.7);opacity:.45}}
-@media (prefers-reduced-motion:reduce){.dg-dot,.cs-dot{animation:none}}
+
 /* phones: the case caption sits under the cover, so nothing hides the picture */
 @media (max-width:809px){
  .cwall .dg-card{display:flex;flex-direction:column;aspect-ratio:auto;height:auto;background:var(--glass)}
@@ -1482,3 +1479,9 @@ body .contacts .c-card{top:128px}
  .csp-grid .cs-info{position:relative;left:auto;bottom:auto;width:auto;max-width:none;padding:16px 20px 20px;border-radius:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
  .csp-grid .cs-info b{color:var(--pink)}
 }
+
+/* blog: more room before read next */
+.p-next{margin-top:140px}
+@media (max-width:809px){.p-next{margin-top:80px}}
+/* industries: the dark tape is the same glass tone as the cards, not tinted by the pink one under it */
+.tl-dark{background:#1f1e1d;backdrop-filter:none;-webkit-backdrop-filter:none}

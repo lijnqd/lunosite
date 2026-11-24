@@ -1,9 +1,9 @@
-/* case cards on hover (desktop): covers stay in colour; when one card is under the cursor, the other cards
-   in the same grid break into ascii glyphs. A lens follows the cursor across them: inside it the real cover
-   shows through, its edge breaks into pixels. */
+/* case cards on hover (desktop): covers stay in colour until the cursor comes onto the grid; then every cover
+   breaks into ascii glyphs and a lens follows the cursor: inside it the real cover shows through, its edge
+   breaks into pixels. Leaving the grid brings the colour back. */
 (function(){if(!matchMedia('(hover:hover) and (pointer:fine)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
 var cards=[].slice.call(document.querySelectorAll('.dg-card,.cs-card:not(.cs-full)'));if(cards.length<2)return;
-var RAMP=' .:-=+*#%@',DPR=Math.min(2,devicePixelRatio||1),CELL=8,CH=11,R=170;
+var RAMP=' .:-=+*#%@',DPR=Math.min(2,devicePixelRatio||1),CELL=8,CH=11,R=160;
 function boxOf(c){return c.querySelector('.cs-img')||c}
 function imgOf(c){return boxOf(c).querySelector('img')}
 function prep(c){var box=boxOf(c),im=imgOf(c);if(!im||!im.complete||!im.naturalWidth)return null;
@@ -30,10 +30,10 @@ function draw(c,lx,ly,t){var K=c.__k,x=K.x,W=K.W,H=K.H;x.setTransform(1,0,0,1,0,
   var edge=1-(dist-(inner-CELL))/(R+12-(inner-CELL)),nz=Math.abs((Math.sin(cc*12.9898+r*78.233+tt)*43758.5453)%1);if(edge+nz*.5-.35<.3)continue;
   var o=(r*K.cols+cc)*4;x.fillStyle=edge<.35&&nz>.7?'rgba(255,179,173,.6)':'rgb('+d[o]+','+d[o+1]+','+d[o+2]+')';x.fillRect(cc*CELL,r*CH,CELL-1,CH-1)}}
 var cur=null,tm=0,mx=-999,my=-999,lx=-999,ly=-999,raf=0;
-function others(){return cur?cards.filter(function(c){return c!==cur&&c.parentNode===cur.parentNode}):[]}
+function others(){return cur?cards.filter(function(c){return c.parentNode===cur.parentNode}):[]}
 function loop(t){raf=0;if(!cur)return;lx+=(mx-lx)*.22;ly+=(my-ly)*.22;others().forEach(function(c){if(c.__k&&(c.__k.lensOn||true))draw(c,lx,ly,t)});raf=requestAnimationFrame(loop)}
 function set(on){clearTimeout(tm);if(on&&!cur){lx=mx;ly=my}cur=on;
- cards.forEach(function(c){var other=on&&c!==on&&c.parentNode===on.parentNode;if(other){var K=prep(c);if(K){K.cv.offsetWidth;K.cv.classList.add('on')}}else if(c.__k)c.__k.cv.classList.remove('on')});
+ cards.forEach(function(c){var other=on&&c.parentNode===on.parentNode;if(other){var K=prep(c);if(K){K.cv.offsetWidth;K.cv.classList.add('on')}}else if(c.__k)c.__k.cv.classList.remove('on')});
  if(on&&!raf)raf=requestAnimationFrame(loop)}
 addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY},{passive:true});
 cards.forEach(function(c){c.addEventListener('mouseenter',function(){set(c)});c.addEventListener('mouseleave',function(){tm=setTimeout(function(){set(null)},90)})});
