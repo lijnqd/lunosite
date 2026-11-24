@@ -1272,3 +1272,4 @@ html,body{overflow-x:clip}
 .cs-full .cs-top .cs-dot,.cs-full .cs-top i.cs-dot.dm{position:absolute!important;right:24px;top:24px;left:auto;bottom:auto}
 @media (max-width:809px){.cs-full .cs-top .cs-dot,.cs-full .cs-top i.cs-dot.dm{right:18px;top:18px}}
 .seams{position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
+.flow{position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:45;pointer-events:none}

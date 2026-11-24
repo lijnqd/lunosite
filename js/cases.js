@@ -31,5 +31,6 @@ function develop(card){var box=card.querySelector('.cs-img'),im=box.querySelecto
    setTimeout(function(){cv.remove();im.style.transition=''},800)})()}
  if(im.complete&&im.naturalWidth)go();else{im.loading='eager';im.addEventListener('load',go,{once:true})}}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);develop(e.target)}})},{threshold:.35});
-cs.forEach(function(c){io.observe(c)});
+/* the first cover is developed by the page flow (js/flow.js) instead */
+cs.forEach(function(c){if(!c.hasAttribute('data-flow'))io.observe(c)});
 })();
