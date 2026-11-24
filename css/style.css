@@ -1333,3 +1333,15 @@ html,body{overflow-x:clip}
 .ab .tools{margin-top:0!important;margin-bottom:0!important;padding:0}
 @media (max-width:809px){.ab .stack{gap:80px!important}.ab .tools{margin-top:-20px!important;margin-bottom:-20px!important}}
 @media (max-width:809px){.casesp .dg{margin-top:28px}}
+/* blog: smaller live ascii cover; pictures run the full content width, two side by side for before / after */
+.post .p-cover{position:relative;max-width:860px;aspect-ratio:1200/750}
+.post .p-cover .pc-cv{position:absolute;inset:0;width:100%;height:100%}
+.post .p-cover.live img{visibility:hidden}
+.post .p-body>.p-fig,.post .p-body>.p-pair{margin:48px 0 0}
+.post .p-body>.p-fig{border-radius:var(--r)}
+.post .p-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.post .p-pair .p-fig{margin:0;border-radius:var(--r)}
+.p-fig img{cursor:zoom-in}
+.zoom{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:rgba(10,10,10,.92);opacity:0;transition:opacity .25s;cursor:zoom-out}
+.zoom.on{opacity:1}.zoom img{max-width:100%;max-height:100%;border-radius:var(--r-in)}
+@media (max-width:809px){.post .p-body>.p-fig,.post .p-body>.p-pair{margin-top:28px}.post .p-pair{grid-template-columns:1fr}}

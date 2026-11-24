@@ -11,7 +11,7 @@ TERSER = sys.argv[1]
 # document order of the old deferred tags: lenis must precede smooth
 MODS = [('lenis.min', None), ('ascii', None), ('pixfx', None), ('nav', None), ('cursor', None),
         ('reviews', '#rqRow'), ('cases', '#csStack'), ('adv', '.adv.av'), ('services', '#services'),
-        ('stats', '.stats'), ('case', '.cx-title'), ('main', '.hero'), ('cat', '.hero-c .cat'), ('awards', '.aw-list'), ('face', '.ab-face'), ('diag', '#dg'), ('process', '.process.pw'), ('cookies', None),
+        ('stats', '.stats'), ('case', '.cx-title'), ('main', '.hero'), ('cat', '.hero-c .cat'), ('awards', '.aw-list'), ('face', '.ab-face'), ('diag', '#dg'), ('blogcover', '.p-cover[data-icon]'), ('zoom', '.p-fig'), ('process', '.process.pw'), ('cookies', None),
         ('dotmorph', None), ('track', None), ('form', '#form'), ('faq', '.fq-grid'),
         ('smooth', None), ('expertise', '.exp')]
 parts = []
