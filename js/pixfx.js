@@ -57,8 +57,9 @@ function go(el){if(el.__px)return;el.__px=1;
  pix(el,400,0);[].slice.call(el.querySelectorAll('.label,h2:not(.sr),h3.h40')).forEach(function(t,i){scr(t,450,40+i*50)})}
 
 function hero(){var hr=d.querySelector('.hero');if(!hr)return;
- var t=hr.querySelector('h1');if(t){t.__px=1;scr(t,850,0)}
- [].slice.call(hr.querySelectorAll('.hero-sub')).forEach(function(p){p.__px=1;scr(p,700,150)});
+ /* the hero text is not scrambled: swapping glyphs re-wraps the lines and shifts the layout on load (CLS) */
+ var t=hr.querySelector('h1');if(t)t.__px=1;
+ [].slice.call(hr.querySelectorAll('.hero-sub')).forEach(function(p){p.__px=1});
  [].slice.call(hr.querySelectorAll('.hero-art,.hero-btns .btn')).forEach(function(b,i){b.__px=1;pix(b,600,100+i*100)})}
 
 function start(){hero();
