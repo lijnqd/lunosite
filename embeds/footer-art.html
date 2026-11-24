@@ -250,6 +250,7 @@ function paint() {
     return { x: r.x, y: r.y, R: (8 + e * 260) * st.u, amp: 0.6 * (1 - p) * (1 - p) * Math.min(1, p * 6) };
   });
   const band = 24 * st.u;
+  const dots = new Path2D();
   for (let j = 0; j < st.rows; j++) {
     const y = st.oy + (j + 0.5) * st.ch;
     for (let i = 0; i < st.cols; i++) {
@@ -282,13 +283,22 @@ function paint() {
       /* cold: the cell's own resting character, so the mascot is
          ASCII from the start; the wake thickens it toward @ and
          cools back to it without a glyph popping in or out */
+      /* cold: a round halftone dot, smaller toward the outline (same style as the hero cat);
+         a few of them flicker into their resting character, so the ascii is always there;
+         the wake turns the dots into characters, densest under the hand */
       if (h <= COLD || idx <= 4) {
-        ctx.fillText(st.base[k], x, yy);
+        if (hash(k, st.deal >> 2) > 0.985) { ctx.fillText(st.base[k], x, yy); continue; }
+        /* cells are narrower than tall, so the dots sit on every other cell, offset row to row:
+           an even, round-dot halftone instead of lines */
+        if ((i + (j & 1)) & 1) continue;
+        const rr = st.ch * 0.5 * (0.4 + 0.75 * m) * (1 - Math.min(1, h * 4) * 0.4);
+        dots.moveTo(x + rr, yy); dots.arc(x, yy, rr, 0, 6.2832);
         continue;
       }
       ctx.fillText(RAMP[idx], x, yy);
     }
   }
+  ctx.fill(dots);
 }
 
 /* the loop runs only while the wake is warm or the hand is moving */
@@ -410,7 +420,7 @@ let vis = true;
 try { new IntersectionObserver((e) => { vis = e[0].isIntersecting; }).observe(canvas); } catch (err) {}
 if (!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches)) setInterval(() => {
   if (!vis || document.hidden || st.raf || !st.base.length) return;
-  redeal();
+  redeal(); st.deal++;
   paint();
 }, 100);
 

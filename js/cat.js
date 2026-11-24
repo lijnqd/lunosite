@@ -10,7 +10,7 @@ var SW=780,SH=770,P=[[192,403],[497,403]],PS=103;/* source layout (see the svg i
 var srcs=['/assets/img/cat/eyes.webp','/assets/img/cat/pupil-0.webp','/assets/img/cat/pupil-1.webp','/assets/img/cat/base.webp'],ims=[];
 var mx=0,my=0,has=false,px=0,py=0,vx=0,vy=0,ex=0,ey=0,dex=1e9,dey=1e9,last=performance.now(),asleep=false,vis=true,raf=0,t0=performance.now(),born=0;
 var x=cv.getContext('2d'),sm=document.createElement('canvas'),sx=sm.getContext('2d',{willReadFrequently:true}),DPR=Math.min(2,devicePixelRatio||1);
-var W=0,H=0,cw=0,ch=0,cols=0,rows=0,SS=4,tiles=[],ord=null,TH=null;
+var lastR=0,W=0,H=0,cw=0,ch=0,cols=0,rows=0,SS=4,tiles=[],ord=null,TH=null;
 var SCR='#%&*+=/\\|~^01',lx=-1e4,ly=-1e4,hv=0,hvT=0,G=['.',':','-','=','+','/','*','%','#'],GA=[.62,.68,.74,.8,.9,.94,1,1,1];
 function hash(k){var h=(k*374761393)|0;h=Math.imul(h^(h>>>13),1274126177);return((h^(h>>>16))>>>0)/4294967296}
 function tile(dense){var c=document.createElement('canvas'),q=c.getContext('2d');c.width=Math.ceil(cw*DPR);c.height=Math.ceil(ch*DPR);q.scale(DPR,DPR);
@@ -47,15 +47,21 @@ function render(now){
  /* halftone: one round dot per cell on a square grid; its size follows how dark the cell is,
     so the darkest parts (outline, pupils, nose, mouth) grow into solid shapes where dots touch,
     and the lightest parts of the fur open up to bare pink. One colour, nothing else */
- var lo=TH.g[0],hi=TH.t0,cell=cw;x.globalAlpha=1;x.beginPath();
+ var lo=TH.g[0],hi=TH.t0,cell=cw,gl=[];x.globalAlpha=1;x.beginPath();
  for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var D=Ds[j*cols+i];if(D<0)continue;
   if(intro<1&&ord[j*cols+i]>intro)continue;
   var E=Sm[j*cols+i]+(D-Sm[j*cols+i])*1.6,tn=(E-lo)/(hi-lo);tn=tn<0?0:tn>1?1:tn;
   var rr=cell*.5*1.22*Math.pow(tn,.62);if(rr<cell*.12)continue;
   var cx=ox+(i+.5)*cell,cy=oy+(j+.5)*cell;
-  if(hv>.01){var ddx=cx-lx,ddy=cy-ly,dd=Math.sqrt(ddx*ddx+ddy*ddy)||1,RR=W*.18;if(dd<RR){var ff=Math.pow(1-dd/RR,2)*hv;cx+=ddx/dd*ff*cell*5;cy+=ddy/dd*ff*cell*5;rr*=1-ff*.5}}
+  var ff0=0;if(hv>.01){var ddx=cx-lx,ddy=cy-ly,dd=Math.sqrt(ddx*ddx+ddy*ddy)||1,RR=W*.18;if(dd<RR){var ff=Math.pow(1-dd/RR,2)*hv;ff0=ff;cx+=ddx/dd*ff*cell*3;cy+=ddy/dd*ff*cell*3}}
+  /* ascii lives in the dots: under the cursor they turn into characters, and now and then a
+     dot elsewhere flickers into one and back */
+  var gk=j*cols+i,fl=hash(gk*13+((now/160)|0)*7919)>.992;
+  if((hv>.01&&ff0>.18)||fl){gl.push(cx,cy,tn,gk);continue}
   x.moveTo(cx+rr,cy);x.arc(cx,cy,rr,0,6.2832)}
  x.fill();
+ x.font='600 '+Math.round(cell*1.25)+"px 'Sometype Mono',monospace";x.textAlign='center';x.textBaseline='middle';
+ for(var q=0;q<gl.length;q+=4){var t2=gl[q+2];x.fillText(t2>.75?'#':t2>.5?'%':t2>.3?'*':t2>.15?'+':':',gl[q],gl[q+1])}
  x.globalAlpha=1;return intro<1}
 function setSay(a){if(asleep===a)return;asleep=a;say.classList.add('pop');setTimeout(function(){txt.textContent=a?IDLE:ACTIVE;say.classList.remove('pop')},120)}
 function wake(cx,cy){mx=cx;my=cy;has=true;last=performance.now();setSay(false);
@@ -75,7 +81,7 @@ function frame(now){raf=0;if(!vis||!W)return;
  var busy=false;
  /* redraw the glyphs only when the pupils have moved enough to change a cell */
  hv+=(hvT-hv)*.15;if(hv<.005)hv=0;
- if(Math.abs(ex-dex)>.8||Math.abs(ey-dey)>.8||now-born<950||hv>0||(hvT===0&&hv>0)){dex=ex;dey=ey;busy=render(now)}
+ if(Math.abs(ex-dex)>.8||Math.abs(ey-dey)>.8||now-born<950||hv>0||now-lastR>160){lastR=now;dex=ex;dey=ey;busy=render(now)}
  raf=requestAnimationFrame(frame)}
 function go(){if(!raf&&vis&&ims.length===4)raf=requestAnimationFrame(frame)}
 Promise.all(srcs.map(function(s){return new Promise(function(res,rej){var i=new Image();i.onload=function(){res(i)};i.onerror=rej;i.src=s})})).then(function(a){
