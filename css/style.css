@@ -1314,3 +1314,5 @@ html,body{overflow-x:clip}
 }
 @media (prefers-reduced-motion:reduce){.dg{height:auto}.dg-stage{position:static;height:auto;overflow:visible;display:grid;grid-template-columns:1fr 1fr;gap:10px}.dg-card{position:relative;left:auto;top:auto;width:100%;margin:0;transform:none!important;opacity:1!important}}
 .tl-in span{text-transform:none}
+/* cases page: cards meet corner to corner along the diagonal, never overlapping */
+.dg-card{width:min(560px,38vw);margin:calc(min(560px,38vw) * -11.4 / 32) 0 0 calc(min(560px,38vw) / -2)}
