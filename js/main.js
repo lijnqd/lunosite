@@ -10,7 +10,7 @@ addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;req()});
 addEventListener('scroll',draw,{passive:true});addEventListener('resize',size);size()})();
 
 // process: line draws on scroll, steps appear
-(function(){var st=document.querySelector('.steps'),ss=st.querySelectorAll('.step');var mx=0;
+(function(){var st=document.querySelector('.steps');if(!st)return;var ss=st.querySelectorAll('.step');var mx=0;
 function u(){var r=st.getBoundingClientRect(),p=innerWidth<1200?(innerHeight*.8-r.top)/(r.height+20):(innerHeight*.85-r.top)/(innerHeight*.45);p=Math.max(mx,Math.min(1,p));mx=p;st.style.setProperty('--p',p);ss.forEach(function(s,i){if(p>=i/ss.length+.02)s.classList.add('in')})}
 addEventListener('scroll',u,{passive:true});u()})();
 

@@ -32,6 +32,13 @@ function render(now){
  for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var a=0,l=0;
   for(var v=0;v<SS;v++)for(var u=0;u<SS;u++){var o=((j*SS+v)*sm.width+i*SS+u)*4,al=d[o+3]/255;a+=al;l+=al*(d[o]*.3+d[o+1]*.59+d[o+2]*.11)/255}
   a/=N;if(a<.4)continue;Ds[j*cols+i]=1-l/(a*N)}
+ /* fur glyphs read a smoothed value (each cell blended with its neighbours), so the halftone of
+    the drawing does not turn into noise; tiles and the darkest marks keep the raw value, so the
+    outline, eyes, nose and mouth stay sharp */
+ var Sm=new Float32Array(Ds.length);
+ for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var k=j*cols+i,v=Ds[k];if(v<0){Sm[k]=-1;continue}var s2=v*2,w2=2;
+  for(var q=-1;q<=1;q++)for(var r=-1;r<=1;r++){if(!q&&!r)continue;var jj=j+q,ii=i+r;if(jj<0||ii<0||jj>=rows||ii>=cols)continue;var u=Ds[jj*cols+ii];if(u>=0){s2+=u;w2++}}
+  Sm[k]=s2/w2}
  /* levels by rank, not by raw value: the fur is mostly mid grey, so raw values would make it all
     blocks. Only the darkest tenth (outline, pupils, nose) becomes tiles; the rest spreads over the glyphs */
  if(!TH){var vs=[].slice.call(Ds).filter(function(v){return v>=0}).sort(function(p,q){return p-q}),Q=function(f){return vs[Math.min(vs.length-1,Math.floor(vs.length*f))]};
@@ -42,7 +49,7 @@ function render(now){
   var cx=ox+i*cw,cy=oy+j*ch;
   if(D>=TH.t0){x.globalAlpha=1;x.drawImage(tiles[0],cx,cy,cw,ch);continue}
   if(D>=TH.t1){x.globalAlpha=1;x.drawImage(tiles[1],cx,cy,cw,ch);continue}
-  var g=0;while(g<8&&D>=TH.g[g+1])g++;if(D<TH.g[0])continue;
+  var E=Sm[j*cols+i],g=0;while(g<8&&E>=TH.g[g+1])g++;if(E<TH.g[0]&&D<TH.g[2])continue;
   x.globalAlpha=GA[g];x.fillText(G[g],cx+cw/2,cy+ch/2)}
  x.globalAlpha=1;return intro<1}
 function setSay(a){if(asleep===a)return;asleep=a;say.classList.add('pop');setTimeout(function(){txt.textContent=a?IDLE:ACTIVE;say.classList.remove('pop')},120)}
