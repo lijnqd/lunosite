@@ -1264,3 +1264,11 @@ html,body{overflow-x:clip}
 .pw-step:not(.on) .pw-c h3{opacity:.55}
 @media (max-width:809px){.process.pw{height:calc(var(--sh) + 100vh * var(--n) * .4)}}
 @media (max-width:809px){.pw-drum{overflow:hidden}}
+/* phones: the header gets a solid frosted bar once the page scrolls, so the logo never sits on text */
+@media (max-width:809px){
+ .hdr-fade{height:66px;background:rgba(20,20,20,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(242,231,220,.08)}
+}
+/* case cards: the dot lives on the plate (top right of it), not on the photo */
+.cs-full .cs-top .cs-dot,.cs-full .cs-top i.cs-dot.dm{position:absolute!important;right:24px;top:24px;left:auto;bottom:auto}
+@media (max-width:809px){.cs-full .cs-top .cs-dot,.cs-full .cs-top i.cs-dot.dm{right:18px;top:18px}}
+.seams{position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
