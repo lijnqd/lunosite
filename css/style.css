@@ -1424,10 +1424,6 @@ body.home .hc-h{letter-spacing:-0.025em}
 .contacts .c-card{z-index:1;background:rgba(242,231,220,.05);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 body .contacts{height:757px}
 body .contacts .c-card{top:150px}
-.luna{align-items:center}
-.luna img{width:70px;height:70px}
-.luna .nm{text-transform:none;font-size:16px;margin-bottom:6px}
-.luna p{width:auto;display:inline-block;padding:10px 26px;color:var(--pink);border-radius:var(--r-in);background:rgba(20,20,20,.55)}
 #form input{height:50px;border-radius:20px;padding:0 20px;font-size:16px}
 @media (max-width:1199px){body .contacts{height:700px}body .contacts .c-card{top:96px}}
 @media (max-width:809px){body .contacts{height:auto}body .contacts .c-card{top:auto;margin-top:-20px}.wordmark.wm-t{margin:0}}
@@ -1435,3 +1431,8 @@ body .contacts{height:720px}
 body .contacts .c-card{top:128px}
 @media (max-width:1199px){body .contacts{height:680px}body .contacts .c-card{top:68px}}
 @media (max-width:809px){body .contacts{height:auto}body .contacts .c-card{top:auto}}
+
+/* about: more room between the pixel brackets and the quote */
+.bh-q{max-width:920px}.bh-p{left:-190px}.bh-p.r{left:auto;right:-190px}
+@media (max-width:1199px){.bh-q{max-width:640px}.bh-p{left:-130px}.bh-p.r{right:-130px}}
+@media (max-width:809px){.bh-q{max-width:none;padding:0 30px}.bh-p{left:-14px}.bh-p.r{right:-14px}}
