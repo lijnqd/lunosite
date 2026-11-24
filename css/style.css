@@ -1375,3 +1375,6 @@ html,body{overflow-x:clip}
 .bh-row img{justify-self:end}
 .bh-t{justify-self:start}
 @media (max-width:809px){.bh{padding:0}.bh-row{grid-template-columns:1fr;margin-top:24px}.bh-row img{justify-self:stretch}}
+/* about #behind lunö: a glass card like the others */
+.bh{background:var(--glass);backdrop-filter:var(--glass-blur,blur(20px));-webkit-backdrop-filter:var(--glass-blur,blur(20px));border-radius:var(--r);padding:80px 40px}
+@media (max-width:809px){.bh{padding:48px 20px 24px}}
