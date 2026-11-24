@@ -1273,3 +1273,9 @@ html,body{overflow-x:clip}
 @media (max-width:809px){.cs-full .cs-top .cs-dot,.cs-full .cs-top i.cs-dot.dm{right:18px;top:18px}}
 .seams{position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
 .flow{position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:45;pointer-events:none}
+/* tablet and phone: the headline stays in one piece above the cat */
+@media (max-width:1199px){
+ .hero-c .hc-h{display:block;order:0}
+ .hero-c .hc-h .h1-a,.hero-c .hc-h .h1-b{display:inline;position:static;text-align:left}
+ .hero-c .cat{order:1}.hero-c .hc-bot{order:2}
+}

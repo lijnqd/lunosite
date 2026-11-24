@@ -20,7 +20,7 @@ function tile(dense){var c=document.createElement('canvas'),q=c.getContext('2d')
  for(var yy=iy+st/2;yy<ch-iy;yy+=st)for(var xx=ix+st/2+((Math.round(yy/st)%2)*st/2);xx<cw-ix;xx+=st){q.beginPath();q.arc(xx,yy,r,0,6.283);q.fill()}
  return c}
 function size(){var r=w.getBoundingClientRect();W=r.width;H=r.height;if(!W)return;
- ch=Math.max(8,Math.round(W/52));TH=null;cw=ch*.62;cols=Math.floor(W/cw);rows=Math.floor(H/ch);
+ ch=Math.max(8,Math.round(W/46));TH=null;cw=ch*.62;cols=Math.floor(W/cw);rows=Math.floor(H/ch);
  cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);sm.width=cols*SS;sm.height=rows*SS;
  tiles=[tile(true),tile(false)];ord=new Float32Array(cols*rows);for(var k=0;k<ord.length;k++)ord[k]=hash(k+7);dex=1e9}
 function render(now){
@@ -50,15 +50,15 @@ function render(now){
  /* halftone in characters: one glyph per cell, picked by how dark the cell is, from a light
     dot to a full block of ink, so the face reads like the dot portrait but every mark is type.
     Still: nothing flickers. Under the cursor the glyphs make way. */
- var lo=TH.g[0],hi=TH.t0,cell=cw,RMP=['.','.',':','-','=','+','*','o','%'];
- x.globalAlpha=1;x.textAlign='center';x.textBaseline='middle';x.font='700 '+Math.round(ch*.98)+"px 'Sometype Mono',monospace";
+ var lo=TH.g[0],hi=TH.t0,cell=cw,RMP=['.',':','-','=','+','*','o','%','@'];
+ x.globalAlpha=1;x.textAlign='center';x.textBaseline='middle';x.font='800 '+Math.round(ch*1.02)+"px 'Sometype Mono',monospace";
  for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var D=Ds[j*cols+i];if(D<0)continue;
   if(intro<1&&ord[j*cols+i]>intro)continue;
   var E=Sm[j*cols+i],cx=ox+(i+.5)*cell,cy=oy+(j+.5)*ch,g;
   /* the strongest marks (outline, pupils, nose, mouth) by the raw value; the fur by the smoothed one, capped below them */
-  if(D>=TH.t0)g='@';else if(D>=TH.t1)g='#';else{var q=-1;while(q<8&&E>=TH.g[q+1])q++;if(q<1)continue;g=RMP[q]}
+  if(D>=TH.t0)g='\u2588';else if(D>=TH.t1)g='#';else{var q=-1;while(q<8&&E>=TH.g[q+1])q++;if(q<1)continue;g=RMP[q]}
   if(hv>.01){var ddx=cx-lx,ddy=cy-ly,dd=Math.sqrt(ddx*ddx+ddy*ddy)||1,RR=W*.18;if(dd<RR){var ff=Math.pow(1-dd/RR,2)*hv;cx+=ddx/dd*ff*cell*3;cy+=ddy/dd*ff*cell*3}}
-  x.globalAlpha=(g==='@'||g==='#')?1:.78;x.fillText(g,cx,cy)}
+  x.globalAlpha=1;if(g==='\u2588'){x.fillRect(cx-cell*.5+.5,cy-ch*.5+.5,cell-1,ch-1);continue}x.fillText(g,cx,cy)}
  x.globalAlpha=1;return intro<1}
 function setSay(a){if(asleep===a)return;asleep=a;say.classList.add('pop');setTimeout(function(){txt.textContent=a?IDLE:ACTIVE;say.classList.remove('pop')},120)}
 function wake(cx,cy){mx=cx;my=cy;has=true;last=performance.now();setSay(false);
