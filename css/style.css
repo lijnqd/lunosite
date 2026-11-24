@@ -1380,11 +1380,9 @@ html,body{overflow-x:clip}
 @media (max-width:809px){.bh{padding:48px 20px 24px}}
 /* footer on phones: 16px links with room for a finger (44px rows) */
 @media (max-width:809px){.f-cols a{font-size:16px;line-height:1.3;padding:12px 0;min-height:44px;box-sizing:border-box}.f-cols .f-h{margin-bottom:4px}}
-/* case card hover: ascii break-up, then a silent loop of the site */
-.ch-asc,.ch-vid{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;border-radius:inherit}
+/* case card hover: ascii break-up, then the cover again */
+.ch-asc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;border-radius:inherit}
 .ch-asc{z-index:1;transition:opacity .35s}
-.ch-vid{z-index:1;object-fit:cover;opacity:0;transition:opacity .45s cubic-bezier(.2,.7,.2,1);background:#141414}
-.ch-vid.on{opacity:1}
 .dg-plate,.cs-info,.cs-full .cs-top{z-index:3}
 @media (max-width:809px){.cs-f .cs-top{padding:20px}}
 /* footer on phones: 16px links, tighter rows */
