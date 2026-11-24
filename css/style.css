@@ -5,7 +5,7 @@
 @font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/instrument-serif-latin-400-italic.woff2) format('woff2')}
 @font-face{font-family:'Redaction 35';font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/redaction-35-latin-400-normal.woff2) format('woff2')}
 @font-face{font-family:'Redaction 35';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/redaction-35-latin-400-italic.woff2) format('woff2')}
-:root{--serif:"Instrument Serif",Georgia,"Times New Roman",serif;--r:20px;--glass-2:rgba(242,231,220,.08);--beige-2:rgba(242,231,220,.72);--r-in:12px;--r-btn:12px;--bg:#141414;--beige:#F2E7DC;--pink:#FFB3AD;--glass:rgba(242,231,220,.05);--mono:Inter,system-ui,sans-serif}
+:root{--serif:"Redaction 35",Georgia,"Times New Roman",serif;--r:20px;--glass-2:rgba(242,231,220,.08);--beige-2:rgba(242,231,220,.72);--r-in:12px;--r-btn:12px;--bg:#141414;--beige:#F2E7DC;--pink:#FFB3AD;--glass:rgba(242,231,220,.05);--mono:Inter,system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{background:var(--bg);color:var(--beige);font-family:Inter,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden;
@@ -1394,13 +1394,12 @@ html,body{overflow-x:clip}
 body.home{--serif:"Redaction 35",Georgia,"Times New Roman",serif}
 body.home .hc-h{letter-spacing:-0.025em}
 @media (min-width:1200px){body.home .hc-h{font-size:88px;max-width:540px}}
-/* hero (home): two lines each, the second block tucked under the first one's last line */
+/* hero (home): two lines per block, availability note with a star */
 .hc-av .hc-star{width:14px;height:14px;fill:var(--bg);flex:none}
 @media (min-width:1200px){
  body.home .hero-c .hc-h{font-size:88px;max-width:none}
- body.home .hero-c .hc-h .h1-a{max-width:none;white-space:nowrap}
- body.home .hero-c .hc-h .h1-b{max-width:none;white-space:nowrap;bottom:auto;top:calc(40px + 1.8em)}
- body.home .hero-c .cat{width:min(380px,45vh);top:auto;bottom:24px;transform:translateX(-50%)}
+ body.home .hero-c .hc-h .h1-a,body.home .hero-c .hc-h .h1-b{max-width:none;white-space:nowrap}
+ body.home .hero-c .cat{width:min(460px,56vh)}
 }
 @media (max-width:1199px){.hc-br{display:none}}
 /* about: no orphan words */
@@ -1411,11 +1410,28 @@ body.home .hc-h{letter-spacing:-0.025em}
 .av-item.on .av-d p{padding:20px 0 8px}
 /* contacts: wordmark set in the heading font */
 .wordmark.wm-t{height:auto;width:auto;left:0;right:0;top:-40px;margin:0;text-align:center;font-family:var(--serif);font-size:260px;line-height:1;letter-spacing:-0.03em;color:var(--beige);white-space:nowrap;transform:none;pointer-events:none;user-select:none}
-body.home .contacts{height:757px}
-body.home .contacts .c-card{top:169px}
-@media (max-width:1199px){.wordmark.wm-t{font-size:160px;top:-24px}body.home .contacts{height:700px}body.home .contacts .c-card{top:110px}}
-@media (max-width:809px){.wordmark.wm-t{position:relative;top:auto;font-size:min(80px,21vw);margin:0 0 -14px}body.home .contacts{height:auto}body.home .contacts .c-card{top:auto}}
+@media (max-width:1199px){.wordmark.wm-t{font-size:160px;top:-24px}}
+@media (max-width:809px){.wordmark.wm-t{position:relative;top:auto;font-size:min(80px,21vw);margin:0 0 -14px}}
 
 .nw{white-space:nowrap}
 .av-t{text-wrap:balance}
 @media (max-width:809px){.about-text .nw{white-space:normal}.about-text .pill{font-size:.92em}}
+
+/* process: soft fade at the top and bottom of the drum instead of a hard cut */
+.pw-drum{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 26%,#000 74%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 26%,#000 74%,transparent 100%)}
+/* contacts: cöntact us sinks under the glass card, avatar + short bubble, softer fields */
+.contacts .wordmark.wm-t{z-index:0}
+.contacts .c-card{z-index:1;background:rgba(242,231,220,.05);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+body .contacts{height:757px}
+body .contacts .c-card{top:150px}
+.luna{align-items:center}
+.luna img{width:70px;height:70px}
+.luna .nm{text-transform:none;font-size:16px;margin-bottom:6px}
+.luna p{width:auto;display:inline-block;padding:10px 26px;color:var(--pink);border-radius:var(--r-in);background:rgba(20,20,20,.55)}
+#form input{height:50px;border-radius:20px;padding:0 20px;font-size:16px}
+@media (max-width:1199px){body .contacts{height:700px}body .contacts .c-card{top:96px}}
+@media (max-width:809px){body .contacts{height:auto}body .contacts .c-card{top:auto;margin-top:-20px}.wordmark.wm-t{margin:0}}
+body .contacts{height:720px}
+body .contacts .c-card{top:128px}
+@media (max-width:1199px){body .contacts{height:680px}body .contacts .c-card{top:68px}}
+@media (max-width:809px){body .contacts{height:auto}body .contacts .c-card{top:auto}}
