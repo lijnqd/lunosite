@@ -89,6 +89,7 @@ const ctx = canvas.getContext('2d');
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 /* lightest to densest; the first is always a blank */
 const RAMP = [" ", ".", ":", "-", "=", "+", "*", "#", "%", "@"];
+const DEPTH = ["+", "*", "o", "%", "#", "#", "@"];
 /* the resting field: the mascot's own characters, as before the wake */
 const REST = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-/<>=?";
 const rest = () => REST[(Math.random() * REST.length) | 0];
@@ -232,7 +233,7 @@ function paint() {
   ctx.clearRect(0, 0, width, height);
   /* one ink for everything, the hero's own */
   ctx.fillStyle = getComputedStyle(canvas).color || '#141414';
-  ctx.font = st.font;
+  ctx.font = st.font.replace('500','700');
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   const top = RAMP.length - 1;
@@ -250,7 +251,6 @@ function paint() {
     return { x: r.x, y: r.y, R: (8 + e * 260) * st.u, amp: 0.6 * (1 - p) * (1 - p) * Math.min(1, p * 6) };
   });
   const band = 24 * st.u;
-  const dots = new Path2D();
   for (let j = 0; j < st.rows; j++) {
     const y = st.oy + (j + 0.5) * st.ch;
     for (let i = 0; i < st.cols; i++) {
@@ -286,19 +286,15 @@ function paint() {
       /* cold: a round halftone dot, smaller toward the outline (same style as the hero cat);
          a few of them flicker into their resting character, so the ascii is always there;
          the wake turns the dots into characters, densest under the hand */
+      /* cold: a still character by depth (lighter toward the outline), no flicker;
+         the wake thickens it toward @ under the hand */
       if (h <= COLD || idx <= 4) {
-        if (hash(k, st.deal >> 2) > 0.985) { ctx.fillText(st.base[k], x, yy); continue; }
-        /* cells are narrower than tall, so the dots sit on every other cell, offset row to row:
-           an even, round-dot halftone instead of lines */
-        if ((i + (j & 1)) & 1) continue;
-        const rr = st.ch * 0.5 * (0.4 + 0.75 * m) * (1 - Math.min(1, h * 4) * 0.4);
-        dots.moveTo(x + rr, yy); dots.arc(x, yy, rr, 0, 6.2832);
+        ctx.fillText(DEPTH[Math.min(DEPTH.length - 1, Math.floor(m * DEPTH.length))], x, yy);
         continue;
       }
       ctx.fillText(RAMP[idx], x, yy);
     }
   }
-  ctx.fill(dots);
 }
 
 /* the loop runs only while the wake is warm or the hand is moving */
@@ -325,7 +321,7 @@ function run() {
     if (st.tick > 0.07) { st.tick = 0; st.deal++; }
     /* the resting characters keep changing while the hand is here too */
     st.churn = (st.churn || 0) + dt;
-    if (st.churn > 0.1) { st.churn = 0; redeal(); }
+
     push(dt);
     paint();
     const still = warm === 0 && !st.rings.length && !st.moving && Math.abs((st.inside ? 1 : 0) - st.near) < 0.004;
@@ -420,8 +416,6 @@ let vis = true;
 try { new IntersectionObserver((e) => { vis = e[0].isIntersecting; }).observe(canvas); } catch (err) {}
 if (!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches)) setInterval(() => {
   if (!vis || document.hidden || st.raf || !st.base.length) return;
-  redeal(); st.deal++;
-  paint();
 }, 100);
 
 init();

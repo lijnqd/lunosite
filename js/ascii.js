@@ -10,7 +10,7 @@ function load(url){if(!cache[url])cache[url]=fetch(url).then(function(r){return 
   return ''});return cache[url]}
 function run(el){var src=el.getAttribute('data-src'),q=(src.split('?')[1]||'');
   if(el.hasAttribute('data-mobile')&&innerWidth<810)q+=(q?'&':'')+el.getAttribute('data-mobile');
-  load(src.split('?')[0]+'?v=39').then(function(code){if(!code)return;
+  load(src.split('?')[0]+'?v=40').then(function(code){if(!code)return;
     var cv=document.createElement('canvas');cv.setAttribute('aria-hidden','true');el.appendChild(cv);
     code=code.replace("document.getElementById('canvas')","__cv").replace("document.getElementById('container')","__cv.parentElement").replace(/location\.search/g,'__qs').replace(/parent\.innerWidth/g,'window.innerWidth');
     code+="\n;if(typeof checkContainer==='function')checkContainer();";var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,n=0,
