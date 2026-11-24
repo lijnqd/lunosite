@@ -1363,3 +1363,15 @@ html,body{overflow-x:clip}
  .bh-row{flex-direction:column;align-items:stretch;margin-top:24px}.bh-row img{width:100%;height:auto;aspect-ratio:306/392}
  .bh-t{width:auto;font-size:16px}.bh-s{margin-top:8px}
 }
+/* quote signature keeps its capitals */
+.quote .author .sig{text-transform:none}
+/* blog: the ascii cover back to the full content width */
+.post .p-cover{max-width:none}
+/* about #behind lunö: no plate, beige on the page; photo ends and text starts at the centre line */
+.bh{background:none;color:var(--beige);padding:0 20px}
+.bh .label{color:var(--beige)}
+.bh-p{color:var(--pink)}
+.bh-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.bh-row img{justify-self:end}
+.bh-t{justify-self:start}
+@media (max-width:809px){.bh{padding:0}.bh-row{grid-template-columns:1fr;margin-top:24px}.bh-row img{justify-self:stretch}}
