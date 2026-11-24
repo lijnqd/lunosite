@@ -1,27 +1,71 @@
-/* luna, the hero cat: her eyes follow the cursor, her head sways after it, she breathes;
-   left alone for a while she dozes off ("zzz…") until the pointer moves again.
-   Runs only while the hero is on screen. Reduced motion: eyes only, no sway. */
+/* luna, the hero cat, drawn in glyphs. Her picture (fur, eyes, pupils on their own layers) is sampled
+   into a grid; each cell gets a glyph by how dark it is: dotted tiles for the darkest parts, then
+   # % * + = : . — two tones, one colour, no noise. Her pupils follow the cursor (the grid is redrawn
+   only when they move), her head sways after it, she breathes; left alone she dozes ("zzz…").
+   Runs only while the hero is on screen. Reduced motion: eyes only. */
 (function(){var w=document.querySelector('.hero-c .cat');if(!w)return;
-var pet=w.querySelector('.cat-pet'),ir=w.querySelectorAll('.cat-iris'),say=w.querySelector('.cat-say'),txt=say.firstChild;
-var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,ACTIVE='Luna, head of the studio',IDLE='zzz…';
-var mx=0,my=0,has=false,px=0,py=0,vx=0,vy=0,ex=0,ey=0,last=performance.now(),asleep=false,vis=true,raf=0,t0=performance.now();
+var pet=w.querySelector('.cat-pet'),cv=w.querySelector('.cat-cv'),say=w.querySelector('.cat-say'),txt=say.firstChild;
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,ACTIVE='Luna, head of the studio',IDLE='zzz…',INK='#141414';
+var SW=780,SH=770,P=[[192,403],[497,403]],PS=103;/* source layout (see the svg in the markup) */
+var srcs=['/assets/img/cat/eyes.webp','/assets/img/cat/pupil-0.webp','/assets/img/cat/pupil-1.webp','/assets/img/cat/base.webp'],ims=[];
+var mx=0,my=0,has=false,px=0,py=0,vx=0,vy=0,ex=0,ey=0,dex=1e9,dey=1e9,last=performance.now(),asleep=false,vis=true,raf=0,t0=performance.now(),born=0;
+var x=cv.getContext('2d'),sm=document.createElement('canvas'),sx=sm.getContext('2d',{willReadFrequently:true}),DPR=Math.min(2,devicePixelRatio||1);
+var W=0,H=0,cw=0,ch=0,cols=0,rows=0,SS=4,tiles=[],ord=null,TH=null;
+var G=['.',':','=','+','*','%','#'];
+function hash(k){var h=(k*374761393)|0;h=Math.imul(h^(h>>>13),1274126177);return((h^(h>>>16))>>>0)/4294967296}
+function tile(dense){var c=document.createElement('canvas'),q=c.getContext('2d');c.width=Math.ceil(cw*DPR);c.height=Math.ceil(ch*DPR);q.scale(DPR,DPR);
+ var ix=cw*.08,iy=ch*.1;q.fillStyle=INK;q.beginPath();q.roundRect?q.roundRect(ix,iy,cw-2*ix,ch-2*iy,1.2):q.rect(ix,iy,cw-2*ix,ch-2*iy);q.fill();
+ /* a regular dot pattern punched out of the block, finer in the dense tile */
+ q.globalCompositeOperation='destination-out';var st=dense?2.6:2.2,r=dense?.45:.7;
+ for(var yy=iy+st/2;yy<ch-iy;yy+=st)for(var xx=ix+st/2+((Math.round(yy/st)%2)*st/2);xx<cw-ix;xx+=st){q.beginPath();q.arc(xx,yy,r,0,6.283);q.fill()}
+ return c}
+function size(){var r=w.getBoundingClientRect();W=r.width;H=r.height;if(!W)return;
+ ch=Math.max(10,Math.round(W/36));TH=null;cw=ch*.72;cols=Math.floor(W/cw);rows=Math.floor(H/ch);
+ cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);sm.width=cols*SS;sm.height=rows*SS;
+ tiles=[tile(true),tile(false)];ord=new Float32Array(cols*rows);for(var k=0;k<ord.length;k++)ord[k]=hash(k+7);dex=1e9}
+function render(now){
+ sx.setTransform(1,0,0,1,0,0);sx.clearRect(0,0,sm.width,sm.height);sx.setTransform(sm.width/SW,0,0,sm.height/SH,0,0);
+ sx.drawImage(ims[0],0,0,SW,SH);sx.drawImage(ims[1],P[0][0]+ex,P[0][1]+ey,PS,PS);sx.drawImage(ims[2],P[1][0]+ex,P[1][1]+ey,PS,PS);sx.drawImage(ims[3],0,0,SW,SH);
+ var d=sx.getImageData(0,0,sm.width,sm.height).data,N=SS*SS,ox=(W-cols*cw)/2,oy=(H-rows*ch)/2,intro=RM?1:Math.min(1,(now-born)/900);
+ x.setTransform(DPR,0,0,DPR,0,0);x.clearRect(0,0,W,H);x.fillStyle=INK;x.textAlign='center';x.textBaseline='middle';x.font='500 '+Math.round(ch*.92)+"px 'Sometype Mono',monospace";
+ var Ds=new Float32Array(cols*rows).fill(-1);
+ for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var a=0,l=0;
+  for(var v=0;v<SS;v++)for(var u=0;u<SS;u++){var o=((j*SS+v)*sm.width+i*SS+u)*4,al=d[o+3]/255;a+=al;l+=al*(d[o]*.3+d[o+1]*.59+d[o+2]*.11)/255}
+  a/=N;if(a<.4)continue;Ds[j*cols+i]=1-l/(a*N)}
+ /* levels by rank, not by raw value: the fur is mostly mid grey, so raw values would make it all
+    blocks. Only the darkest tenth (outline, pupils, nose) becomes tiles; the rest spreads over the glyphs */
+ if(!TH){var vs=[].slice.call(Ds).filter(function(v){return v>=0}).sort(function(p,q){return p-q}),Q=function(f){return vs[Math.min(vs.length-1,Math.floor(vs.length*f))]};
+  TH={t0:Q(.9),t1:Q(.8),g:[Q(.12),Q(.24),Q(.36),Q(.48),Q(.58),Q(.68),Q(.8)]}}
+ for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var D=Ds[j*cols+i];if(D<0)continue;
+  if(intro<1&&ord[j*cols+i]>intro)continue;
+  var cx=ox+i*cw,cy=oy+j*ch;
+  if(D>=TH.t0){x.globalAlpha=1;x.drawImage(tiles[0],cx,cy,cw,ch);continue}
+  if(D>=TH.t1){x.globalAlpha=1;x.drawImage(tiles[1],cx,cy,cw,ch);continue}
+  var g=0;while(g<6&&D>=TH.g[g+1])g++;if(D<TH.g[0])continue;
+  x.globalAlpha=g>=4?1:.55;x.fillText(G[g],cx+cw/2,cy+ch/2)}
+ x.globalAlpha=1;return intro<1}
 function setSay(a){if(asleep===a)return;asleep=a;say.classList.add('pop');setTimeout(function(){txt.textContent=a?IDLE:ACTIVE;say.classList.remove('pop')},120)}
-function wake(x,y){mx=x;my=y;has=true;last=performance.now();setSay(false);go()}
+function wake(cx,cy){mx=cx;my=cy;has=true;last=performance.now();setSay(false);go()}
 addEventListener('pointermove',function(e){wake(e.clientX,e.clientY)},{passive:true});
 addEventListener('pointerdown',function(e){wake(e.clientX,e.clientY)},{passive:true});
-function frame(now){raf=0;if(!vis)return;
+function frame(now){raf=0;if(!vis||!W)return;
  if(now-last>7000)setSay(true);
  var r=w.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height*.58,tx=0,ty=0,lx=0,ly=0;
- if(has&&!asleep){var dx=mx-cx,dy=my-cy,d=Math.sqrt(dx*dx+dy*dy)||1,k=Math.min(1,d/(r.width*.45));lx=dx/d*k;ly=dy/d*k;
-  var R=r.width*.06,f=Math.min(1,d/(r.width*1.6));tx=dx/d*f*R;ty=dy/d*f*R*.5}
+ if(has&&!asleep){var dx=mx-cx,dy=my-cy,dd=Math.sqrt(dx*dx+dy*dy)||1,k=Math.min(1,dd/(r.width*.45));lx=dx/dd*k;ly=dy/dd*k;
+  var R=r.width*.05,f=Math.min(1,dd/(r.width*1.6));tx=dx/dd*f*R;ty=dy/dd*f*R*.5}
  if(RM){tx=0;ty=0}
  vx+=(tx-px)*.045;vy+=(ty-py)*.045;vx*=.86;vy*=.86;px+=vx;py+=vy;
- var br=RM?0:Math.sin((now-t0)/(asleep?1500:900)),rot=Math.max(-6,Math.min(6,px/r.width*30+vx*.6));
- pet.style.transform='translate('+px.toFixed(2)+'px,'+(py+br*(asleep?2.5:1.2)).toFixed(2)+'px) rotate('+rot.toFixed(2)+'deg) scale('+(1+br*.006).toFixed(4)+','+(1-br*.006).toFixed(4)+')';
- /* asleep: the eyes drift down and in, as if half shut */
- var gx=asleep?0:lx*13,gy=asleep?6:ly*7;ex+=(gx-ex)*.2;ey+=(gy-ey)*.2;
- for(var i=0;i<ir.length;i++)ir[i].setAttribute('transform','translate('+ex.toFixed(2)+' '+ey.toFixed(2)+')');
+ var br=RM?0:Math.sin((now-t0)/(asleep?1500:900)),rot=Math.max(-5,Math.min(5,px/r.width*26+vx*.5));
+ pet.style.transform='translate('+px.toFixed(2)+'px,'+(py+br*(asleep?2.5:1.2)).toFixed(2)+'px) rotate('+rot.toFixed(2)+'deg)';
+ var gx=asleep?0:lx*14,gy=asleep?8:ly*8;ex+=(gx-ex)*.22;ey+=(gy-ey)*.22;
+ var busy=false;
+ /* redraw the glyphs only when the pupils have moved enough to change a cell */
+ if(Math.abs(ex-dex)>.8||Math.abs(ey-dey)>.8||now-born<950){dex=ex;dey=ey;busy=render(now)}
  raf=requestAnimationFrame(frame)}
-function go(){if(!raf&&vis)raf=requestAnimationFrame(frame)}
+function go(){if(!raf&&vis&&ims.length===4)raf=requestAnimationFrame(frame)}
+Promise.all(srcs.map(function(s){return new Promise(function(res,rej){var i=new Image();i.onload=function(){res(i)};i.onerror=rej;i.src=s})})).then(function(a){
+ ims=a;return document.fonts&&document.fonts.load?document.fonts.load("500 14px 'Sometype Mono'"):0}).then(function(){
+ size();born=performance.now();w.classList.add('asc');go()}).catch(function(){});
+addEventListener('resize',function(){size();go()});
 if('IntersectionObserver'in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting;go()}).observe(w);
-document.addEventListener('visibilitychange',function(){if(!document.hidden)go()});go()})();
+document.addEventListener('visibilitychange',function(){if(!document.hidden)go()})})();

@@ -1183,3 +1183,10 @@ html.scrolled .hdr-fade{opacity:1}
 @media (max-width:809px){.ab .tools{margin:-60px -12px;padding:36px 0}}
 /* case names keep their own spelling everywhere (SET, Beeyawn, ORTA, førm) */
 .cx-title,.cs-info b,.cs-name,.cl-bc h2{text-transform:none}
+/* the second button: beige, for secondary actions (behance, all cases, services) next to the pink main one */
+.btn-light{background:var(--beige);color:var(--bg);width:auto;padding:0 28px;white-space:nowrap;transition:transform .35s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
+.btn-light i{background:var(--pink)}
+@media (hover:hover){.btn-light:hover{background:var(--pink)}.btn-light:hover i{background:var(--bg)}}
+/* the cat drawn in glyphs: the canvas replaces the picture once it is ready (the picture stays as the no-js fallback) */
+.hero-c .cat-cv{position:absolute;inset:0;width:100%;height:100%;display:none}
+.hero-c .cat.asc .cat-cv{display:block}.hero-c .cat.asc .cat-svg{visibility:hidden}

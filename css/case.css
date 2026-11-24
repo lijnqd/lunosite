@@ -161,3 +161,14 @@ html,body{overflow-x:clip}
  .cx-nums{padding:24px 12px;grid-template-columns:1fr 1fr;gap:12px}.cx-num span{font-size:15px}.cx-nums-note{padding:0 12px}
 }
 .cx-bh .btn,.cx-more .head .btn{width:auto;padding:0 28px;white-space:nowrap}
+/* v3.1: screenshots are never cropped and never scroll. A long page is cut into columns laid side by side;
+   a short one sits at its own proportions; pairs keep theirs */
+.cx-pg{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:10px;margin:0}
+.pg-c{aspect-ratio:var(--ar);overflow:hidden;border-radius:16px;background:#1d1d1d}
+.pg-c img{display:block;width:100%;height:auto;transform:translateY(calc(-100% * var(--k) / var(--n)))}
+.cx-full .cx-img.cx-one{aspect-ratio:auto;max-width:1000px;margin:0 auto}
+.cx-full .cx-one img{height:auto;object-fit:initial}
+.cx-full .cx-pair{align-items:start}
+.cx-full .cx-pair .cx-img{aspect-ratio:auto}
+.cx-full .cx-pair .cx-img img{height:auto;object-fit:initial}
+@media (max-width:809px){.cx-pg{grid-template-columns:repeat(min(var(--n),2),minmax(0,1fr));gap:6px}.pg-c{border-radius:10px}.cx-full .cx-pair{grid-template-columns:1fr 1fr;gap:6px}}
