@@ -39,10 +39,6 @@ d.addEventListener('click',function(e){
 },false);
 /* menu items scramble into place on hover, the same glyphs as everywhere else */
 if(matchMedia('(hover:hover) and (pointer:fine)').matches)d.querySelectorAll('.nav a,.f-cols a').forEach(function(a){a.addEventListener('mouseenter',function(){window.pxScramble&&pxScramble(a,360)})});
-/* magnetic main buttons: they lean a few pixels toward the pointer and settle back */
-if(matchMedia('(hover:hover) and (pointer:fine)').matches)d.querySelectorAll('.btn-pink,.btn-dark').forEach(function(b){
- b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;b.style.transform='translate('+(x*10).toFixed(1)+'px,'+(y*8).toFixed(1)+'px)'});
- b.addEventListener('mouseleave',function(){b.style.transform=''})});
 /* a case cover flies into the case page (cross-document view transition, chrome and safari) */
 d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="/cases/"],a[href^="cases/"]');if(!a)return;
  var im=a.matches('.wk-media')?a.querySelector('img.top')||a.querySelector('img.on'):a.querySelector('img');

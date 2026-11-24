@@ -1321,3 +1321,15 @@ html,body{overflow-x:clip}
 .post .p-cover img,.post .p-fig img{display:block;width:100%;height:auto}
 .post .p-fig{margin:28px 0;border-radius:var(--r-in);overflow:hidden;border:1px solid rgba(242,231,220,.12)}
 @media (min-width:1200px){.post .pc:has(.p-fig){max-width:680px}}
+/* one case plate everywhere (home stack, more cases, cases page): dark glass that reads on any cover */
+.cs-info,.cs-full .cs-top,.dg-plate{background:rgba(20,20,20,.55);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-radius:var(--r-in);color:var(--beige)}
+.cs-info b,.cs-full .cs-name,.dg-plate b{color:var(--pink)}
+@media (max-width:809px){.cs-info,.cs-full .cs-top,.dg-plate{background:rgba(18,18,18,.82);backdrop-filter:none;-webkit-backdrop-filter:none}}
+/* cases page: less air under the title, bigger cards */
+.casesp .dg{margin-top:-170px}
+.dg-card{width:min(700px,46vw);margin:calc(min(700px,46vw) * -11.4 / 32) 0 0 calc(min(700px,46vw) / -2)}
+.dg-plate{width:min(380px,calc(100% - 40px))}
+/* about: the tapes keep the usual 140 to the blocks around them */
+.ab .tools{margin-top:0!important;margin-bottom:0!important;padding:0}
+@media (max-width:809px){.ab .stack{gap:80px!important}.ab .tools{margin-top:-20px!important;margin-bottom:-20px!important}}
+@media (max-width:809px){.casesp .dg{margin-top:28px}}
