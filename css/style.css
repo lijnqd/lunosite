@@ -1190,3 +1190,16 @@ html.scrolled .hdr-fade{opacity:1}
 /* the cat drawn in glyphs: the canvas replaces the picture once it is ready (the picture stays as the no-js fallback) */
 .hero-c .cat-cv{position:absolute;inset:0;width:100%;height:100%;display:none}
 .hero-c .cat.asc .cat-cv{display:block}.hero-c .cat.asc .cat-svg{visibility:hidden}
+/* about tapes: edge to edge across the whole window (never cut at the sides) */
+.ab .tools{overflow:visible;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);width:100vw;max-width:none;padding:0}
+.ab .tools .tl-r{width:120vw;margin-left:-10vw}
+.ab .tools{margin-top:-33px;margin-bottom:-33px}
+@media (max-width:809px){.ab .tools{margin-top:-60px;margin-bottom:-60px}}
+/* one glass for the whole site: every see-through card is the same tint and the same blur;
+   where a card must be opaque (stacking, under images) it uses that same glass colour, solid */
+:root{--glass:rgba(242,231,220,.05);--glass-blur:blur(20px);--surface:#1f1f1e}
+.card,.acard,.sv-card,.st-dark,.cs-info,.wk-list,.exp-card,.cs-stat,.cx-num-card{background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur)}
+.exp-card{border-color:transparent}
+.menu-btn,.cs-card,.wk-media,.cs-full,.cx-cover,.cx-img,.cx-next,.cx-ba,.pg-c{background-color:var(--surface)}
+@media (max-width:809px){.sv-card{background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none}.menu-btn{background:var(--surface)}}
+html,body{overflow-x:clip}
