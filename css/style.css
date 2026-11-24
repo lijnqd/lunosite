@@ -1463,3 +1463,22 @@ body .contacts .c-card{top:128px}
 .cwall .dg-card:hover .dg-plate p,.cwall .dg-card:focus-visible .dg-plate p{max-height:60px;opacity:1;margin-top:8px}
 @media (max-width:1199px){.cwall .dg-card{grid-column:span 6!important;height:clamp(260px,34vw,380px)}}
 @media (max-width:809px){.cwall{margin-top:28px}.cw-grid{grid-template-columns:1fr}.cwall .dg-card{grid-column:auto!important;height:auto;aspect-ratio:16/11}.cwall .dg-plate{left:10px;right:auto;bottom:10px;width:auto;padding:12px 16px}.cwall .dg-plate b{font-size:28px;padding-right:22px}.cwall .dg-plate em{margin-top:6px}.cwall .dg-dot{right:14px;top:14px}}
+/* case plates: names beige, pink on hover; the dot pulses */
+.cwall .dg-plate b,.csp-grid .cs-info b{color:var(--beige);transition:color .3s}
+.cwall .dg-card:hover .dg-plate b,.csp-grid .cs-card:hover .cs-info b{color:var(--pink)}
+.dg-dot,.cs-dot{animation:cdot 1.6s ease-in-out infinite}
+.dg-card:hover .dg-dot,.cs-card:hover .cs-dot{animation-duration:.9s}
+@keyframes cdot{50%{transform:scale(1.7);opacity:.45}}
+@media (prefers-reduced-motion:reduce){.dg-dot,.cs-dot{animation:none}}
+/* phones: the case caption sits under the cover, so nothing hides the picture */
+@media (max-width:809px){
+ .cwall .dg-card{display:flex;flex-direction:column;aspect-ratio:auto;height:auto;background:var(--glass)}
+ .cwall .dg-card img{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:var(--r) var(--r) 0 0}
+ .cwall .dg-plate{position:relative;left:auto;bottom:auto;width:auto;margin:0;padding:16px 20px 20px;border-radius:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+ .cwall .dg-plate b{color:var(--pink)}
+ .csp-grid .cs-card{display:flex;flex-direction:column;height:auto;aspect-ratio:auto;background:var(--glass)}
+ .csp-grid .cs-card picture{display:contents}
+ .csp-grid .cs-card img{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+ .csp-grid .cs-info{position:relative;left:auto;bottom:auto;width:auto;max-width:none;padding:16px 20px 20px;border-radius:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+ .csp-grid .cs-info b{color:var(--pink)}
+}
