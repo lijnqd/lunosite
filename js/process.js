@@ -25,14 +25,14 @@ function paint(o,on,now){if(!o.g)return;var x=o.cv.getContext('2d'),ch=o.cell*1.
 function size(){R=parseFloat(getComputedStyle(drum).getPropertyValue('--r'))||190;nums.forEach(build);var now=performance.now();nums.forEach(function(o,i){paint(o,i===act,now)})}
 function frame(now){raf=0;if(!vis)return;
  var r=sec.getBoundingClientRect(),z=r.height/(sec.offsetHeight||1)||1,sh=sec.querySelector('.pw-stage').offsetHeight*z,span=Math.max(1,r.height-sh),top=(innerHeight-sh)/2;
- var tp=Math.max(0,Math.min(1,(top-r.top)/span))*n;ep+=(tp-ep)*.14;if(Math.abs(tp-ep)<.001)ep=tp;
+ var tp=Math.max(0,Math.min(1,(top-r.top)/span))*(n-1);ep+=(tp-ep)*.14;if(Math.abs(tp-ep)<.001)ep=tp;
  var a=((Math.round(ep)%n)+n)%n;
  if(a!==act){if(act>=0){st[act].classList.remove('on');paint(nums[act],false,now)}act=a;st[a].classList.add('on')}
  /* the steps ride a big dial whose centre is far to the left: the front step sits furthest right
     and level; the ones above and below swing left along the arc and tilt with it (top one leans up,
     bottom one leans down). The order wraps, so after the last step the first comes round again */
  var Rd=innerWidth<810?760:1150,stepA=10;
- for(var i=0;i<n;i++){var off=i-ep;off=((off%n)+n)%n;if(off>n/2)off-=n;var ang=off*stepA,rad=ang*Math.PI/180,ao=Math.abs(off);
+ for(var i=0;i<n;i++){var off=i-ep;var ang=off*stepA,rad=ang*Math.PI/180,ao=Math.abs(off);
   st[i].style.transform='translate('+((Math.cos(rad)-1)*Rd*(innerWidth<810?.6:3)).toFixed(1)+'px,'+(Math.sin(rad)*Rd).toFixed(1)+'px) rotate('+ang.toFixed(2)+'deg)';
   st[i].style.opacity=ao>1.5?0:Math.max(0,1-ao*.58).toFixed(3);st[i].style.visibility=ao>1.5?'hidden':'visible';st[i].style.setProperty('--po',Math.max(.35,1-ao*.65).toFixed(3))}
  if(now-last>120){paint(nums[act],true,now);last=now}
