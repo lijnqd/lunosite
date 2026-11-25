@@ -23,7 +23,7 @@ function frame(){
  var M=innerWidth<810,LH=mq.offsetHeight*(M?0.6:0.95),tx=-(p*0.55+q*0.08)*mw/3,vw=innerWidth,zz=z(),amp=1-ease(cl((p-0.04)/0.32));
  letters.forEach(function(l,k){var x=(lx[k]||0)*zz+tx,u=cl((x-vw*.18)/(vw*.8));if(RM)u=0;
   var y=(Math.pow(u,1.35)*1.7+Math.sin(u*Math.PI)*.18*u)*amp*LH;l.style.transform='translate3d(0,'+y.toFixed(1)+'px,0)'});
- cards.forEach(function(c,i){var t=RM?1:M?ease(cl((p-0.08-i*0.27)/0.26)):ease(cl((p-0.05-i*0.13)/0.42));c.style.transform='translate3d(0,'+((1-t)*vh/z()*0.95).toFixed(1)+'px,0)'});
+ cards.forEach(function(c,i){var t=RM?1:M?ease(cl((p+0.02-i*0.27)/0.26)):ease(cl((p-0.05-i*0.13)/0.42));c.style.transform='translate3d(0,'+((1-t)*vh/z()*(M&&i===0?0.42:0.95)).toFixed(1)+'px,0)'});
 }
 var tick=false;function req(){if(!tick){tick=true;requestAnimationFrame(function(){tick=false;frame()})}}
 addEventListener('scroll',req,{passive:true});var lw=innerWidth;addEventListener('resize',function(){if(innerWidth<810&&innerWidth===lw){req();return}lw=innerWidth;size();req()});
