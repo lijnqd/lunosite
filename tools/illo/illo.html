@@ -1,19 +1,18 @@
 <!doctype html><html><head><meta charset="utf-8">
-<!-- lunö blog illustration template: 1200x750, dark background, pink accent, Instrument Serif + Inter,
+<!-- lunö blog illustration template: 1200x750, dark background, pink accent, Redaction 35 + Inter,
      ascii in Sometype Mono. Open illo.html#<id> to see one; tools/illo/render.js exports them all. -->
 <style>
 @font-face{font-family:Inter;font-weight:100 900;src:url(/assets/fonts/inter-latin-wght-normal.woff2) format('woff2')}
 @font-face{font-family:'Sometype Mono';src:url(/assets/fonts/sometype-mono-latin-500-normal.woff2) format('woff2')}
-@font-face{font-family:'Instrument Serif';src:url(/assets/fonts/redaction-35-latin-400-normal.woff2) format('woff2')}
-@font-face{font-family:'Instrument Serif';font-style:italic;src:url(/assets/fonts/redaction-35-latin-400-italic.woff2) format('woff2')}
-@font-face{font-family:'Saint Delafield';src:url(/assets/fonts/mrs-saint-delafield-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Redaction 35';src:url(/assets/fonts/redaction-35-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Redaction 35';font-style:italic;src:url(/assets/fonts/redaction-35-latin-400-italic.woff2) format('woff2')}
 :root{--bg:#141414;--beige:#F2E7DC;--pink:#FFB3AD;--glass:rgba(242,231,220,.05);--line:rgba(242,231,220,.12)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#000;font-family:Inter,sans-serif;color:var(--beige)}
 .art{position:relative;width:1200px;height:750px;background:var(--bg);overflow:hidden}
 .tag{position:absolute;left:40px;top:34px;font-size:16px;color:var(--pink);letter-spacing:-.01em}
-.foot{position:absolute;right:40px;top:34px;font-family:'Instrument Serif';font-size:22px;color:rgba(242,231,220,.5)}
-.sf{font-family:'Instrument Serif';font-weight:400;letter-spacing:-.01em}
+.foot{position:absolute;right:40px;top:34px;font-family:'Redaction 35';font-size:22px;color:rgba(242,231,220,.5)}
+.sf{font-family:'Redaction 35';font-weight:400;letter-spacing:-.01em}
 .pane{position:absolute;top:96px;bottom:40px;width:550px;border-radius:20px;background:var(--glass);border:1px solid var(--line);padding:32px}
 .pane.l{left:40px}.pane.r{right:40px}
 .verdict{display:flex;align-items:center;gap:12px;font-size:18px}
@@ -87,7 +86,7 @@ function cover(id,icon,tag){const a=$(frame(`<canvas class="asc" width="2400" he
 function fonts(){return frame(`
  <div class="pane l"><div class="verdict no"><i>✕</i>five fonts</div>
   <div style="margin-top:34px;display:flex;flex-direction:column;gap:14px">
-   <div style="font-family:'Saint Delafield';font-size:64px;line-height:1">Bloom Studio</div>
+   <div style="font-family:'Redaction 35';font-style:italic;font-size:56px;line-height:1">Bloom Studio</div>
    <div style="font-family:Impact,'Arial Black',sans-serif;font-weight:900;font-size:40px;text-transform:uppercase;letter-spacing:.02em">Grand opening</div>
    <div style="font-family:'Sometype Mono';font-size:22px">// 20% off this week</div>
    <div style="font-family:Georgia,serif;font-style:italic;font-size:30px">handmade with love</div>
@@ -241,6 +240,6 @@ const ALL={
  'scheme-first-screen':()=>add('scheme-first-screen',wire()),'shot-before':()=>add('shot-before',shot(false)),'shot-after':()=>add('shot-after',shot(true)),
  's-logo-vs-identity':()=>add('s-logo-vs-identity',logoVs()),'s-guideline':()=>add('s-guideline',guide()),'s-package':()=>add('s-package',pack()),'s-mobile':()=>add('s-mobile',mobile()),'s-competitors':()=>add('s-competitors',twins()),'s-brief':()=>add('s-brief',brief()),'s-explain':()=>add('s-explain',explain()),'s-ai':()=>add('s-ai',ai()),'s-freelancer':()=>add('s-freelancer',three()),'s-timeline':()=>add('s-timeline',timeline())};
 function add(id,h){const e=$(h);e.id=id;document.getElementById('stage').append(e)}
-document.fonts.load("500 17px 'Sometype Mono'").then(()=>Promise.all(["40px 'Instrument Serif'","40px 'Saint Delafield'","16px Inter"].map(f=>document.fonts.load(f)))).then(()=>{
+document.fonts.load("500 17px 'Sometype Mono'").then(()=>Promise.all(["40px 'Redaction 35'","16px Inter"].map(f=>document.fonts.load(f)))).then(()=>{
  const only=location.hash.slice(1);Object.keys(ALL).forEach(k=>{if(!only||only===k)ALL[k]()});window.READY=Object.keys(ALL)});
 </script></body></html>
