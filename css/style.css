@@ -1564,3 +1564,10 @@ body .contacts .c-card{top:128px}
  .bh-p{display:none}
  .bh-q{font-size:36px;line-height:1.1;padding:0 4px}
 }
+@media (max-width:809px){
+ /* footer: main and pages side by side */
+ .f-cols{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:18px}
+ .f-cols>div:nth-child(n+3){grid-column:1 / -1}
+ /* contacts: the wordmark half out of the card */
+ body .contacts .c-card{margin-top:-28px}
+}
