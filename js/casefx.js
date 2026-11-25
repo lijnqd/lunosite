@@ -16,7 +16,7 @@ if(im){var cv=document.createElement('canvas'),x=cv.getContext('2d');cv.classNam
    x.fillStyle=cell<15?col:'rgba(242,231,220,'+(.25+L*.7).toFixed(2)+')';x.fillText(g,i*cell+cell/2,j*ch+ch/2)}}
  var dec=im.decode?im.decode().catch(function(){}):Promise.resolve(),fnt=document.fonts&&document.fonts.load?document.fonts.load('12px '+MONO).catch(function(){}):Promise.resolve();
  Promise.all([dec,fnt]).then(async function(){if(!im.naturalWidth){cv.remove();return}
-  for(var s of [24,15,9,5]){paint(s);await wait(170)}cv.classList.add('out');setTimeout(function(){cv.remove()},500)});
+  for(var s of [24,15,9,5]){paint(s);await wait(120)}cv.classList.add('out');setTimeout(function(){cv.remove()},500)});
  setTimeout(function(){if(cv.isConnected&&!cv.classList.contains('out')){cv.classList.add('out');setTimeout(function(){cv.remove()},500)}},4000)}
 /* 2. result numbers count up from zero */
 [].slice.call(document.querySelectorAll('.cx-num b')).forEach(function(b){var t=b.textContent.trim(),m=t.match(/^(\D*)([\d,]+(?:\.\d+)?)(.*)$/);if(!m)return;
