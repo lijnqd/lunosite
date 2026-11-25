@@ -1506,3 +1506,41 @@ body .contacts .c-card{top:128px}
  .rq-case{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;margin-right:-4px}
  .footer a,.f-legal a{min-height:40px;display:inline-flex;align-items:center}
 }
+/* ---- phone pass ---- */
+@media (max-width:809px){
+ /* footer links back in a column, still 40px tall to tap */
+ .f-cols a{display:flex}
+ /* contacts: the wordmark sinks a bit more under the card */
+ body .contacts .c-card{margin-top:-38px}
+ /* cases page and more cases: no grey plate, the caption sits on the page */
+ .cwall .dg-card,.csp-grid .cs-card{background:none}
+ .cwall .dg-card img,.csp-grid .cs-card img{border-radius:var(--r)}
+ .cwall .dg-plate,.csp-grid .cs-info{padding:14px 4px 8px}
+ .cwall .dg-dot{right:6px;top:auto;bottom:62px}
+ /* home cases: cards stack over each other, the whole cover is visible */
+ .cs-full{position:sticky!important;top:calc(64px + var(--i) * 10px);aspect-ratio:auto!important;height:auto;display:flex;flex-direction:column;padding:0;margin-bottom:24px;background:#1b1b1b;transform-origin:50% 0}
+ .cs-full:after{display:block}
+ .cs-full .cs-img{position:relative!important;inset:auto!important;aspect-ratio:16/9;border-radius:0}
+ .cs-full .cs-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#141414}
+ .cs-full .cs-top{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;width:auto;min-height:0;padding:18px 20px 20px;border-radius:0;background:#1b1b1b!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ /* process: heading fully visible, fade only on the drum, steps spaced out */
+ .pw-stage{-webkit-mask-image:none;mask-image:none}
+ .pw-drum{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 22%,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 22%,#000 78%,transparent 100%);--r:230px}
+ .pw-left .label{margin-bottom:16px}
+ .pw-c h3{font-size:30px}
+ /* about brackets: tall enough to hold the quote */
+ .bh-q{padding:0 40px}
+ .bh-p{font-size:190px;left:-34px;transform:translateY(-52%)}
+ .bh-p.r{right:-34px}
+}
+/* numbers: four results go two per row so wide ones never touch */
+.cx-nums:has(.cx-num:nth-child(4)){grid-template-columns:1fr 1fr;column-gap:40px;row-gap:40px}
+/* reviews: avatar and name, the case link under them on the left, same on every card */
+.rq figcaption{display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:14px;align-items:center;flex-wrap:nowrap}
+.rq-case{grid-column:1 / -1;justify-self:start;margin-left:0}
+@media (max-width:809px){.rq-case{min-height:32px;margin:-6px 0 -6px -4px;padding:0 4px}}
+@media (max-width:809px){
+ .cs-full .cs-img{order:-1}
+ .pw-list{top:32%}
+ .process.pw{--sh:480px}
+}
