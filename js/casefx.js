@@ -18,20 +18,11 @@ if(im){var cv=document.createElement('canvas'),x=cv.getContext('2d');cv.classNam
  Promise.all([dec,fnt]).then(async function(){if(!im.naturalWidth){cv.remove();return}
   for(var s of [24,15,9,5]){paint(s);await wait(170)}cv.classList.add('out');setTimeout(function(){cv.remove()},500)});
  setTimeout(function(){if(cv.isConnected&&!cv.classList.contains('out')){cv.classList.add('out');setTimeout(function(){cv.remove()},500)}},4000)}
-/* 2. result numbers */
+/* 2. result numbers count up from zero */
 [].slice.call(document.querySelectorAll('.cx-num b')).forEach(function(b){var t=b.textContent.trim(),m=t.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/);if(!m)return;
- var pre=m[1],end=parseFloat(m[2]),suf=m[3],c=document.createElement('canvas'),g=c.getContext('2d');c.className='cx-numcv';c.setAttribute('aria-hidden','true');b.classList.add('asc');b.appendChild(c);
- function draw(txt){var fs=parseFloat(getComputedStyle(b).fontSize),ff=getComputedStyle(b).fontFamily,W=Math.ceil(b.offsetWidth),H=Math.ceil(b.offsetHeight*1.15),cell=Math.max(5,Math.round(fs/14)),chh=Math.round(cell*1.45);
-  if(c.width!==W*DPR){c.width=W*DPR;c.height=H*DPR;c.style.width=W+'px';c.style.height=H+'px'}
-  var o=document.createElement('canvas');o.width=W;o.height=H;var p=o.getContext('2d',{willReadFrequently:true});p.font='400 '+fs+'px '+ff;p.textBaseline='alphabetic';p.fillStyle='#000';p.fillText(txt,0,fs*.82);
-  var d=p.getImageData(0,0,W,H).data;g.setTransform(DPR,0,0,DPR,0,0);g.clearRect(0,0,W,H);g.font=Math.round(chh*1.05)+'px '+MONO;g.textAlign='center';g.textBaseline='middle';g.fillStyle=PINK;
-  for(var y=0;y<H;y+=chh)for(var xx=0;xx<W;xx+=cell){var s=0,n=0;for(var yy=y;yy<y+chh&&yy<H;yy+=2)for(var x2=xx;x2<xx+cell&&x2<W;x2+=2){s+=d[(yy*W+x2)*4+3];n++}var a=s/n/255;if(a<.12)continue;
-   g.fillText(RAMP[Math.min(9,3+Math.round(a*6))],xx+cell/2,y+chh/2)}}
- var done=false;function run(){if(done)return;done=true;var t0=performance.now(),dec=(m[2].split('.')[1]||'').length;
-  (function f(now){var k=Math.min(1,(now-t0)/1300),e=1-Math.pow(1-k,3);draw(pre+(end*e).toFixed(dec)+suf);if(k<1)requestAnimationFrame(f)})(t0)}
- (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){draw(pre+(0).toFixed((m[2].split('.')[1]||'').length)+suf);
-  new IntersectionObserver(function(es,io){if(es[0].isIntersecting){io.disconnect();setTimeout(run,250)}},{threshold:.4}).observe(b)});
- addEventListener('resize',function(){if(done)draw(t)})});
+ var pre=m[1],end=parseFloat(m[2]),suf=m[3],dec=(m[2].split('.')[1]||'').length;b.style.minWidth=b.offsetWidth+'px';b.textContent=pre+(0).toFixed(dec)+suf;
+ new IntersectionObserver(function(es,io){if(!es[0].isIntersecting)return;io.disconnect();var t0=performance.now();
+  (function f(now){var k=Math.min(1,(now-t0)/1300),e=1-Math.pow(1-k,3);b.textContent=pre+(end*e).toFixed(dec)+suf;if(k<1)requestAnimationFrame(f)})(t0)},{threshold:.4}).observe(b)});
 /* 3. screenshots: columns dissolve in one after another */
 var pgs=[].slice.call(document.querySelectorAll('.cx-pg.rv'));pgs.forEach(function(f){f.__px=1});
 if(pgs.length&&'IntersectionObserver'in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);var f=e.target;
