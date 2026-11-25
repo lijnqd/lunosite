@@ -2,7 +2,7 @@
    breaks into ascii glyphs and a lens follows the cursor: inside it the real cover shows through, its edge
    breaks into pixels. Leaving the grid brings the colour back. */
 (function(){if(!matchMedia('(hover:hover) and (pointer:fine)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-var cards=[].slice.call(document.querySelectorAll('.dg-card,.cs-card:not(.cs-full)'));if(cards.length<2)return;
+var cards=[].slice.call(document.querySelectorAll('.dg-card,.cs-card'));if(cards.length<2)return;
 var RAMP=' .:-=+*#%@',DPR=Math.min(2,devicePixelRatio||1),CELL=8,CH=11,R=160;
 function boxOf(c){return c.querySelector('.cs-img')||c}
 function imgOf(c){return boxOf(c).querySelector('img')}

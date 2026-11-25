@@ -26,7 +26,7 @@ addEventListener('resize',function(){to(cur,true)});
  /* a pink sheet like the hero: big serif items, then the contacts and the main button */
  m.innerHTML='<div class="mm-list">'+list.map(function(l,i){return '<a class="mm-i" href="'+l[0]+'" style="transition-delay:'+(60+i*40)+'ms"><span>'+l[1]+'</span><em>'+('0'+(i+1)).slice(-2)+'</em></a>'}).join('')+'</div>'+
   '<div class="mm-foot" style="transition-delay:'+(60+list.length*40)+'ms"><a class="btn btn-dark" href="'+(home?'#contacts':'/#contacts')+'"><i></i>discuss a project</a>'+
-  '<div class="mm-c"><a href="mailto:hey.lunostudio@gmail.com">hey.lunostudio@gmail.com</a><a href="https://wa.me/995599906542" target="_blank" rel="noopener">whatsapp</a><a href="https://t.me/dsgn_luno" target="_blank" rel="noopener">telegram</a><a href="https://www.instagram.com/dsgn.luno/" target="_blank" rel="noopener">instagram</a><a href="https://www.behance.net/dsgn_luno" target="_blank" rel="noopener">behance</a></div></div>';
+  '<div class="mm-c"><a href="mailto:hey@designluno.com">hey@designluno.com</a><a href="https://wa.me/995599906542" target="_blank" rel="noopener">whatsapp</a><a href="https://t.me/dsgn_luno" target="_blank" rel="noopener">telegram</a><a href="https://www.instagram.com/dsgn.luno/" target="_blank" rel="noopener">instagram</a><a href="https://www.behance.net/dsgn_luno" target="_blank" rel="noopener">behance</a></div></div>';
  var items=m.querySelectorAll('.mm-i');
  if(cur){var ci=links.indexOf(cur)+1;items[ci]&&items[ci].classList.add('cur')}else if(home)items[0].classList.add('cur');
  d.body.appendChild(m);

@@ -1422,7 +1422,7 @@ body.home .hc-h{letter-spacing:-0.025em}
 .pw-stage{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 24%,#000 76%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 24%,#000 76%,transparent 100%)}
 /* contacts: cöntact us sinks under the glass card, avatar + short bubble, softer fields */
 .contacts .wordmark.wm-t{z-index:0}
-.contacts .c-card{z-index:1;background:rgba(242,231,220,.05);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.contacts .c-card{z-index:1;background:rgba(242,231,220,.05);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
 body .contacts{height:757px}
 body .contacts .c-card{top:150px}
 #form input{height:50px;border-radius:20px;padding:0 20px;font-size:16px}
