@@ -52,5 +52,10 @@ Promise.all(items.map(function(it){return sample(it.dataset.icon)})).then(functi
 var mv=0;/* the glyphs shy away from the pointer and ripple while it moves */
 if(!RM&&matchMedia('(hover:hover)').matches){cv.parentNode.addEventListener('pointermove',function(ev){var r=cv.getBoundingClientRect();mx=(ev.clientX-r.left)*cv.__w/r.width;my=(ev.clientY-r.top)*cv.__h/r.height;hvT=1;mv=performance.now();req()});
  cv.parentNode.addEventListener('pointerleave',function(){hvT=0;req()})}
+/* each point is clickable: the page scrolls to where that point is active */
+items.forEach(function(it,i){it.style.cursor='pointer';if(!it.hasAttribute('tabindex'))it.setAttribute('tabindex','0');it.setAttribute('role','button');
+ function go(){var r=sec.getBoundingClientRect(),z=r.height/(sec.offsetHeight||1)||1,shv=sec.querySelector('.av-stage').offsetHeight*z,span=Math.max(1,r.height-shv),top0=(innerHeight-shv)/2,
+  y=scrollY+r.top-top0+(n>1?i/(n-1):0)*span+2;if(window.lenis&&lenis.scrollTo)lenis.scrollTo(y,{duration:.9});else scrollTo({top:y,behavior:RM?'auto':'smooth'})}
+ it.addEventListener('click',go);it.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
 addEventListener('scroll',req,{passive:true});addEventListener('resize',function(){size();req()});
 })();
