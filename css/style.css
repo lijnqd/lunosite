@@ -1555,3 +1555,19 @@ body .contacts .c-card{top:128px}
  .f-cols .f-h{margin-bottom:2px}
  .f-cols{gap:18px}
 }
+
+@media (max-width:809px){
+ /* home cases: every card the same height, so a card never peeks out from under the next one; no grey */
+ .cs-full{background:var(--bg)}
+ .cs-full .cs-img{aspect-ratio:16/9!important;border-radius:var(--r);overflow:hidden}
+ .cs-full .cs-img img{position:absolute!important;inset:0!important;width:100%;height:100%!important;object-fit:cover}
+ .cs-full .cs-top{background:var(--bg)!important;height:178px;padding:16px 4px 0}
+ .cs-full .cs-meta .cs-y{display:none}
+ .cs-full .cs-top .cs-dot,.cs-full .cs-top i.cs-dot.dm{right:8px;top:30px}
+ /* cases page: captions never clipped */
+ .cwall .dg-card{overflow:visible}
+ .cwall .dg-plate{padding-left:2px;padding-right:2px}
+ /* about: no brackets on phones, larger quote */
+ .bh-p{display:none}
+ .bh-q{font-size:36px;line-height:1.1;padding:0 4px}
+}
