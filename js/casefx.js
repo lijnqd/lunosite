@@ -19,10 +19,12 @@ if(im){var cv=document.createElement('canvas'),x=cv.getContext('2d');cv.classNam
   for(var s of [24,15,9,5]){paint(s);await wait(170)}cv.classList.add('out');setTimeout(function(){cv.remove()},500)});
  setTimeout(function(){if(cv.isConnected&&!cv.classList.contains('out')){cv.classList.add('out');setTimeout(function(){cv.remove()},500)}},4000)}
 /* 2. result numbers count up from zero */
-[].slice.call(document.querySelectorAll('.cx-num b')).forEach(function(b){var t=b.textContent.trim(),m=t.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/);if(!m)return;
- var pre=m[1],end=parseFloat(m[2]),suf=m[3],dec=(m[2].split('.')[1]||'').length;b.style.minWidth=b.offsetWidth+'px';b.textContent=pre+(0).toFixed(dec)+suf;
+[].slice.call(document.querySelectorAll('.cx-num b')).forEach(function(b){var t=b.textContent.trim(),m=t.match(/^(\D*)([\d,]+(?:\.\d+)?)(.*)$/);if(!m)return;
+ var pre=m[1],raw=m[2],end=parseFloat(raw.replace(/,/g,'')),suf=m[3],dec=(raw.split('.')[1]||'').length,grp=raw.indexOf(',')>-1;
+ function fmt(v){var s=v.toFixed(dec);if(grp){var p=s.split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');s=p.join('.')}return pre+s+suf}
+ b.textContent=fmt(0);
  new IntersectionObserver(function(es,io){if(!es[0].isIntersecting)return;io.disconnect();var t0=performance.now();
-  (function f(now){var k=Math.min(1,(now-t0)/1300),e=1-Math.pow(1-k,3);b.textContent=pre+(end*e).toFixed(dec)+suf;if(k<1)requestAnimationFrame(f)})(t0)},{threshold:.4}).observe(b)});
+  (function f(now){var k=Math.min(1,(now-t0)/1300),e=1-Math.pow(1-k,3);b.textContent=fmt(end*e);if(k<1)requestAnimationFrame(f)})(t0)},{threshold:.4}).observe(b)});
 /* 3. screenshots: columns dissolve in one after another */
 var pgs=[].slice.call(document.querySelectorAll('.cx-pg.rv'));pgs.forEach(function(f){f.__px=1});
 if(pgs.length&&'IntersectionObserver'in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);var f=e.target;

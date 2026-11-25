@@ -1499,3 +1499,10 @@ body .contacts .c-card{top:128px}
 .lnk:focus-visible{outline:1px solid var(--pink);outline-offset:4px;border-radius:4px}
 
 .p-cta-b .lnk{margin-left:16px}
+
+/* bigger tap areas on phones, looks the same */
+@media (max-width:809px){
+ .f-cols a{display:inline-flex;align-items:center;min-height:40px;padding:0}
+ .rq-case{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;margin-right:-4px}
+ .footer a,.f-legal a{min-height:40px;display:inline-flex;align-items:center}
+}
