@@ -9,7 +9,7 @@ import os, re, subprocess, sys, time, glob
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TERSER = sys.argv[1]
 # document order of the old deferred tags: lenis must precede smooth
-MODS = [('lenis.min', None), ('ascii', None), ('pixfx', None), ('nav', None), ('cursor', None),
+MODS = [('lenis.min', None), ('ascii', None), ('casefx', '.cx'), ('pixfx', None), ('nav', None), ('cursor', None),
         ('reviews', '#rqRow'), ('cases', '#csStack'), ('adv', '.adv.av'), ('services', '#services'),
         ('stats', '.stats'), ('case', '.cx-title'), ('main', '.hero'), ('cat', '.hero-c .cat'), ('awards', '.aw-list'), ('face', '.ab-face'), ('diag', '#dg'), ('casehover', None), ('blogcover', '.p-cover[data-icon]'), ('zoom', '.p-fig'), ('process', '.process.pw'), ('cookies', None),
         ('dotmorph', None), ('track', None), ('form', '#form'), ('faq', '.fq-grid'),

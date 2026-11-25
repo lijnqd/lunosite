@@ -1484,4 +1484,9 @@ body .contacts .c-card{top:128px}
 .p-next{margin-top:140px}
 @media (max-width:809px){.p-next{margin-top:80px}}
 /* industries: the dark tape is the same glass tone as the cards, not tinted by the pink one under it */
-.tl-dark{background:#1f1e1d;backdrop-filter:none;-webkit-backdrop-filter:none}
+.tl-dark{background:rgba(242,231,220,.05);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+
+@media (max-width:809px){br.dt{display:none}}
+/* blog: lower cover, the picture keeps its proportions inside */
+.post .p-cover{aspect-ratio:auto;height:clamp(260px,34vw,480px)}
+.post .p-cover img{width:100%;height:100%;object-fit:contain;background:#141414}

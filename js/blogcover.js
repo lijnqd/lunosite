@@ -41,11 +41,11 @@ fs.forEach(function(f){var icon=ICONS[f.dataset.icon];if(!icon)return;
  var W=0,H=0,mx=-1e4,my=-1e4,tx=-1e4,ty=-1e4,hv=0,ht=0,raf=0,vis=false,dx=new Float32Array(cols*rows),dy=new Float32Array(cols*rows);
  function size(){var rc=f.getBoundingClientRect(),z=rc.width/(f.offsetWidth||rc.width)||1;W=f.offsetWidth;H=f.offsetHeight;cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);draw()}
  function hash(k){return Math.abs(Math.sin(k*12.9898)*43758.5453)%1}
- function draw(){var sx=W/1200,sy=H/750,moving=false;x.setTransform(DPR,0,0,DPR,0,0);x.clearRect(0,0,W,H);x.textAlign='center';x.textBaseline='middle';x.font="500 "+Math.max(8,Math.round(17*sx))+"px 'Sometype Mono',monospace";
-  mx+=(tx-mx)*.15;my+=(ty-my)*.15;hv+=(ht-hv)*.08;var RR=W*.16;
-  for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var k=j*cols+i,c=cov[k],nr=near[k],h=hash(i*31+j*17),px=(i+.5)*C*sx,py=(j+.5)*R*sy,heat=0,fx=0,fy=0;
-   if(hv>.01){var ex=px-mx,ey=py-my,dd=Math.sqrt(ex*ex+ey*ey)||1;if(dd<RR){var t=1-dd/RR;t=t*t*(3-2*t)*hv;heat=t;fx=ex/dd*t*C*sx*1.6;fy=ey/dd*t*C*sx*1.6}}
-   dx[k]+=(fx-dx[k])*.2;dy[k]+=(fy-dy[k])*.2;if(Math.abs(fx-dx[k])>.05||Math.abs(fy-dy[k])>.05)moving=true;
+ function draw(){var sc=Math.min(W/1200,H/750),sx=sc,sy=sc,OX=(W-1200*sc)/2,OY=(H-750*sc)/2,moving=false;x.setTransform(DPR,0,0,DPR,0,0);x.clearRect(0,0,W,H);x.textAlign='center';x.textBaseline='middle';x.font="500 "+Math.max(8,Math.round(17*sx))+"px 'Sometype Mono',monospace";
+  mx+=(tx-mx)*.15;my+=(ty-my)*.15;hv+=(ht-hv)*.08;var RR=Math.max(140,H*.42);
+  for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var k=j*cols+i,c=cov[k],nr=near[k],h=hash(i*31+j*17),px=OX+(i+.5)*C*sx,py=OY+(j+.5)*R*sy,heat=0,fx=0,fy=0;
+   if(hv>.01){var ex=px-mx,ey=py-my,dd=Math.sqrt(ex*ex+ey*ey)||1;if(dd<RR){var t=1-dd/RR;t=t*t*(3-2*t)*hv;heat=t;fx=ex/dd*t*C*sx*4.2;fy=ey/dd*t*C*sx*4.2}}
+   dx[k]+=(fx-dx[k])*.09;dy[k]+=(fy-dy[k])*.09;if(Math.abs(fx-dx[k])>.05||Math.abs(fy-dy[k])>.05)moving=true;
    var X=px+dx[k],Y=py+dy[k];
    if(c>.05){x.fillStyle=P;x.globalAlpha=1;x.fillText(heat>.35?HOT[(i+j+((performance.now()/120)|0))%3]:RAMP[Math.min(9,Math.max(3,Math.round(c*9-h*1.5)))],X,Y)}
    else if(nr>.3||heat>.25){x.fillStyle=heat>.25?P:B;x.globalAlpha=heat>.25?.55*heat:.22;x.fillText(h>.5?'.':':',X,Y)}}

@@ -46,6 +46,7 @@ function pix(el,dur,delay,cb){dur=dur||520;delay=delay||0;var r=el.getBoundingCl
    else if(t>p-.08){x.fillStyle=(i+j)%3?PINK:BEIGE;x.globalAlpha=.35;x.fillRect(i*S+1,j*S+1,S-2,S-2);x.globalAlpha=1}}
   requestAnimationFrame(f)})(performance.now())}
 
+window.pxPix=pix;
 function under(el){for(var e=el.parentElement;e&&e!==d.documentElement;e=e.parentElement){var c=getComputedStyle(e).backgroundColor;if(c&&c!=='transparent'&&!/rgba\([^)]*,\s*0\)$/.test(c)){var m=c.match(/[\d.]+/g);if(!m||m.length<4||+m[3]>.9){under.el=e===d.body?null:e;return c}}}under.el=null;return BG}
 var TXT=/^(H1|H2|H3|P|BLOCKQUOTE|SPAN)$/;
 /* a block that is already well on screen when it is reached (the visitor scrolled fast,

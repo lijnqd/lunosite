@@ -172,3 +172,11 @@ html,body{overflow-x:clip}
 .cx-full .cx-pair .cx-img{aspect-ratio:auto}
 .cx-full .cx-pair .cx-img img{height:auto;object-fit:initial}
 @media (max-width:809px){.cx-pg{grid-template-columns:repeat(min(var(--n),2),minmax(0,1fr));gap:6px}.pg-c{border-radius:10px}.cx-full .cx-pair{grid-template-columns:1fr 1fr;gap:6px}}
+
+/* cover develops out of ascii on open */
+.cx-dev{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;transition:opacity .45s cubic-bezier(.2,.7,.2,1)}
+.cx-dev.out{opacity:0}
+/* result numbers drawn in pink glyphs */
+.cx-num b.asc{position:relative;color:transparent}
+.cx-num b .cx-numcv{position:absolute;left:0;top:0;pointer-events:none}
+.cx-num b.asc{font-size:clamp(110px,13vw,200px)}
